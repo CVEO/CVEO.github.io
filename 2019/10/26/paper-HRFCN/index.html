@@ -16,19 +16,19 @@
 <meta property="og:site_name" content="武汉大学CVEO小组(张晓东教授团队)">
 <meta property="og:description" content="Haze removal from a single remote sensing image based on a fully convolutional neural network 链接Ling K, Puyun L, Xiaodong Z, Guanzhou C, Kun Z, Qing W, Xiaoliang T.Journal of Applied Remote Sensing,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/introduction.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/datasetGeneration.png">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/introduction.jpg">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/datasetGeneration.jpg">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/table.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/NetworkDesign.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/Hierarchical-Block.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/evaluationIndicators.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/methodComparison.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/RealWorldDehazing.png">
-<meta property="og:updated_time" content="2020-08-23T07:05:53.556Z">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/methodComparison.jpg">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/RealWorldDehazing.jpg">
+<meta property="og:updated_time" content="2020-09-30T14:42:13.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于全卷积神经网络的单张遥感影像去雾">
 <meta name="twitter:description" content="Haze removal from a single remote sensing image based on a fully convolutional neural network 链接Ling K, Puyun L, Xiaodong Z, Guanzhou C, Kun Z, Qing W, Xiaoliang T.Journal of Applied Remote Sensing,">
-<meta name="twitter:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/introduction.png">
+<meta name="twitter:image" content="https://www.whu-cveo.com/2019/10/26/paper-HRFCN/introduction.jpg">
   
     <link rel="alternative" href="/atom.xml" title="武汉大学CVEO小组(张晓东教授团队)" type="application/atom+xml">
   
@@ -60,7 +60,7 @@
 			<img src="/assets/zxd.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">张晓东教授</a></h1>
+		  <h1 class="header-author"><a href="/">张晓东课题组</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">武汉大学CVEO小组</p>
@@ -124,7 +124,7 @@
 				<img src="/assets/zxd.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">张晓东教授</h1>
+			  <h1 class="header-author js-header-author">张晓东课题组</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>武汉大学CVEO小组<i class="icon icon-quo-right"></i></p>
@@ -225,7 +225,7 @@
 </ul>
 <!-- tocstop -->
 <h1><span id="1-简介">1. 简介</span></h1><p>雾给遥感影像带来了大量噪声，它大大降低了影像的可见度和对比度，使其表面颜色变淡，影像数据信息量减少。遥感图像如果包含大量的有雾区域，会使许多后续数据处理与解译任务（如影像分割、目标检测和识别、影像分类等）的效果受到大幅影响。我们迫切需要一个有效的去雾算法来解决这个问题。如下图展示了同一区域遥感影像去雾前后的对比，左图为带有厚雾的遥感影像，右图为使用暗通道去雾算法的效果：</p>
-<div align="center"><br><img src="/2019/10/26/paper-HRFCN/introduction.png"><br></div>
+<div align="center"><br><img src="/2019/10/26/paper-HRFCN/introduction.jpg"><br></div>
 
 <p>经典的去雾算法通过引入先验知识来实现这一功能，这些方法可以分为基于图像增强的算法和基于图像恢复的算法。前者在影像处理中常常会忽视影像的细节部分；而后者又过于注重纹理信息，导致对于白色目标过于敏感，同时，这些算法适用于自然影像，在场景复杂的遥感影像上的表现则差强人意。</p>
 <p>为了解决这些问题，我们引入了深度全卷积网络（Fully Convolutional Network，FCN）模型。因此，适合遥感影像的去雾数据集和适合遥感影像的卷积神经网络的结构设计成为了解决遥感影像去雾问题的重点所在。本文设计了泛化能力较强的去雾数据集合成方法以及轻便有效的神经网络：HRFCN。</p>
@@ -236,7 +236,7 @@
 <p>严格来说，t0应该被设置为0，然而由于可能不存在t为0的像素，因而在实际操作中近似地将t0取为接近0的极小值即可。所以，全局大气亮度可以由透射率图推导近似得出，因而透射率图即为在大气散射模型下，求解无雾影像的关键。</p>
 <p>基于该模型，我们可以计算出透射率图值，与带雾影像叠加后即可得到去雾影像。基于现实世界中云雾的特点，我们认为云雾的分布与地物分布统计上无关，并且邻近地物的云雾分布也是相近的。为了进一步简化模型，本文还引入了两个假设：（1）不同带雾影像的透射率图在纹理上是相近的；（2）充满云雾的像素应该是纯白色的，即大气像素值α为1，我们基于以上理论来设计了遥感影像去雾模型。</p>
 <h2><span id="22-训练数据集合成流程">2.2 训练数据集合成流程</span></h2><p>本文获取了湖北省上空的若干真实带雾影像，并采用了暗通道先验、非局部去雾和暗目标去除等多个算法对上述影像进行透射率图求解，取其中效果最好的结果，获得了与真实云雾分布情况相近的透射率图，然后我们对这些影像进行了随机翻转、添加高斯噪声等数据增强操作。在此基础上，我们再对原始无雾影像进行数据增强，并与透射率图叠加获得带雾影像，从而获得大量的去雾算法影像对，构建了一个泛化能力较强的合成训练数据集。如下图展示了合成数据集的全部流程。</p>
-<div align="center"><br><img src="/2019/10/26/paper-HRFCN/datasetGeneration.png"><br></div> 
+<div align="center"><br><img src="/2019/10/26/paper-HRFCN/datasetGeneration.jpg"><br></div> 
 
 <p>从下表可以看出，与其他模型中采用的合成去雾影像数据集算法相比，本方法泛化能力更强。</p>
 <div align="center"><br><img src="/2019/10/26/paper-HRFCN/table.png"><br></div>
@@ -253,10 +253,10 @@
 <div align="center"><br><img src="/2019/10/26/paper-HRFCN/evaluationIndicators.png"><br></div> 
 
 <p>本文将各个模型去雾之后得到的结果连同地面真实值（Ground Truth）汇总在下图中，从左到右依次是带雾影像、HRFCN去雾影像、暗通道先验去雾影像、Dehaze-Net去雾影像、MSCNN去雾影像以及地面真实值。本文注意到，Dehaze-Net和MSCNN两种算法得到的去雾结果在白色目标上效果不佳，并且有时甚至会产生低对比度图像，例如第一张中的房屋和最后一张的河边。而DCP算法在浅色区域的效果明显不如人意，例如第三张中的飞机跑道和第四张的农田，去雾效果出现了严重的失真。同时该算法获得的去雾影像普遍存在去雾程度过高而去雾影像画面偏暗的情况。</p>
-<div align="center"><br><img src="/2019/10/26/paper-HRFCN/methodComparison.png"><br></div> 
+<div align="center"><br><img src="/2019/10/26/paper-HRFCN/methodComparison.jpg"><br></div> 
 
 <p>为了进一步展示我们算法的效果，我们对比了该算法在现实带雾影像去雾后的效果。如下图中，左侧展示了带有雾的影像，右侧展示了去雾后的影像，圆圈部分展示了同区域下的影像细节。本文发现去雾后的影像能够展示出更生动的画面，更适于遥感影像应用。</p>
-<div align="center"><br><img src="/2019/10/26/paper-HRFCN/RealWorldDehazing.png"><br></div> 
+<div align="center"><br><img src="/2019/10/26/paper-HRFCN/RealWorldDehazing.jpg"><br></div> 
 
 <h1><span id="4结论">4.结论</span></h1><p>云雾作为现实生活中的一种常见现象，常常会降低可见光遥感影像的视觉质量。本文介绍了一种全新的遥感影像去雾算法，获得了较好的效果。</p>
 <p><strong>如何引用本文：</strong><br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@article&#123;10.1117/1.JRS.13.036505,</span><br><span class="line">author = &#123;Ling Ke and Puyun Liao and Xiaodong Zhang and Guanzhou Chen and Kun Zhu and Qing Wang and Xiaoliang Tan&#125;,</span><br><span class="line">title = &#123;&#123;Haze removal from a single remote sensing image based on a fully convolutional neural network&#125;&#125;,</span><br><span class="line">volume = &#123;13&#125;,</span><br><span class="line">journal = &#123;Journal of Applied Remote Sensing&#125;,</span><br><span class="line">number = &#123;3&#125;,</span><br><span class="line">publisher = &#123;SPIE&#125;,</span><br><span class="line">pages = &#123;1 -- 11&#125;,</span><br><span class="line">keywords = &#123;remote sensing, haze removal, deep learning, haze removal fully convolutional network&#125;,</span><br><span class="line">year = &#123;2019&#125;,</span><br><span class="line">doi = &#123;10.1117/1.JRS.13.036505&#125;,</span><br><span class="line">URL = &#123;https://doi.org/10.1117/1.JRS.13.036505&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -370,23 +370,6 @@
   
 
   
-  <div id="gitment-ctn"></div> 
-<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
-<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  // id: "https://www.whu-cveo.com/2019/10/26/paper-HRFCN/",
-  id: "基于全卷积神经网络的单张遥感影像去雾",
-  owner: 'chenguanzhou',
-  repo: 'CVEO-website-comments',
-  oauth: {
-    client_id: '134c9461b7d11cb2649e',
-    client_secret: '7dbd39d368a9c470e3b1d693aa63f3308f1f7dce',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-  
 
 
           </div>
@@ -396,7 +379,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 张晓东教授
+    		&copy; 2020 张晓东课题组
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -439,12 +422,12 @@ MathJax.Hub.Config({
 MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
 });
 </script>
 
-<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
@@ -508,6 +491,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
@@ -525,18 +520,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">气象遥感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,6 +559,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">模型压缩</a>
               </li>
              
@@ -585,14 +576,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识蒸馏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
               </li>
              
               <li class="article-tag-list-item">

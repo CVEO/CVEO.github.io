@@ -16,21 +16,21 @@
 <meta property="og:site_name" content="武汉大学CVEO小组(张晓东教授团队)">
 <meta property="og:description" content="Convective Clouds Extraction from Himawari-8 Satellite Images Based on Double-Stream Fully Convolutional NetworksZhang X, Tong W, Chen G, Tan X, Kun Z.IEEE GEOSCIENCE AND REMOTE SENSING LETTERS  对流云的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example.png">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example.jpg">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/boxplot.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/3ONet.png">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/3ONet.jpg">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/sdfcn.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/netarc.png">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/netarc.jpg">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/H8.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/w.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/minmax.png">
 <meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/tableresults.png">
-<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example1.png">
-<meta property="og:updated_time" content="2020-08-23T07:05:53.537Z">
+<meta property="og:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example1.jpg">
+<meta property="og:updated_time" content="2020-09-30T14:38:15.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于双流神经网络的葵花八号卫星对流云提取">
 <meta name="twitter:description" content="Convective Clouds Extraction from Himawari-8 Satellite Images Based on Double-Stream Fully Convolutional NetworksZhang X, Tong W, Chen G, Tan X, Kun Z.IEEE GEOSCIENCE AND REMOTE SENSING LETTERS  对流云的">
-<meta name="twitter:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example.png">
+<meta name="twitter:image" content="https://www.whu-cveo.com/2019/07/16/paper-3onet/example.jpg">
   
     <link rel="alternative" href="/atom.xml" title="武汉大学CVEO小组(张晓东教授团队)" type="application/atom+xml">
   
@@ -62,7 +62,7 @@
 			<img src="/assets/zxd.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">张晓东教授</a></h1>
+		  <h1 class="header-author"><a href="/">张晓东课题组</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">武汉大学CVEO小组</p>
@@ -126,7 +126,7 @@
 				<img src="/assets/zxd.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">张晓东教授</h1>
+			  <h1 class="header-author js-header-author">张晓东课题组</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>武汉大学CVEO小组<i class="icon icon-quo-right"></i></p>
@@ -237,7 +237,7 @@
 <li>双流网络：我们提出了一种双流全卷积网络。 我们将3ONet提取的光谱特征与SDFCN提取的几何特征相结合，完成语义分割任务。</li>
 </ul>
 <h1><span id="2-方法">2. 方法</span></h1><h2><span id="21-葵花八号卫星影像的光谱特征">2.1 葵花八号卫星影像的光谱特征</span></h2><p>对于遥感图像，尤其是多光谱图像，在进行解译时必须考虑其光谱特征。我们选择了一些样本进行假彩色合成，如下图所示：</p>
-<div align="center"><br><img src="/2019/07/16/paper-3onet/example.png"><br></div> 
+<div align="center"><br><img src="/2019/07/16/paper-3onet/example.jpg"><br></div> 
 
 <p>该图像是由葵花卫星的7、9和13波段进行假彩色合成的。标记为1的区域为对流云，2为非对流。它们之间的不同色调表明对流云与非对流区的光谱特征是不同的，光谱特征是相对显著的。</p>
 <p>此外，为了得到更有说服力的证据，我们对所有影像的对流与非对流区域的光谱特征进行了统计。统计结果如下图所示：</p>
@@ -245,7 +245,7 @@
 
 <p>据此，我们可以说对流云与非对流区域的光谱特征有着较大差异。在进行语义分割时应当加以考虑。</p>
 <h2><span id="22-3onet">2.2 3ONet</span></h2><p>我们设计了3ONet进行光谱特征的提取，该网络的结构如下图所示：</p>
-<div align="center"><br><img src="/2019/07/16/paper-3onet/3ONet.png"><br></div> 
+<div align="center"><br><img src="/2019/07/16/paper-3onet/3ONet.jpg"><br></div> 
 
 <p>3onet结构：蓝色代表卷积层，上面的数字代表卷积核的计数，绿色代表relu激活函数，橙色代表批标准化层。最终提取的光谱特征是32维。</p>
 <p>其优点是1×1卷积只计算单个像素，避免与周围像素混合。因此，我们可以将光谱信息与几何信息分开。</p>
@@ -254,7 +254,7 @@
 
 <p>将原SDFCN的Softmax层去掉，最终输出的是一个32维的Feature map，我们将其视为影像的几何特征。</p>
 <p>最终设计的双流神经网络结构如下：</p>
-<div align="center"><br><img src="/2019/07/16/paper-3onet/netarc.png"><br></div> 
+<div align="center"><br><img src="/2019/07/16/paper-3onet/netarc.jpg"><br></div> 
 
 <p>蓝色箭头表示光谱特征提取的数据流，橙色箭头表示几何特征提取的数据流，绿色箭头表示组合特征。对于其中的辅助输出的权重我们也进行了实验。</p>
 <h1><span id="3-实验结果与分析">3. 实验结果与分析</span></h1><p>本文利用葵花八号卫星的数据进行实验。在实验中，K（Kappa coefficient）与mIoU（mean intersection over union）作为实验结果的评定指标。</p>
@@ -275,7 +275,7 @@
 <p>测试结果如下：</p>
 <div align="center"><br><img src="/2019/07/16/paper-3onet/tableresults.png"><br></div> 
 
-<div align="center"><br><img src="/2019/07/16/paper-3onet/example1.png"><br></div> 
+<div align="center"><br><img src="/2019/07/16/paper-3onet/example1.jpg"><br></div> 
 
 <p>图中，a 是7-9-13波段所形成的假彩色图像. b 是地面真实值, c 是FCN-8s的预测结果,d是PSPNet的预测结果, e是SDFCN的预测结果，f是3ONet的预测结果, g 是双流神经网络的预测结果。b-g中，白色区域为对流云，黑色区域为非对流。</p>
 <p>结果表明，我们的3Onet和双流网络在mIoU和K系数方面优于FCN-8s和PSPNet。此外，我们发现归一化方法对结果有很大影响。全局归一化可以有效地提高模型mIoU和K系数。而对于损失函数则没有比较容易总结的规律，不同的模型可能有着不同的适宜的损失函数。</p>
@@ -391,23 +391,6 @@
   
 
   
-  <div id="gitment-ctn"></div> 
-<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
-<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  // id: "https://www.whu-cveo.com/2019/07/16/paper-3onet/",
-  id: "基于双流神经网络的葵花八号卫星对流云提取",
-  owner: 'chenguanzhou',
-  repo: 'CVEO-website-comments',
-  oauth: {
-    client_id: '134c9461b7d11cb2649e',
-    client_secret: '7dbd39d368a9c470e3b1d693aa63f3308f1f7dce',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-  
 
 
           </div>
@@ -417,7 +400,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 张晓东教授
+    		&copy; 2020 张晓东课题组
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -460,12 +443,12 @@ MathJax.Hub.Config({
 MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
 });
 </script>
 
-<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
@@ -529,6 +512,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
@@ -546,18 +541,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">气象遥感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +580,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">模型压缩</a>
               </li>
              
@@ -606,14 +597,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识蒸馏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
               </li>
              
               <li class="article-tag-list-item">

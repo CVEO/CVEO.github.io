@@ -7,6 +7,30 @@
     </url>
 
     <url>
+        <loc>https://www.whu-cveo.com/2019/10/26/paper-HRFCN/</loc>
+        <lastmod>2020-09-30T14:42:13.308Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.whu-cveo.com/2019/07/16/paper-3onet/</loc>
+        <lastmod>2020-09-30T14:38:15.839Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.whu-cveo.com/2019/10/28/introduction/</loc>
+        <lastmod>2020-09-30T14:10:30.093Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.whu-cveo.com/2019/03/28/paper-szcds/</loc>
         <lastmod>2020-08-23T07:05:53.587Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -15,32 +39,8 @@
     </url>
 
     <url>
-        <loc>https://www.whu-cveo.com/2019/10/26/paper-HRFCN/</loc>
-        <lastmod>2020-08-23T07:05:53.556Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://www.whu-cveo.com/2019/04/02/paper-DM-FPN/</loc>
         <lastmod>2020-08-23T07:05:53.538Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://www.whu-cveo.com/2019/10/28/introduction/</loc>
-        <lastmod>2020-08-23T07:05:53.537Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://www.whu-cveo.com/2019/07/16/paper-3onet/</loc>
-        <lastmod>2020-08-23T07:05:53.537Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
