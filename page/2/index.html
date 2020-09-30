@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="dns-prefetch" href="https://cveo.github.io">
+  <link rel="dns-prefetch" href="https://www.whu-cveo.com">
   <title>武汉大学CVEO小组(张晓东教授团队)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="武汉大学CVEO（Computer Vision Earth Observation）小组由武汉大学测绘遥感信息工程国家重点实验室张晓东教授领衔，成员包括1名博士后，5名博士研究生和2名硕士研究生。成立至今，CVEO小组参与和主持了一系列省、部级科研项目，还与行业相关企、事业单位开展了一系列横向科研项目合作。目前CVEO小组主要研究方向包括：遥感影像处理、人工智能与深度学习、GIS系统开发与应用。">
 <meta name="keywords" content="武汉大学 CVEO 遥感 测绘遥感信息工程国家重点实验室">
 <meta property="og:type" content="website">
 <meta property="og:title" content="武汉大学CVEO小组(张晓东教授团队)">
-<meta property="og:url" content="https://cveo.github.io/page/2/index.html">
+<meta property="og:url" content="https://www.whu-cveo.com/page/2/index.html">
 <meta property="og:site_name" content="武汉大学CVEO小组(张晓东教授团队)">
 <meta property="og:description" content="武汉大学CVEO（Computer Vision Earth Observation）小组由武汉大学测绘遥感信息工程国家重点实验室张晓东教授领衔，成员包括1名博士后，5名博士研究生和2名硕士研究生。成立至今，CVEO小组参与和主持了一系列省、部级科研项目，还与行业相关企、事业单位开展了一系列横向科研项目合作。目前CVEO小组主要研究方向包括：遥感影像处理、人工智能与深度学习、GIS系统开发与应用。">
 <meta property="og:locale" content="zh-CN">
@@ -174,6 +174,328 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-coordinate-convert" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/07/coordinate-convert/">空间坐标与投影系统系列(三)：坐标转换</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/07/coordinate-convert/" class="archive-article-date">
+  	<time datetime="2018-08-07T13:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>上一篇介绍了国内常用的坐标系。本篇文章我们来谈谈这些坐标系统中坐标转换的方法。</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#坐标转换的基本概念">坐标转换的基本概念</a><ul>
+<li><a href="#坐标系变换">坐标系变换</a></li>
+<li><a href="#基准变换">基准变换</a></li>
+</ul>
+</li>
+<li><a href="#坐标转换的基本方法">坐标转换的基本方法</a></li>
+<li><a href="#坐标系转换的实施步骤">坐标系转换的实施步骤</a></li>
+<li><a href="#坐标转换常见误区">坐标转换常见误区</a></li>
+<li><a href="#结束语">结束语</a></li>
+</ul>
+<!-- tocstop -->
+<p>坐标系统是测量工作中定位的基础，坐标系统有很多形式和基准，不同历史时期所建立和使用的坐标系是不同的。随着科学技术的进步，测量方法和观测技术不断改进，采用的参考椭球及定位方式也逐步完善和精化。为更加精确的确定点位信息并综合利用各种信息，常常用到<strong>坐标转换</strong>。</p>
+        
+          <a class="article-more-a" href="/2018/08/07/coordinate-convert/#more">继续阅读 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">空间坐标系</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">地图投影</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识//" class="article-tag-list-link color5">基础知识</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识/空间坐标与投影系统系列//" class="article-tag-list-link color2">空间坐标与投影系统系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/07/coordinate-convert/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-coordinate-china" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/31/coordinate-china/">空间坐标与投影系统系列(二)：国内常用投影坐标系</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/31/coordinate-china/" class="archive-article-date">
+  	<time datetime="2018-07-31T13:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>上一篇我们介绍了空间坐标和地图投影。本篇我们以国内常用的54，80，2000坐标系统为例，介绍各坐标系统的区别与联系。</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#我国常用坐标系">我国常用坐标系</a><ul>
+<li><a href="#北京54坐标系bjz54">北京54坐标系(BJZ54)</a></li>
+<li><a href="#西安80坐标系">西安80坐标系</a></li>
+<li><a href="#2000国家大地坐标系">2000国家大地坐标系</a></li>
+<li><a href="#wgs-84坐标系">WGS－84坐标系</a></li>
+</ul>
+</li>
+<li><a href="#通用gis软件中的常用坐标系投影方式">通用GIS软件中的常用坐标系投影方式</a></li>
+<li><a href="#通过坐标推断投影带类型">通过坐标推断投影带类型</a></li>
+<li><a href="#结束语">结束语</a></li>
+</ul>
+<!-- tocstop -->
+<h1 id="我国常用坐标系"><a href="#我国常用坐标系" class="headerlink" title="我国常用坐标系"></a>我国常用坐标系</h1><p>我国大中比例尺地图均采用<code>高斯-克吕格投影</code>，其通常是按6度和3度分带投影，1:2.5万－1:50万比例尺地形图采用经差6度分带，1:1万比例尺的地形图采用经差3度分带。具体分带法是：6度分带从本初子午线开始，按经差6度为一个投影带自西向东划分，全球共分60个投影带，带号分别为1－60；3度投影带是从东经1度30秒经线开始，按经差3度为一个投影带自西向东划分，全球共分120个投影带。</p>
+        
+          <a class="article-more-a" href="/2018/07/31/coordinate-china/#more">继续阅读 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">空间坐标系</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">地图投影</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识//" class="article-tag-list-link color5">基础知识</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识/空间坐标与投影系统系列//" class="article-tag-list-link color2">空间坐标与投影系统系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/31/coordinate-china/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-coordinate-projection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/26/coordinate-projection/">空间坐标与投影系统系列(一)：空间坐标和地图投影</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/26/coordinate-projection/" class="archive-article-date">
+  	<time datetime="2018-07-26T13:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>GIS处理的是空间信息，而所有对空间信息的量算都是基于某个坐标系统的，因此GIS中坐标系统的定义是GIS系统的基础，正确理解GIS中的坐标系统就变得尤为重要。坐标系统又可分为两大类：地理坐标系统、投影坐标系统。GIS中的坐标系定义由基准面和地图投影两组参数确定，而基准面的定义则由特定椭球体及其对应的转换参数确定，因此欲正确定义GIS系统坐标系，首先必须弄清<strong>地球椭球体(Ellipsoid)</strong>、<strong>大地基准面(Datum)</strong>及<strong>地图投影(Projection)</strong>三者的基本概念及它们之间的关系。</p>
+<!-- toc -->
+<ul>
+<li><a href="#1-地球椭球体ellipsoid">1、地球椭球体(Ellipsoid)</a></li>
+<li><a href="#2-大地基准面geodetic-datum">2、大地基准面（Geodetic datum）</a></li>
+<li><a href="#3-投影坐标系统projected-coordinate-systems">3、投影坐标系统（Projected Coordinate Systems ）</a></li>
+</ul>
+<!-- tocstop -->
+<h1 id="1、地球椭球体-Ellipsoid"><a href="#1、地球椭球体-Ellipsoid" class="headerlink" title="1、地球椭球体(Ellipsoid)"></a>1、地球椭球体(Ellipsoid)</h1><p>地球表面是一个凸凹不平的表面，而对于地球测量而言，地表是一个无法用数学公式表达的曲面，这样的曲面不能作为测量和制图的基准面。假想一个扁率极小的椭圆，绕大地球体短轴旋转所形成的规则椭球体称之为地球椭球体。地球椭球体表面是一个规则的数学表面，可以用数学公式表达，所以在测量和制图中就用它替代地球的自然表面。因此就有了<strong>地球椭球体</strong>的概念。地球椭球体有长半径和短半径之分，长半径(a)即赤道半径，短半径(b)即极半径。f=（a-b）/a为椭球体的扁率，表示椭球体的扁平程度，<strong>a</strong>、<strong>b</strong>、<strong>f</strong>被称为地球椭球体的三要素。</p>
+        
+          <a class="article-more-a" href="/2018/07/26/coordinate-projection/#more">继续阅读 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">空间坐标系</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">地图投影</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识//" class="article-tag-list-link color5">基础知识</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识/空间坐标与投影系统系列//" class="article-tag-list-link color2">空间坐标与投影系统系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/26/coordinate-projection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-object-detection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -311,7 +633,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 张晓东教授
+    		&copy; 2020 张晓东教授
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -415,15 +737,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
+                <a href="javascript:void(0)" class="js-tag color1">空间坐标系</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
+                <a href="javascript:void(0)" class="js-tag color5">地图投影</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -447,11 +765,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">空间坐标系</a>
+                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">地图投影</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -463,15 +785,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">水准尺自动化读数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">水准尺图像数字化处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光学影像</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+                <a href="javascript:void(0)" class="js-tag color2">遥感影像处理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+                <a href="javascript:void(0)" class="js-tag color2">遥感影像去雾</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">数据集合成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,6 +822,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识蒸馏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Feature Pyramid Network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多尺度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像目标检测</a>
               </li>
              
               <li class="article-tag-list-item">

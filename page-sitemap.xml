@@ -1,181 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://cveo.github.io</loc>
+        <loc>https://www.whu-cveo.com</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/wangqing/</loc>
+        <loc>https://www.whu-cveo.com/products/</loc>
+        <lastmod>2020-08-23T07:05:53.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/researchs/</loc>
+        <lastmod>2020-08-23T07:05:53.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/platform/</loc>
+        <lastmod>2020-08-23T07:05:53.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/platform/diaohui/</loc>
+        <lastmod>2020-08-23T07:05:53.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/platform/cdtstudio/</loc>
+        <lastmod>2020-08-23T07:05:53.710Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/wangqing/</loc>
         <lastmod>2019-07-15T09:59:46.105Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/</loc>
+        <loc>https://www.whu-cveo.com/members/</loc>
         <lastmod>2019-07-15T09:59:07.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/yth/</loc>
+        <loc>https://www.whu-cveo.com/products/yth/</loc>
         <lastmod>2019-07-15T09:24:25.557Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/researchs/</loc>
-        <lastmod>2019-07-15T09:24:25.557Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://cveo.github.io/products/quwu/</loc>
+        <loc>https://www.whu-cveo.com/products/quwu/</loc>
         <lastmod>2019-07-15T09:24:25.554Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/quwu/guide/</loc>
+        <loc>https://www.whu-cveo.com/products/quwu/guide/</loc>
         <lastmod>2019-07-15T09:24:25.549Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/njq/</loc>
+        <loc>https://www.whu-cveo.com/products/njq/</loc>
         <lastmod>2019-07-15T09:24:25.540Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/mde/</loc>
+        <loc>https://www.whu-cveo.com/products/mde/</loc>
         <lastmod>2019-07-15T09:24:25.537Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/</loc>
-        <lastmod>2019-07-15T09:24:25.534Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://cveo.github.io/products/dmpc/</loc>
+        <loc>https://www.whu-cveo.com/products/dmpc/</loc>
         <lastmod>2019-07-15T09:24:25.530Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/diaohui/</loc>
+        <loc>https://www.whu-cveo.com/products/diaohui/</loc>
         <lastmod>2019-07-15T09:24:25.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/products/cdtstudio/</loc>
+        <loc>https://www.whu-cveo.com/products/cdtstudio/</loc>
         <lastmod>2019-07-15T09:24:25.523Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/zuoyinan/</loc>
+        <loc>https://www.whu-cveo.com/members/zuoyinan/</loc>
         <lastmod>2019-07-15T09:24:25.519Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/zhukun/</loc>
+        <loc>https://www.whu-cveo.com/members/zhukun/</loc>
         <lastmod>2019-07-15T09:24:25.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/zhangxiaodong/</loc>
+        <loc>https://www.whu-cveo.com/members/zhangxiaodong/</loc>
         <lastmod>2019-07-15T09:24:25.515Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/zhanglifei/</loc>
+        <loc>https://www.whu-cveo.com/members/zhanglifei/</loc>
         <lastmod>2019-07-15T09:24:25.513Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/wangwenbo/</loc>
+        <loc>https://www.whu-cveo.com/members/wangwenbo/</loc>
         <lastmod>2019-07-15T09:24:25.512Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/wangtong/</loc>
+        <loc>https://www.whu-cveo.com/members/wangtong/</loc>
         <lastmod>2019-07-15T09:24:25.511Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/tanxiaoliang/</loc>
+        <loc>https://www.whu-cveo.com/members/tanxiaoliang/</loc>
         <lastmod>2019-07-15T09:24:25.509Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/sunyufeng/</loc>
+        <loc>https://www.whu-cveo.com/members/sunyufeng/</loc>
         <lastmod>2019-07-15T09:24:25.506Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/lpy/</loc>
+        <loc>https://www.whu-cveo.com/members/lpy/</loc>
         <lastmod>2019-07-15T09:24:25.503Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/lijin/</loc>
+        <loc>https://www.whu-cveo.com/members/lijin/</loc>
         <lastmod>2019-07-15T09:24:25.500Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/gongyuanfu/</loc>
+        <loc>https://www.whu-cveo.com/members/gongyuanfu/</loc>
         <lastmod>2019-07-15T09:24:25.495Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/daifan/</loc>
+        <loc>https://www.whu-cveo.com/members/daifan/</loc>
         <lastmod>2019-07-15T09:24:25.493Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://cveo.github.io/members/cuixiujuan/</loc>
+        <loc>https://www.whu-cveo.com/members/cuixiujuan/</loc>
         <lastmod>2019-07-15T09:24:25.492Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

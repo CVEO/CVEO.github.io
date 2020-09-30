@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://cveo.github.io</loc>
+        <loc>https://www.whu-cveo.com</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2019/07/16/paper-3onet/</loc>
-        <lastmod>2019-07-16T12:01:13.058Z</lastmod>
+        <loc>https://www.whu-cveo.com/2019/03/28/paper-szcds/</loc>
+        <lastmod>2020-08-23T07:05:53.587Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2017/03/22/introduction/</loc>
-        <lastmod>2019-07-15T09:57:11.043Z</lastmod>
+        <loc>https://www.whu-cveo.com/2019/10/26/paper-HRFCN/</loc>
+        <lastmod>2020-08-23T07:05:53.556Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/09/27/paper-sdfcn/</loc>
+        <loc>https://www.whu-cveo.com/2019/04/02/paper-DM-FPN/</loc>
+        <lastmod>2020-08-23T07:05:53.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.whu-cveo.com/2019/10/28/introduction/</loc>
+        <lastmod>2020-08-23T07:05:53.537Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.whu-cveo.com/2019/07/16/paper-3onet/</loc>
+        <lastmod>2020-08-23T07:05:53.537Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.whu-cveo.com/2018/09/27/paper-sdfcn/</loc>
         <lastmod>2019-07-15T09:24:25.477Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +55,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/09/29/paper-kdcnn/</loc>
+        <loc>https://www.whu-cveo.com/2018/09/29/paper-kdcnn/</loc>
         <lastmod>2019-07-15T09:24:25.468Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -39,7 +63,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/10/18/paper-fasterrcnn4cd/</loc>
+        <loc>https://www.whu-cveo.com/2018/10/18/paper-fasterrcnn4cd/</loc>
         <lastmod>2019-07-15T09:24:25.461Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -47,7 +71,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/09/28/paper-SiCNN/</loc>
+        <loc>https://www.whu-cveo.com/2018/09/28/paper-SiCNN/</loc>
         <lastmod>2019-07-15T09:24:25.450Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -55,7 +79,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/07/26/coordinate-projection/</loc>
+        <loc>https://www.whu-cveo.com/2018/07/26/coordinate-projection/</loc>
         <lastmod>2019-07-15T09:24:25.443Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -63,7 +87,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/08/07/coordinate-convert/</loc>
+        <loc>https://www.whu-cveo.com/2018/08/07/coordinate-convert/</loc>
         <lastmod>2019-07-15T09:24:25.442Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -71,7 +95,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/07/31/coordinate-china/</loc>
+        <loc>https://www.whu-cveo.com/2018/07/31/coordinate-china/</loc>
         <lastmod>2019-07-15T09:24:25.440Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -79,7 +103,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2018/08/17/coordinate-7params/</loc>
+        <loc>https://www.whu-cveo.com/2018/08/17/coordinate-7params/</loc>
         <lastmod>2019-07-15T09:24:25.439Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -87,7 +111,7 @@
     </url>
 
     <url>
-        <loc>https://cveo.github.io/2017/03/22/object-detection/</loc>
+        <loc>https://www.whu-cveo.com/2017/03/22/object-detection/</loc>
         <lastmod>2018-07-27T04:49:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

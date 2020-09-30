@@ -5,23 +5,23 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="dns-prefetch" href="https://cveo.github.io">
+  <link rel="dns-prefetch" href="https://www.whu-cveo.com">
   <title>空间坐标与投影系统系列(四)：七参数转换实例 | 武汉大学CVEO小组(张晓东教授团队)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="上一篇介绍了坐标转换。本篇文章我们将以实例来介绍七参数的转换过程。   七参数转换法 七参数转换法实例 导入数据 正向计算 系数求解 模型精度评定和结果验证   结束语   七参数转换法七参数法（包括布尔莎模型，一步法模型，海尔曼特等）是解决此问题的比较严密和通用的方法1。其涉及到的七个参数为：X平移，Y平移，Z平移，X旋转，Y旋转，Z旋转，尺度变化m。此七个参数可以通过在需要转化的区域里选取3个">
 <meta name="keywords" content="空间坐标系,地图投影,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="空间坐标与投影系统系列(四)：七参数转换实例">
-<meta property="og:url" content="https://cveo.github.io/2018/08/17/coordinate-7params/index.html">
+<meta property="og:url" content="https://www.whu-cveo.com/2018/08/17/coordinate-7params/index.html">
 <meta property="og:site_name" content="武汉大学CVEO小组(张晓东教授团队)">
 <meta property="og:description" content="上一篇介绍了坐标转换。本篇文章我们将以实例来介绍七参数的转换过程。   七参数转换法 七参数转换法实例 导入数据 正向计算 系数求解 模型精度评定和结果验证   结束语   七参数转换法七参数法（包括布尔莎模型，一步法模型，海尔曼特等）是解决此问题的比较严密和通用的方法1。其涉及到的七个参数为：X平移，Y平移，Z平移，X旋转，Y旋转，Z旋转，尺度变化m。此七个参数可以通过在需要转化的区域里选取3个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cveo.github.io/2018/08/17/coordinate-7params/qrcode.png">
+<meta property="og:image" content="https://www.whu-cveo.com/2018/08/17/coordinate-7params/qrcode.png">
 <meta property="og:updated_time" content="2019-07-15T09:24:25.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="空间坐标与投影系统系列(四)：七参数转换实例">
 <meta name="twitter:description" content="上一篇介绍了坐标转换。本篇文章我们将以实例来介绍七参数的转换过程。   七参数转换法 七参数转换法实例 导入数据 正向计算 系数求解 模型精度评定和结果验证   结束语   七参数转换法七参数法（包括布尔莎模型，一步法模型，海尔曼特等）是解决此问题的比较严密和通用的方法1。其涉及到的七个参数为：X平移，Y平移，Z平移，X旋转，Y旋转，Z旋转，尺度变化m。此七个参数可以通过在需要转化的区域里选取3个">
-<meta name="twitter:image" content="https://cveo.github.io/2018/08/17/coordinate-7params/qrcode.png">
+<meta name="twitter:image" content="https://www.whu-cveo.com/2018/08/17/coordinate-7params/qrcode.png">
   
     <link rel="alternative" href="/atom.xml" title="武汉大学CVEO小组(张晓东教授团队)" type="application/atom+xml">
   
@@ -336,7 +336,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  // id: "https://cveo.github.io/2018/08/17/coordinate-7params/",
+  // id: "https://www.whu-cveo.com/2018/08/17/coordinate-7params/",
   id: "空间坐标与投影系统系列(四)：七参数转换实例",
   owner: 'chenguanzhou',
   repo: 'CVEO-website-comments',
@@ -357,7 +357,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 张晓东教授
+    		&copy; 2020 张晓东教授
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -461,15 +461,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
+                <a href="javascript:void(0)" class="js-tag color1">空间坐标系</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
+                <a href="javascript:void(0)" class="js-tag color5">地图投影</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,11 +489,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">空间坐标系</a>
+                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">地图投影</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,15 +509,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">水准尺自动化读数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">水准尺图像数字化处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光学影像</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+                <a href="javascript:void(0)" class="js-tag color2">遥感影像处理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+                <a href="javascript:void(0)" class="js-tag color2">遥感影像去雾</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">数据集合成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,6 +546,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识蒸馏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Feature Pyramid Network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多尺度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像目标检测</a>
               </li>
              
               <li class="article-tag-list-item">
