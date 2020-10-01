@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://www.whu-cveo.com/2019/10/28/introduction/</loc>
+        <lastmod>2020-10-01T03:11:52.533Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.whu-cveo.com/2019/10/26/paper-HRFCN/</loc>
         <lastmod>2020-09-30T14:42:13.308Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,14 +25,6 @@
     <url>
         <loc>https://www.whu-cveo.com/2019/07/16/paper-3onet/</loc>
         <lastmod>2020-09-30T14:38:15.839Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://www.whu-cveo.com/2019/10/28/introduction/</loc>
-        <lastmod>2020-09-30T14:10:30.093Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
