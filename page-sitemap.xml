@@ -7,6 +7,20 @@
     </url>
     
     <url>
+        <loc>https://www.whu-cveo.com/researchs/</loc>
+        <lastmod>2021-03-24T14:52:57.011Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/zhangxiaodong/</loc>
+        <lastmod>2021-03-24T14:41:15.404Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://www.whu-cveo.com/members/caipeihua/</loc>
         <lastmod>2020-10-01T03:07:04.134Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,13 +72,6 @@
     <url>
         <loc>https://www.whu-cveo.com/members/zhukun/</loc>
         <lastmod>2020-09-30T14:10:11.357Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/zhangxiaodong/</loc>
-        <lastmod>2020-09-30T14:10:06.676Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -127,13 +134,6 @@
     
     <url>
         <loc>https://www.whu-cveo.com/products/</loc>
-        <lastmod>2020-08-23T07:05:53.713Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/researchs/</loc>
         <lastmod>2020-08-23T07:05:53.713Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

@@ -174,6 +174,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-coordinate-7params" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/17/coordinate-7params/">空间坐标与投影系统系列(四)：七参数转换实例</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/17/coordinate-7params/" class="archive-article-date">
+  	<time datetime="2018-08-17T13:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>上一篇介绍了坐标转换。本篇文章我们将以实例来介绍七参数的转换过程。</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#七参数转换法">七参数转换法</a></li>
+<li><a href="#七参数转换法实例">七参数转换法实例</a><ul>
+<li><a href="#导入数据">导入数据</a></li>
+<li><a href="#正向计算">正向计算</a></li>
+<li><a href="#系数求解">系数求解</a></li>
+<li><a href="#模型精度评定和结果验证">模型精度评定和结果验证</a></li>
+</ul>
+</li>
+<li><a href="#结束语">结束语</a></li>
+</ul>
+<!-- tocstop -->
+<h1 id="七参数转换法"><a href="#七参数转换法" class="headerlink" title="七参数转换法"></a>七参数转换法</h1><p>七参数法（包括布尔莎模型，一步法模型，海尔曼特等）是解决此问题的比较严密和通用的方法<sup><a href="#footnote1">1</a></sup>。其涉及到的七个参数为：X平移，Y平移，Z平移，X旋转，Y旋转，Z旋转，尺度变化m。此七个参数可以通过在需要转化的区域里选取3个以上的转换控制点对而获取。<br>如果区域范围不大，最远点间的距离不大于30Km，可以用三参数（莫洛登斯基模型），即X平移，Y平移，Z平移，而此时将X旋转，Y旋转，Z旋转，尺度变化m视为0。所以<strong>三参数只是七参数的一种特例</strong>。三参数只需通过1个控制点对就能获取。</p>
+        
+          <a class="article-more-a" href="/2018/08/17/coordinate-7params/#more">继续阅读 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">空间坐标系</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">地图投影</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识//" class="article-tag-list-link color5">基础知识</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/基础知识/空间坐标与投影系统系列//" class="article-tag-list-link color2">空间坐标与投影系统系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/17/coordinate-7params/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-coordinate-convert" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -633,7 +746,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 张晓东课题组
+    		&copy; 2021 张晓东课题组
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -745,18 +858,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
@@ -785,7 +886,39 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">武汉大学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVEO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">张晓东</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">水准尺自动化读数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">水准尺图像数字化处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光学影像</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -801,14 +934,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Faster RCNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">遥感影像变化检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">模型压缩</a>
               </li>
              
@@ -818,18 +943,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识蒸馏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">水准尺自动化读数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">水准尺图像数字化处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光学影像</a>
               </li>
              
               <li class="article-tag-list-item">
