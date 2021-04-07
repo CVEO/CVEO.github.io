@@ -8,7 +8,35 @@
     
     <url>
         <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2021-03-24T14:55:34.558Z</lastmod>
+        <lastmod>2021-04-07T13:01:09.284Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/dongyuekun/</loc>
+        <lastmod>2021-04-07T12:47:10.105Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/chenyuwen/</loc>
+        <lastmod>2021-04-07T12:41:43.780Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/</loc>
+        <lastmod>2021-04-07T12:40:20.102Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/daifan/</loc>
+        <lastmod>2021-04-07T10:05:48.843Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -44,13 +72,6 @@
     <url>
         <loc>https://www.whu-cveo.com/members/lixianwei/</loc>
         <lastmod>2020-10-01T02:30:02.950Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/</loc>
-        <lastmod>2020-10-01T02:18:27.786Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -114,13 +135,6 @@
     <url>
         <loc>https://www.whu-cveo.com/members/gongyuanfu/</loc>
         <lastmod>2020-09-30T14:09:27.433Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/daifan/</loc>
-        <lastmod>2020-09-30T14:09:21.472Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
