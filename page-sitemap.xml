@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>https://www.whu-cveo.com/researchs/</loc>
+        <lastmod>2021-04-23T07:59:42.851Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://www.whu-cveo.com/members/</loc>
         <lastmod>2021-04-18T06:58:03.928Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -23,13 +30,6 @@
     <url>
         <loc>https://www.whu-cveo.com/members/shishenhao/</loc>
         <lastmod>2021-04-17T11:42:01.160Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2021-04-09T06:44:18.527Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
