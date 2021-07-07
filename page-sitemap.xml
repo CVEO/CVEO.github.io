@@ -7,15 +7,22 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2021-04-23T07:59:42.851Z</lastmod>
+        <loc>https://www.whu-cveo.com/members/qiuyaheng/</loc>
+        <lastmod>2021-07-07T09:51:07.670Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.whu-cveo.com/members/</loc>
-        <lastmod>2021-04-18T06:58:03.928Z</lastmod>
+        <lastmod>2021-07-07T09:50:14.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/researchs/</loc>
+        <lastmod>2021-07-07T08:52:02.096Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -112,7 +119,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/zuoyinan/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/zuoyinan/</loc>
         <lastmod>2020-09-30T14:10:15.981Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -126,7 +133,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/zhanglifei/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/zhanglifei/</loc>
         <lastmod>2020-09-30T14:09:57.166Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -147,7 +154,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/tanxiaoliang/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/tanxiaoliang/</loc>
         <lastmod>2020-09-30T14:09:37.001Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -168,7 +175,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/cuixiujuan/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/cuixiujuan/</loc>
         <lastmod>2020-09-30T14:09:17.121Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
