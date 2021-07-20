@@ -7,15 +7,22 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/qiuyaheng/</loc>
-        <lastmod>2021-07-07T09:51:07.670Z</lastmod>
+        <loc>https://www.whu-cveo.com/members/wangzifan/</loc>
+        <lastmod>2021-07-20T14:03:46.185Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.whu-cveo.com/members/</loc>
-        <lastmod>2021-07-07T09:50:14.571Z</lastmod>
+        <lastmod>2021-07-20T14:01:24.268Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/qiuyaheng/</loc>
+        <lastmod>2021-07-07T09:51:07.670Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
