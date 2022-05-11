@@ -7,8 +7,15 @@
     </url>
     
     <url>
+        <loc>https://www.whu-cveo.com/products/</loc>
+        <lastmod>2022-05-11T08:37:31.386Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2022-04-17T12:35:53.352Z</lastmod>
+        <lastmod>2022-05-11T08:35:07.092Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -23,13 +30,6 @@
     <url>
         <loc>https://www.whu-cveo.com/members/yanghaobo/</loc>
         <lastmod>2022-04-15T09:13:57.453Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/products/</loc>
-        <lastmod>2021-12-13T13:25:30.666Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
