@@ -8,7 +8,28 @@
     
     <url>
         <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2022-06-17T03:26:24.823Z</lastmod>
+        <lastmod>2022-08-10T09:13:24.709Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/</loc>
+        <lastmod>2022-08-10T09:11:01.634Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/caoxianyu/</loc>
+        <lastmod>2022-08-10T09:10:34.888Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/yunbohan/</loc>
+        <lastmod>2022-08-10T09:07:56.779Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -16,13 +37,6 @@
     <url>
         <loc>https://www.whu-cveo.com/products/</loc>
         <lastmod>2022-05-11T08:37:31.386Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/</loc>
-        <lastmod>2022-04-17T12:30:31.426Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -77,7 +91,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/chenyuwen/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/chenyuwen/</loc>
         <lastmod>2021-04-07T12:41:43.780Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -112,7 +126,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/liuchenxi/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/liuchenxi/</loc>
         <lastmod>2020-10-01T02:30:12.327Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -140,7 +154,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/zhukun/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/zhukun/</loc>
         <lastmod>2020-09-30T14:10:11.357Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -182,7 +196,7 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/gongyuanfu/</loc>
+        <loc>https://www.whu-cveo.com/members/deprecated/gongyuanfu/</loc>
         <lastmod>2020-09-30T14:09:27.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
