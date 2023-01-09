@@ -7,6 +7,48 @@
     </url>
     
     <url>
+        <loc>https://www.whu-cveo.com/researchs/</loc>
+        <lastmod>2023-01-09T05:34:00.404Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/deprecated/chenyuwen/</loc>
+        <lastmod>2022-08-12T07:22:48.479Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/dongyuekun/</loc>
+        <lastmod>2022-08-12T07:22:44.801Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/shishenhao/</loc>
+        <lastmod>2022-08-12T07:22:42.505Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/daifan/</loc>
+        <lastmod>2022-08-12T07:22:40.443Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.whu-cveo.com/members/wangzifan/</loc>
+        <lastmod>2022-08-12T07:22:28.096Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://www.whu-cveo.com/members/zhouwenlin/</loc>
         <lastmod>2022-08-12T07:15:19.437Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -63,13 +105,6 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/researchs/</loc>
-        <lastmod>2022-08-10T09:13:24.709Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>https://www.whu-cveo.com/members/yunbohan/</loc>
         <lastmod>2022-08-10T09:07:56.779Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -98,13 +133,6 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/wangzifan/</loc>
-        <lastmod>2021-07-20T14:03:46.185Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>https://www.whu-cveo.com/members/qiuyaheng/</loc>
         <lastmod>2021-07-07T09:51:07.670Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -119,36 +147,8 @@
     </url>
     
     <url>
-        <loc>https://www.whu-cveo.com/members/shishenhao/</loc>
-        <lastmod>2021-04-17T11:42:01.160Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>https://www.whu-cveo.com/members/zhongdi/</loc>
         <lastmod>2021-04-08T13:29:55.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/dongyuekun/</loc>
-        <lastmod>2021-04-07T12:47:10.105Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/deprecated/chenyuwen/</loc>
-        <lastmod>2021-04-07T12:41:43.780Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.whu-cveo.com/members/daifan/</loc>
-        <lastmod>2021-04-07T10:05:48.843Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
