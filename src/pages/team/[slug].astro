@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getEntryBySlug, getCollection } from 'astro:content'
+export async function getStaticPaths() {
+  const entries = await getCollection('members')
+  return entries.map(e => ({ params: { slug: e.slug } }))
+}
+const { slug } = Astro.params
+const entry = await getEntryBySlug('members', slug)
+let Content
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+}
+--- 
+<BaseLayout title={entry ? `${entry.data.name} - 团队成员` : '成员页面'}>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    {entry ? (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <img src={entry.data.photo || "https://picsum.photos/600/800"} alt={entry.data.name} class="w-full aspect-[3/4] object-cover rounded" />
+        </div>
+        <div class="md:col-span-2">
+          <h1 class="text-2xl font-semibold text-slate-900">{entry.data.name}</h1>
+          <p class="mt-2 text-slate-700">{entry.data.role}</p>
+          <div class="mt-6 prose prose-slate">
+            <Content />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <p class="text-slate-700">成员未找到。</p>
+    )}
+  </section>
+</BaseLayout>

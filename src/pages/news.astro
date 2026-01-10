@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import raw from '../data/news.md?raw'
+const lines = raw.split(/\r?\n/).filter(l => l.trim().startsWith('## '))
+function parseLine(line) {
+  const s = line.replace(/^##\s*/, '')
+  const m = s.match(/^(\d{4}-\d{2}-\d{2})\s+(.*)$/)
+  if (!m) return null
+  const date = new Date(m[1])
+  const text = m[2]
+  const slug = text.toLowerCase().replace(/[\s\/\\]+/g, '-').replace(/[^a-z0-9\-\u4e00-\u9fa5]/g, '')
+  const id = `news-${m[1]}-${slug}`.replace(/-+/g, '-')
+  return { date, dateStr: m[1], text, id }
+}
+const items = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime())
+---
+<BaseLayout title="新闻动态">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-2xl font-semibold text-slate-900">新闻动态</h1>
+    <div class="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <aside class="lg:col-span-1">
+        <div class="rounded-lg border border-slate-200 p-4">
+          <h2 class="text-sm font-semibold text-slate-700">索引</h2>
+          <ul class="mt-3 space-y-2">
+            {items.map(i => (
+              <li><a href={`#${i.id}`} class="text-slate-700 hover:text-brand-700">{i.dateStr}</a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+      <div class="lg:col-span-3">
+        <div class="space-y-6">
+          {items.map(i => (
+            <article id={i.id} class="rounded-lg border border-slate-200 p-4 hover:shadow transition">
+              <h3 class="text-slate-900 font-semibold">{i.dateStr}</h3>
+              <p class="mt-2 text-slate-700">{i.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

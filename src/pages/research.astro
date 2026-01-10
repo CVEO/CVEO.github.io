@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PaperCard from '../components/PaperCard.astro'
+import { getCollection } from 'astro:content'
+import PatentTable from '../components/PatentTable.astro'
+const papers = await getCollection('papers')
+const sorted = papers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+---
+<BaseLayout title="科研成果">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-2xl font-semibold text-slate-900 mb-8">期刊论文</h1>
+    
+    <div class="mb-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
+      <div class="flex flex-wrap gap-4 text-sm text-slate-700">
+        <div class="flex items-center">
+          <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">†</span>
+          <span>共同一作</span>
+        </div>
+        <div class="flex items-center">
+          <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">*</span>
+          <span>通讯作者</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="space-y-6">
+      {sorted.map(p => <PaperCard paper={p} />)}
+    </div>
+    
+    <div class="mt-16">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">合作论文</h2>
+      <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200">
+            <thead class="bg-slate-100">
+              <tr>
+                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">论文标题</th>
+                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell">期刊</th>
+                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">发表时间</th>
+                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">合作单位</th>
+                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">作者贡献</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">基于深度学习的遥感图像语义分割方法研究</div>
+                  <div class="mt-1 text-xs md:text-sm text-slate-600">提出了一种基于注意力机制的语义分割网络</div>
+                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">遥感学报</span>
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2024年6月</span>
+                  </div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
+                  <div class="text-sm font-medium text-slate-900">遥感学报</div>
+                  <div class="text-xs text-slate-500 mt-1">SCI收录</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">2024年6月</div>
+                  <div class="text-xs text-slate-500 mt-1">第45卷第3期</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">中国科学院空天信息创新研究院</div>
+                  <div class="text-xs text-slate-500 mt-1">北京</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm text-slate-900">算法设计与实验分析</div>
+                  <div class="mt-1">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-50 text-blue-700 border border-blue-200">主要贡献</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">多源遥感数据融合的城市变化检测</div>
+                  <div class="mt-1 text-xs md:text-sm text-slate-600">融合SAR与光学影像的城市变化检测方法</div>
+                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">测绘学报</span>
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2024年3月</span>
+                  </div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
+                  <div class="text-sm font-medium text-slate-900">测绘学报</div>
+                  <div class="text-xs text-slate-500 mt-1">EI收录</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">2024年3月</div>
+                  <div class="text-xs text-slate-500 mt-1">第53卷第2期</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">清华大学地球系统科学系</div>
+                  <div class="text-xs text-slate-500 mt-1">北京</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm text-slate-900">数据预处理与模型验证</div>
+                  <div class="mt-1">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-green-50 text-green-700 border border-green-200">数据处理</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">高分辨率遥感影像目标检测技术综述</div>
+                  <div class="mt-1 text-xs md:text-sm text-slate-600">系统综述了深度学习在遥感目标检测中的应用</div>
+                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">中国图象图形学报</span>
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2023年12月</span>
+                  </div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
+                  <div class="text-sm font-medium text-slate-900">中国图象图形学报</div>
+                  <div class="text-xs text-slate-500 mt-1">核心期刊</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">2023年12月</div>
+                  <div class="text-xs text-slate-500 mt-1">第28卷第12期</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">北京大学遥感与地理信息系统研究所</div>
+                  <div class="text-xs text-slate-500 mt-1">北京</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm text-slate-900">文献调研与综述撰写</div>
+                  <div class="mt-1">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-purple-50 text-purple-700 border border-purple-200">综述撰写</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">基于Transformer的遥感场景分类方法</div>
+                  <div class="mt-1 text-xs md:text-sm text-slate-600">提出了一种基于Vision Transformer的遥感场景分类模型</div>
+                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">电子与信息学报</span>
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2023年9月</span>
+                  </div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
+                  <div class="text-sm font-medium text-slate-900">电子与信息学报</div>
+                  <div class="text-xs text-slate-500 mt-1">EI收录</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">2023年9月</div>
+                  <div class="text-xs text-slate-500 mt-1">第45卷第9期</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+                  <div class="text-sm font-medium text-slate-900">南京大学地理与海洋科学学院</div>
+                  <div class="text-xs text-slate-500 mt-1">南京</div>
+                </td>
+                <td class="px-4 md:px-8 py-4 md:py-5">
+                  <div class="text-sm text-slate-900">模型设计与性能评估</div>
+                  <div class="mt-1">
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-orange-50 text-orange-700 border border-orange-200">模型设计</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-16">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6">专利与软著</h2>
+      <PatentTable />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PaperCard from '../components/PaperCard.astro'
+import MemberCard from '../components/MemberCard.astro'
+import { getCollection } from 'astro:content'
+import raw from '../data/news.md?raw'
+import PatentTable from '../components/PatentTable.astro'
+import Projects from '../data/projects.md'
+
+const papers = await getCollection('papers')
+const sortedPapers = papers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+const recentPapers = sortedPapers.slice(0, 5)
+const members = await getCollection('members')
+
+const lines = raw.split(/\r?\n/).filter(l => l.trim().startsWith('## '))
+function parseLine(line) {
+  const s = line.replace(/^##\s*/, '')
+  const m = s.match(/^(\d{4}-\d{2}-\d{2})\s+(.*)$/)
+  if (!m) return null
+  const date = new Date(m[1])
+  const text = m[2]
+  const slug = text.toLowerCase().replace(/[\s\/\\]+/g, '-').replace(/[^a-z0-9\-\u4e00-\u9fa5]/g, '')
+  const id = `news-${m[1]}-${slug}`.replace(/-+/g, '-')
+  return { date, dateStr: m[1], text, id }
+}
+const newsItems = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime()).slice(0, 5)
+
+function byGroup(g) { return members.filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
+
+function formatDate(dateStr) {
+  const date = new Date(dateStr)
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  return `${year}年${month}月`
+}
+---
+<BaseLayout title="首页">
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <h1 class="text-3xl sm:text-5xl font-bold text-brand-700">武汉大学 CVEO 课题组</h1>
+      <p class="mt-4 text-slate-700 text-lg">计算机视觉与地球观测，产学研协同创新。</p>
+    </div>
+  </section>
+
+  <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">关于课题组</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <img src="https://picsum.photos/600/338" alt="PI Photo" class="w-full aspect-[16/9] object-cover rounded shadow-lg" />
+      </div>
+      <div class="md:col-span-2">
+        <h3 class="text-xl font-semibold text-slate-900 mb-4">PI 教授带队</h3>
+        <p class="text-slate-700 mb-6">PI 姓名，职称与单位信息占位。团队以问题驱动，联合产学研各方开展关键技术攻关与成果转化。</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
+            <h4 class="font-semibold text-slate-900 mb-3">研究方向</h4>
+            <ul class="space-y-2 text-slate-700">
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>遥感场景理解与目标检测</span>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>弱监督、自监督与时空表示学习</span>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>多源数据融合与地学知识注入</span>
+              </li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
+            <h4 class="font-semibold text-slate-900 mb-3">合作与平台</h4>
+            <ul class="space-y-2 text-slate-700">
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>国内外高校与研究机构</span>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>行业企业与政府部门</span>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                <span>开放数据与开源社区</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">新闻动态</h2>
+    <div class="space-y-6">
+      {newsItems.map(i => (
+        <article class="rounded-lg border border-slate-200 bg-white p-6 hover:shadow-md transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 rounded-lg bg-brand-50 flex items-center justify-center">
+                <span class="text-brand-700 font-semibold">{i.dateStr.split('-')[0]}</span>
+              </div>
+            </div>
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold text-slate-900">{i.text}</h3>
+              <p class="mt-2 text-slate-600">{i.dateStr}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="mt-8 text-center">
+      <a href="/news" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+        查看更多新闻
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="research" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">科研成果</h2>
+    
+    <div class="mb-12">
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">期刊论文</h3>
+      
+      <div class="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <div class="flex flex-wrap gap-4 text-sm text-slate-700">
+          <div class="flex items-center">
+            <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">†</span>
+            <span>共同一作</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">*</span>
+            <span>通讯作者</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        {recentPapers.map(p => (
+          <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+            <div class="flex justify-between items-start mb-4">
+              <h4 class="text-lg font-semibold text-slate-900">{p.data.title}</h4>
+              {p.data.partition && (
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">
+                  {p.data.partition}
+                </span>
+              )}
+            </div>
+            <p class="text-slate-700 mb-3">{p.data.journal} • {formatDate(p.data.date)}</p>
+            <p class="text-slate-600 mb-4">
+              作者：{p.data.authors.map((author, idx) => {
+                let display = author
+                if (p.data.equalFirst && p.data.equalFirst.includes(idx)) {
+                  display += '†'
+                }
+                if (p.data.corresponding && p.data.corresponding.includes(idx)) {
+                  display += '*'
+                }
+                return display
+              }).join('，')}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/research" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+          查看更多论文
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">专利与软著</h3>
+      <PatentTable />
+    </div>
+  </section>
+
+  <section id="team" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">团队成员</h2>
+    
+    <div class="mb-12">
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">教授与研究员</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('Professor').map(m => <MemberCard member={m} />)}
+        {byGroup('Researcher').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">学生团队</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('PhD').map(m => <MemberCard member={m} />)}
+        {byGroup('Master').map(m => <MemberCard member={m} />)}
+        {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">顾问团队</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('Advisor').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">在研项目</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-slate-900 mb-3">国家自然科学基金重点项目</h3>
+        <p class="text-slate-700 mb-2">负责人：张三 教授</p>
+        <p class="text-slate-700 mb-4">起止时间：2023年1月 - 2026年12月</p>
+        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
+      </div>
+      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-slate-900 mb-3">企业合作项目</h3>
+        <p class="text-slate-700 mb-2">负责人：李四 研究员</p>
+        <p class="text-slate-700 mb-4">起止时间：2024年3月 - 2025年12月</p>
+        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
+      </div>
+      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-slate-900 mb-3">国家青年科学基金项目</h3>
+        <p class="text-slate-700 mb-2">负责人：王五 副教授</p>
+        <p class="text-slate-700 mb-4">起止时间：2024年1月 - 2026年12月</p>
+        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
+      </div>
+      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-slate-900 mb-3">省部级重点研发项目</h3>
+        <p class="text-slate-700 mb-2">负责人：赵六 教授</p>
+        <p class="text-slate-700 mb-4">起止时间：2023年6月 - 2025年12月</p>
+        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
+      </div>
+    </div>
+    <div class="mt-8 text-center">
+      <a href="/projects/completed" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+        查看已结题项目
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 scroll-mt-16">
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">联系我们</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-4">联系方式</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <svg class="w-5 h-5 text-brand-600 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <div>
+              <p class="font-medium text-slate-900">邮箱</p>
+              <p class="text-slate-700">cveo@whu.edu.cn</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <svg class="w-5 h-5 text-brand-600 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <div>
+              <p class="font-medium text-slate-900">地址</p>
+              <p class="text-slate-700">湖北省武汉市武汉大学信息学部</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-4">研究方向</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">遥感场景理解</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">弱监督学习</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">时空大模型</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">多源数据融合</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

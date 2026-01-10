@@ -1,0 +1,36 @@
+---
+const { paper } = Astro.props
+
+function formatDate(dateStr) {
+  const date = new Date(dateStr)
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  return `${year}年${month}月`
+}
+---
+<div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+  <div class="flex justify-between items-start mb-4">
+    <div class="flex-grow">
+      <h3 class="text-lg font-semibold text-slate-900">{paper.data.title}</h3>
+      <p class="mt-2 text-slate-700">{paper.data.journal} • {formatDate(paper.data.date)}</p>
+    </div>
+    {paper.data.partition && (
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200 ml-4 flex-shrink-0">
+        {paper.data.partition}
+      </span>
+    )}
+  </div>
+  
+  <div class="mt-4">
+    <p class="text-slate-600" set:html={paper.data.authors.map((author, idx) => {
+      let display = author
+      if (paper.data.equalFirst && paper.data.equalFirst.includes(idx)) {
+        display += '<sup>†</sup>'
+      }
+      if (paper.data.corresponding && paper.data.corresponding.includes(idx)) {
+        display += '<sup>*</sup>'
+      }
+      return display
+    }).join('，')}></p>
+  </div>
+</div>

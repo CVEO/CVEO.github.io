@@ -1,0 +1,21 @@
+---
+import '../styles/tailwind.css'
+import NavBar from '../components/NavBar.astro'
+import Footer from '../components/Footer.astro'
+const { title } = Astro.props
+---
+<!doctype html>
+<html lang="zh" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ? `${title} | CVEO` : 'CVEO 武汉大学'}</title>
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#1d4ed8" />
+  </head>
+  <body class="bg-white text-slate-800 antialiased">
+    <NavBar />
+    <main class="min-h-screen"><slot /></main>
+    <Footer />
+  </body>
+</html>

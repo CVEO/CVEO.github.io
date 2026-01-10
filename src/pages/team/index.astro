@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import MemberCard from '../../components/MemberCard.astro'
+import { getCollection } from 'astro:content'
+const members = await getCollection('members')
+const groups = ['Professor','Researcher','PhD','Master','Undergrad','Advisor']
+function byGroup(g) { return members.filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
+---
+<BaseLayout title="团队成员">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-2xl font-semibold text-slate-900">团队成员</h1>
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold text-slate-900">学生团队</h2>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('PhD').map(m => <MemberCard member={m} />)}
+        {byGroup('Master').map(m => <MemberCard member={m} />)}
+        {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-slate-900">顾问团队</h2>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('Advisor').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-slate-900">教授与研究员</h2>
+      <p class="mt-2 text-slate-700 text-sm">点击查看独立页面</p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        {byGroup('Professor').map(m => (
+          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-600 text-brand-700 hover:bg-brand-50">{m.data.name}</a>
+        ))}
+        {byGroup('Researcher').map(m => (
+          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-600 text-brand-700 hover:bg-brand-50">{m.data.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

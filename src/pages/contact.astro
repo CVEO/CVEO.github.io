@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+<BaseLayout title="联系我们">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-2xl font-semibold text-slate-900 mb-8">联系我们</h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg border border-slate-200 p-8">
+          <h2 class="text-xl font-semibold text-slate-900 mb-6">联系信息</h2>
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-900 mb-1">邮箱</h3>
+                <p class="text-slate-700">cveo@whu.edu.cn</p>
+                <p class="text-sm text-slate-500 mt-1">一般咨询与学术交流</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-900 mb-1">地址</h3>
+                <p class="text-slate-700">湖北省武汉市武昌区八一路武汉大学</p>
+                <p class="text-sm text-slate-500 mt-1">信息学部计算机学院</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-900 mb-1">工作时间</h3>
+                <p class="text-slate-700">周一至周五 9:00-17:00</p>
+                <p class="text-sm text-slate-500 mt-1">节假日除外</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="bg-white rounded-lg border border-slate-200 p-8">
+          <h2 class="text-xl font-semibold text-slate-900 mb-6">加入我们</h2>
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-semibold text-slate-900 mb-2">研究生招生</h3>
+              <p class="text-slate-700 mb-3">欢迎保研、考研与留学意向同学申请。</p>
+              <ul class="space-y-2 text-sm text-slate-600">
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>计算机、遥感、测绘等相关专业</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>具备编程与数学基础</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>对科研有浓厚兴趣</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="font-semibold text-slate-900 mb-2">申请材料</h3>
+              <ul class="space-y-2 text-sm text-slate-600">
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>个人简历</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>成绩单</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
+                  <span>研究计划或作品集</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="pt-4 border-t border-slate-200">
+              <a href="mailto:cveo@whu.edu.cn" class="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg bg-brand-600 text-white hover:bg-brand-700">
+                发送申请材料
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-12 bg-white rounded-lg border border-slate-200 p-8">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6">合作与交流</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-lg bg-slate-50">
+          <h3 class="font-semibold text-slate-900 mb-3">学术合作</h3>
+          <p class="text-slate-700">欢迎国内外高校、研究机构开展学术交流与合作研究。</p>
+        </div>
+        <div class="p-6 rounded-lg bg-slate-50">
+          <h3 class="font-semibold text-slate-900 mb-3">企业合作</h3>
+          <p class="text-slate-700">与企业合作开展技术研发、成果转化与人才培养。</p>
+        </div>
+        <div class="p-6 rounded-lg bg-slate-50">
+          <h3 class="font-semibold text-slate-900 mb-3">访问学者</h3>
+          <p class="text-slate-700">欢迎访问学者、博士后研究人员加入课题组。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

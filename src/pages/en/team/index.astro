@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import MemberCard from '../../../components/MemberCard.astro'
+import { getCollection } from 'astro:content'
+const members = await getCollection('members')
+function byGroup(g) { return members.filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
+---
+<BaseLayout title="Team (EN)">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-2xl font-semibold text-slate-900">Team</h1>
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold text-slate-900">Students</h2>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('PhD').map(m => <MemberCard member={m} />)}
+        {byGroup('Master').map(m => <MemberCard member={m} />)}
+        {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-slate-900">Advisors</h2>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {byGroup('Advisor').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
