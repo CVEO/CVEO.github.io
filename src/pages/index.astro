@@ -4,13 +4,21 @@ import PaperCard from '../components/PaperCard.astro'
 import MemberCard from '../components/MemberCard.astro'
 import { getCollection } from 'astro:content'
 import raw from '../data/news.md?raw'
-import PatentTable from '../components/PatentTable.astro'
-import Projects from '../data/projects.md'
 
-const papers = await getCollection('papers')
+import aboutData from '../data/about.json'
+import projectsData from '../data/projects.json'
+import awardsData from '../data/awards.json'
+
+const papers = await getCollection('papers') || []
 const sortedPapers = papers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 const recentPapers = sortedPapers.slice(0, 5)
-const members = await getCollection('members')
+
+// 调试：查看论文数据结构
+console.log('论文总数:', papers.length)
+if (papers.length > 0) {
+  console.log('第一篇论文数据:', papers[0].data)
+}
+const members = await getCollection('members') || []
 
 const lines = raw.split(/\r?\n/).filter(l => l.trim().startsWith('## '))
 function parseLine(line) {
@@ -23,68 +31,155 @@ function parseLine(line) {
   const id = `news-${m[1]}-${slug}`.replace(/-+/g, '-')
   return { date, dateStr: m[1], text, id }
 }
-const newsItems = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime()).slice(0, 5)
+const newsItems = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime()).slice(0, 3)
 
-function byGroup(g) { return members.filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
+function byGroup(g) { return (members || []).filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
 
 function formatDate(dateStr) {
-  const date = new Date(dateStr)
-  const year = date.getFullYear()
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  return `${year}年${month}月`
+  if (!dateStr) return '日期未知'
+  try {
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) {
+      // 尝试解析 YYYY-MM-DD 格式
+      const match = dateStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
+      if (match) {
+        const year = parseInt(match[1])
+        const month = parseInt(match[2])
+        return `${year}年${month.toString().padStart(2, '0')}月`
+      }
+      return '日期格式错误'
+    }
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    return `${year}年${month}月`
+  } catch (error) {
+    return '日期解析错误'
+  }
 }
 ---
 <BaseLayout title="首页">
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <h1 class="text-3xl sm:text-5xl font-bold text-brand-700">武汉大学 CVEO 课题组</h1>
+      <h1 class="text-3xl sm:text-5xl font-bold text-brand-900">武汉大学 CVEO 课题组</h1>
       <p class="mt-4 text-slate-700 text-lg">计算机视觉与地球观测，产学研协同创新。</p>
     </div>
   </section>
 
-  <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
-    <h2 class="text-2xl font-semibold text-slate-900 mb-8">关于课题组</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       <div>
-        <img src="https://picsum.photos/600/338" alt="PI Photo" class="w-full aspect-[16/9] object-cover rounded shadow-lg" />
-      </div>
-      <div class="md:col-span-2">
-        <h3 class="text-xl font-semibold text-slate-900 mb-4">PI 教授带队</h3>
-        <p class="text-slate-700 mb-6">PI 姓名，职称与单位信息占位。团队以问题驱动，联合产学研各方开展关键技术攻关与成果转化。</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
-            <h4 class="font-semibold text-slate-900 mb-3">研究方向</h4>
-            <ul class="space-y-2 text-slate-700">
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>遥感场景理解与目标检测</span>
-              </li>
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>弱监督、自监督与时空表示学习</span>
-              </li>
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>多源数据融合与地学知识注入</span>
-              </li>
-            </ul>
+        <div class="sticky top-24">
+          <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
+            <span class="w-8 h-1 bg-brand-900 mr-4"></span>
+            关于课题组
+          </h2>
+          
+          <div class="space-y-6">
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 shadow-sm">
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">团队简介</h3>
+              <p class="text-slate-700 leading-relaxed">
+                {aboutData.introduction}
+              </p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              {(aboutData.stats || []).map(stat => (
+                <div class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition-all duration-300">
+                  <div class="text-3xl font-bold text-brand-900 mb-1">{stat.value}<span class="text-sm ml-1 font-normal text-slate-500">{stat.unit}</span></div>
+                  <div class="text-sm text-slate-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-green-50 to-white border border-brand-green-100 shadow-sm">
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">核心研究领域</h3>
+              <div class="space-y-4">
+                {(aboutData.researchFields || []).map(field => (
+                  <div class="flex items-start group">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-green-100 flex items-center justify-center mr-4 group-hover:bg-brand-green-200 transition-colors duration-300">
+                      <svg class="w-5 h-5 text-brand-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-900 group-hover:text-brand-green-900 transition-colors duration-300">{field.title}</h4>
+                      <p class="text-sm text-slate-600 mt-1">{field.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
-            <h4 class="font-semibold text-slate-900 mb-3">合作与平台</h4>
-            <ul class="space-y-2 text-slate-700">
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>国内外高校与研究机构</span>
-              </li>
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>行业企业与政府部门</span>
-              </li>
-              <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3"></span>
-                <span>开放数据与开源社区</span>
-              </li>
-            </ul>
+        </div>
+      </div>
+      
+      <div>
+        <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 mb-8">
+          <img 
+            src="/assets/avatars/team.png" 
+            alt="CVEO课题组团队合影" 
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        
+        <div class="text-center space-y-4">
+          <h3 class="text-2xl font-bold text-slate-900">团队风采</h3>
+          <p class="text-slate-600">
+            CVEO课题组全体成员合影 - 致力于计算机视觉与地球观测研究
+          </p>
+          
+          <div class="pt-6 border-t border-slate-200">
+            <div class="inline-flex items-center space-x-2 text-sm text-slate-500">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>成立于2020年</span>
+              <span class="mx-2">•</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>武汉大学信息学部</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-12 p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200">
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">团队特色</h3>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-slate-900">产学研结合</h4>
+                <p class="text-sm text-slate-600 mt-1">理论研究与产业应用紧密结合，推动科技成果转化</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-slate-900">国际化视野</h4>
+                <p class="text-sm text-slate-600 mt-1">与国内外顶尖研究机构保持密切合作与交流</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-slate-900">创新驱动</h4>
+                <p class="text-sm text-slate-600 mt-1">鼓励创新思维，培养具有国际竞争力的科研人才</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +189,7 @@ function formatDate(dateStr) {
   <section id="news" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">新闻动态</h2>
     <div class="space-y-6">
-      {newsItems.map(i => (
+      {(newsItems || []).map(i => (
         <article class="rounded-lg border border-slate-200 bg-white p-6 hover:shadow-md transition">
           <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -111,7 +206,7 @@ function formatDate(dateStr) {
       ))}
     </div>
     <div class="mt-8 text-center">
-      <a href="/news" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+      <a href="/news" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看更多新闻
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -139,20 +234,20 @@ function formatDate(dateStr) {
         </div>
       </div>
       
-      <div class="space-y-6">
-        {recentPapers.map(p => (
-          <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {(recentPapers || []).map(p => (
+          <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition flex flex-col h-full">
             <div class="flex justify-between items-start mb-4">
-              <h4 class="text-lg font-semibold text-slate-900">{p.data.title}</h4>
+              <h4 class="text-lg font-semibold text-slate-900 line-clamp-2">{p.data.title}</h4>
               {p.data.partition && (
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-900 border border-brand-200 flex-shrink-0 ml-2">
                   {p.data.partition}
                 </span>
               )}
             </div>
             <p class="text-slate-700 mb-3">{p.data.journal} • {formatDate(p.data.date)}</p>
-            <p class="text-slate-600 mb-4">
-              作者：{p.data.authors.map((author, idx) => {
+            <p class="text-slate-600 mb-4 flex-grow">
+              作者：{(p.data.authors || []).map((author, idx) => {
                 let display = author
                 if (p.data.equalFirst && p.data.equalFirst.includes(idx)) {
                   display += '†'
@@ -167,7 +262,7 @@ function formatDate(dateStr) {
         ))}
       </div>
       <div class="mt-8 text-center">
-        <a href="/research" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+        <a href="/research" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
           查看更多论文
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -175,27 +270,38 @@ function formatDate(dateStr) {
         </a>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-semibold text-slate-900 mb-6">专利与软著</h3>
-      <PatentTable />
-    </div>
   </section>
 
   <section id="team" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">团队成员</h2>
     
     <div class="mb-12">
-      <h3 class="text-xl font-semibold text-slate-900 mb-6">教授与研究员</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {byGroup('Professor').map(m => <MemberCard member={m} />)}
-        {byGroup('Researcher').map(m => <MemberCard member={m} />)}
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-semibold text-slate-900">教授与研究员</h3>
+        <button class="text-sm text-brand-900 hover:text-brand-800 font-medium flex items-center gap-1 team-toggle" data-target="professor-researcher">
+          <span>展开全部</span>
+          <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 team-section" id="professor-researcher">
+        {(byGroup('Professor') || []).map(m => <MemberCard member={m} />)}
+        {(byGroup('Researcher') || []).map(m => <MemberCard member={m} />)}
       </div>
     </div>
 
     <div class="mb-12">
-      <h3 class="text-xl font-semibold text-slate-900 mb-6">学生团队</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-semibold text-slate-900">学生团队</h3>
+        <button class="text-sm text-brand-900 hover:text-brand-800 font-medium flex items-center gap-1 team-toggle" data-target="student-team">
+          <span>展开全部</span>
+          <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 team-section" id="student-team">
         {byGroup('PhD').map(m => <MemberCard member={m} />)}
         {byGroup('Master').map(m => <MemberCard member={m} />)}
         {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
@@ -203,8 +309,16 @@ function formatDate(dateStr) {
     </div>
 
     <div>
-      <h3 class="text-xl font-semibold text-slate-900 mb-6">顾问团队</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-semibold text-slate-900">顾问团队</h3>
+        <button class="text-sm text-brand-900 hover:text-brand-800 font-medium flex items-center gap-1 team-toggle" data-target="advisor-team">
+          <span>展开全部</span>
+          <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 team-section" id="advisor-team">
         {byGroup('Advisor').map(m => <MemberCard member={m} />)}
       </div>
     </div>
@@ -213,38 +327,44 @@ function formatDate(dateStr) {
   <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">在研项目</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
-        <h3 class="text-lg font-semibold text-slate-900 mb-3">国家自然科学基金重点项目</h3>
-        <p class="text-slate-700 mb-2">负责人：张三 教授</p>
-        <p class="text-slate-700 mb-4">起止时间：2023年1月 - 2026年12月</p>
-        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
-      </div>
-      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
-        <h3 class="text-lg font-semibold text-slate-900 mb-3">企业合作项目</h3>
-        <p class="text-slate-700 mb-2">负责人：李四 研究员</p>
-        <p class="text-slate-700 mb-4">起止时间：2024年3月 - 2025年12月</p>
-        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
-      </div>
-      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
-        <h3 class="text-lg font-semibold text-slate-900 mb-3">国家青年科学基金项目</h3>
-        <p class="text-slate-700 mb-2">负责人：王五 副教授</p>
-        <p class="text-slate-700 mb-4">起止时间：2024年1月 - 2026年12月</p>
-        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
-      </div>
-      <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
-        <h3 class="text-lg font-semibold text-slate-900 mb-3">省部级重点研发项目</h3>
-        <p class="text-slate-700 mb-2">负责人：赵六 教授</p>
-        <p class="text-slate-700 mb-4">起止时间：2023年6月 - 2025年12月</p>
-        <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">在研</span>
-      </div>
+      {(projectsData || []).slice(0, 6).map(project => (
+        <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">{project.title}</h3>
+          <p class="text-slate-700 mb-2">负责人：{project.leader}</p>
+          <p class="text-slate-700 mb-4">起止时间：{project.period}</p>
+          <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">{project.status}</span>
+        </div>
+      ))}
     </div>
     <div class="mt-8 text-center">
-      <a href="/projects/completed" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+      <a href="/projects/completed" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看已结题项目
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
       </a>
+    </div>
+  </section>
+
+  <section id="awards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-16">
+    <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center">
+      <span class="w-8 h-1 bg-brand-900 mr-4"></span>
+      获奖情况
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {awardsData.map(award => (
+        <div class="flex items-center p-6 rounded-xl border border-slate-200 bg-white hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center mr-6 flex-shrink-0">
+            <svg class="w-6 h-6 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900">{award.title}</h3>
+            <p class="text-sm text-slate-600 mt-1">{award.level} • {award.year}年</p>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -255,7 +375,7 @@ function formatDate(dateStr) {
         <h3 class="text-lg font-semibold text-slate-900 mb-4">联系方式</h3>
         <div class="space-y-4">
           <div class="flex items-start">
-            <svg class="w-5 h-5 text-brand-600 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-brand-900 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
             <div>
@@ -264,7 +384,7 @@ function formatDate(dateStr) {
             </div>
           </div>
           <div class="flex items-start">
-            <svg class="w-5 h-5 text-brand-600 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-brand-900 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
@@ -278,12 +398,43 @@ function formatDate(dateStr) {
       <div>
         <h3 class="text-lg font-semibold text-slate-900 mb-4">研究方向</h3>
         <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">遥感场景理解</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">弱监督学习</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">时空大模型</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-700 border border-brand-200">多源数据融合</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">遥感场景理解</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">弱监督学习</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">时空大模型</span>
+          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">多源数据融合</span>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const teamSections = document.querySelectorAll('.team-section');
+  const toggleButtons = document.querySelectorAll('.team-toggle');
+  
+  teamSections.forEach(section => {
+    section.style.maxHeight = '500px';
+    section.style.overflow = 'hidden';
+    section.style.transition = 'max-height 0.3s ease-out';
+  });
+  
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+      const isExpanded = targetSection.style.maxHeight === 'none' || targetSection.style.maxHeight === '';
+      
+      if (isExpanded) {
+        targetSection.style.maxHeight = '500px';
+        this.querySelector('span').textContent = '展开全部';
+        this.querySelector('svg').style.transform = 'rotate(0deg)';
+      } else {
+        targetSection.style.maxHeight = 'none';
+        this.querySelector('span').textContent = '收起';
+        this.querySelector('svg').style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+});
+</script>

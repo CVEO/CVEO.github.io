@@ -2,18 +2,73 @@
 ---
 <header class="bg-white/75 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-14">
-      <a href="/" class="font-semibold text-brand-700">CVEO</a>
-      <nav class="flex items-center gap-6 text-sm">
-        <a href="/" class="text-slate-700 hover:text-brand-700">首页</a>
-        <a href="#about" class="text-slate-700 hover:text-brand-700">关于</a>
-        <a href="#news" class="text-slate-700 hover:text-brand-700">新闻动态</a>
-        <a href="#research" class="text-slate-700 hover:text-brand-700">科研成果</a>
-        <a href="#team" class="text-slate-700 hover:text-brand-700">团队成员</a>
-        <a href="#projects" class="text-slate-700 hover:text-brand-700">项目</a>
-        <a href="#contact" class="text-slate-700 hover:text-brand-700">联系</a>
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-3">
+          <img 
+            src="/assets/logos/logo.png" 
+            alt="CVEO课题组logo" 
+            class="w-32 h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          />
+          <span class="font-semibold text-brand-900 text-lg hidden md:inline">CVEO课题组</span>
+        </a>
+      </div>
+      <nav class="flex items-center gap-6 text-sm" id="main-nav">
+        <a href="/" class="text-slate-700 hover:text-brand-900">首页</a>
+        <a href="#about" class="text-slate-700 hover:text-brand-900">关于</a>
+        <a href="#news" class="text-slate-700 hover:text-brand-900">新闻动态</a>
+        <a href="#research" class="text-slate-700 hover:text-brand-900">科研成果</a>
+        <a href="#team" class="text-slate-700 hover:text-brand-900">团队成员</a>
+        <a href="#projects" class="text-slate-700 hover:text-brand-900">项目</a>
+        <a href="#contact" class="text-slate-700 hover:text-brand-900">联系</a>
         <!-- <a href="/en" class="text-slate-700 hover:text-brand-700">EN</a> -->
       </nav>
     </div>
   </div>
 </header>
+
+<script>
+  function setupNav() {
+    const nav = document.getElementById('main-nav');
+    if (!nav) return;
+
+    const links = nav.querySelectorAll('a');
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      link.addEventListener('click', (e) => {
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId) || 
+                             (targetId === 'teams' ? document.getElementById('team') : null);
+
+        if (isHomePage) {
+          // On homepage, let the default anchor jump work (BaseLayout has scroll-smooth)
+          if (targetId === 'teams') {
+            e.preventDefault();
+            document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else {
+          // On non-homepage
+          if (targetElement) {
+            // Target exists on current page
+            e.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, '', href);
+          } else {
+            // Target does not exist, go to homepage + anchor
+            e.preventDefault();
+            window.location.href = '/' + href;
+          }
+        }
+      });
+    });
+  }
+
+  // Run on load
+  setupNav();
+  // Re-run on view transitions if needed (Astro)
+  document.addEventListener('astro:after-swap', setupNav);
+</script>

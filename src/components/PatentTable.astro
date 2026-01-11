@@ -1,75 +1,19 @@
 ---
+import patentsData from '../data/patents.json';
+
 interface Props {
   patents?: Array<{
     type: string;
-    name: string;
-    number: string;
-    date: string;
+    title: string;
+    patentNumber: string;
+    grantDate: string;
     status?: string;
     inventors?: string[];
+    abstract?: string;
   }>;
 }
 
-const defaultPatents = [
-  {
-    type: '发明专利',
-    name: '一种遥感数据预处理方法',
-    number: 'ZL202310567890.1',
-    date: '2025-02-10',
-    status: '已授权',
-    inventors: ['张三', '李四', '王五']
-  },
-  {
-    type: '发明专利',
-    name: '生态监测模型构建系统',
-    number: 'ZL202210876543.2',
-    date: '2024-11-05',
-    status: '已授权',
-    inventors: ['张三', '赵六']
-  },
-  {
-    type: '实用新型专利',
-    name: '遥感数据采集装置',
-    number: 'ZL202420123456.7',
-    date: '2024-08-20',
-    status: '已授权',
-    inventors: ['李四', '王五']
-  },
-  {
-    type: '软件著作权',
-    name: '多源数据融合分析系统V1.0',
-    number: '2024SR1234567',
-    date: '2024-05-15',
-    status: '已登记',
-    inventors: ['张三', '李四', '王五', '赵六']
-  },
-  {
-    type: '软件著作权',
-    name: '生态监测可视化平台V2.0',
-    number: '2023SR0987654',
-    date: '2023-12-10',
-    status: '已登记',
-    inventors: ['张三', '王五']
-  },
-  {
-    type: '发明专利',
-    name: '一种基于AI的遥感图像识别方法',
-    number: 'ZL202110345678.9',
-    date: '2023-09-05',
-    status: '已授权',
-    inventors: ['李四', '赵六']
-  },
-  {
-    type: '软件著作权',
-    name: '遥感数据管理系统V1.0',
-    number: '2023SR0654321',
-    date: '2023-06-25',
-    status: '已登记',
-    inventors: ['张三', '李四']
-  }
-];
-
-const { patents = defaultPatents } = Astro.props;
+const { patents = patentsData } = Astro.props;
 ---
 
 <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
@@ -114,15 +58,15 @@ const { patents = defaultPatents } = Astro.props;
                 <div>
                   <div class="text-sm font-medium text-slate-900">{patent.type}</div>
                   <div class="mt-1 md:hidden">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.number}</span>
+                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.patentNumber}</span>
                   </div>
                 </div>
               </div>
             </td>
             <td class="px-4 md:px-8 py-4 md:py-5">
-              <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">{patent.name}</div>
+              <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">{patent.title}</div>
               <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.date}</span>
+                <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.grantDate}</span>
                 {patent.status && (
                   <span class={`inline-flex items-center px-2 py-1 rounded text-xs ${
                     patent.status === '已授权' || patent.status === '已登记' 
@@ -135,13 +79,13 @@ const { patents = defaultPatents } = Astro.props;
               </div>
             </td>
             <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-              <div class="text-sm font-medium text-slate-900">{patent.number}</div>
+              <div class="text-sm font-medium text-slate-900">{patent.patentNumber}</div>
               <div class="text-xs text-slate-500 mt-1">
                 {patent.type.includes('专利') ? '专利号' : '登记号'}
               </div>
             </td>
             <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-              <div class="text-sm font-medium text-slate-900">{patent.date}</div>
+              <div class="text-sm font-medium text-slate-900">{patent.grantDate}</div>
               <div class="text-xs text-slate-500 mt-1">
                 {patent.type.includes('专利') ? '授权日期' : '登记日期'}
               </div>

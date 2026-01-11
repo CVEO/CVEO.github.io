@@ -1,0 +1,39 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  aspectRatio?: string; // 例如 "3/4" 表示 3:4 竖排头像，"1/1" 表示正方形
+  className?: string;
+  lazy?: boolean;
+  fallbackSrc?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  aspectRatio = "1/1", 
+  className = "", 
+  lazy = true,
+  fallbackSrc = "/assets/avatars/placeholder.svg"
+} = Astro.props;
+
+const aspectRatioClass = {
+  "3/4": "aspect-[3/4]",
+  "1/1": "aspect-square",
+  "4/3": "aspect-[4/3]",
+  "16/9": "aspect-video"
+}[aspectRatio] || "aspect-square";
+
+const handleError = `
+  this.onerror = null;
+  this.src = '${fallbackSrc}';
+`;
+---
+
+<img 
+  src={src} 
+  alt={alt}
+  class={`object-cover rounded ${aspectRatioClass} ${className}`}
+  loading={lazy ? "lazy" : "eager"}
+  onerror={handleError}
+/>

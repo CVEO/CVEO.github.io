@@ -1,8 +1,8 @@
 ---
-name: 李研究员
-role: Researcher
+name: 陈关州
+role: 副研究员
 group: Researcher
-photo: ""
+photo: "assets/avatars/cgz.jpg"
 bio: 负责弱监督学习与时空表征研究
 ---
 

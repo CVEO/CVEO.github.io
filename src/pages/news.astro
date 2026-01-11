@@ -23,7 +23,7 @@ const items = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime(
           <h2 class="text-sm font-semibold text-slate-700">索引</h2>
           <ul class="mt-3 space-y-2">
             {items.map(i => (
-              <li><a href={`#${i.id}`} class="text-slate-700 hover:text-brand-700">{i.dateStr}</a></li>
+              <li><a href={`#${i.id}`} class="text-slate-700 hover:text-brand-900">{i.dateStr}</a></li>
             ))}
           </ul>
         </div>

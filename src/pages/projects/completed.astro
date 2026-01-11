@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import completedProjectsData from '../../data/completed_projects.json'
 ---
 
 <BaseLayout title="已结题项目">
@@ -23,78 +24,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-slate-200">
-            <tr class="hover:bg-slate-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-slate-900">国家重点研发计划</div>
-                <div class="text-sm text-slate-600">弱监督遥感场景理解关键技术研究</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">张三 教授</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">国家级</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2022年1月 - 2025年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2025年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">已结题</span>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-slate-900">国家自然科学基金面上项目</div>
-                <div class="text-sm text-slate-600">多源遥感数据融合与智能分析</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">李四 研究员</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">国家级</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2021年1月 - 2024年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2024年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">已结题</span>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-slate-900">省部级科技攻关项目</div>
-                <div class="text-sm text-slate-600">高分辨率遥感影像智能解译</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">王五 副教授</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">省部级</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2020年6月 - 2023年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2023年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">已结题</span>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-slate-900">企业横向合作项目</div>
-                <div class="text-sm text-slate-600">遥感数据处理平台开发</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">赵六 教授</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">企业合作</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2019年3月 - 2022年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2022年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">已结题</span>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 transition">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-slate-900">国际合作项目</div>
-                <div class="text-sm text-slate-600">遥感大数据分析与应用</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">钱七 教授</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">国际合作</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2018年1月 - 2021年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">2021年12月</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">已结题</span>
-              </td>
-            </tr>
+            {completedProjectsData.map(project => (
+              <tr class="hover:bg-slate-50 transition">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-slate-900">{project.title}</div>
+                  <div class="text-sm text-slate-600">{project.description}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">{project.leader}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">{project.type}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">{project.period}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">{project.completedDate}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">{project.status}</span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="mt-8 text-center">
-      <a href="/" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-600 text-brand-700 hover:bg-brand-50 hover:border-brand-700 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+      <a href="/" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-900 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         返回首页
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>

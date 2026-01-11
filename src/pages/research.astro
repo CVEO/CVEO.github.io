@@ -1,168 +1,209 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import PaperCard from '../components/PaperCard.astro'
-import { getCollection } from 'astro:content'
 import PatentTable from '../components/PatentTable.astro'
-const papers = await getCollection('papers')
-const sorted = papers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+import awardsData from '../data/awards.json'
+import { getCollection } from 'astro:content'
+
+const allPapers = await getCollection('papers') || []
+const ourPapers = allPapers.filter(p => p.id.startsWith('our/'))
+const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative/'))
 ---
 <BaseLayout title="科研成果">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-2xl font-semibold text-slate-900 mb-8">期刊论文</h1>
-    
-    <div class="mb-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
-      <div class="flex flex-wrap gap-4 text-sm text-slate-700">
-        <div class="flex items-center">
-          <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">†</span>
-          <span>共同一作</span>
-        </div>
-        <div class="flex items-center">
-          <span class="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-medium bg-slate-200 rounded">*</span>
-          <span>通讯作者</span>
-        </div>
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <h1 class="text-3xl font-bold text-slate-900">科研成果</h1>
+      
+      <div class="inline-flex p-1 bg-slate-100 rounded-xl" id="paper-tabs">
+        <button 
+          class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm"
+          data-tab="our"
+        >
+          通讯/一作论文
+        </button>
+        <button 
+          class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900"
+          data-tab="collaborative"
+        >
+          合作论文
+        </button>
       </div>
     </div>
-    
-    <div class="space-y-6">
-      {sorted.map(p => <PaperCard paper={p} />)}
-    </div>
-    
-    <div class="mt-16">
-      <h2 class="text-2xl font-semibold text-slate-900 mb-6">合作论文</h2>
-      <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-slate-200">
-            <thead class="bg-slate-100">
-              <tr>
-                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">论文标题</th>
-                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell">期刊</th>
-                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">发表时间</th>
-                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">合作单位</th>
-                <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">作者贡献</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-200">
-              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">基于深度学习的遥感图像语义分割方法研究</div>
-                  <div class="mt-1 text-xs md:text-sm text-slate-600">提出了一种基于注意力机制的语义分割网络</div>
-                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">遥感学报</span>
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2024年6月</span>
-                  </div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-                  <div class="text-sm font-medium text-slate-900">遥感学报</div>
-                  <div class="text-xs text-slate-500 mt-1">SCI收录</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">2024年6月</div>
-                  <div class="text-xs text-slate-500 mt-1">第45卷第3期</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">中国科学院空天信息创新研究院</div>
-                  <div class="text-xs text-slate-500 mt-1">北京</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm text-slate-900">算法设计与实验分析</div>
-                  <div class="mt-1">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-50 text-blue-700 border border-blue-200">主要贡献</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">多源遥感数据融合的城市变化检测</div>
-                  <div class="mt-1 text-xs md:text-sm text-slate-600">融合SAR与光学影像的城市变化检测方法</div>
-                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">测绘学报</span>
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2024年3月</span>
-                  </div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-                  <div class="text-sm font-medium text-slate-900">测绘学报</div>
-                  <div class="text-xs text-slate-500 mt-1">EI收录</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">2024年3月</div>
-                  <div class="text-xs text-slate-500 mt-1">第53卷第2期</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">清华大学地球系统科学系</div>
-                  <div class="text-xs text-slate-500 mt-1">北京</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm text-slate-900">数据预处理与模型验证</div>
-                  <div class="mt-1">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-green-50 text-green-700 border border-green-200">数据处理</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">高分辨率遥感影像目标检测技术综述</div>
-                  <div class="mt-1 text-xs md:text-sm text-slate-600">系统综述了深度学习在遥感目标检测中的应用</div>
-                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">中国图象图形学报</span>
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2023年12月</span>
-                  </div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-                  <div class="text-sm font-medium text-slate-900">中国图象图形学报</div>
-                  <div class="text-xs text-slate-500 mt-1">核心期刊</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">2023年12月</div>
-                  <div class="text-xs text-slate-500 mt-1">第28卷第12期</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">北京大学遥感与地理信息系统研究所</div>
-                  <div class="text-xs text-slate-500 mt-1">北京</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm text-slate-900">文献调研与综述撰写</div>
-                  <div class="mt-1">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-purple-50 text-purple-700 border border-purple-200">综述撰写</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">基于Transformer的遥感场景分类方法</div>
-                  <div class="mt-1 text-xs md:text-sm text-slate-600">提出了一种基于Vision Transformer的遥感场景分类模型</div>
-                  <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">电子与信息学报</span>
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">2023年9月</span>
-                  </div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-                  <div class="text-sm font-medium text-slate-900">电子与信息学报</div>
-                  <div class="text-xs text-slate-500 mt-1">EI收录</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">2023年9月</div>
-                  <div class="text-xs text-slate-500 mt-1">第45卷第9期</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
-                  <div class="text-sm font-medium text-slate-900">南京大学地理与海洋科学学院</div>
-                  <div class="text-xs text-slate-500 mt-1">南京</div>
-                </td>
-                <td class="px-4 md:px-8 py-4 md:py-5">
-                  <div class="text-sm text-slate-900">模型设计与性能评估</div>
-                  <div class="mt-1">
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-orange-50 text-orange-700 border border-orange-200">模型设计</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+    <div id="paper-content">
+      <div id="our-papers" class="grid grid-cols-1 md:grid-cols-2 gap-6 paper-list" data-type="our">
+        {ourPapers.map((p, index) => (
+          <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 paper-item hidden flex flex-col h-full" data-index={index}>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{p.data.title}</h3>
+            <div class="space-y-2 text-slate-700 mb-4 flex-grow">
+              <p><span class="font-semibold">作者：</span>{p.data.authors.join('，')}</p>
+              <p><span class="font-semibold">发表期刊/会议：</span>{p.data.journal}</p>
+              <p><span class="font-semibold">发表时间：</span>{p.data.date}</p>
+              {p.data.link && p.data.link !== '#' && (
+                <p><span class="font-semibold">DOI/链接：</span><a href={p.data.link} target="_blank" class="text-brand-900 hover:underline">{p.data.link}</a></p>
+              )}
+            </div>
+            {p.data.abstract && (
+              <div class="bg-slate-50 p-4 rounded-lg">
+                <p class="text-sm text-slate-600 leading-relaxed"><span class="font-semibold text-slate-800">摘要：</span>{p.data.abstract}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div id="collaborative-papers" class="grid grid-cols-1 md:grid-cols-2 gap-6 paper-list hidden" data-type="collaborative">
+        {collaborativePapers.map((p, index) => (
+          <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 paper-item hidden flex flex-col h-full" data-index={index}>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{p.data.title}</h3>
+            <div class="space-y-2 text-slate-700 mb-4 flex-grow">
+              <p><span class="font-semibold">作者：</span>{p.data.authors.join('，')}</p>
+              <p><span class="font-semibold">发表期刊/会议：</span>{p.data.journal}</p>
+              <p><span class="font-semibold">发表时间：</span>{p.data.date}</p>
+              {p.data.link && p.data.link !== '#' && (
+                <p><span class="font-semibold">DOI/链接：</span><a href={p.data.link} target="_blank" class="text-brand-900 hover:underline">{p.data.link}</a></p>
+              )}
+            </div>
+            {p.data.abstract && (
+              <div class="bg-slate-50 p-4 rounded-lg">
+                <p class="text-sm text-slate-600 leading-relaxed"><span class="font-semibold text-slate-800">摘要：</span>{p.data.abstract}</p>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
-    
-    <div class="mt-16">
-      <h2 class="text-2xl font-semibold text-slate-900 mb-6">专利与软著</h2>
+
+    <!-- Pagination Controls -->
+    <div id="pagination" class="mt-12 flex justify-center items-center gap-2">
+      <button id="prev-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+        上一页
+      </button>
+      <div id="page-numbers" class="flex gap-2"></div>
+      <button id="next-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+        下一页
+      </button>
+    </div>
+
+    <div class="mt-20">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center">
+        <span class="w-8 h-1 bg-brand-600 mr-4"></span>
+        专利与软著
+      </h2>
       <PatentTable />
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll('#paper-tabs button');
+  const ourContent = document.getElementById('our-papers');
+  const collabContent = document.getElementById('collaborative-papers');
+  
+  // Pagination State
+  const ITEMS_PER_PAGE = 5;
+  let currentTab = 'our';
+  let currentPage = 1;
+
+  function updatePagination() {
+    const activeContent = currentTab === 'our' ? ourContent : collabContent;
+    if (!activeContent) return;
+
+    const papers = activeContent.querySelectorAll('.paper-item');
+    const totalPages = Math.ceil(papers.length / ITEMS_PER_PAGE);
+    
+    // Ensure currentPage is within bounds
+    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    // Show/Hide papers
+    papers.forEach((paper, index) => {
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      if (index >= start && index < end) {
+        paper.classList.remove('hidden');
+      } else {
+        paper.classList.add('hidden');
+      }
+    });
+
+    // Update Page Numbers
+    const pageNumbersContainer = document.getElementById('page-numbers');
+    if (pageNumbersContainer) {
+      pageNumbersContainer.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i.toString();
+        btn.className = `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+          i === currentPage 
+            ? 'bg-brand-600 text-white shadow-sm' 
+            : 'text-slate-600 hover:bg-slate-100'
+        }`;
+        btn.onclick = () => {
+          currentPage = i;
+          updatePagination();
+          window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
+        };
+        pageNumbersContainer.appendChild(btn);
+      }
+    }
+
+    // Update Prev/Next buttons
+    const prevBtn = document.getElementById('prev-page') as HTMLButtonElement;
+    const nextBtn = document.getElementById('next-page') as HTMLButtonElement;
+    if (prevBtn) prevBtn.disabled = currentPage === 1;
+    if (nextBtn) nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+  }
+
+  // Tab switching
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab');
+      if (!target) return;
+      
+      currentTab = target;
+      currentPage = 1; // Reset to first page on tab switch
+      
+      // Update tab styles
+      tabs.forEach(t => {
+        t.classList.remove('bg-white', 'text-brand-900', 'shadow-sm');
+        t.classList.add('text-slate-600', 'hover:text-slate-900');
+      });
+      tab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
+      tab.classList.remove('text-slate-600', 'hover:text-slate-900');
+
+      // Update content visibility
+      if (currentTab === 'our') {
+        ourContent?.classList.remove('hidden');
+        collabContent?.classList.add('hidden');
+      } else {
+        ourContent?.classList.add('hidden');
+        collabContent?.classList.remove('hidden');
+      }
+
+      updatePagination();
+    });
+  });
+
+  // Prev/Next handlers
+  document.getElementById('prev-page')?.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updatePagination();
+      window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
+    }
+  });
+
+  document.getElementById('next-page')?.addEventListener('click', () => {
+    const activeContent = currentTab === 'our' ? ourContent : collabContent;
+    const totalPapers = activeContent?.querySelectorAll('.paper-item').length || 0;
+    const totalPages = Math.ceil(totalPapers / ITEMS_PER_PAGE);
+    if (currentPage < totalPages) {
+      currentPage++;
+      updatePagination();
+      window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
+    }
+  });
+
+  // Initial call
+  updatePagination();
+</script>

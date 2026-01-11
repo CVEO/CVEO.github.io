@@ -28,10 +28,10 @@ function byGroup(g) { return members.filter(m => (m.data.group || '').toLowerCas
       <p class="mt-2 text-slate-700 text-sm">点击查看独立页面</p>
       <div class="mt-4 flex flex-wrap gap-3">
         {byGroup('Professor').map(m => (
-          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-600 text-brand-700 hover:bg-brand-50">{m.data.name}</a>
+          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-900 text-brand-900 hover:bg-brand-50">{m.data.name}</a>
         ))}
         {byGroup('Researcher').map(m => (
-          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-600 text-brand-700 hover:bg-brand-50">{m.data.name}</a>
+          <a href={`/team/${m.slug}`} class="px-3 py-1 rounded border border-brand-900 text-brand-900 hover:bg-brand-50">{m.data.name}</a>
         ))}
       </div>
     </div>

@@ -2,14 +2,16 @@ import { defineCollection, z } from 'astro:content'
 
 const papers = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     journal: z.string(),
-    date: z.date(),
+    date: z.string(),
+    authors: z.array(z.string()),
+    link: z.string().optional(),
+    abstract: z.string().optional(),
     partition: z.string().optional(),
     equalFirst: z.array(z.number()).optional(),
-    corresponding: z.array(z.number()).optional(),
-    authors: z.array(z.string())
+    corresponding: z.array(z.number()).optional()
   })
 })
 
