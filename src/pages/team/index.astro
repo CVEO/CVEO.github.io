@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import MemberCard from '../../components/MemberCard.astro'
+import { getCollection } from 'astro:content'
+
+const members = await getCollection('members') || []
+
+function byGroup(g) { 
+  return (members || []).filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) 
+}
+---
+<BaseLayout title="团队成员">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-slate-900 mb-4">团队成员</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+        武汉大学CVEO课题组汇聚了来自计算机视觉与地球观测交叉领域的优秀研究人员，包括教授、研究员、博士生、硕士生以及行业顾问。
+      </p>
+    </div>
+
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-semibold text-slate-900">指导老师</h2>
+        <span class="text-sm text-slate-500">
+          {(byGroup('Professor') || []).length + (byGroup('Researcher') || []).length} 位
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {(byGroup('Professor') || []).map(m => <MemberCard member={m} />)}
+        {(byGroup('Researcher') || []).map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-semibold text-slate-900">学生团队</h2>
+        <span class="text-sm text-slate-500">
+          {byGroup('PhD').length + byGroup('Master').length + byGroup('Undergrad').length} 位
+        </span>
+      </div>
+      
+      <div class="mb-10">
+        <h3 class="text-xl font-semibold text-slate-900 mb-6">博士研究生</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {byGroup('PhD').map(m => <MemberCard member={m} />)}
+        </div>
+      </div>
+      
+      <div class="mb-10">
+        <h3 class="text-xl font-semibold text-slate-900 mb-6">硕士研究生</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {byGroup('Master').map(m => <MemberCard member={m} />)}
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-slate-900 mb-6">本科生</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-semibold text-slate-900">团队顾问</h2>
+        <span class="text-sm text-slate-500">{byGroup('Advisor').length} 位</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {byGroup('Advisor').map(m => <MemberCard member={m} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

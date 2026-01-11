@@ -4,19 +4,59 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-slate-600 text-sm">武汉大学 CVEO 课题组 © {new Date().getFullYear()}</p>
-      <div class="text-slate-600 text-sm">
-        <a href="/about" class="hover:text-brand-900">关于</a>
+      <div class="text-slate-600 text-sm" id="footer-nav">
+        <a href="/" class="hover:text-brand-900">首页</a>
         <span class="mx-2">·</span>
-        <a href="/news" class="hover:text-brand-900">新闻</a>
+        <a href="#about" class="hover:text-brand-900">关于</a>
         <span class="mx-2">·</span>
-        <a href="/research" class="hover:text-brand-900">成果</a>
+        <a href="#news" class="hover:text-brand-900">新闻</a>
+        <span class="mx-2">·</span>
+        <a href="#research" class="hover:text-brand-900">成果</a>
         <span class="mx-2">·</span>
         <a href="/team" class="hover:text-brand-900">团队</a>
         <span class="mx-2">·</span>
-        <a href="/projects" class="hover:text-brand-900">项目</a>
+        <a href="#projects" class="hover:text-brand-900">项目</a>
         <span class="mx-2">·</span>
-        <a href="/contact" class="hover:text-brand-900">联系</a>
+        <a href="#contact" class="hover:text-brand-900">联系</a>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+  function setupFooterNav() {
+    const nav = document.getElementById('footer-nav');
+    if (!nav) return;
+
+    const links = nav.querySelectorAll('a');
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      
+      // Skip links that are not anchor links (e.g., /team)
+      if (!href.startsWith('#')) return;
+
+      link.addEventListener('click', (e) => {
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (isHomePage) {
+          // On homepage, let the default anchor jump work (BaseLayout has scroll-smooth)
+          e.preventDefault();
+          targetElement?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // On non-homepage, go to homepage + anchor
+          e.preventDefault();
+          window.location.href = '/' + href;
+        }
+      });
+    });
+  }
+
+  // Run on load
+  setupFooterNav();
+  // Re-run on view transitions if needed (Astro)
+  document.addEventListener('astro:after-swap', setupFooterNav);
+</script>

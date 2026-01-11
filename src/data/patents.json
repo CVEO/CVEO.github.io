@@ -1,65 +1,191 @@
 [
   {
     "type": "发明专利",
-    "title": "一种遥感数据预处理方法",
-    "patentNumber": "ZL202310567890.1",
-    "grantDate": "2025-02-10",
+    "title": "一种基于多模态语义分析的无人船智能控制系统及方法",
+    "patentNumber": "202411903806.1",
+    "grantDate": "2025-04-01",
     "status": "已授权",
-    "inventors": ["张三", "李四", "王五"],
-    "abstract": "一种高效的遥感数据预处理方法，能够显著提升后续识别任务的准确率。"
+    "inventors": ["武汉大学"],
+    "abstract": "一种基于多模态语义分析的无人船智能控制系统及方法"
   },
   {
     "type": "发明专利",
-    "title": "生态监测模型构建系统",
-    "patentNumber": "ZL202210876543.2",
-    "grantDate": "2024-11-05",
+    "title": "一种基于深度学习的三维MESH建筑物单体化与纹理优化方法",
+    "patentNumber": "202410527165.8",
+    "grantDate": "2024-07-26",
     "status": "已授权",
-    "inventors": ["张三", "赵六"],
-    "abstract": "用于生态环境动态监测的模型构建系统，支持多种传感器数据融合。"
-  },
-  {
-    "type": "实用新型专利",
-    "title": "遥感数据采集装置",
-    "patentNumber": "ZL202420123456.7",
-    "grantDate": "2024-08-20",
-    "status": "已授权",
-    "inventors": ["李四", "王五"],
-    "abstract": "一种轻便、高精度的遥感数据现场采集装置。"
-  },
-  {
-    "type": "软件著作权",
-    "title": "多源数据融合分析系统V1.0",
-    "patentNumber": "2024SR1234567",
-    "grantDate": "2024-05-15",
-    "status": "已登记",
-    "inventors": ["张三", "李四", "王五", "赵六"],
-    "abstract": "支持多源异构数据的一体化融合分析平台。"
-  },
-  {
-    "type": "软件著作权",
-    "title": "生态监测可视化平台V2.0",
-    "patentNumber": "2023SR0987654",
-    "grantDate": "2023-12-10",
-    "status": "已登记",
-    "inventors": ["张三", "王五"],
-    "abstract": "提供直观的生态监测结果展示与数据挖掘分析功能。"
+    "inventors": ["武汉大学"],
+    "abstract": "一种基于深度学习的三维MESH建筑物单体化与纹理优化方法"
   },
   {
     "type": "发明专利",
-    "title": "一种基于AI的遥感图像识别方法",
-    "patentNumber": "ZL202110345678.9",
-    "grantDate": "2023-09-05",
+    "title": "一种基于深度先验的无人机影像场景语义分割方法",
+    "patentNumber": "202410529519.2",
+    "grantDate": "2024-07-09",
     "status": "已授权",
-    "inventors": ["李四", "赵六"],
-    "abstract": "利用深度学习技术实现的自动化遥感图像地物识别方法。"
+    "inventors": ["武汉大学"],
+    "abstract": "一种基于深度先验的无人机影像场景语义分割方法"
+  },
+  {
+    "type": "发明专利",
+    "title": "双时相遥感影像无监督分类与变化检测方法及系统",
+    "patentNumber": "202211093654.4",
+    "grantDate": "2023-06-23",
+    "status": "已授权",
+    "inventors": ["武汉大学"],
+    "abstract": "双时相遥感影像无监督分类与变化检测方法及系统"
+  },
+  {
+    "type": "发明专利",
+    "title": "基于全要素参数符号化的三维场景仿真重构系统及方法",
+    "patentNumber": "202210384435.5",
+    "grantDate": "2023-04-11",
+    "status": "已授权",
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
+    "abstract": "基于全要素参数符号化的三维场景仿真重构系统及方法"
+  },
+  {
+    "type": "发明专利",
+    "title": "基于三维点云的建筑物单体化方法及系统",
+    "patentNumber": "202210384465.6",
+    "grantDate": "2023-03-31",
+    "status": "已授权",
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
+    "abstract": "基于三维点云的建筑物单体化方法及系统"
+  },
+  {
+    "type": "发明专利",
+    "title": "OSGB三维模型建筑物快速单体化方法、系统、存储器及设备",
+    "patentNumber": "202110118885.5",
+    "grantDate": "2021-12-21",
+    "status": "已授权",
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
+    "abstract": "OSGB三维模型建筑物快速单体化方法、系统、存储器及设备"
+  },
+  {
+    "type": "发明专利",
+    "title": "基于WebGIS的三维模型数据分析展示平台及方法",
+    "patentNumber": "202011636521.8",
+    "grantDate": "2021-11-09",
+    "status": "已授权",
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
+    "abstract": "基于WebGIS的三维模型数据分析展示平台及方法"
   },
   {
     "type": "软件著作权",
-    "title": "遥感数据管理系统V1.0",
-    "patentNumber": "2023SR0654321",
-    "grantDate": "2023-06-25",
+    "title": "架空送电线路优化设计系统PLOS V1.0",
+    "patentNumber": "2010SR069052",
+    "grantDate": "2010-01-01",
     "status": "已登记",
-    "inventors": ["张三", "李四"],
-    "abstract": "高效的遥感元数据管理与在线分发系统。"
+    "inventors": ["武汉大学"],
+    "abstract": "架空送电线路优化设计系统PLOS V1.0"
+  },
+  {
+    "type": "软件著作权",
+    "title": "影像镶嵌软件V1.0 ImageStitch",
+    "patentNumber": "2006SR14329",
+    "grantDate": "2006-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "影像镶嵌软件V1.0 ImageStitch"
+  },
+  {
+    "type": "软件著作权",
+    "title": "海域动态监视监测移动上报与核实系统",
+    "patentNumber": "2011SR027612",
+    "grantDate": "2011-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "海域动态监视监测移动上报与核实系统"
+  },
+  {
+    "type": "软件著作权",
+    "title": "海域动态监视监测管理系统",
+    "patentNumber": "2011SR029833",
+    "grantDate": "2011-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "海域动态监视监测管理系统"
+  },
+  {
+    "type": "软件著作权",
+    "title": "海域使用动态监控与指挥办公系统",
+    "patentNumber": "2011SR036214",
+    "grantDate": "2011-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "海域使用动态监控与指挥办公系统"
+  },
+  {
+    "type": "软件著作权",
+    "title": "国家重点实验室管理信息系统",
+    "patentNumber": "2011SR084040",
+    "grantDate": "2011-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "国家重点实验室管理信息系统"
+  },
+  {
+    "type": "软件著作权",
+    "title": "遥感影像地表覆盖分类与图斑变化智能监测软件[简称：识图]",
+    "patentNumber": "2021SR1542980",
+    "grantDate": "2021-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "遥感影像地表覆盖分类与图斑变化智能监测软件[简称：识图]"
+  },
+  {
+    "type": "软件著作权",
+    "title": "地理国情监测图斑智能解译与更新原型系统[简称：识图]",
+    "patentNumber": "2022SR1481210",
+    "grantDate": "2022-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "地理国情监测图斑智能解译与更新原型系统[简称：识图]"
+  },
+  {
+    "type": "软件著作权",
+    "title": "露天矿山监测三维可视化分析决策系统V1.0",
+    "patentNumber": "2023SR0573694",
+    "grantDate": "2023-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "露天矿山监测三维可视化分析决策系统V1.0"
+  },
+  {
+    "type": "软件著作权",
+    "title": "三维场景仿真重构软件V1.0",
+    "patentNumber": "2023SR0573695",
+    "grantDate": "2023-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "三维场景仿真重构软件V1.0"
+  },
+  {
+    "type": "软件著作权",
+    "title": "实景三维矢量重建与三维数据可视化平台系统V1.0",
+    "patentNumber": "2023SR0573697",
+    "grantDate": "2023-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "实景三维矢量重建与三维数据可视化平台系统V1.0"
+  },
+  {
+    "type": "软件著作权",
+    "title": "矢量三维数据生产软件开发 V1.0",
+    "patentNumber": "2023SR0573696",
+    "grantDate": "2023-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "矢量三维数据生产软件开发 V1.0"
+  },
+  {
+    "type": "软件著作权",
+    "title": "建筑物三维模型半自动单体化与修复系统",
+    "patentNumber": "2024SR0273408",
+    "grantDate": "2024-01-01",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "建筑物三维模型半自动单体化与修复系统"
   }
 ]

@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PatentTable from '../components/PatentTable.astro'
+import PaperCard from '../components/PaperCard.astro'
 import awardsData from '../data/awards.json'
 import { getCollection } from 'astro:content'
 
-const allPapers = await getCollection('papers') || []
+const allPapers = (await getCollection('papers') || []).sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
 const ourPapers = allPapers.filter(p => p.id.startsWith('our/'))
 const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative/'))
 ---
@@ -30,44 +33,18 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
     </div>
 
     <div id="paper-content">
-      <div id="our-papers" class="grid grid-cols-1 md:grid-cols-2 gap-6 paper-list" data-type="our">
+      <div id="our-papers" class="grid grid-cols-1 gap-6 paper-list" data-type="our">
         {ourPapers.map((p, index) => (
-          <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 paper-item hidden flex flex-col h-full" data-index={index}>
-            <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{p.data.title}</h3>
-            <div class="space-y-2 text-slate-700 mb-4 flex-grow">
-              <p><span class="font-semibold">作者：</span>{p.data.authors.join('，')}</p>
-              <p><span class="font-semibold">发表期刊/会议：</span>{p.data.journal}</p>
-              <p><span class="font-semibold">发表时间：</span>{p.data.date}</p>
-              {p.data.link && p.data.link !== '#' && (
-                <p><span class="font-semibold">DOI/链接：</span><a href={p.data.link} target="_blank" class="text-brand-900 hover:underline">{p.data.link}</a></p>
-              )}
-            </div>
-            {p.data.abstract && (
-              <div class="bg-slate-50 p-4 rounded-lg">
-                <p class="text-sm text-slate-600 leading-relaxed"><span class="font-semibold text-slate-800">摘要：</span>{p.data.abstract}</p>
-              </div>
-            )}
+          <div class="paper-item hidden" data-index={index}>
+            <PaperCard paper={p} showAbstract={false} showLink={true} />
           </div>
         ))}
       </div>
 
-      <div id="collaborative-papers" class="grid grid-cols-1 md:grid-cols-2 gap-6 paper-list hidden" data-type="collaborative">
+      <div id="collaborative-papers" class="grid grid-cols-1 gap-6 paper-list hidden" data-type="collaborative">
         {collaborativePapers.map((p, index) => (
-          <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 paper-item hidden flex flex-col h-full" data-index={index}>
-            <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{p.data.title}</h3>
-            <div class="space-y-2 text-slate-700 mb-4 flex-grow">
-              <p><span class="font-semibold">作者：</span>{p.data.authors.join('，')}</p>
-              <p><span class="font-semibold">发表期刊/会议：</span>{p.data.journal}</p>
-              <p><span class="font-semibold">发表时间：</span>{p.data.date}</p>
-              {p.data.link && p.data.link !== '#' && (
-                <p><span class="font-semibold">DOI/链接：</span><a href={p.data.link} target="_blank" class="text-brand-900 hover:underline">{p.data.link}</a></p>
-              )}
-            </div>
-            {p.data.abstract && (
-              <div class="bg-slate-50 p-4 rounded-lg">
-                <p class="text-sm text-slate-600 leading-relaxed"><span class="font-semibold text-slate-800">摘要：</span>{p.data.abstract}</p>
-              </div>
-            )}
+          <div class="paper-item hidden" data-index={index}>
+            <PaperCard paper={p} showAbstract={false} showLink={true} />
           </div>
         ))}
       </div>
@@ -100,7 +77,7 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
   const collabContent = document.getElementById('collaborative-papers');
   
   // Pagination State
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 15;
   let currentTab = 'our';
   let currentPage = 1;
 

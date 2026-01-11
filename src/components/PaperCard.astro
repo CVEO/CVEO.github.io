@@ -1,5 +1,5 @@
 ---
-const { paper } = Astro.props
+const { paper, showAbstract = false, showLink = false } = Astro.props
 
 function formatDate(dateStr) {
   const date = new Date(dateStr)
@@ -7,30 +7,62 @@ function formatDate(dateStr) {
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   return `${year}年${month}月`
 }
+
+function getAuthorDisplay(author, idx) {
+  let display = author
+  let tooltip = ''
+  
+  if (paper.data.equalFirst && paper.data.equalFirst.includes(idx)) {
+    display += '<sup class="cursor-help" title="共同第一作者">†</sup>'
+  }
+  if (paper.data.corresponding && paper.data.corresponding.includes(idx)) {
+    display += '<sup class="cursor-help" title="通讯作者">*</sup>'
+  }
+  
+  if (paper.data.otherContributions) {
+    const contributions = paper.data.otherContributions.filter(c => c.authorIndex === idx)
+    contributions.forEach(contrib => {
+      display += `<sup class="cursor-help" title="${contrib.description}">${contrib.symbol}</sup>`
+    })
+  }
+  
+  return display
+}
 ---
-<div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+<div class="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
   <div class="flex justify-between items-start mb-4">
     <div class="flex-grow">
       <h3 class="text-lg font-semibold text-slate-900">{paper.data.title}</h3>
       <p class="mt-2 text-slate-700">{paper.data.journal} • {formatDate(paper.data.date)}</p>
     </div>
     {paper.data.partition && (
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-900 border border-brand-200 ml-4 flex-shrink-0">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-900 border border-brand-200 ml-4 flex-shrink-0 cursor-help" title="中科院分区">
         {paper.data.partition}
       </span>
     )}
   </div>
   
   <div class="mt-4">
-    <p class="text-slate-600" set:html={paper.data.authors.map((author, idx) => {
-      let display = author
-      if (paper.data.equalFirst && paper.data.equalFirst.includes(idx)) {
-        display += '<sup>†</sup>'
-      }
-      if (paper.data.corresponding && paper.data.corresponding.includes(idx)) {
-        display += '<sup>*</sup>'
-      }
-      return display
-    }).join('，')}></p>
+    <p class="text-slate-600" set:html={paper.data.authors.map((author, idx) => getAuthorDisplay(author, idx)).join('，')}></p>
   </div>
+  
+  {showLink && paper.data.link && paper.data.link !== '#' && (
+    <div class="mt-3">
+      <p class="text-sm text-slate-700">
+        <span class="font-medium">DOI/链接：</span>
+        <a href={paper.data.link} target="_blank" class="text-brand-900 hover:underline break-all">
+          {paper.data.link}
+        </a>
+      </p>
+    </div>
+  )}
+  
+  {showAbstract && paper.data.abstract && (
+    <div class="mt-4 bg-slate-50 p-4 rounded-lg">
+      <p class="text-sm text-slate-600 leading-relaxed">
+        <span class="font-medium text-slate-800">摘要：</span>
+        {paper.data.abstract}
+      </p>
+    </div>
+  )}
 </div>
