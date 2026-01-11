@@ -1,6 +1,6 @@
 ---
-name: 李陶
-role: 教授
+name: 李陶 教授
+role: 武汉大学卫星导航定位技术研究中心
 group: Advisor
 photo: "assets/avatars/litao.jpg"
 bio: SAR监测
