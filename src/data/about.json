@@ -2,7 +2,7 @@
   "teamName": "武汉大学CVEO（Computer Vision for Earth Observation）团队",
   "leader": "张晓东教授",
   "affiliation": "测绘遥感信息工程全国重点实验室",
-  "introduction": "武汉大学CVEO（Computer Vision for Earth Observation）团队由张晓东教授领衔，致力于多模态遥感AI智能解译与全域遥感监测技术研发。团队构建了覆盖“星-地”多模态数据感知、智能处理、精准解译的全链路技术体系，在遥感影像智能分析、三维遥感重建、时序动态监测等核心技术上取得突破，相关成果广泛应用于自然资源监测、智慧城市建模、农林生态评估等领域。",
+  "introduction": "武汉大学CVEO（Computer Vision for Earth Observation）课题组由测绘遥感信息工程全国重点实验室<strong>张晓东教授</strong>领衔，致力于多模态遥感AI智能解译与全域遥感监测技术研发。\n\n团队构建了覆盖“星-地”多模态数据感知、智能处理、精准解译的全链路技术体系，在遥感影像智能分析、三维遥感重建、时序动态监测等核心技术上取得突破，相关成果广泛应用于自然资源监测、智慧城市建模、农林生态评估等领域。",
   "researchFields": [
     {
       "title": "多模态遥感AI智能解译",

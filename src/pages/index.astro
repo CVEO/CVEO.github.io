@@ -60,91 +60,76 @@ function formatDate(dateStr) {
 <BaseLayout title="首页">
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <h1 class="text-3xl sm:text-5xl font-bold text-brand-900">武汉大学 CVEO 课题组</h1>
-      <p class="mt-4 text-slate-700 text-lg">计算机视觉与地球观测，产学研协同创新。</p>
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-5xl font-bold text-brand-900 mb-4">武汉大学 CVEO 课题组</h1>
+        <p class="text-xl text-slate-700 mb-6">计算机视觉与地球观测交叉研究团队</p>
+        <div class="inline-flex items-center space-x-2 text-slate-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <span>{aboutData.affiliation}</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-16">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <div>
-        <div class="sticky top-24">
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
-            <span class="w-8 h-1 bg-brand-900 mr-4"></span>
-            关于课题组
-          </h2>
-          
-          <div class="space-y-6">
-            <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 shadow-sm">
-              <h3 class="text-xl font-semibold text-slate-900 mb-4">团队简介</h3>
-              <p class="text-slate-700 leading-relaxed">
-                {aboutData.introduction}
-              </p>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              {(aboutData.stats || []).map(stat => (
-                <div class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition-all duration-300">
-                  <div class="text-3xl font-bold text-brand-900 mb-1">{stat.value}<span class="text-sm ml-1 font-normal text-slate-500">{stat.unit}</span></div>
-                  <div class="text-sm text-slate-600 font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-            
-            <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-green-50 to-white border border-brand-green-100 shadow-sm">
-              <h3 class="text-xl font-semibold text-slate-900 mb-4">核心研究领域</h3>
-              <div class="space-y-4">
-                {(aboutData.researchFields || []).map(field => (
-                  <div class="flex items-start group">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-green-100 flex items-center justify-center mr-4 group-hover:bg-brand-green-200 transition-colors duration-300">
-                      <svg class="w-5 h-5 text-brand-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold text-slate-900 group-hover:text-brand-green-900 transition-colors duration-300">{field.title}</h4>
-                      <p class="text-sm text-slate-600 mt-1">{field.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+    <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center">
+      <span class="w-8 h-1 bg-brand-900 mr-4"></span>
+      关于课题组
+    </h2>
+    
+    <div class="space-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 shadow-sm">
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">团队简介</h3>
+          <div class="text-slate-700 leading-relaxed text-justify space-y-4">
+            {aboutData.introduction.split('\n\n').map(para => (
+              <p set:html={para} />
+            ))}
           </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          {(aboutData.stats || []).map(stat => (
+            <div class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition-all duration-300">
+              <div class="text-3xl font-bold text-brand-900 mb-1">{stat.value}<span class="text-sm ml-1 font-normal text-slate-500">{stat.unit}</span></div>
+              <div class="text-sm text-slate-600 font-medium">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
       
-      <div>
-        <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 mb-8">
-          <img 
-            src="/assets/avatars/team.png" 
-            alt="CVEO课题组团队合影" 
-            class="w-full h-auto object-cover"
-          />
-        </div>
-        
-        <div class="text-center space-y-4">
-          <h3 class="text-2xl font-bold text-slate-900">团队风采</h3>
-          <p class="text-slate-600">
-            CVEO课题组全体成员合影 - 致力于计算机视觉与地球观测研究
-          </p>
-          
-          <div class="pt-6 border-t border-slate-200">
-            <div class="inline-flex items-center space-x-2 text-sm text-slate-500">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span>成立于2020年</span>
-              <span class="mx-2">•</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <span>武汉大学信息学部</span>
-            </div>
+      <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
+        <img 
+          src="/assets/avatars/team.png" 
+          alt="CVEO课题组团队合影" 
+          class="w-full h-auto object-cover"
+        />
+      </div>      
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-green-50 to-white border border-brand-green-100 shadow-sm">
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">核心研究领域</h3>
+          <div class="space-y-4">
+            {(aboutData.researchFields || []).map(field => (
+              <div class="flex items-start group">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-green-100 flex items-center justify-center mr-4 group-hover:bg-brand-green-200 transition-colors duration-300">
+                  <svg class="w-5 h-5 text-brand-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900 group-hover:text-brand-green-900 transition-colors duration-300">{field.title}</h4>
+                  <p class="text-sm text-slate-600 mt-1">{field.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         
-        <div class="mt-12 p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200">
           <h3 class="text-xl font-semibold text-slate-900 mb-4">团队特色</h3>
           <div class="space-y-4">
             <div class="flex items-start">
@@ -277,7 +262,7 @@ function formatDate(dateStr) {
     
     <div class="mb-12">
       <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-semibold text-slate-900">教授与研究员</h3>
+        <h3 class="text-xl font-semibold text-slate-900">指导老师</h3>
         <button class="text-sm text-brand-900 hover:text-brand-800 font-medium flex items-center gap-1 team-toggle" data-target="professor-researcher">
           <span>展开全部</span>
           <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

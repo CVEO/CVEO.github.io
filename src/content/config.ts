@@ -22,7 +22,8 @@ const members = defineCollection({
     role: z.string(),
     group: z.enum(['Professor','Researcher','PhD', 'Master', 'Undergrad', 'Advisor']).optional(),
     photo: z.string().optional(),
-    bio: z.string().optional()
+    bio: z.string().optional(),
+    externalLink: z.string().optional()
   })
 })
 
