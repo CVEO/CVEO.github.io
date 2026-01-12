@@ -1,42 +1,77 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import raw from '../data/news.md?raw'
-const lines = raw.split(/\r?\n/).filter(l => l.trim().startsWith('## '))
-function parseLine(line) {
-  const s = line.replace(/^##\s*/, '')
-  const m = s.match(/^(\d{4}-\d{2}-\d{2})\s+(.*)$/)
-  if (!m) return null
-  const date = new Date(m[1])
-  const text = m[2]
-  const slug = text.toLowerCase().replace(/[\s\/\\]+/g, '-').replace(/[^a-z0-9\-\u4e00-\u9fa5]/g, '')
-  const id = `news-${m[1]}-${slug}`.replace(/-+/g, '-')
-  return { date, dateStr: m[1], text, id }
+import NewsCard from '../components/NewsCard.astro'
+import { loadNews, getNewsYears, groupNewsByYear } from '../lib/data/news'
+
+// 加载新闻数据
+const newsItems = await loadNews()
+const years = getNewsYears(newsItems)
+const newsByYear = groupNewsByYear(newsItems)
+
+// 格式化年份显示
+function formatYear(year: number): string {
+  return `${year}年`
 }
-const items = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime())
 ---
 <BaseLayout title="新闻动态">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <h1 class="text-2xl font-semibold text-slate-900">新闻动态</h1>
-    <div class="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div class="mb-8">
+      <h1 class="text-2xl font-semibold text-slate-900">新闻动态</h1>
+      <p class="mt-2 text-slate-600">了解课题组最新动态、研究成果和学术活动</p>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {/* 左侧时间轴导航 */}
       <aside class="lg:col-span-1">
-        <div class="rounded-lg border border-slate-200 p-4">
-          <h2 class="text-sm font-semibold text-slate-700">索引</h2>
-          <ul class="mt-3 space-y-2">
-            {items.map(i => (
-              <li><a href={`#${i.id}`} class="text-slate-700 hover:text-brand-900">{i.dateStr}</a></li>
-            ))}
-          </ul>
+        <div class="sticky top-6">
+          <div class="rounded-lg border border-slate-200 p-4 bg-white">
+            <h2 class="text-sm font-semibold text-slate-700 mb-3">时间轴</h2>
+            <div class="space-y-1">
+              {years.map((year: number) => (
+                <a 
+                  href={`#year-${year}`}
+                  class="block px-3 py-2 rounded text-slate-700 hover:bg-slate-50 hover:text-brand-900 transition-colors"
+                >
+                  {formatYear(year)}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </aside>
+      
+      {/* 右侧新闻内容 */}
       <div class="lg:col-span-3">
-        <div class="space-y-6">
-          {items.map(i => (
-            <article id={i.id} class="rounded-lg border border-slate-200 p-4 hover:shadow transition">
-              <h3 class="text-slate-900 font-semibold">{i.dateStr}</h3>
-              <p class="mt-2 text-slate-700">{i.text}</p>
-            </article>
-          ))}
-        </div>
+        {years.map((year: number) => {
+          const yearNews = newsByYear.get(year) || []
+          return (
+            <div id={`year-${year}`} class="mb-10">
+              {/* 年份标题 */}
+              <div class="flex items-center mb-6">
+                <div class="w-3 h-3 rounded-full bg-brand-500 mr-3"></div>
+                <h2 class="text-xl font-semibold text-slate-900">
+                  {formatYear(year)}
+                </h2>
+                <span class="ml-3 text-sm text-slate-500">
+                  ({yearNews.length}条)
+                </span>
+              </div>
+              
+              {/* 年份内的新闻列表 */}
+              <div class="space-y-6">
+                {yearNews.map((news: any) => (
+                  <NewsCard 
+                    news={news}
+                    layout="horizontal"
+                    showImage={true}
+                    showDescription={true}
+                    showDate={true}
+                  />
+                ))}
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   </section>

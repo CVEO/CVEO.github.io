@@ -59,7 +59,8 @@ const members = defineCollection({
     group: z.enum(['Professor','Researcher','PhD', 'Master', 'Undergrad', 'Advisor']).optional(),
     photo: z.string().optional(),
     bio: z.string().optional(),
-    externalLink: z.string().optional()
+    externalLink: z.string().optional(),
+    research: z.string().optional()  // 研究方向字段
   })
 })
 

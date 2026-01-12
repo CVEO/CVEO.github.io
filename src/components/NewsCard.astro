@@ -1,0 +1,175 @@
+---
+import AdaptiveImage from './AdaptiveImage.astro'
+
+interface Props {
+  news: {
+    date: string
+    title: string
+    id: string
+    url?: string
+    image?: string
+    description?: string
+    text?: string  // 向后兼容字段
+  }
+  layout?: 'horizontal' | 'vertical' | 'compact'
+  showImage?: boolean
+  showDescription?: boolean
+  showDate?: boolean
+}
+
+const {
+  news,
+  layout = 'horizontal',
+  showImage = true,
+  showDescription = true,
+  showDate = true
+} = Astro.props
+
+// 格式化日期显示
+function formatNewsDate(dateStr: string): string {
+  try {
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) {
+      return dateStr
+    }
+    
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    
+    return `${year}年${month}月${day}日`
+  } catch (error) {
+    return dateStr
+  }
+}
+
+// 检查是否有图片
+const hasImage = showImage && news.image
+
+// 根据布局决定容器类名
+const containerClasses = {
+  horizontal: `flex flex-col md:flex-row gap-4 p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 ${
+    news.url ? 'hover:border-brand-300 cursor-pointer' : ''
+  }`,
+  vertical: `flex flex-col gap-4 p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 ${
+    news.url ? 'hover:border-brand-300 cursor-pointer' : ''
+  }`,
+  compact: `p-3 rounded-lg border border-slate-200 bg-white hover:shadow-sm transition-all duration-200 ${
+    news.url ? 'hover:border-brand-300 cursor-pointer' : ''
+  }`
+}[layout]
+
+// 图片容器类名
+const imageContainerClasses = {
+  horizontal: 'md:w-48 md:h-32 w-full h-48 flex-shrink-0',
+  vertical: 'w-full h-48',
+  compact: 'w-full h-32'
+}[layout]
+
+// 内容容器类名
+const contentClasses = {
+  horizontal: 'flex-grow',
+  vertical: 'flex-grow',
+  compact: 'flex-grow'
+}[layout]
+---
+
+<!-- 根据是否有链接决定渲染方式 -->
+{news.url ? (
+  <a 
+    href={news.url} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="block no-underline hover:no-underline"
+  >
+    <div class={containerClasses}>
+      {/* 内容区域 */}
+      <div class={contentClasses}>
+        {/* 日期 */}
+        {showDate && (
+          <div class="text-sm text-slate-500 mb-2">
+            {formatNewsDate(news.date)}
+          </div>
+        )}
+        
+        {/* 标题 */}
+        <h3 class={`font-semibold text-slate-900 ${
+          layout === 'compact' ? 'text-base' : 'text-lg'
+        }`}>
+          {news.title}
+        </h3>
+        
+        {/* 描述 */}
+        {showDescription && news.description && (
+          <p class={`mt-2 text-slate-600 ${
+            layout === 'compact' ? 'text-sm line-clamp-2' : 'line-clamp-3'
+          }`}>
+            {news.description}
+          </p>
+        )}
+        
+        {/* 链接提示 */}
+        {news.url && (
+          <div class="mt-3 flex items-center text-brand-900 text-sm font-medium">
+            <span>查看详情</span>
+            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </div>
+        )}
+      </div>
+      
+      {/* 图片区域（放在右侧） */}
+      {hasImage && (
+        <div class={`overflow-hidden rounded-lg ${imageContainerClasses}`}>
+          <AdaptiveImage
+            src={news.image!}
+            alt={news.title}
+            className="w-full h-full object-cover"
+            lazy={true}
+          />
+        </div>
+      )}
+    </div>
+  </a>
+) : (
+  <div class={containerClasses}>
+    {/* 内容区域 */}
+    <div class={contentClasses}>
+      {/* 日期 */}
+      {showDate && (
+        <div class="text-sm text-slate-500 mb-2">
+          {formatNewsDate(news.date)}
+        </div>
+      )}
+      
+      {/* 标题 */}
+      <h3 class={`font-semibold text-slate-900 ${
+        layout === 'compact' ? 'text-base' : 'text-lg'
+      }`}>
+        {news.title}
+      </h3>
+      
+      {/* 描述 */}
+      {showDescription && news.description && (
+        <p class={`mt-2 text-slate-600 ${
+          layout === 'compact' ? 'text-sm line-clamp-2' : 'line-clamp-3'
+        }`}>
+          {news.description}
+        </p>
+      )}
+    </div>
+    
+    {/* 图片区域（放在右侧） */}
+    {hasImage && (
+      <div class={`overflow-hidden rounded-lg ${imageContainerClasses}`}>
+        <AdaptiveImage
+          src={news.image!}
+          alt={news.title}
+          className="w-full h-full object-cover"
+          lazy={true}
+        />
+      </div>
+    )}
+  </div>
+)}

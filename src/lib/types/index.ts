@@ -35,6 +35,7 @@ export interface Member {
   photo?: string;
   bio?: string;
   externalLink?: string;
+  research?: string;  // 研究方向字段
 }
 
 export interface Project {
@@ -56,9 +57,12 @@ export interface Award {
 }
 
 export interface NewsItem {
-  date: string;
-  text: string;
-  id: string;
+  date: string;           // 日期 YYYY-MM-DD
+  title: string;          // 新闻标题
+  id: string;             // 唯一标识符
+  url?: string;           // 可选：跳转链接
+  image?: string;         // 可选：新闻图片路径
+  description?: string;   // 可选：简短描述（1-2句话）
 }
 
 export interface TeamStats {

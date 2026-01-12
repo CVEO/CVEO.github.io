@@ -29,6 +29,11 @@ module.exports = {
             900: "#2a4829" // 珞珈绿主色
           }
         }
+      },
+      // 统一按钮样式配置
+      boxShadow: {
+        'button': '0 2px 4px rgba(45, 31, 92, 0.1)',
+        'button-hover': '0 4px 8px rgba(45, 31, 92, 0.15)',
       }
     }
   },
