@@ -1,0 +1,34 @@
+---
+import BaseTable from './BaseTable.astro';
+import type { Patent } from '../../lib/types';
+
+interface Props {
+  patents: Patent[];
+  enhanced?: boolean;
+  sortable?: boolean;
+  filterable?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  className?: string;
+}
+
+const { 
+  patents,
+  enhanced = false,
+  sortable = false,
+  filterable = false,
+  showHeader = true,
+  showFooter = true,
+  className = ''
+} = Astro.props;
+---
+
+<BaseTable 
+  patents={patents}
+  enhanced={enhanced}
+  sortable={sortable}
+  filterable={filterable}
+  showHeader={showHeader}
+  showFooter={showFooter}
+  className={className}
+/>

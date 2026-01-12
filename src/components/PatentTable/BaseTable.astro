@@ -1,0 +1,316 @@
+---
+import type { Patent } from '../../lib/types';
+
+interface Props {
+  patents: Patent[];
+  enhanced?: boolean;
+  sortable?: boolean;
+  filterable?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  className?: string;
+}
+
+const { 
+  patents,
+  enhanced = false,
+  sortable = false,
+  filterable = false,
+  showHeader = true,
+  showFooter = true,
+  className = ''
+} = Astro.props;
+
+const getTypeIcon = (type: string) => {
+  if (type === '发明专利') {
+    return {
+      bg: 'bg-blue-100',
+      text: 'text-blue-800',
+      icon: 'invention'
+    };
+  }
+  if (type === '实用新型专利') {
+    return {
+      bg: 'bg-green-100',
+      text: 'text-green-800',
+      icon: 'utility'
+    };
+  }
+  return {
+    bg: 'bg-purple-100',
+    text: 'text-purple-800',
+    icon: 'software'
+  };
+};
+
+const getStatusColor = (status?: string) => {
+  if (status === '已授权' || status === '已登记') {
+    return {
+      bg: 'bg-green-100',
+      text: 'text-green-800',
+      border: 'border-green-200'
+    };
+  }
+  return {
+    bg: 'bg-yellow-100',
+    text: 'text-yellow-800',
+    border: 'border-yellow-200'
+  };
+};
+
+const formatDate = (dateStr: string) => {
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return dateStr;
+  } catch {
+    return dateStr;
+  }
+};
+---
+
+<div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id="patent-table">
+  {showHeader && (
+    <div class="px-4 md:px-8 py-4 bg-slate-50 border-b border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="mb-3 md:mb-0">
+          <h3 class="text-lg font-semibold text-slate-900">专利与软著列表</h3>
+          <p class="text-sm text-slate-600 mt-1">共 <span class="font-medium text-slate-900">{patents.length}</span> 项成果</p>
+        </div>
+        
+        {enhanced && (
+          <div class="flex flex-wrap gap-2">
+            {filterable && (
+              <div class="relative">
+                <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                  <option value="all">所有类型</option>
+                  <option value="invention">发明专利</option>
+                  <option value="utility">实用新型专利</option>
+                  <option value="software">软件著作权</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            )}
+            
+            {sortable && (
+              <div class="relative">
+                <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                  <option value="date-desc">按日期降序</option>
+                  <option value="date-asc">按日期升序</option>
+                  <option value="name">按名称排序</option>
+                  <option value="type">按类型排序</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+  
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-slate-200">
+      <thead class="bg-slate-100">
+        <tr>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              类型
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              名称
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              授权号/登记号
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              授权/登记日期
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              状态
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
+            <div class="flex items-center">
+              发明人/著作权人
+              {sortable && (
+                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-200">
+        {patents.map((patent, index) => {
+          const typeIcon = getTypeIcon(patent.type);
+          const statusColor = getStatusColor(patent.status);
+          
+          return (
+            <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
+              <td class="px-4 md:px-8 py-4 md:py-5">
+                <div class="flex items-center">
+                  <span class={`inline-flex items-center justify-center w-6 h-6 mr-2 text-xs font-medium ${typeIcon.bg} ${typeIcon.text} rounded-full`}>
+                    {typeIcon.icon === 'invention' && (
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                    {typeIcon.icon === 'utility' && (
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                    {typeIcon.icon === 'software' && (
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                  </span>
+                  <div>
+                    <div class="text-sm font-medium text-slate-900">{patent.type}</div>
+                    <div class="mt-1 md:hidden">
+                      <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.patentNumber}</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 md:px-8 py-4 md:py-5">
+                <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">{patent.title}</div>
+                <div class="mt-2 md:hidden flex flex-wrap gap-2">
+                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{formatDate(patent.grantDate)}</span>
+                  {patent.status && (
+                    <span class={`inline-flex items-center px-2 py-1 rounded text-xs ${statusColor.bg} ${statusColor.text} border ${statusColor.border}`}>
+                      {patent.status}
+                    </span>
+                  )}
+                </div>
+              </td>
+              <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
+                <div class="text-sm font-medium text-slate-900">{patent.patentNumber}</div>
+                <div class="text-xs text-slate-500 mt-1">
+                  {patent.type.includes('专利') ? '专利号' : '登记号'}
+                </div>
+              </td>
+              <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
+                <div class="text-sm font-medium text-slate-900">{formatDate(patent.grantDate)}</div>
+                <div class="text-xs text-slate-500 mt-1">
+                  {patent.type.includes('专利') ? '授权日期' : '登记日期'}
+                </div>
+              </td>
+              <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+                {patent.status && (
+                  <div class="flex items-center">
+                    <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${statusColor.bg} ${statusColor.text}`}>
+                      {patent.status}
+                    </span>
+                  </div>
+                )}
+              </td>
+              <td class="px-4 md:px-8 py-4 md:py-5">
+                <div class="text-sm text-slate-900">
+                  {patent.inventors?.join('、') || '未指定'}
+                </div>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-50 text-blue-700 border border-blue-200">
+                    {patent.type.includes('专利') ? '发明人' : '著作权人'}
+                  </span>
+                </div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+  
+  {showFooter && (
+    <div class="px-4 md:px-8 py-4 bg-slate-50 border-t border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="text-sm text-slate-600 mb-2 md:mb-0">
+          共 <span class="font-medium text-slate-900">{patents.length}</span> 项专利与软著
+        </div>
+        <div class="flex items-center space-x-2">
+          <button type="button" class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200">
+            上一页
+          </button>
+          <span class="px-3 py-1.5 text-sm font-medium text-slate-900 bg-slate-100 rounded">
+            1
+          </span>
+          <button type="button" class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200">
+            下一页
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+{enhanced && (
+  <script>
+    // 增强功能脚本
+    document.addEventListener('DOMContentLoaded', () => {
+      const table = document.getElementById('patent-table');
+      if (!table) return;
+      
+      // 排序功能
+      const sortableHeaders = table.querySelectorAll('th[class*="cursor-pointer"]');
+      sortableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          console.log('排序功能待实现');
+        });
+      });
+      
+      // 筛选功能
+      const filterSelect = table.querySelector('select');
+      if (filterSelect) {
+        filterSelect.addEventListener('change', (e: Event) => {
+          const target = e.target as HTMLSelectElement;
+          console.log('筛选功能待实现:', target.value);
+        });
+      }
+    });
+  </script>
+)}

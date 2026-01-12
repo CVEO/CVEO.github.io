@@ -3,7 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import PaperCard from '../components/PaperCard.astro'
 import MemberCard from '../components/MemberCard.astro'
 import { getCollection } from 'astro:content'
-import raw from '../data/news.md?raw'
+import { loadNews, getLatestNews, formatNewsDate } from '../lib/data/news'
+import { formatDate as formatDateUtil } from '../lib/utils/format'
+import type { NewsItem, Member } from '../lib/types'
 
 import aboutData from '../data/about.json'
 import projectsData from '../data/projects.json'
@@ -14,48 +16,15 @@ const ourPapers = papers.filter(p => p.id.startsWith('our/'))
 const sortedPapers = ourPapers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 const recentPapers = sortedPapers.slice(0, 4)
 
-// 调试：查看论文数据结构
-console.log('论文总数:', papers.length)
-if (papers.length > 0) {
-  console.log('第一篇论文数据:', papers[0].data)
-}
 const members = await getCollection('members') || []
 
-const lines = raw.split(/\r?\n/).filter(l => l.trim().startsWith('## '))
-function parseLine(line) {
-  const s = line.replace(/^##\s*/, '')
-  const m = s.match(/^(\d{4}-\d{2}-\d{2})\s+(.*)$/)
-  if (!m) return null
-  const date = new Date(m[1])
-  const text = m[2]
-  const slug = text.toLowerCase().replace(/[\s\/\\]+/g, '-').replace(/[^a-z0-9\-\u4e00-\u9fa5]/g, '')
-  const id = `news-${m[1]}-${slug}`.replace(/-+/g, '-')
-  return { date, dateStr: m[1], text, id }
-}
-const newsItems = lines.map(parseLine).filter(Boolean).sort((a,b) => b.date.getTime() - a.date.getTime()).slice(0, 3)
+// 加载新闻数据
+const allNews = await loadNews()
+const newsItems = getLatestNews(allNews, 3)
 
-function byGroup(g) { return (members || []).filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()) }
-
-function formatDate(dateStr) {
-  if (!dateStr) return '日期未知'
-  try {
-    const date = new Date(dateStr)
-    if (isNaN(date.getTime())) {
-      // 尝试解析 YYYY-MM-DD 格式
-      const match = dateStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
-      if (match) {
-        const year = parseInt(match[1])
-        const month = parseInt(match[2])
-        return `${year}年${month.toString().padStart(2, '0')}月`
-      }
-      return '日期格式错误'
-    }
-    const year = date.getFullYear()
-    const month = (date.getMonth() + 1).toString().padStart(2, '0')
-    return `${year}年${month}月`
-  } catch (error) {
-    return '日期解析错误'
-  }
+// 按组筛选成员
+function byGroup(g: string): Member[] {
+  return members.filter(m => (m.data.group || '').toLowerCase() === g.toLowerCase()).map(m => m.data as Member)
 }
 ---
 <BaseLayout title="首页">
@@ -189,17 +158,17 @@ function formatDate(dateStr) {
   <section id="news" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-slate-50 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">新闻动态</h2>
     <div class="space-y-6">
-      {(newsItems || []).map(i => (
+      {(newsItems || []).map((i: NewsItem) => (
         <article class="rounded-lg border border-slate-200 bg-white p-6 hover:shadow-md transition">
           <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
               <div class="w-16 h-16 rounded-lg bg-brand-50 flex items-center justify-center">
-                <span class="text-brand-700 font-semibold">{i.dateStr.split('-')[0]}</span>
+                <span class="text-brand-700 font-semibold">{i.date.split('-')[0]}</span>
               </div>
             </div>
             <div class="flex-grow">
               <h3 class="text-lg font-semibold text-slate-900">{i.text}</h3>
-              <p class="mt-2 text-slate-600">{i.dateStr}</p>
+              <p class="mt-2 text-slate-600">{formatNewsDate(i.date)}</p>
             </div>
           </div>
         </article>

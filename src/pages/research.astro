@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import PatentTable from '../components/PatentTable.astro'
+import PatentTable from '../components/PatentTable/index.astro'
 import PaperCard from '../components/PaperCard.astro'
 import awardsData from '../data/awards.json'
 import { getCollection } from 'astro:content'
+import { loadPatents } from '../lib/data/patents'
+
+const patentsData = await loadPatents()
 
 const allPapers = (await getCollection('papers') || []).sort((a, b) => {
   return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
@@ -18,12 +21,14 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
       
       <div class="inline-flex p-1 bg-slate-100 rounded-xl" id="paper-tabs">
         <button 
+          type="button"
           class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm"
           data-tab="our"
         >
           通讯/一作论文
         </button>
         <button 
+          type="button"
           class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900"
           data-tab="collaborative"
         >
@@ -52,11 +57,11 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
 
     <!-- Pagination Controls -->
     <div id="pagination" class="mt-12 flex justify-center items-center gap-2">
-      <button id="prev-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+      <button type="button" id="prev-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
         上一页
       </button>
       <div id="page-numbers" class="flex gap-2"></div>
-      <button id="next-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+      <button type="button" id="next-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
         下一页
       </button>
     </div>
@@ -66,7 +71,7 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
         <span class="w-8 h-1 bg-brand-600 mr-4"></span>
         专利与软著
       </h2>
-      <PatentTable />
+      <PatentTable patents={patentsData} />
     </div>
   </section>
 </BaseLayout>
