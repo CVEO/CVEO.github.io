@@ -40,13 +40,10 @@ export interface Member {
 
 export interface Project {
   title: string;
-  leader: string;
   period: string;
   status: '在研' | '已结题';
-  description: string;
-  type: string;
+  source: string;
   level: '国家级' | '省部级' | '社会服务';
-  completedDate?: string;
 }
 
 export interface Award {

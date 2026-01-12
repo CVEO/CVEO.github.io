@@ -29,30 +29,16 @@ function getStatusColor(status: string) {
   <div class="flex justify-between items-start mb-4">
     <div class="flex-grow">
       <h3 class="text-lg font-semibold text-slate-900">{project.title}</h3>
-      <p class="mt-2 text-slate-700">负责人：{project.leader} • 周期：{project.period}</p>
+      <p class="mt-2 text-slate-700">周期：{project.period}</p>
+      <p class="mt-1 text-slate-700">项目来源：{project.source}</p>
     </div>
     <div class="flex flex-col gap-2 ml-4 flex-shrink-0">
-      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm ${getLevelColor(project.level)} border`}>
+      <span class={`inline-flex items-center justify-center px-3 py-1 rounded-full text-sm ${getLevelColor(project.level)} border`}>
         {project.level}
       </span>
-      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm ${getStatusColor(project.status)} border`}>
+      <span class={`inline-flex items-center justify-center px-3 py-1 rounded-full text-sm ${getStatusColor(project.status)} border`}>
         {project.status}
       </span>
     </div>
-  </div>
-  
-  <div class="mt-4">
-    <p class="text-slate-600 leading-relaxed">{project.description}</p>
-  </div>
-  
-  <div class="mt-4 flex flex-wrap gap-2">
-    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-slate-100 text-slate-700">
-      {project.type}
-    </span>
-    {project.completedDate && (
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-slate-100 text-slate-700">
-        结题时间：{project.completedDate}
-      </span>
-    )}
   </div>
 </div>

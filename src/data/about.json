@@ -18,9 +18,9 @@
     }
   ],
   "stats": [
-    { "label": "科研项目", "value": "60+", "unit": "项" },
-    { "label": "科技奖励", "value": "10+", "unit": "项" },
-    { "label": "发明专利", "value": "9", "unit": "项" },
-    { "label": "软件著作权", "value": "30+", "unit": "项" }
+    { "label": "承担科研项目", "value": "40+", "unit": "项" },
+    { "label": "高水平论文", "value": "50+", "unit": "篇" },
+    { "label": "发明专利", "value": "8", "unit": "项" },
+    { "label": "软件著作权", "value": "13", "unit": "项" }
   ]
 }

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PaperCard from '../components/PaperCard.astro'
 import NewsCard from '../components/NewsCard.astro'
+import ProjectCard from '../components/ProjectCard.astro'
 import { getCollection } from 'astro:content'
 import { loadNews, getLatestNews } from '../lib/data/news'
 
@@ -49,7 +50,7 @@ const newsItems = getLatestNews(allNews, 3)
     <div class="space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="p-5 rounded-xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 shadow-sm">
-          <h3 class="text-lg font-semibold text-slate-900 mb-3">团队简介</h3>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">关于我们</h3>
           <div class="text-slate-700 leading-relaxed text-justify space-y-3">
             {aboutData.introduction.split('\n\n').map(para => (
               <p set:html={para} />
@@ -79,7 +80,7 @@ const newsItems = getLatestNews(allNews, 3)
       </div>   
     <div class="text-center">
       <p class="text-slate-600 mb-2 max-w-2xl mx-auto py-4">
-        武汉大学CVEO课题组汇聚了来自计算机视觉与地球观测交叉领域的优秀研究人员，包括教授、研究员、博士生、硕士生以及行业顾问。
+        武汉大学CVEO课题组汇聚了来自计算机视觉与地球观测交叉领域的优秀研究人员
       </p>
       <a href="/team" class="inline-flex items-center justify-center px-6 py-3 mb-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看完整团队成员
@@ -189,7 +190,7 @@ const newsItems = getLatestNews(allNews, 3)
       </div>
       <div class="mt-8 text-center">
         <a href="/research" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
-          查看更多论文
+          查看更多科研成果
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -207,20 +208,12 @@ const newsItems = getLatestNews(allNews, 3)
         .filter(project => project.status === '在研')
         .slice(0, 6)
         .map(project => (
-        <div class="p-6 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
-          <h3 class="text-lg font-semibold text-slate-900 mb-3">{project.title}</h3>
-          <p class="text-slate-700 mb-2">负责人：{project.leader}</p>
-          <p class="text-slate-700 mb-4">起止时间：{project.period}</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="inline-block px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 border border-blue-200">{project.level}</span>
-            <span class="inline-block px-3 py-1 rounded-full text-sm bg-yellow-50 text-yellow-700 border border-yellow-200">{project.status}</span>
-          </div>
-        </div>
+        <ProjectCard project={project} />
       ))}
     </div>
     <div class="mt-8 text-center">
       <a href="/research-projects" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
-        查看全部项目
+        查看全部科研项目
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>

@@ -1,8 +1,8 @@
 ---
-name: 王五
-role: PhD
+name: 谭效良
+role: 博士研究生
 group: PhD
-photo: ""
+photo: "assets/avatars/txl.jpg"
 bio: 研究方向为遥感图像理解
 ---
 
