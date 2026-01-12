@@ -56,7 +56,8 @@ const members = defineCollection({
   schema: z.object({
     name: z.string(),
     role: z.string(),
-    group: z.enum(['Professor','Researcher','PhD', 'Master', 'Undergrad', 'Advisor']).optional(),
+    group: z.enum(['Professor','Researcher','ResearchAssistant','PhD', 'Master', 'Undergrad', 'Advisor']).optional(),
+    order: z.number().default(999),
     photo: z.string().optional(),
     bio: z.string().optional(),
     externalLink: z.string().optional(),

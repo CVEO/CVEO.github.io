@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "name": "张三",
+    "graduationDate": "2023-06",
+    "researchDirection": "遥感图像处理",
+    "destination": "华为技术有限公司",
+    "educationType": "WuhanMaster",
+    "degree": "Master",
+    "order": 1,
+    "photo": "assets/avatars/placeholder.svg",
+    "externalLink": "https://example.com",
+    "description": "武汉大学计算机学院2023届硕士毕业生"
+  },
+  {
+    "id": 2,
+    "name": "李四",
+    "graduationDate": "2022-12",
+    "researchDirection": "计算机视觉",
+    "destination": "清华大学博士后",
+    "educationType": "WuhanPhD",
+    "degree": "PhD",
+    "order": 2,
+    "description": "武汉大学2022届博士毕业生"
+  },
+  {
+    "id": 3,
+    "name": "王五",
+    "graduationDate": "2024-06",
+    "researchDirection": "地理信息系统",
+    "destination": "阿里巴巴集团",
+    "educationType": "JointTraining",
+    "degree": "Master",
+    "order": 3,
+    "description": "联合培养硕士毕业生"
+  },
+  {
+    "id": 4,
+    "name": "赵六",
+    "graduationDate": "2021-06",
+    "researchDirection": "深度学习",
+    "destination": "腾讯科技",
+    "educationType": "WuhanUndergrad",
+    "degree": "Bachelor",
+    "order": 4,
+    "description": "武汉大学2021届本科毕业生"
+  },
+  {
+    "id": 5,
+    "name": "孙七",
+    "graduationDate": "2020-12",
+    "researchDirection": "机器学习",
+    "destination": "字节跳动",
+    "educationType": "WuhanMaster",
+    "degree": "Master",
+    "order": 5,
+    "description": "武汉大学2020届硕士毕业生"
+  },
+  {
+    "id": 6,
+    "name": "周八",
+    "graduationDate": "2019-06",
+    "researchDirection": "人工智能",
+    "destination": "百度研究院",
+    "educationType": "JointTraining",
+    "degree": "PhD",
+    "order": 6,
+    "description": "联合培养博士毕业生"
+  }
+]
