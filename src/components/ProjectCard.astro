@@ -1,0 +1,58 @@
+---
+const { project } = Astro.props;
+
+function getLevelColor(level: string) {
+  switch (level) {
+    case '国家级':
+      return 'bg-blue-50 text-blue-700 border-blue-200';
+    case '省部级':
+      return 'bg-green-50 text-green-700 border-green-200';
+    case '社会服务':
+      return 'bg-purple-50 text-purple-700 border-purple-200';
+    default:
+      return 'bg-slate-50 text-slate-700 border-slate-200';
+  }
+}
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case '在研':
+      return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+    case '已结题':
+      return 'bg-green-50 text-green-700 border-green-200';
+    default:
+      return 'bg-slate-50 text-slate-700 border-slate-200';
+  }
+}
+---
+<div class="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+  <div class="flex justify-between items-start mb-4">
+    <div class="flex-grow">
+      <h3 class="text-lg font-semibold text-slate-900">{project.title}</h3>
+      <p class="mt-2 text-slate-700">负责人：{project.leader} • 周期：{project.period}</p>
+    </div>
+    <div class="flex flex-col gap-2 ml-4 flex-shrink-0">
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm ${getLevelColor(project.level)} border`}>
+        {project.level}
+      </span>
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm ${getStatusColor(project.status)} border`}>
+        {project.status}
+      </span>
+    </div>
+  </div>
+  
+  <div class="mt-4">
+    <p class="text-slate-600 leading-relaxed">{project.description}</p>
+  </div>
+  
+  <div class="mt-4 flex flex-wrap gap-2">
+    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-slate-100 text-slate-700">
+      {project.type}
+    </span>
+    {project.completedDate && (
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-slate-100 text-slate-700">
+        结题时间：{project.completedDate}
+      </span>
+    )}
+  </div>
+</div>

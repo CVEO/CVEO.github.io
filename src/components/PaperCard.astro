@@ -1,32 +1,50 @@
 ---
-const { paper, showAbstract = false, showLink = false } = Astro.props
+interface Contribution {
+  authorIndex: number
+  description: string
+  symbol: string
+}
 
-function formatDate(dateStr) {
+const { paper, showAbstract = false, showLink = false } = Astro.props as {
+  paper: any
+  showAbstract?: boolean
+  showLink?: boolean
+}
+
+function formatDate(dateStr: string): string {
   const date = new Date(dateStr)
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   return `${year}年${month}月`
 }
 
-function getAuthorDisplay(author, idx) {
-  let display = author
-  let tooltip = ''
+function getAuthorDisplay(author: string, idx: number): {html: string, title: string} {
+  let html = author
+  let title = ''
+  const roles: string[] = []
   
   if (paper.data.equalFirst && paper.data.equalFirst.includes(idx)) {
-    display += '<sup class="cursor-help" title="共同第一作者">†</sup>'
+    html += '<sup>†</sup>'
+    roles.push('共同第一作者')
   }
   if (paper.data.corresponding && paper.data.corresponding.includes(idx)) {
-    display += '<sup class="cursor-help" title="通讯作者">*</sup>'
+    html += '<sup>*</sup>'
+    roles.push('通讯作者')
   }
   
   if (paper.data.otherContributions) {
-    const contributions = paper.data.otherContributions.filter(c => c.authorIndex === idx)
-    contributions.forEach(contrib => {
-      display += `<sup class="cursor-help" title="${contrib.description}">${contrib.symbol}</sup>`
+    const contributions = paper.data.otherContributions.filter((c: Contribution) => c.authorIndex === idx)
+    contributions.forEach((contrib: Contribution) => {
+      html += `<sup>${contrib.symbol}</sup>`
+      roles.push(contrib.description)
     })
   }
   
-  return display
+  if (roles.length > 0) {
+    title = roles.join('，')
+  }
+  
+  return { html, title }
 }
 ---
 <div class="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
@@ -43,7 +61,23 @@ function getAuthorDisplay(author, idx) {
   </div>
   
   <div class="mt-4">
-    <p class="text-slate-600" set:html={paper.data.authors.map((author, idx) => getAuthorDisplay(author, idx)).join('，')}></p>
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-slate-600">
+      {paper.data.authors.map((author: string, idx: number) => {
+        const authorInfo = getAuthorDisplay(author, idx)
+        return (
+          <>
+            {idx > 0 && (
+              <span class="text-slate-400 select-none">·</span>
+            )}
+            <span 
+              class={`author-item px-1 py-0.5 rounded-sm hover:bg-slate-50 transition-colors ${authorInfo.title ? 'cursor-help' : ''}`}
+              set:html={authorInfo.html}
+              title={authorInfo.title}
+            ></span>
+          </>
+        )
+      })}
+    </div>
   </div>
   
   {showLink && paper.data.link && paper.data.link !== '#' && (

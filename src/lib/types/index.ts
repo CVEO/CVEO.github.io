@@ -44,6 +44,8 @@ export interface Project {
   status: '在研' | '已结题';
   description: string;
   type: string;
+  level: '国家级' | '省部级' | '社会服务';
+  completedDate?: string;
 }
 
 export interface Award {

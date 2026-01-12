@@ -26,13 +26,22 @@ export function validateProject(project: any): Project {
     throw new Error('项目类型必须为字符串');
   }
   
+  if (!project.level || !['国家级', '省部级', '社会服务'].includes(project.level)) {
+    throw new Error('项目级别必须是"国家级"、"省部级"或"社会服务"');
+  }
+  
+  // 如果是已结题项目，必须有结题时间
+  if (project.status === '已结题' && (!project.completedDate || typeof project.completedDate !== 'string')) {
+    throw new Error('已结题项目必须包含结题时间');
+  }
+  
   return project as Project;
 }
 
 // 加载项目数据
 export async function loadProjects(): Promise<Project[]> {
   try {
-    const projectsData = await import('../../data/projects.json');
+    const projectsData = await import('../../data/research-projects.json');
     const projects = projectsData.default;
     
     if (!Array.isArray(projects)) {
@@ -54,4 +63,17 @@ export function filterProjectsByStatus(projects: Project[], status: '在研' | '
 // 按类型筛选项目
 export function filterProjectsByType(projects: Project[], type: string): Project[] {
   return projects.filter(project => project.type === type);
+}
+
+// 按级别排序项目
+export function sortProjectsByLevel(projects: Project[]): Project[] {
+  const levelOrder = {
+    '国家级': 1,
+    '省部级': 2,
+    '社会服务': 3
+  };
+  
+  return [...projects].sort((a, b) => {
+    return levelOrder[a.level] - levelOrder[b.level];
+  });
 }

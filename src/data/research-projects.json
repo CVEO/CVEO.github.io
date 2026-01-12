@@ -1,0 +1,106 @@
+[
+  {
+    "title": "国家自然科学基金重点项目",
+    "leader": "张三 教授",
+    "period": "2023年1月 - 2026年12月",
+    "status": "在研",
+    "description": "面向多源遥感数据的智能解译方法研究",
+    "type": "NSFC",
+    "level": "国家级"
+  },
+  {
+    "title": "企业合作项目",
+    "leader": "李四 研究员",
+    "period": "2024年3月 - 2025年12月",
+    "status": "在研",
+    "description": "遥感数据智能处理平台研发",
+    "type": "企业",
+    "level": "社会服务"
+  },
+  {
+    "title": "国家青年科学基金项目",
+    "leader": "王五 副教授",
+    "period": "2024年1月 - 2026年12月",
+    "status": "在研",
+    "description": "高分辨率遥感影像变化检测技术研究",
+    "type": "NSFC",
+    "level": "国家级"
+  },
+  {
+    "title": "省部级重点研发项目",
+    "leader": "赵六 教授",
+    "period": "2023年6月 - 2025年12月",
+    "status": "在研",
+    "description": "全域遥感监测关键技术攻关",
+    "type": "省部级",
+    "level": "省部级"
+  },
+  {
+    "title": "国际合作项目",
+    "leader": "钱七 教授",
+    "period": "2024年1月 - 2027年12月",
+    "status": "在研",
+    "description": "遥感大数据分析与应用",
+    "type": "国际合作",
+    "level": "社会服务"
+  },
+  {
+    "title": "校级创新项目",
+    "leader": "孙八 副教授",
+    "period": "2024年9月 - 2026年8月",
+    "status": "在研",
+    "description": "遥感影像自监督预训练模型研究",
+    "type": "校级",
+    "level": "社会服务"
+  },
+  {
+    "title": "国家重点研发计划",
+    "leader": "张三 教授",
+    "period": "2022年1月 - 2025年12月",
+    "status": "已结题",
+    "description": "弱监督遥感场景理解关键技术研究",
+    "type": "国家级",
+    "level": "国家级",
+    "completedDate": "2025年12月"
+  },
+  {
+    "title": "国家自然科学基金面上项目",
+    "leader": "李四 研究员",
+    "period": "2021年1月 - 2024年12月",
+    "status": "已结题",
+    "description": "多源遥感数据融合与智能分析",
+    "type": "国家级",
+    "level": "国家级",
+    "completedDate": "2024年12月"
+  },
+  {
+    "title": "省部级科技攻关项目",
+    "leader": "王五 副教授",
+    "period": "2020年6月 - 2023年12月",
+    "status": "已结题",
+    "description": "高分辨率遥感影像智能解译",
+    "type": "省部级",
+    "level": "省部级",
+    "completedDate": "2023年12月"
+  },
+  {
+    "title": "企业横向合作项目",
+    "leader": "赵六 教授",
+    "period": "2019年3月 - 2022年12月",
+    "status": "已结题",
+    "description": "遥感数据处理平台开发",
+    "type": "企业合作",
+    "level": "社会服务",
+    "completedDate": "2022年12月"
+  },
+  {
+    "title": "国际合作项目",
+    "leader": "钱七 教授",
+    "period": "2018年1月 - 2021年12月",
+    "status": "已结题",
+    "description": "遥感大数据分析与应用",
+    "type": "国际合作",
+    "level": "社会服务",
+    "completedDate": "2021年12月"
+  }
+]

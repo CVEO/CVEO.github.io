@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { loadProjects, filterProjectsByStatus, sortProjectsByLevel } from '../lib/data/projects'
+
+const allProjects = await loadProjects()
+const activeProjects = filterProjectsByStatus(allProjects, '在研')
+const completedProjects = filterProjectsByStatus(allProjects, '已结题')
+
+// 按级别排序
+const sortedActiveProjects = sortProjectsByLevel(activeProjects)
+const sortedCompletedProjects = sortProjectsByLevel(completedProjects)
+
+// 统计信息
+const stats = {
+  total: allProjects.length,
+  active: activeProjects.length,
+  completed: completedProjects.length,
+  national: allProjects.filter(p => p.level === '国家级').length,
+  provincial: allProjects.filter(p => p.level === '省部级').length,
+  social: allProjects.filter(p => p.level === '社会服务').length
+}
+---
+<BaseLayout title="科研项目">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- 统计信息 -->
+    <div class="mb-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-brand-900">{stats.total}</div>
+        <div class="text-sm text-slate-600">项目总数</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-yellow-600">{stats.active}</div>
+        <div class="text-sm text-slate-600">在研项目</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-green-600">{stats.completed}</div>
+        <div class="text-sm text-slate-600">已结题</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-blue-600">{stats.national}</div>
+        <div class="text-sm text-slate-600">国家级</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-green-600">{stats.provincial}</div>
+        <div class="text-sm text-slate-600">省部级</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border border-slate-200">
+        <div class="text-2xl font-bold text-purple-600">{stats.social}</div>
+        <div class="text-sm text-slate-600">社会服务</div>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <h1 class="text-3xl font-bold text-slate-900">科研项目</h1>
+      
+      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="project-tabs">
+        <button 
+          type="button"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm whitespace-nowrap"
+          data-tab="active"
+        >
+          在研项目
+        </button>
+        <button 
+          type="button"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
+          data-tab="completed"
+        >
+          已结题项目
+        </button>
+      </div>
+    </div>
+
+    <!-- 在研项目 -->
+    <div id="active-projects" class="project-content" data-type="active">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">在研项目</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{sortedActiveProjects.length}</span> 个项目</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedActiveProjects.map(project => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+      
+      {sortedActiveProjects.length === 0 && (
+        <div class="text-center py-12">
+          <svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p class="text-slate-500">暂无在研项目</p>
+        </div>
+      )}
+    </div>
+
+    <!-- 已结题项目 -->
+    <div id="completed-projects" class="project-content hidden" data-type="completed">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">已结题项目</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{sortedCompletedProjects.length}</span> 个项目</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedCompletedProjects.map(project => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+      
+      {sortedCompletedProjects.length === 0 && (
+        <div class="text-center py-12">
+          <svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p class="text-slate-500">暂无已结题项目</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll('#project-tabs button');
+  const contents = document.querySelectorAll('.project-content');
+  
+  let currentTab = 'active';
+  
+  // Tab switching
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab');
+      if (!target) return;
+      
+      currentTab = target;
+      
+      // Update tab styles
+      tabs.forEach(t => {
+        t.classList.remove('bg-white', 'text-brand-900', 'shadow-sm');
+        t.classList.add('text-slate-600', 'hover:text-slate-900');
+      });
+      tab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
+      tab.classList.remove('text-slate-600', 'hover:text-slate-900');
+
+      // Update content visibility
+      contents.forEach(content => {
+        const type = content.getAttribute('data-type');
+        if (type === currentTab) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+
+      // Scroll to top of content
+      const activeContent = document.querySelector(`.project-content[data-type="${currentTab}"]`) as HTMLElement;
+      if (activeContent) {
+        window.scrollTo({ 
+          top: activeContent.offsetTop - 100, 
+          behavior: 'smooth' 
+        });
+      }
+    });
+  });
+
+  // Initialize first tab as active
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstTab = document.querySelector('#project-tabs button[data-tab="active"]');
+    if (firstTab) {
+      firstTab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
+      firstTab.classList.remove('text-slate-600', 'hover:text-slate-900');
+    }
+  });
+</script>
+
+<style>
+  .project-content {
+    @apply transition-all duration-300;
+  }
+</style>
