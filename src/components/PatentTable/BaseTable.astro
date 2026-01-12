@@ -71,49 +71,42 @@ const formatDate = (dateStr: string) => {
 
 <div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id="patent-table">
   {showHeader && (
-    <div class="px-4 md:px-8 py-4 bg-slate-50 border-b border-slate-200">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <div class="mb-3 md:mb-0">
-          <h3 class="text-lg font-semibold text-slate-900">专利与软著列表</h3>
-          <p class="text-sm text-slate-600 mt-1">共 <span class="font-medium text-slate-900">{patents.length}</span> 项成果</p>
-        </div>
-        
-        {enhanced && (
-          <div class="flex flex-wrap gap-2">
-            {filterable && (
-              <div class="relative">
-                <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                  <option value="all">所有类型</option>
-                  <option value="invention">发明专利</option>
-                  <option value="utility">实用新型专利</option>
-                  <option value="software">软件著作权</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                </div>
+    <div class="px-4 md:px-8 py-4 bg-slate-50 border-b border-slate-200">        
+      {enhanced && (
+        <div class="flex flex-wrap gap-2">
+          {filterable && (
+            <div class="relative">
+              <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                <option value="all">所有类型</option>
+                <option value="invention">发明专利</option>
+                <option value="utility">实用新型专利</option>
+                <option value="software">软件著作权</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
               </div>
-            )}
+            </div>
+          )}
             
-            {sortable && (
-              <div class="relative">
-                <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                  <option value="date-desc">按日期降序</option>
-                  <option value="date-asc">按日期升序</option>
-                  <option value="name">按名称排序</option>
-                  <option value="type">按类型排序</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                </div>
+          {sortable && (
+            <div class="relative">
+              <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                <option value="date-desc">按日期降序</option>
+                <option value="date-asc">按日期升序</option>
+                <option value="name">按名称排序</option>
+                <option value="type">按类型排序</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )}
   
@@ -270,7 +263,7 @@ const formatDate = (dateStr: string) => {
     <div class="px-4 md:px-8 py-4 bg-slate-50 border-t border-slate-200">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div class="text-sm text-slate-600 mb-2 md:mb-0">
-          共 <span class="font-medium text-slate-900">{patents.length}</span> 项专利与软著
+          共 <span class="font-medium text-slate-900">{patents.length}</span> 项
         </div>
         <div class="flex items-center space-x-2">
           <button type="button" class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200">
@@ -286,7 +279,7 @@ const formatDate = (dateStr: string) => {
       </div>
     </div>
   )}
-</div>
+
 
 {enhanced && (
   <script>
