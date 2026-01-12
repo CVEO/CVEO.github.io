@@ -1,139 +1,348 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import PatentTable from '../components/PatentTable/index.astro'
+import InventionTable from '../components/InventionTable.astro'
+import SoftwareTable from '../components/SoftwareTable.astro'
 import PaperCard from '../components/PaperCard.astro'
-import awardsData from '../data/awards.json'
+import TimeAxis from '../components/TimeAxis.astro'
 import { getCollection } from 'astro:content'
-import { loadPatents } from '../lib/data/patents'
+import { loadPatents, filterPatentsByType } from '../lib/data/patents'
 
 const patentsData = await loadPatents()
+const inventionPatents = filterPatentsByType(patentsData, '发明专利')
+const softwarePatents = filterPatentsByType(patentsData, '软件著作权')
 
-const allPapers = (await getCollection('papers') || []).sort((a, b) => {
+const allPapers = (await getCollection('papers') || []).sort((a: any, b: any) => {
   return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 });
-const ourPapers = allPapers.filter(p => p.id.startsWith('our/'))
-const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative/'))
+const ourPapers = allPapers.filter((p: any) => p.id.startsWith('our/'))
+const collaborativePapers = allPapers.filter((p: any) => p.id.startsWith('collaborative/'))
+
+// 获取论文年份用于时间轴
+const getPaperYears = (papers: any[]) => {
+  const years = new Set<number>()
+  papers.forEach((paper: any) => {
+    const year = new Date(paper.data.date).getFullYear()
+    years.add(year)
+  })
+  return Array.from(years).sort((a: number, b: number) => b - a) // 倒序排列
+}
+
+const ourPaperYears = getPaperYears(ourPapers)
+const collaborativePaperYears = getPaperYears(collaborativePapers)
 ---
 <BaseLayout title="科研成果">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
       <h1 class="text-3xl font-bold text-slate-900">科研成果</h1>
       
-      <div class="inline-flex p-1 bg-slate-100 rounded-xl" id="paper-tabs">
+      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="research-tabs">
         <button 
           type="button"
-          class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm whitespace-nowrap"
           data-tab="our"
         >
           通讯/一作论文
         </button>
         <button 
           type="button"
-          class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
           data-tab="collaborative"
         >
           合作论文
         </button>
+        <button 
+          type="button"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
+          data-tab="invention"
+        >
+          发明专利
+        </button>
+        <button 
+          type="button"
+          class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
+          data-tab="software"
+        >
+          软件著作权
+        </button>
       </div>
     </div>
 
-    <div id="paper-content">
-      <div id="our-papers" class="grid grid-cols-1 gap-6 paper-list" data-type="our">
-        {ourPapers.map((p, index) => (
-          <div class="paper-item hidden" data-index={index}>
-            <PaperCard paper={p} showAbstract={false} showLink={true} />
+    <!-- 通讯/一作论文 -->
+    <div id="our-papers" class="research-content" data-type="our">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">通讯/一作论文</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{ourPapers.length}</span> 篇论文</p>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <!-- 时间轴和筛选面板 -->
+        <div class="lg:w-1/4">
+          <div class="sticky top-20 lg:top-24 bg-white lg:bg-transparent p-4 lg:p-0 rounded-lg lg:rounded-none shadow-sm lg:shadow-none mb-6 lg:mb-0">
+            <!-- 移动端折叠面板 -->
+            <div class="lg:hidden mb-4">
+              <button class="flex items-center justify-between w-full text-left" id="our-filter-toggle">
+                <h3 class="text-lg font-medium text-slate-900">筛选选项</h3>
+                <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <!-- 筛选内容 -->
+            <div id="our-filter-content" class="lg:block hidden lg:visible">
+              <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">按年份筛选</h3>
+              <TimeAxis 
+                years={ourPaperYears} 
+                className="mb-6"
+                id="our-timeaxis"
+              />
+              
+              <!-- 简单筛选 -->
+              <div class="mt-6 lg:mt-8">
+                <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">快速筛选</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-2">
+                  <button class="filter-btn" data-filter="all" data-type="our">
+                    全部论文
+                  </button>
+                  <button class="filter-btn" data-filter="recent" data-type="our">
+                    最近3年
+                  </button>
+                  <button class="filter-btn" data-filter="partition" data-type="our">
+                    中科院分区
+                  </button>
+                  <button class="filter-btn lg:hidden" id="our-apply-filter">
+                    应用筛选
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-
-      <div id="collaborative-papers" class="grid grid-cols-1 gap-6 paper-list hidden" data-type="collaborative">
-        {collaborativePapers.map((p, index) => (
-          <div class="paper-item hidden" data-index={index}>
-            <PaperCard paper={p} showAbstract={false} showLink={true} />
+        </div>
+        
+        <!-- 论文列表 -->
+        <div class="lg:w-3/4">
+          <div class="mb-4 lg:hidden">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-medium text-slate-900">论文列表</h3>
+              <span class="text-sm text-slate-500" id="our-paper-count">{ourPapers.length} 篇</span>
+            </div>
           </div>
-        ))}
+          
+          <div id="our-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
+            {ourPapers.map((p: any) => (
+              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''}>
+                <PaperCard paper={p} showAbstract={false} showLink={true} />
+              </div>
+            ))}
+          </div>
+          
+          <div id="our-no-results" class="hidden text-center py-8 lg:py-12">
+            <svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-slate-500">没有找到符合条件的论文</p>
+            <button class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="our">
+              清除筛选条件
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Pagination Controls -->
-    <div id="pagination" class="mt-12 flex justify-center items-center gap-2">
-      <button type="button" id="prev-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
-        上一页
-      </button>
-      <div id="page-numbers" class="flex gap-2"></div>
-      <button type="button" id="next-page" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
-        下一页
-      </button>
+    <!-- 合作论文 -->
+    <div id="collaborative-papers" class="research-content hidden" data-type="collaborative">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">合作论文</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{collaborativePapers.length}</span> 篇论文</p>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <!-- 时间轴和筛选面板 -->
+        <div class="lg:w-1/4">
+          <div class="sticky top-20 lg:top-24 bg-white lg:bg-transparent p-4 lg:p-0 rounded-lg lg:rounded-none shadow-sm lg:shadow-none mb-6 lg:mb-0">
+            <!-- 移动端折叠面板 -->
+            <div class="lg:hidden mb-4">
+              <button class="flex items-center justify-between w-full text-left" id="collaborative-filter-toggle">
+                <h3 class="text-lg font-medium text-slate-900">筛选选项</h3>
+                <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <!-- 筛选内容 -->
+            <div id="collaborative-filter-content" class="lg:block hidden lg:visible">
+              <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">按年份筛选</h3>
+              <TimeAxis 
+                years={collaborativePaperYears} 
+                className="mb-6"
+                id="collaborative-timeaxis"
+              />
+              
+              <!-- 简单筛选 -->
+              <div class="mt-6 lg:mt-8">
+                <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">快速筛选</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-2">
+                  <button class="filter-btn" data-filter="all" data-type="collaborative">
+                    全部论文
+                  </button>
+                  <button class="filter-btn" data-filter="recent" data-type="collaborative">
+                    最近3年
+                  </button>
+                  <button class="filter-btn" data-filter="partition" data-type="collaborative">
+                    中科院分区
+                  </button>
+                  <button class="filter-btn lg:hidden" id="collaborative-apply-filter">
+                    应用筛选
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 论文列表 -->
+        <div class="lg:w-3/4">
+          <div class="mb-4 lg:hidden">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-medium text-slate-900">论文列表</h3>
+              <span class="text-sm text-slate-500" id="collaborative-paper-count">{collaborativePapers.length} 篇</span>
+            </div>
+          </div>
+          
+          <div id="collaborative-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
+            {collaborativePapers.map((p: any) => (
+              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''}>
+                <PaperCard paper={p} showAbstract={false} showLink={true} />
+              </div>
+            ))}
+          </div>
+          
+          <div id="collaborative-no-results" class="hidden text-center py-8 lg:py-12">
+            <svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-slate-500">没有找到符合条件的论文</p>
+            <button class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="collaborative">
+              清除筛选条件
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="mt-20">
-      <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center">
-        <span class="w-8 h-1 bg-brand-600 mr-4"></span>
-        专利与软著
-      </h2>
-      <PatentTable patents={patentsData} />
+    <!-- 发明专利 -->
+    <div id="invention-patents" class="research-content hidden" data-type="invention">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">发明专利</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{inventionPatents.length}</span> 项专利</p>
+      </div>
+      <InventionTable patents={inventionPatents} className="invention-table" />
+    </div>
+
+    <!-- 软件著作权 -->
+    <div id="software-patents" class="research-content hidden" data-type="software">
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">软件著作权</h2>
+        <p class="text-slate-600">共 <span class="font-medium text-brand-900">{softwarePatents.length}</span> 项软著</p>
+      </div>
+      <SoftwareTable patents={softwarePatents} className="software-table" />
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  const tabs = document.querySelectorAll('#paper-tabs button');
-  const ourContent = document.getElementById('our-papers');
-  const collabContent = document.getElementById('collaborative-papers');
+  const tabs = document.querySelectorAll('#research-tabs button');
+  const contents = document.querySelectorAll('.research-content');
   
-  // Pagination State
-  const ITEMS_PER_PAGE = 15;
   let currentTab = 'our';
-  let currentPage = 1;
-
-  function updatePagination() {
-    const activeContent = currentTab === 'our' ? ourContent : collabContent;
-    if (!activeContent) return;
-
-    const papers = activeContent.querySelectorAll('.paper-item');
-    const totalPages = Math.ceil(papers.length / ITEMS_PER_PAGE);
+  // 筛选论文函数
+  function filterPapers(type: string, year = 0, filterType = 'all') {
+    const paperItems = document.querySelectorAll(`#${type}-papers-list .paper-item`);
+    const noResults = document.getElementById(`${type}-no-results`);
+    const paperCount = document.getElementById(`${type}-paper-count`);
+    let visibleCount = 0;
     
-    // Ensure currentPage is within bounds
-    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-
-    // Show/Hide papers
-    papers.forEach((paper, index) => {
-      const start = (currentPage - 1) * ITEMS_PER_PAGE;
-      const end = start + ITEMS_PER_PAGE;
-      if (index >= start && index < end) {
-        paper.classList.remove('hidden');
+    paperItems.forEach(item => {
+      const itemYear = parseInt(item.getAttribute('data-year') || '0');
+      const partition = item.getAttribute('data-partition') || '';
+      let shouldShow = true;
+      
+      // 按年份筛选
+      if (year > 0 && itemYear !== year) {
+        shouldShow = false;
+      }
+      
+      // 按筛选类型筛选
+      if (filterType === 'recent') {
+        const currentYear = new Date().getFullYear();
+        if (itemYear < currentYear - 2) { // 最近3年
+          shouldShow = false;
+        }
+      } else if (filterType === 'partition') {
+        if (!partition || partition === '') {
+          shouldShow = false;
+        }
+      }
+      
+      if (shouldShow) {
+        item.classList.remove('hidden');
+        visibleCount++;
       } else {
-        paper.classList.add('hidden');
+        item.classList.add('hidden');
       }
     });
-
-    // Update Page Numbers
-    const pageNumbersContainer = document.getElementById('page-numbers');
-    if (pageNumbersContainer) {
-      pageNumbersContainer.innerHTML = '';
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i.toString();
-        btn.className = `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-          i === currentPage 
-            ? 'bg-brand-600 text-white shadow-sm' 
-            : 'text-slate-600 hover:bg-slate-100'
-        }`;
-        btn.onclick = () => {
-          currentPage = i;
-          updatePagination();
-          window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
-        };
-        pageNumbersContainer.appendChild(btn);
+    
+    // 显示/隐藏无结果提示
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
       }
     }
+    
+    // 更新论文计数
+    if (paperCount) {
+      const totalCount = paperItems.length;
+      if (visibleCount === totalCount || (year === 0 && filterType === 'all')) {
+        paperCount.textContent = `${totalCount} 篇`;
+      } else {
+        paperCount.textContent = `${visibleCount}/${totalCount} 篇`;
+        paperCount.classList.add('text-brand-900', 'font-medium');
+      }
+    }
+    
+    return visibleCount;
+  }
 
-    // Update Prev/Next buttons
-    const prevBtn = document.getElementById('prev-page') as HTMLButtonElement;
-    const nextBtn = document.getElementById('next-page') as HTMLButtonElement;
-    if (prevBtn) prevBtn.disabled = currentPage === 1;
-    if (nextBtn) nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+  // 更新时间轴选中状态
+  function updateTimeAxisSelection(type: string, year: number) {
+    const timeAxis = document.getElementById(`${type}-timeaxis`);
+    if (!timeAxis) return;
+    
+    // 更新所有年份按钮状态
+    const yearButtons = timeAxis.querySelectorAll('button[data-year]');
+    yearButtons.forEach(btn => {
+      const btnYear = parseInt(btn.getAttribute('data-year') || '0');
+      if (btnYear === year) {
+        if (year === 0) {
+          btn.classList.add('text-brand-900', 'font-semibold');
+          btn.classList.remove('text-slate-600', 'hover:text-slate-900');
+        } else {
+          btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+          btn.classList.remove('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+        }
+      } else {
+        if (btnYear === 0) {
+          btn.classList.remove('text-brand-900', 'font-semibold');
+          btn.classList.add('text-slate-600', 'hover:text-slate-900');
+        } else {
+          btn.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+          btn.classList.add('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+        }
+      }
+    });
   }
 
   // Tab switching
@@ -143,7 +352,6 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
       if (!target) return;
       
       currentTab = target;
-      currentPage = 1; // Reset to first page on tab switch
       
       // Update tab styles
       tabs.forEach(t => {
@@ -154,38 +362,136 @@ const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative
       tab.classList.remove('text-slate-600', 'hover:text-slate-900');
 
       // Update content visibility
-      if (currentTab === 'our') {
-        ourContent?.classList.remove('hidden');
-        collabContent?.classList.add('hidden');
-      } else {
-        ourContent?.classList.add('hidden');
-        collabContent?.classList.remove('hidden');
-      }
+      contents.forEach(content => {
+        const type = content.getAttribute('data-type');
+        if (type === currentTab) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
 
-      updatePagination();
+      // Scroll to top of content
+      const activeContent = document.querySelector(`.research-content[data-type="${currentTab}"]`) as HTMLElement;
+      if (activeContent) {
+        window.scrollTo({ 
+          top: activeContent.offsetTop - 100, 
+          behavior: 'smooth' 
+        });
+      }
     });
   });
 
-  // Prev/Next handlers
-  document.getElementById('prev-page')?.addEventListener('click', () => {
-    if (currentPage > 1) {
-      currentPage--;
-      updatePagination();
-      window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
+  // 时间轴年份选择事件
+  document.addEventListener('timeaxis-year-select', (e: any) => {
+    const { year } = e.detail;
+    const timeAxis = e.target.closest('.time-axis');
+    
+    if (timeAxis && timeAxis.id) {
+      const type = timeAxis.id.includes('our') ? 'our' : 'collaborative';
+      
+      updateTimeAxisSelection(type, year);
+      filterPapers(type, year === 0 ? 0 : year, 'all');
     }
   });
 
-  document.getElementById('next-page')?.addEventListener('click', () => {
-    const activeContent = currentTab === 'our' ? ourContent : collabContent;
-    const totalPapers = activeContent?.querySelectorAll('.paper-item').length || 0;
-    const totalPages = Math.ceil(totalPapers / ITEMS_PER_PAGE);
-    if (currentPage < totalPages) {
-      currentPage++;
-      updatePagination();
-      window.scrollTo({ top: document.getElementById('paper-content')?.offsetTop ? document.getElementById('paper-content')!.offsetTop - 100 : 0, behavior: 'smooth' });
+  // 筛选按钮点击事件
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const filterBtn = target.closest('.filter-btn');
+    
+    if (filterBtn) {
+      const filterType = filterBtn.getAttribute('data-filter');
+      const type = filterBtn.getAttribute('data-type');
+      
+      if (filterType && type) {
+        // 更新筛选按钮状态
+        const allFilterBtns = document.querySelectorAll(`.filter-btn[data-type="${type}"]`);
+        allFilterBtns.forEach(btn => {
+          btn.classList.remove('bg-brand-600', 'text-white');
+          btn.classList.add('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+        });
+        
+        filterBtn.classList.add('bg-brand-600', 'text-white');
+        filterBtn.classList.remove('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+        
+        // 重置时间轴选择
+        updateTimeAxisSelection(type, 0);
+        
+        // 应用筛选
+        filterPapers(type, 0, filterType);
+        
+        // 移动端：应用筛选后关闭筛选面板
+        if (window.innerWidth < 1024) {
+          const filterContent = document.getElementById(`${type}-filter-content`);
+          if (filterContent) {
+            filterContent.classList.add('hidden');
+            const toggleBtn = document.getElementById(`${type}-filter-toggle`);
+            if (toggleBtn) {
+              const svg = toggleBtn.querySelector('svg');
+              if (svg) {
+                svg.style.transform = 'rotate(0deg)';
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // 移动端筛选面板切换
+    const filterToggle = target.closest('[id$="-filter-toggle"]');
+    if (filterToggle) {
+      const type = filterToggle.id.includes('our') ? 'our' : 'collaborative';
+      const filterContent = document.getElementById(`${type}-filter-content`);
+      const svg = filterToggle.querySelector('svg');
+      
+      if (filterContent && svg) {
+        if (filterContent.classList.contains('hidden')) {
+          filterContent.classList.remove('hidden');
+          svg.style.transform = 'rotate(180deg)';
+        } else {
+          filterContent.classList.add('hidden');
+          svg.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+    
+    // 清除筛选按钮
+    const clearFilterBtn = target.closest('[data-clear-filter]');
+    if (clearFilterBtn) {
+      const type = clearFilterBtn.getAttribute('data-clear-filter');
+      if (type) {
+        const allFilterBtn = document.querySelector(`.filter-btn[data-filter="all"][data-type="${type}"]`);
+        if (allFilterBtn) {
+          allFilterBtn.click();
+        }
+      }
     }
   });
 
-  // Initial call
-  updatePagination();
+  // Initialize first tab as active
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstTab = document.querySelector('#research-tabs button[data-tab="our"]');
+    if (firstTab) {
+      firstTab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
+      firstTab.classList.remove('text-slate-600', 'hover:text-slate-900');
+    }
+    
+    // 初始化筛选按钮样式
+    const filterBtns = document.querySelectorAll('.filter-btn[data-filter="all"]');
+    filterBtns.forEach(btn => {
+      btn.classList.add('bg-brand-600', 'text-white');
+      btn.classList.remove('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200');
+    });
+  });
 </script>
+
+<style>
+  .filter-btn {
+    @apply w-full px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-100 text-slate-700 hover:bg-slate-200 text-left;
+  }
+  
+  .paper-item {
+    @apply transition-all duration-300;
+  }
+</style>

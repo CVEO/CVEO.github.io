@@ -6,5 +6,6 @@ authors: ["Ke, Ling","Liao, Puyun","Zhang, Xiaodong","Chen, Guanzhou","Zhu, Kun"
 link: "https://doi.org/10.1117/1.jrs.13.036505"
 abstract: "Haze removal from a single remote sensing image based on a fully convolutional neural network"
 corresponding: [2]
+partition: "中科院四区"
 ---
 Haze removal from a single remote sensing image based on a fully convolutional neural network

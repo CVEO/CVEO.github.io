@@ -6,5 +6,6 @@ authors: ["Zhang, Xiaodong","Wang, Qing","Chen, Guanzhou","Dai, Fan","Zhu, Kun",
 link: "https://doi.org/10.1080/2150704x.2017.1422873"
 abstract: "An object-based supervised classification framework for very-high-resolution remote sensing images using convolutional neural networks"
 corresponding: [0]
+partition: "中科院四区"
 ---
 An object-based supervised classification framework for very-high-resolution remote sensing images using convolutional neural networks

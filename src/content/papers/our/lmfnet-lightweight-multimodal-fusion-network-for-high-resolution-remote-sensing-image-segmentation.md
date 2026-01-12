@@ -6,5 +6,7 @@ authors: ["Wang, Tong","Chen, Guanzhou","Zhang, Xiaodong","Liu, Chenxi","Wang, J
 link: "https://doi.org/10.1016/j.patcog.2025.111579"
 abstract: "LMFNet: Lightweight Multimodal Fusion Network for high-resolution remote sensing image segmentation"
 corresponding: [2]
+equalFirst: [0,1]
+partition: "中科院一区"
 ---
 LMFNet: Lightweight Multimodal Fusion Network for high-resolution remote sensing image segmentation

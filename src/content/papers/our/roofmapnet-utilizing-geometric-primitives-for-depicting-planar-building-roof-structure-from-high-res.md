@@ -6,5 +6,7 @@ authors: ["Wang, Jiaqi","Chen, Guanzhou","Zhang, Xiaodong","Wang, Tong","Tan, Xi
 link: "https://doi.org/10.1016/j.jag.2025.104630"
 abstract: "RoofMapNet: Utilizing geometric primitives for depicting planar building roof structure from high-resolution remote sensing imagery"
 corresponding: [1,2]
+equalFirst: [0,1]
+partition: "中科院一区"
 ---
 RoofMapNet: Utilizing geometric primitives for depicting planar building roof structure from high-resolution remote sensing imagery

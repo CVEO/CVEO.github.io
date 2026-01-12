@@ -6,5 +6,6 @@ authors: ["Wang, Qing","Zhang, Xiaodong","Chen, Guanzhou","Dai, Fan","Gong, Yuan
 link: "https://doi.org/10.1080/2150704x.2018.1492172"
 abstract: "Change detection based on Faster R-CNN for high-resolution remote sensing images"
 corresponding: [1]
+partition: "中科院四区"
 ---
 Change detection based on Faster R-CNN for high-resolution remote sensing images

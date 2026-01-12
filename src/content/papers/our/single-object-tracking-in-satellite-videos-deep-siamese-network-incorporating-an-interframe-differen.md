@@ -6,5 +6,6 @@ authors: ["Zhu, Kun","Zhang, Xiaodong","Chen, Guanzhou","Tan, Xiaoliang","Liao, 
 link: "https://doi.org/10.3390/rs13071298"
 abstract: "Single Object Tracking in Satellite Videos: Deep Siamese Network Incorporating an Interframe Difference Centroid Inertia Motion Model"
 corresponding: [1]
+partition: "中科院二区"
 ---
 Single Object Tracking in Satellite Videos: Deep Siamese Network Incorporating an Interframe Difference Centroid Inertia Motion Model

@@ -6,5 +6,6 @@ authors: ["Chen, Guanzhou","Tan, Xiaoliang","Guo, Beibei","Zhu, Kun","Liao, Puyu
 link: "https://doi.org/10.3390/rs13234902"
 abstract: "SDFCNv2: An Improved FCN Framework for Remote Sensing Images Semantic Segmentation"
 corresponding: [7]
+partition: "中科院二区"
 ---
 SDFCNv2: An Improved FCN Framework for Remote Sensing Images Semantic Segmentation

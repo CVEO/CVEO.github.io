@@ -6,5 +6,6 @@ authors: ["Zhang, Xiaodong","Chen, Guanzhou","Wang, Wenbo","Wang, Qing","Dai, Fa
 link: "https://doi.org/10.1109/jstars.2017.2672736"
 abstract: "Object-Based Land-Cover Supervised Classification for Very-High-Resolution UAV Images Using Stacked Denoising Autoencoders"
 corresponding: [0]
+partition: "中科院二区"
 ---
 Object-Based Land-Cover Supervised Classification for Very-High-Resolution UAV Images Using Stacked Denoising Autoencoders

@@ -6,5 +6,6 @@ authors: ["Wu, Hongyu","Chen, Guanzhou","Bai, Yang","Peng, Ying","Ba, Qianqian",
 link: "https://doi.org/10.3390/rs16203893"
 abstract: "On-Orbit Geometric Calibration and Accuracy Validation of the Jilin1-KF01B Wide-Field Camera"
 corresponding: [7]
+partition: "中科院二区"
 ---
 On-Orbit Geometric Calibration and Accuracy Validation of the Jilin1-KF01B Wide-Field Camera

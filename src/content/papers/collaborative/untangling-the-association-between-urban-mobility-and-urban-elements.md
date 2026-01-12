@@ -6,5 +6,6 @@ authors: ["Cao, Jinzhou","Tu, Wei","Cao, Rui","Gao, Qili","Chen, Guanzhou","Li, 
 link: "https://doi.org/10.1080/10095020.2022.2157761"
 abstract: "Untangling the association between urban mobility and urban elements"
 corresponding: [1]
+partition: "中科院一区"
 ---
 Untangling the association between urban mobility and urban elements

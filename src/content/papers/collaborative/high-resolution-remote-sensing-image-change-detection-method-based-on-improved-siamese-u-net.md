@@ -6,5 +6,6 @@ authors: ["Wang, Qing","Li, Mengqi","Li, Gongquan","Zhang, Jiling","Yan, Shuoyue
 link: "https://doi.org/10.3390/rs15143517"
 abstract: "High-Resolution Remote Sensing Image Change Detection Method Based on Improved Siamese U-Net"
 corresponding: [0]
+partition: "中科院二区"
 ---
 High-Resolution Remote Sensing Image Change Detection Method Based on Improved Siamese U-Net

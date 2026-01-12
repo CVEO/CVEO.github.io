@@ -6,5 +6,6 @@ authors: ["Zhu, Kun","Guo, Haitao","Chen, Guanzhou","Zhang, Xiaodong","Ding, Lei
 link: "https://doi.org/10.1016/j.eswa.2025.130507"
 abstract: "Propagating spatio-temporal state and progressively associating trajectory for satellite video multi-object tracking"
 corresponding: [1,2]
+partition: "中科院一区"
 ---
 Propagating spatio-temporal state and progressively associating trajectory for satellite video multi-object tracking

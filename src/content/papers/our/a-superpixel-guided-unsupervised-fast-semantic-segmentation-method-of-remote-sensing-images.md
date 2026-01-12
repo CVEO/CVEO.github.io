@@ -6,5 +6,6 @@ authors: ["Chen, Guanzhou","He, Chanjuan","Wang, Tong","Zhu, Kun","Liao, Puyun",
 link: "https://doi.org/10.1109/lgrs.2022.3198065"
 abstract: "A Superpixel-Guided Unsupervised Fast Semantic Segmentation Method of Remote Sensing Images"
 corresponding: [5]
+partition: "中科院二区"
 ---
 A Superpixel-Guided Unsupervised Fast Semantic Segmentation Method of Remote Sensing Images
