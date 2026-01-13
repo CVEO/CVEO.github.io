@@ -26,7 +26,7 @@ interface UndergradAlumni {
 type AlumniItem = GraduateAlumni | UndergradAlumni
 
 interface Props {
-  alumni: AlumniItem[][]
+  alumni: AlumniItem[] | AlumniItem[][]
   title?: string
   type?: 'graduate' | 'undergrad'
 }
@@ -77,8 +77,10 @@ function getEducationTypeWeight(eduType: string): number {
 }
 
 // ==================== 数据处理 ====================
-// 扁平化嵌套数组
-const flatAlumni = alumni.flat()
+// 处理一维或二维数组
+const flatAlumni = Array.isArray(alumni[0]) && Array.isArray(alumni[0][0]) 
+  ? (alumni as AlumniItem[][]).flat() 
+  : alumni as AlumniItem[]
 const totalItems = flatAlumni.length
 
 /**

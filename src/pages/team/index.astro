@@ -57,21 +57,30 @@ function byGroup(g: string) {
       </div>
       
       <div class="mb-10">
-        <h3 class="text-xl font-semibold text-slate-900 mb-6">博士研究生</h3>
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-semibold text-slate-900">博士研究生</h3>
+          <span class="text-sm text-slate-500">{byGroup('PhD').length} 位</span>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {byGroup('PhD').map(m => <MemberCard member={m} />)}
         </div>
       </div>
       
       <div class="mb-10">
-        <h3 class="text-xl font-semibold text-slate-900 mb-6">硕士研究生</h3>
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-semibold text-slate-900">硕士研究生</h3>
+          <span class="text-sm text-slate-500">{byGroup('Master').length} 位</span>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {byGroup('Master').map(m => <MemberCard member={m} />)}
         </div>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-slate-900 mb-6">本科生</h3>
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-semibold text-slate-900">本科生</h3>
+          <span class="text-sm text-slate-500">{byGroup('Undergrad').length} 位</span>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {byGroup('Undergrad').map(m => <MemberCard member={m} />)}
         </div>
@@ -96,7 +105,7 @@ function byGroup(g: string) {
     />
     
     <!-- 本科生毕业去向 -->
-    {undergradAlumni.flat().length > 0 && (
+    {undergradAlumni.length > 0 && (
       <AlumniTable 
         alumni={undergradAlumni} 
         title="本科生毕业去向" 
