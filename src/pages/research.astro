@@ -347,7 +347,8 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
 
   // Tab switching
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
       const target = tab.getAttribute('data-tab');
       if (!target) return;
       
@@ -370,15 +371,6 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           content.classList.add('hidden');
         }
       });
-
-      // Scroll to top of content
-      const activeContent = document.querySelector(`.research-content[data-type="${currentTab}"]`) as HTMLElement;
-      if (activeContent) {
-        window.scrollTo({ 
-          top: activeContent.offsetTop - 100, 
-          behavior: 'smooth' 
-        });
-      }
     });
   });
 
@@ -463,7 +455,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
       if (type) {
         const allFilterBtn = document.querySelector(`.filter-btn[data-filter="all"][data-type="${type}"]`);
         if (allFilterBtn) {
-          allFilterBtn.click();
+          (allFilterBtn as HTMLButtonElement).click();
         }
       }
     }

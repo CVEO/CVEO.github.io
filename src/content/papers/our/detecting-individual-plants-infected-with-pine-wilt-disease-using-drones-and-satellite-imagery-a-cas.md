@@ -8,5 +8,6 @@ abstract: "Detecting Individual Plants Infected with Pine Wilt Disease Using Dro
 corresponding: [10]
 partition: "中科院二区"
 equalFirst: [0,1]
+wechatArticle: https://mp.weixin.qq.com/s/vcbn4vh-xJT_bS609S0wsQ
 ---
 Detecting Individual Plants Infected with Pine Wilt Disease Using Drones and Satellite Imagery: A Case Study in Xianning, China

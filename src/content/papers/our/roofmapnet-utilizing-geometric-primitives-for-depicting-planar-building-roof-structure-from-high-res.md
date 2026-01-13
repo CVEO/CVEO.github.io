@@ -8,5 +8,7 @@ abstract: "RoofMapNet: Utilizing geometric primitives for depicting planar build
 corresponding: [1,2]
 equalFirst: [0,1]
 partition: "中科院一区"
+wechatArticle: https://mp.weixin.qq.com/s/z4-TtD0BMJ1enBOhTfoelQ
+codeDataLink: https://github.com/CVEO/RoofMapNet
 ---
 RoofMapNet: Utilizing geometric primitives for depicting planar building roof structure from high-resolution remote sensing imagery

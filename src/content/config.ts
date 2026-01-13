@@ -8,6 +8,8 @@ const papers = defineCollection({
     date: z.string(),
     authors: z.array(z.string()),
     link: z.string().optional(),
+    wechatArticle: z.string().url().optional(),
+    codeDataLink: z.string().url().optional(),
     abstract: z.string().optional(),
     partition: z.enum(['中科院一区', '中科院二区', '中科院三区', '中科院四区']).optional(),
     equalFirst: z.array(z.number()).optional(),

@@ -8,5 +8,7 @@ abstract: "BFA-YOLO: A balanced multiscale object detection network for building
 corresponding: [2,9]
 partition: "中科院一区"
 equalFirst: [0,1]
+wechatArticle: https://mp.weixin.qq.com/s/EyMvKJNqYigFJWDJ5p8CMQ
+codeDataLink: https://github.com/CVEO/BFA-YOLO
 ---
 BFA-YOLO: A balanced multiscale object detection network for building façade elements detection

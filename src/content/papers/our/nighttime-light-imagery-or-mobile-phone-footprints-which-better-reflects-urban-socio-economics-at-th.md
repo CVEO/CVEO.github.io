@@ -8,5 +8,6 @@ abstract: "Nighttime light imagery or mobile phone footprints: Which better refl
 corresponding: [5,6]
 partition: "中科院一区"
 equalFirst: [0,1]
+wechatArticle: https://mp.weixin.qq.com/s/biz90RXwud1GUnAtvlCj5Q
 ---
 Nighttime light imagery or mobile phone footprints: Which better reflects urban socio-economics at the grid level? A case study in the Pearl River Delta, China

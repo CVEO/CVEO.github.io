@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import PaperCard from '../components/PaperCard.astro'
 import NewsCard from '../components/NewsCard.astro'
 import ProjectCard from '../components/ProjectCard.astro'
+import CollaborationEntryCards from '../components/CollaborationEntryCards.astro'
 import { getCollection } from 'astro:content'
 import { loadNews, getLatestNews } from '../lib/data/news'
 
@@ -66,9 +67,7 @@ const newsItems = getLatestNews(allNews, 3)
             </div>
           ))}
         </div>
-      </div>
-      
-   
+       </div>
 
       <section id="team" class="max-w-7xl mx-auto  scroll-mt-16">
               <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200">
@@ -184,9 +183,9 @@ const newsItems = getLatestNews(allNews, 3)
     <div>
       <h3 class="text-xl font-semibold text-slate-900 mb-6">期刊论文</h3>
     
-      <div class="grid grid-cols-1 gap-6">
+       <div class="grid grid-cols-1 gap-6">
         {(recentPapers || []).map(p => (
-          <PaperCard paper={p} showAbstract={false} showLink={false} />
+          <PaperCard paper={p} showAbstract={false} showLink={true} />
         ))}
       </div>
       <div class="mt-8 text-center">
@@ -244,11 +243,14 @@ const newsItems = getLatestNews(allNews, 3)
     </div>
   </section>
 
+  {aboutData.collaborationCards && aboutData.collaborationCards.length > 0 && (
+    <CollaborationEntryCards cards={aboutData.collaborationCards} />
+  )}
+
   <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-slate-50 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">联系我们</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-4">联系方式</h3>
         <div class="space-y-4">
           <div class="flex items-start">
             <svg class="w-5 h-5 text-brand-900 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -256,7 +258,7 @@ const newsItems = getLatestNews(allNews, 3)
             </svg>
             <div>
               <p class="font-medium text-slate-900">邮箱</p>
-              <p class="text-slate-700">cveo@whu.edu.cn</p>
+              <p class="text-slate-700">zxdlmars#whu.edu.cn，cgz#whu.edu.cn（#替换成@）</p>
             </div>
           </div>
           <div class="flex items-start">
@@ -270,16 +272,7 @@ const newsItems = getLatestNews(allNews, 3)
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-4">研究方向</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">遥感场景理解</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">弱监督学习</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">时空大模型</span>
-          <span class="px-3 py-1 rounded-full text-sm bg-brand-green-50 text-brand-green-900 border border-brand-green-200">多源数据融合</span>
-        </div>
-      </div>
+      </div>      
     </div>
   </section>
 </BaseLayout>

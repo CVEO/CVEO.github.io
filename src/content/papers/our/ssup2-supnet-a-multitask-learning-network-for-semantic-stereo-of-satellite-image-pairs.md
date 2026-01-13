@@ -7,5 +7,6 @@ link: "https://doi.org/10.1109/tgrs.2023.3335997"
 abstract: "S2Net: A Multitask Learning Network for Semantic Stereo of Satellite Image Pairs"
 corresponding: [1,2]
 partition: "中科院一区"
+wechatArticle: https://mp.weixin.qq.com/s/umtfnJWP72NvTOVwdfUOvw
 ---
 S2Net: A Multitask Learning Network for Semantic Stereo of Satellite Image Pairs

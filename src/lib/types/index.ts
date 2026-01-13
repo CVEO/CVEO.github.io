@@ -17,6 +17,8 @@ export interface Paper {
   date: string;
   authors: string[];
   link?: string;
+  wechatArticle?: string;
+  codeDataLink?: string;
   abstract?: string;
   partition?: '中科院一区' | '中科院二区' | '中科院三区' | '中科院四区';
   equalFirst?: number[];
@@ -73,6 +75,30 @@ export interface ResearchField {
   description: string;
 }
 
+export interface CollaborationCard {
+  title: string;
+  description: string;
+  icon: string;
+  link: string;
+  count: string;
+}
+
+export interface Partner {
+  name: string;
+  logo?: string;
+  website?: string;
+  description?: string;
+}
+
+export interface ResearchCenter {
+  name: string;
+  partners: string[];
+  type: string;
+  established: string;
+  description: string;
+  focusAreas?: string[];
+}
+
 export interface AboutData {
   teamName: string;
   leader: string;
@@ -80,4 +106,5 @@ export interface AboutData {
   introduction: string;
   researchFields: ResearchField[];
   stats: TeamStats[];
+  collaborationCards: CollaborationCard[];
 }

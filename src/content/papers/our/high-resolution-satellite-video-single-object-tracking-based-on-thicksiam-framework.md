@@ -7,5 +7,6 @@ link: "https://doi.org/10.1080/15481603.2022.2163063"
 abstract: "High-resolution satellite video single object tracking based on thicksiam framework"
 corresponding: [1,2]
 partition: "中科院二区"
+wechatArticle: https://mp.weixin.qq.com/s/xyPMaucF3vVpXF1tWJWVsQ
 ---
 High-resolution satellite video single object tracking based on thicksiam framework

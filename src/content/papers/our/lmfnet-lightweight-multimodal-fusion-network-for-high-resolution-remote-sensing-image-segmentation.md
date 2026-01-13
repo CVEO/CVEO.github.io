@@ -8,5 +8,6 @@ abstract: "LMFNet: Lightweight Multimodal Fusion Network for high-resolution rem
 corresponding: [2]
 equalFirst: [0,1]
 partition: "中科院一区"
+wechatArticle: https://mp.weixin.qq.com/s/4VhQxBwXPgq8U65xbYs3aw
 ---
 LMFNet: Lightweight Multimodal Fusion Network for high-resolution remote sensing image segmentation

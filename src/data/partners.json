@@ -1,0 +1,38 @@
+[
+  {
+    "name": "汕头市自然资源测绘院",
+    "logo": "/assets/partners/shantou-survey.png",
+    "website": "https://example.com",
+    "description": "地方测绘与自然资源管理单位"
+  },
+  {
+    "name": "湖北省国土测绘院",
+    "logo": "/assets/partners/hubei-survey.png",
+    "website": "https://example.com",
+    "description": "省级测绘与地理信息服务单位"
+  },
+  {
+    "name": "中能建安徽省电力设计院",
+    "logo": "/assets/partners/anhui-power-design.png",
+    "website": "https://example.com",
+    "description": "电力工程设计与地理信息技术应用"
+  },
+  {
+    "name": "武汉大学测绘学院",
+    "logo": "/assets/partners/whu-survey.png",
+    "website": "https://sgg.whu.edu.cn",
+    "description": "国内顶尖测绘学科单位"
+  },
+  {
+    "name": "中国科学院空天信息创新研究院",
+    "logo": "/assets/partners/cas-air.png",
+    "website": "https://www.aircas.ac.cn",
+    "description": "空天信息领域国家级研究机构"
+  },
+  {
+    "name": "自然资源部国土卫星遥感应用中心",
+    "logo": "/assets/partners/natural-resources-satellite.png",
+    "website": "https://example.com",
+    "description": "国土卫星遥感数据应用中心"
+  }
+]

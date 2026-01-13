@@ -1,0 +1,65 @@
+---
+interface CollaborationCard {
+  title: string
+  description: string
+  icon: string
+  link: string
+  count: string
+}
+
+const { cards } = Astro.props as {
+  cards: CollaborationCard[]
+}
+---
+<section id="collaboration-cards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-mt-16">
+  <h2 class="text-2xl font-semibold text-slate-900 mb-8">合作与平台</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {cards.map(card => (
+      <a 
+        href={card.link}
+        class="group block p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg hover:border-brand-200 transition-all duration-300"
+      >
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-900 group-hover:bg-brand-100 transition-colors duration-300">
+            {card.icon === 'handshake' ? (
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+              </svg>
+            ) : card.icon === 'research' ? (
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            ) : (
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+          </div>
+          
+          <div class="flex-grow">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-semibold text-slate-900 group-hover:text-brand-900 transition-colors duration-300">
+                {card.title}
+              </h3>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-brand-50 text-brand-900 border border-brand-200">
+                {card.count}
+              </span>
+            </div>
+            
+            <p class="text-slate-600 mb-4">
+              {card.description}
+            </p>
+            
+            <div class="flex items-center text-brand-900 font-medium">
+              <span>了解更多</span>
+              <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

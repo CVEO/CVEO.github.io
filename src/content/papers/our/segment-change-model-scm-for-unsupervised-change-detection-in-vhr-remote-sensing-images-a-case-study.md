@@ -6,5 +6,7 @@ authors: ["Tan, Xiaoliang","Chen, Guanzhou","Wang, Tong","Wang, Jiaqi","Zhang, X
 link: "https://doi.org/10.1109/igarss53475.2024.10642429"
 abstract: "SEGMENT CHANGE MODEL (SCM) FOR UNSUPERVISED CHANGE DETECTION IN VHR REMOTE SENSING IMAGES: A CASE STUDY OF BUILDINGS"
 corresponding: [1,4]
+wechatArticle: https://mp.weixin.qq.com/s/IXzzTBFdt9mrLkT3v8AfUA
+codeDataLink: https://github.com/StephenApX/UCD-SCM
 ---
 SEGMENT CHANGE MODEL (SCM) FOR UNSUPERVISED CHANGE DETECTION IN VHR REMOTE SENSING IMAGES: A CASE STUDY OF BUILDINGS

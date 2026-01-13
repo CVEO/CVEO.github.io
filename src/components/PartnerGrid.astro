@@ -1,0 +1,66 @@
+---
+interface Partner {
+  name: string
+  logo?: string
+  website?: string
+  description?: string
+}
+
+const { partners } = Astro.props as {
+  partners: Partner[]
+}
+---
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {partners.map(partner => (
+    <div class="group">
+      <a 
+        href={partner.website || '#'}
+        target={partner.website ? '_blank' : '_self'}
+        rel="noopener noreferrer"
+        class="block p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg hover:border-brand-200 transition-all duration-300 h-full"
+      >
+        <div class="flex flex-col items-center text-center h-full">
+          {partner.logo ? (
+            <div class="mb-4 w-full">
+              <div class="h-24 flex items-center justify-center">
+                <img 
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  class="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ) : (
+            <div class="mb-4 w-16 h-16 rounded-full bg-brand-50 flex items-center justify-center text-brand-900 group-hover:bg-brand-100 transition-colors duration-300">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+          )}
+          
+          <h3 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-brand-900 transition-colors duration-300">
+            {partner.name}
+          </h3>
+          
+          {partner.description && (
+            <p class="text-sm text-slate-600 mb-4 flex-grow">
+              {partner.description}
+            </p>
+          )}
+          
+          {partner.website && (
+            <div class="mt-auto pt-4 border-t border-slate-100 w-full">
+              <div class="flex items-center justify-center text-sm text-brand-900 font-medium">
+                <span>访问官网</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </div>
+            </div>
+          )}
+        </div>
+      </a>
+    </div>
+  ))}
+</div>

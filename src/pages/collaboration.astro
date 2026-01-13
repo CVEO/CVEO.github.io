@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PartnerGrid from '../components/PartnerGrid.astro'
+import ResearchCenterList from '../components/ResearchCenterList.astro'
+
+import partnersData from '../data/partners.json'
+import researchCentersData from '../data/research-centers.json'
+---
+
+<BaseLayout title="合作与平台">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-12 text-center">
+      <h1 class="text-3xl font-bold text-slate-900 mb-4">合作与平台</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+        武汉大学CVEO课题组与多家科研院所、企事业单位建立长期合作关系，共同推动产学研深度融合与科技成果转化。
+      </p>
+    </div>
+
+    <!-- 研究中心部分 -->
+    <section id="research-centers" class="scroll-mt-20 py-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl font-semibold text-slate-900 mb-2">科研合作平台</h2>
+          <p class="text-slate-600">
+            共建多个产学研合作研究中心，推动科技成果转化与应用落地
+          </p>
+        </div>
+        <div class="text-sm text-slate-500">
+          共 <span class="font-semibold text-brand-900">{researchCentersData.length}</span> 个合作平台
+        </div>
+      </div>
+
+      <ResearchCenterList centers={researchCentersData} />
+    </section>
+
+    <!-- 合作单位部分 -->
+    <section id="partners" class="mb-16 scroll-mt-20 py-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl font-semibold text-slate-900 mb-2">合作单位</h2>
+          <p class="text-slate-600">
+            与多家科研院所、企事业单位建立长期合作关系，共同推动产学研深度融合
+          </p>
+        </div>
+        <div class="text-sm text-slate-500">
+          共 <span class="font-semibold text-brand-900">{partnersData.length}</span> 家合作单位
+        </div>
+      </div>
+
+      <PartnerGrid partners={partnersData} />
+    </section>
+
+
+  </section>
+</BaseLayout>
