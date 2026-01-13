@@ -154,15 +154,7 @@ const newsItems = getLatestNews(allNews, 3)
   </section>
 
   <section id="news" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-mt-16">
-    <div class="flex justify-between items-center mb-8">
-      <h2 class="text-2xl font-semibold text-slate-900">新闻动态</h2>
-      <a href="/news" class="text-brand-900 hover:text-brand-800 font-medium flex items-center transition-colors duration-200">
-        查看全部
-        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
+    <h2 class="text-2xl font-semibold text-slate-900 mb-8">新闻动态</h2>
     
     <div class="space-y-6">
       {(newsItems || []).map((news: any) => (
@@ -174,6 +166,15 @@ const newsItems = getLatestNews(allNews, 3)
           showDate={true}
         />
       ))}
+    </div>
+    
+    <div class="mt-8 text-center">
+      <a href="/news" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
+        查看全部动态
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
     </div>
   </section>
 

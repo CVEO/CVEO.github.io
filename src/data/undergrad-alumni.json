@@ -1,0 +1,170 @@
+[
+  {
+    "name": "谭效良",
+    "graduationDate": "2018年",
+    "school": "测绘学院",
+    "project": "",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "廖溥昀",
+    "graduationDate": "2018年",
+    "school": "测绘学院",
+    "project": "",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "张力飞",
+    "graduationDate": "2018年",
+    "school": "测绘学院",
+    "project": "",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "王铜",
+    "graduationDate": "2020年",
+    "school": "遥感信息工程学院",
+    "project": "",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "陈昱文",
+    "graduationDate": "2022年",
+    "school": "计算机学院",
+    "project": "",
+    "destination": "复旦大学读研"
+  },
+  {
+    "name": "周文琳",
+    "graduationDate": "2022年",
+    "school": "遥感信息工程学院",
+    "project": "国家级大创-基于WebGIS的传染病数据智能分析平台",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "何婵娟",
+    "graduationDate": "2022年",
+    "school": "遥感信息工程学院",
+    "project": "第十届中国软件杯大赛-基于先验点的影像图斑提取技术",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "石沈昊",
+    "graduationDate": "2022年",
+    "school": "遥感信息工程学院",
+    "project": "第十届中国软件杯大赛-基于先验点的影像图斑提取技术",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "陈逸飞",
+    "graduationDate": "2023年",
+    "school": "测绘学院",
+    "project": "国家级大创-基于WebGIS的传染病数据智能分析平台",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "曹先宇",
+    "graduationDate": "2023年",
+    "school": "资源与环境学院",
+    "project": "国家级大创-基于WebGIS的传染病数据智能分析平台",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "张凯琦",
+    "graduationDate": "2024年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于长时序植被覆盖与气候数据的碳源碳汇算法研究",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "骆一川",
+    "graduationDate": "2024年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于长时序植被覆盖与气候数据的碳源碳汇算法研究",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "王博文",
+    "graduationDate": "2024年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于虚幻5（UE5）引擎的实景三维城市建设",
+    "destination": "国家石油天然气管网集团有限公司"
+  },
+  {
+    "name": "陈怡",
+    "graduationDate": "2024年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于虚幻5（UE5）引擎的实景三维城市建设",
+    "destination": "中山大学读研"
+  },
+  {
+    "name": "韦廖以",
+    "graduationDate": "2024年",
+    "school": "数学与统计学院",
+    "project": "省级大创-基于虚幻5（UE5）引擎的实景三维城市建设",
+    "destination": "毕业工作"
+  },
+  {
+    "name": "邱仁汕",
+    "graduationDate": "2024年",
+    "school": "测绘学院",
+    "project": "省级大创-基于立体光学卫星影像的建筑物轮廓与屋顶结构提取",
+    "destination": "海南测绘地理信息局"
+  },
+  {
+    "name": "樊绍杰",
+    "graduationDate": "2024年",
+    "school": "测绘学院",
+    "project": "省级大创-基于立体光学卫星影像的建筑物轮廓与屋顶结构提取",
+    "destination": "上海华测导航技术股份有限公司"
+  },
+  {
+    "name": "李枫豪",
+    "graduationDate": "2024年",
+    "school": "测绘学院",
+    "project": "省级大创-基于立体光学卫星影像的建筑物轮廓与屋顶结构提取",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "程鹏鑫",
+    "graduationDate": "2024年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于立体光学卫星影像的山洪泥石流灾害评估",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "马宇乐",
+    "graduationDate": "2025年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于立体光学卫星影像的山洪泥石流灾害评估",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "谷迎东",
+    "graduationDate": "2025年",
+    "school": "遥感信息工程学院",
+    "project": "省级大创-基于立体光学卫星影像的山洪泥石流灾害评估",
+    "destination": "武汉大学读研"
+  },
+  {
+    "name": "鲜于何明",
+    "graduationDate": "2025年",
+    "school": "测绘学院",
+    "project": "国家级大创-基于神经辐射场（NeRF）的城市级三维重建与渲染",
+    "destination": "南京大学读研"
+  },
+  {
+    "name": "刘振宇",
+    "graduationDate": "2025年",
+    "school": "测绘学院",
+    "project": "国家级大创-基于神经辐射场（NeRF）的城市级三维重建与渲染",
+    "destination": "清华大学读研"
+  },
+  {
+    "name": "李明哲",
+    "graduationDate": "2025年",
+    "school": "测绘学院",
+    "project": "国家级大创-基于神经辐射场（NeRF）的城市级三维重建与渲染",
+    "destination": "出国深造"
+  }
+]
