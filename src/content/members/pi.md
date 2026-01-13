@@ -1,6 +1,6 @@
 ---
-name: 张晓东
-role: 教授
+name: 张晓东 教授
+role: 测绘遥感信息全国重点实验室
 group: Professor
 order: 1
 photo: "assets/avatars/zxd.jpg"

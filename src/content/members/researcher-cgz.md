@@ -1,6 +1,6 @@
 ---
-name: 陈关州
-role: 副研究员
+name: 陈关州 副研究员
+role: 测绘遥感信息全国重点实验室
 group: Researcher
 order: 2
 photo: "assets/avatars/cgz.jpg"

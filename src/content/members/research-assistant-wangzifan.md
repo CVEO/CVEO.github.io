@@ -1,6 +1,6 @@
 ---
 name: 王子凡
-role: 科研助理
+role: 测绘遥感信息全国重点实验室
 group: ResearchAssistant
 order: 2
 photo: "assets/avatars/wangzifan.jpg"

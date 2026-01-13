@@ -1,6 +1,7 @@
 ---
 name: 王铜
-role: 博士研究生
+role: 测绘遥感信息全国重点实验室
+research: 22级博士研究生
 group: PhD
 photo: "assets/avatars/wangtong.jpg"
 order: 1
