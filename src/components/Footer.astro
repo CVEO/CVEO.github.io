@@ -4,101 +4,188 @@ const currentYear = new Date().getFullYear();
 
 <footer class="border-t border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="mb-8">
-      <p class="text-slate-600 text-sm mb-4 text-center md:text-left">武汉大学 CVEO 课题组 © {currentYear}</p>
-      
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
-        <div class="flex-1">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a 
-              href="https://github.com/cveo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors group"
-              title="访问GitHub仓库"
+    <!-- 联系方式卡片 -->
+    <div
+      class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8"
+    >
+      <div class="flex-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a
+            href="https://github.com/cveo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors group"
+            title="访问GitHub仓库"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors"
             >
-              <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="min-h-[3.5rem] flex flex-col justify-center">
-                <p class="font-medium text-slate-900">GitHub</p>
-                <p class="text-xs text-slate-600">访问仓库</p>
-              </div>
-            </a>
-            
-            <div class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white">
-              <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="min-h-[3.5rem] flex flex-col justify-center">
+              <p class="font-medium text-slate-900">GitHub</p>
+              <p class="text-xs text-slate-600">访问团队开源代码仓库</p>
+            </div>
+          </a>
+
+          <div class="relative group">
+            <div
+              class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors"
+              >
+                <svg
+                  class="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
                 </svg>
               </div>
               <div class="min-h-[3.5rem] flex flex-col justify-center">
                 <p class="font-medium text-slate-900">邮箱</p>
                 <div class="space-y-0.5">
-                  <p class="text-xs text-slate-600 leading-tight">zxdlmars#whu.edu.cn</p>
-                  <p class="text-xs text-slate-600 leading-tight">cgz#whu.edu.cn</p>
+                  <p class="text-xs text-slate-600 leading-tight">
+                    zxdlmars#whu.edu.cn
+                  </p>
+                  <p class="text-xs text-slate-600 leading-tight">
+                    cgz#whu.edu.cn
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <div class="relative group">
-              <div class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer">
-                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <div class="min-h-[3.5rem] flex flex-col justify-center">
-                  <p class="font-medium text-slate-900">CVEO课题组</p>
-                  <p class="text-xs text-slate-600">扫码关注</p>
-                </div>
-              </div>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                <div class="bg-white p-3 rounded-lg shadow-lg border border-slate-200">
-                  <p class="text-xs text-slate-600 mb-2 text-center">扫码关注CVEO课题组</p>
-                  <img 
-                    src="/assets/social/wechat-cveo.png" 
-                    alt="CVEO课题组微信公众号二维码"
-                    class="w-32 h-32 object-cover rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
+            <div
+              class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10"
+            >
+              <div
+                class="bg-white p-3 rounded-lg shadow-lg border border-slate-200 min-w-[200px]"
+              >
+                <p class="text-xs text-slate-600">
+                  请将邮箱地址中的 <code
+                    class="bg-slate-100 px-1 py-0.5 rounded text-brand-900"
+                    >#</code
+                  > 手动替换为 <code
+                    class="bg-slate-100 px-1 py-0.5 rounded text-brand-900"
+                    >@</code>
+                </p>
               </div>
             </div>
-            
-            <div class="relative group">
-              <div class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer">
-                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <div class="min-h-[3.5rem] flex flex-col justify-center">
-                  <p class="font-medium text-slate-900">珞珈经纬</p>
-                  <p class="text-xs text-slate-600">扫码关注</p>
-                </div>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors"
+              >
+                <svg
+                  class="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  ></path>
+                </svg>
               </div>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                <div class="bg-white p-3 rounded-lg shadow-lg border border-slate-200">
-                  <p class="text-xs text-slate-600 mb-2 text-center">扫码关注珞珈经纬</p>
-                  <img 
-                    src="/assets/social/wechat-luojiagingwei.png" 
-                    alt="珞珈经纬微信公众号二维码"
-                    class="w-32 h-32 object-cover rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
+              <div class="min-h-[3.5rem] flex flex-col justify-center">
+                <p class="font-medium text-slate-900">CVEO课题组</p>
+                <p class="text-xs text-slate-600">扫码关注</p>
+              </div>
+            </div>
+            <div
+              class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10"
+            >
+              <div
+                class="bg-white p-3 rounded-lg shadow-lg border border-slate-200"
+              >
+                <p class="text-xs text-slate-600 mb-2 text-center">
+                  扫码关注CVEO课题组
+                </p>
+                <img
+                  src="/assets/social/wechat-cveo.png"
+                  alt="CVEO课题组微信公众号二维码"
+                  class="w-32 h-32 object-cover rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors cursor-pointer"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-200 transition-colors"
+              >
+                <svg
+                  class="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="min-h-[3.5rem] flex flex-col justify-center">
+                <p class="font-medium text-slate-900">珞珈经纬</p>
+                <p class="text-xs text-slate-600">扫码关注</p>
+              </div>
+            </div>
+            <div
+              class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10"
+            >
+              <div
+                class="bg-white p-3 rounded-lg shadow-lg border border-slate-200"
+              >
+                <p class="text-xs text-slate-600 mb-2 text-center">
+                  扫码关注珞珈经纬
+                </p>
+                <img
+                  src="/assets/social/wechat-luojiagingwei.png"
+                  alt="珞珈经纬微信公众号二维码"
+                  class="w-32 h-32 object-cover rounded-lg"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="pt-6 border-t border-slate-200">
-      <div class="text-slate-600 text-sm text-center" id="footer-nav">
+
+    <!-- 版权信息和导航 -->
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-8"
+    >
+      <p class="text-slate-600 text-sm text-left">
+        武汉大学 CVEO 课题组 © {currentYear}
+      </p>
+
+      <div class="text-slate-600 text-sm text-right" id="footer-nav">
         <a href="/" class="hover:text-brand-900">首页</a>
         <span class="mx-2">·</span>
         <a href="#news" class="hover:text-brand-900">新闻</a>
@@ -114,31 +201,33 @@ const currentYear = new Date().getFullYear();
 </footer>
 <script>
   function setupFooterNav() {
-    const nav = document.getElementById('footer-nav');
+    const nav = document.getElementById("footer-nav");
     if (!nav) return;
 
-    const links = nav.querySelectorAll('a');
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    const links = nav.querySelectorAll("a");
+    const isHomePage =
+      window.location.pathname === "/" ||
+      window.location.pathname === "/index.html";
 
-    links.forEach(link => {
-      const href = link.getAttribute('href');
+    links.forEach((link) => {
+      const href = link.getAttribute("href");
       if (!href) return;
-      
-      // Skip links that are not anchor links (e.g., /team)
-      if (!href.startsWith('#')) return;
 
-      link.addEventListener('click', (e) => {
+      // Skip links that are not anchor links (e.g., /team)
+      if (!href.startsWith("#")) return;
+
+      link.addEventListener("click", (e) => {
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
 
         if (isHomePage) {
           // On homepage, let the default anchor jump work (BaseLayout has scroll-smooth)
           e.preventDefault();
-          targetElement?.scrollIntoView({ behavior: 'smooth' });
+          targetElement?.scrollIntoView({ behavior: "smooth" });
         } else {
           // On non-homepage, go to homepage + anchor
           e.preventDefault();
-          window.location.href = '/' + href;
+          window.location.href = "/" + href;
         }
       });
     });
@@ -147,5 +236,5 @@ const currentYear = new Date().getFullYear();
   // Run on load
   setupFooterNav();
   // Re-run on view transitions if needed (Astro)
-  document.addEventListener('astro:after-swap', setupFooterNav);
+  document.addEventListener("astro:after-swap", setupFooterNav);
 </script>

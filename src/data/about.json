@@ -18,25 +18,26 @@
     }
   ],
   "stats": [
-    { "label": "承担科研项目", "value": "40+", "unit": "项" },
-    { "label": "高水平论文", "value": "50+", "unit": "篇" },
-    { "label": "发明专利", "value": "8", "unit": "项" },
-    { "label": "软件著作权", "value": "13", "unit": "项" }
+    { "label": "承担科研项目", "value": "45+", "unit": "项" },
+    { "label": "团队成员", "value": "40+", "unit": "人" },
+    { "label": "高水平论文", "value": "60+", "unit": "篇" },
+    { "label": "发明专利", "value": "8", "unit": "项" }
   ],
   "collaborationCards": [
-    {
-      "title": "合作单位",
-      "description": "与多家科研院所、企事业单位建立长期合作关系",
-      "icon": "handshake",
-      "link": "/collaboration#partners",
-      "count": "6+"
-    },
     {
       "title": "科研合作平台",
       "description": "共建多个产学研合作研究中心，推动科技成果转化",
       "icon": "research",
       "link": "/collaboration#research-centers",
       "count": "3"
+    },
+    {
+      "title": "合作单位",
+      "description": "与多家政府机构、科研院所、企事业单位建立长期合作关系",
+      "icon": "handshake",
+      "link": "/collaboration#partners",
+      "count": "28+"
     }
+
   ]
 }

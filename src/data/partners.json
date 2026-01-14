@@ -1,38 +1,165 @@
 [
   {
-    "name": "汕头市自然资源测绘院",
-    "logo": "/assets/partners/shantou-survey.png",
-    "website": "https://example.com",
-    "description": "地方测绘与自然资源管理单位"
+    "name": "湖北省自然资源厅",
+    "logo": "/assets/partners/hubeizrzyt.png",
+    "website": "https://zrzyt.hubei.gov.cn/",
+    "description": "政府机构"
+  },
+  {
+    "name": "湖北省民政厅",
+    "logo": "/assets/partners/hbmzt_logo.png",
+    "website": "https://mzt.hubei.gov.cn/",
+    "description": "政府机构"
+  },
+  {
+    "name": "汕头市自然资源局",
+    "logo": "/assets/partners/stzrzy.png",
+    "website": "https://www.shantou.gov.cn/zrzyj/",
+    "description": "政府机构"
+  },
+  {
+    "name": "上海市科学技术委员会",
+    "logo": "/assets/partners/shkw.png",
+    "website": "https://stcsm.sh.gov.cn/",
+    "description": "政府机构"
+  },
+  {
+    "name": "南京市规划和自然资源局",
+    "logo": "/assets/partners/njzrzy.jpg",
+    "website": "https://ghj.nanjing.gov.cn/",
+    "description": "政府机构"
   },
   {
     "name": "湖北省国土测绘院",
     "logo": "/assets/partners/hubei-survey.png",
-    "website": "https://example.com",
-    "description": "省级测绘与地理信息服务单位"
+    "website": "https://dzj.hubei.gov.cn/chy/",
+    "description": "湖北省地质局所属公益二类事业单位"
   },
   {
-    "name": "中能建安徽省电力设计院",
-    "logo": "/assets/partners/anhui-power-design.png",
-    "website": "https://example.com",
-    "description": "电力工程设计与地理信息技术应用"
+    "name": "湖北省航测遥感院",
+    "logo": "/assets/partners/hbshcygy.png",
+    "website": "https://zrzyt.hubei.gov.cn/fbjd/xxgkml/jgzn/zsdw/201910/t20191024_215848.shtml",
+    "description": ""
   },
   {
-    "name": "武汉大学测绘学院",
-    "logo": "/assets/partners/whu-survey.png",
-    "website": "https://sgg.whu.edu.cn",
-    "description": "国内顶尖测绘学科单位"
+    "name": "湖北省核与辐射环境监测技术中心",
+    "website": "https://sthjt.hubei.gov.cn/hjsj/ztzl/qsydwxxgk/hfzx/dwjj/201910/t20191026_697983.shtml",
+    "description": ""
   },
   {
-    "name": "中国科学院空天信息创新研究院",
-    "logo": "/assets/partners/cas-air.png",
-    "website": "https://www.aircas.ac.cn",
-    "description": "空天信息领域国家级研究机构"
+    "name": "汕头市自然资源测绘院",
+    "website": "",
+    "description": ""
   },
   {
     "name": "自然资源部国土卫星遥感应用中心",
-    "logo": "/assets/partners/natural-resources-satellite.png",
-    "website": "https://example.com",
+    "logo": "/assets/partners/zrzybzx.png",
+    "website": "http://www.lasac.cn/",
     "description": "国土卫星遥感数据应用中心"
+  },
+  {
+    "name": "安徽省第四测绘院",
+    "website": "https://zrzyt.ah.gov.cn/ztlm/ahschj/dwgk/jsdwjj/142921431.html",
+    "description": ""
+  },
+  {
+    "name": "福建省地质测绘中心（福建省资源遥感中心）",
+    "logo": "/assets/partners/fjdcy.png",
+    "website": "http://fjdcy.cn/",
+    "description": "福建省地质测绘中心（福建省资源遥感中心）是经福建省地勘系统机构改革，在原福建省地质测绘院基础上更名而成的省级财政核补的公益二类事业单位。"
+  },
+  {
+    "name": "湖北省卫生健康发展服务中心",
+    "logo": "/assets/partners/hbwsfzzx.png",
+    "website": "https://wjw.hubei.gov.cn/hbwsjd/",
+    "description": ""
+  },
+  {
+    "name": "湖北省农科院农业经济技术研究所",
+    "logo": "/assets/partners/hbnky.png",
+    "website": "http://www.hbaas.ac.cn/nongjingsuo/",
+    "description": ""
+  },
+  {
+    "name": "长江科学院农业水利研究所",
+    "logo": "/assets/partners/zkynss.png",
+    "website": "http://www.crsri.cn/YJS/About/introduce/nys/",
+    "description": ""
+  },
+  {
+    "name": "湖北省气象信息与技术保障中心",
+    "website": "https://www.hbjmtq.com/",
+    "description": ""
+  },  
+  {
+    "name": "湖北省测绘地理信息学会",
+    "logo": "/assets/partners/hbchxh.jpg",
+    "website": "https://www.hbkx.org.cn/news/info?newsid=1de2a734-4422-4bfc-8cfb-b20bc0e371fa",
+    "description": ""
+  },  
+  {
+    "name": "湖北省测绘行业协会",
+    "logo": "/assets/partners/hbgis.png",
+    "website": "http://hbgis.org/",
+    "description": ""
+  },
+  {
+    "name": "武汉物联网产业协会",
+    "logo": "/assets/partners/whiot.jpg",
+    "description": ""
+  },
+  {
+    "name": "广东电网有限责任公司",
+    "logo": "/assets/partners/gddw.jpg",
+    "website": "https://www.gd.csg.cn/gdIndex/",
+    "description": "　广东电网有限责任公司是国有大型骨干企业中国南方电网有限责任公司（目前世界500强排名第84位）的全资子公司，注册资本668亿元。前身为广东省广电集团有限公司，2005年3月31日更名为广东电网公司，2014年6月4日更名为广东电网有限责任公司。公司拥有变电站3057座（其中500千伏变电站76座），变电容量6.49亿千伏安，输电线路总长度10.6232万千米，资产总额5652.37亿元，是全国规模最大的省级电网公司之一。 "
+  },
+  {
+    "name": "中科曙光",
+    "logo": "/assets/partners/zksg.png",
+    "website": "https://www.sugon.com/",
+    "description": ""
+  },
+  {
+    "name": "中科星图",
+    "logo": "/assets/partners/zkxt.png",
+    "website": "https://www.geovis.com.cn/",
+    "description": ""
+  },
+  {
+    "name": "航天恒星",
+    "logo": "/assets/partners/hthx.png",
+    "website": "https://spacestar.zhiye.com/",
+    "description": ""
+  },
+  {
+    "name": "中冶武勘工程技术有限公司",
+    "logo": "/assets/partners/zywk.png",
+    "website": "https://www.wsgri.com/",
+    "description": ""
+  },
+  {
+    "name": "武汉长江通信产业集团股份有限公司",
+    "logo": "/assets/partners/ct.png",
+    "website": "https://www.ycig.com/",
+    "description": ""
+  },
+  {
+    "name": "中南勘察设计院集团有限公司",
+    "logo": "/assets/partners/znsjy.png",
+    "website": "http://www.cssdi.com.cn/",
+    "description": ""
+  },
+  {
+    "name": "中国能建安徽院",
+    "logo": "/assets/partners/anhui-power-design.png",
+    "website": "http://www.ahedi.ceec.net.cn/col/col13644/index.html",
+    "description": "中国能源建设集团安徽省电力设计院有限公司"
+  },
+  {
+    "name": "梦天门科技",
+    "logo": "/assets/partners/mtm.png",
+    "website": "https://www.mtm2000.cn/",
+    "description": ""
   }
 ]

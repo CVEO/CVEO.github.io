@@ -1,11 +1,11 @@
 ---
-name: 金雨涵
+name: 马爽
 role: 武汉大学国家网络安全学院
-research: 23级本科生
+research: 24级本科生
 group: Undergrad
-# photo: "assets/avatars/jinyuhan.jpg"
+# photo: "assets/avatars/mashuang.jpg"
 bio: ""
-order: 2
+order: 3
 ---
 
 简介占位
