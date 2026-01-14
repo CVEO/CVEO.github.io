@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 ---
 
-<BaseTable 
+ <BaseTable 
   patents={patents}
   enhanced={true}
   sortable={sortable}
@@ -29,7 +29,8 @@ const {
   showHeader={showHeader}
   showFooter={showFooter}
   className={className}
-/>
+  id="invention-patent-table"
+ />
 
 <style>
   /* 发明专利特定样式 */

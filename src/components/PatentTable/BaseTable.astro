@@ -1,7 +1,7 @@
 ---
 import type { Patent } from '../../lib/types';
 
-interface Props {
+ interface Props {
   patents: Patent[];
   enhanced?: boolean;
   sortable?: boolean;
@@ -9,17 +9,19 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   className?: string;
-}
+  id?: string;
+ }
 
-const { 
+ const { 
   patents,
   enhanced = false,
   sortable = false,
   filterable = false,
   showHeader = true,
   showFooter = true,
-  className = ''
-} = Astro.props;
+  className = '',
+  id = 'patent-table'
+ } = Astro.props;
 
 const getTypeIcon = (type: string) => {
   if (type === '发明专利') {
@@ -69,7 +71,7 @@ const formatDate = (dateStr: string) => {
 };
 ---
 
-<div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id="patent-table">
+ <div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id={id}>
   {showHeader && (
     <div class="px-4 md:px-8 py-4 bg-slate-50 border-b border-slate-200">        
       {enhanced && (
@@ -177,7 +179,7 @@ const formatDate = (dateStr: string) => {
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-200">
-        {patents.map((patent, index) => {
+         {patents.map((patent, _index) => {
           const typeIcon = getTypeIcon(patent.type);
           const statusColor = getStatusColor(patent.status);
           
@@ -280,30 +282,3 @@ const formatDate = (dateStr: string) => {
     </div>
   )}
 
-
-{enhanced && (
-  <script>
-    // 增强功能脚本
-    document.addEventListener('DOMContentLoaded', () => {
-      const table = document.getElementById('patent-table');
-      if (!table) return;
-      
-      // 排序功能
-      const sortableHeaders = table.querySelectorAll('th[class*="cursor-pointer"]');
-      sortableHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-          console.log('排序功能待实现');
-        });
-      });
-      
-      // 筛选功能
-      const filterSelect = table.querySelector('select');
-      if (filterSelect) {
-        filterSelect.addEventListener('change', (e: Event) => {
-          const target = e.target as HTMLSelectElement;
-          console.log('筛选功能待实现:', target.value);
-        });
-      }
-    });
-  </script>
-)}

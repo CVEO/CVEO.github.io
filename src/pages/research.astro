@@ -80,12 +80,12 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           <div class="sticky top-20 lg:top-24 bg-white lg:bg-transparent p-4 lg:p-0 rounded-lg lg:rounded-none shadow-sm lg:shadow-none mb-6 lg:mb-0">
             <!-- 移动端折叠面板 -->
             <div class="lg:hidden mb-4">
-              <button class="flex items-center justify-between w-full text-left" id="our-filter-toggle">
-                <h3 class="text-lg font-medium text-slate-900">筛选选项</h3>
-                <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
+               <button type="button" class="flex items-center justify-between w-full text-left" id="our-filter-toggle">
+                 <span class="text-lg font-medium text-slate-900">筛选选项</span>
+                 <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                 </svg>
+               </button>
             </div>
             
             <!-- 筛选内容 -->
@@ -101,16 +101,16 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
               <div class="mt-6 lg:mt-8">
                 <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">快速筛选</h3>
                 <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-2">
-                  <button class="filter-btn" data-filter="all" data-type="our">
+                   <button type="button" class="filter-btn" data-filter="all" data-type="our">
                     全部论文
                   </button>
-                  <button class="filter-btn" data-filter="recent" data-type="our">
+                   <button type="button" class="filter-btn" data-filter="recent" data-type="our">
                     最近3年
                   </button>
-                  <button class="filter-btn" data-filter="partition" data-type="our">
+                   <button type="button" class="filter-btn" data-filter="partition" data-type="our">
                     中科院分区
                   </button>
-                  <button class="filter-btn lg:hidden" id="our-apply-filter">
+                   <button type="button" class="filter-btn lg:hidden" id="our-apply-filter">
                     应用筛选
                   </button>
                 </div>
@@ -141,7 +141,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <p class="text-slate-500">没有找到符合条件的论文</p>
-            <button class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="our">
+             <button type="button" class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="our">
               清除筛选条件
             </button>
           </div>
@@ -162,12 +162,12 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           <div class="sticky top-20 lg:top-24 bg-white lg:bg-transparent p-4 lg:p-0 rounded-lg lg:rounded-none shadow-sm lg:shadow-none mb-6 lg:mb-0">
             <!-- 移动端折叠面板 -->
             <div class="lg:hidden mb-4">
-              <button class="flex items-center justify-between w-full text-left" id="collaborative-filter-toggle">
-                <h3 class="text-lg font-medium text-slate-900">筛选选项</h3>
-                <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
+               <button type="button" class="flex items-center justify-between w-full text-left" id="collaborative-filter-toggle">
+                 <span class="text-lg font-medium text-slate-900">筛选选项</span>
+                 <svg class="w-5 h-5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                 </svg>
+               </button>
             </div>
             
             <!-- 筛选内容 -->
@@ -183,16 +183,16 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
               <div class="mt-6 lg:mt-8">
                 <h3 class="text-lg font-medium text-slate-900 mb-4 hidden lg:block">快速筛选</h3>
                 <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-2">
-                  <button class="filter-btn" data-filter="all" data-type="collaborative">
+                   <button type="button" class="filter-btn" data-filter="all" data-type="collaborative">
                     全部论文
                   </button>
-                  <button class="filter-btn" data-filter="recent" data-type="collaborative">
+                   <button type="button" class="filter-btn" data-filter="recent" data-type="collaborative">
                     最近3年
                   </button>
-                  <button class="filter-btn" data-filter="partition" data-type="collaborative">
+                   <button type="button" class="filter-btn" data-filter="partition" data-type="collaborative">
                     中科院分区
                   </button>
-                  <button class="filter-btn lg:hidden" id="collaborative-apply-filter">
+                   <button type="button" class="filter-btn lg:hidden" id="collaborative-apply-filter">
                     应用筛选
                   </button>
                 </div>
@@ -223,7 +223,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <p class="text-slate-500">没有找到符合条件的论文</p>
-            <button class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="collaborative">
+             <button type="button" class="mt-4 text-sm text-brand-900 hover:text-brand-700" data-clear-filter="collaborative">
               清除筛选条件
             </button>
           </div>

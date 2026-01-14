@@ -44,30 +44,38 @@ npm run preview
 src/
 ├── components/           # 可复用组件
 │   ├── AdaptiveImage.astro      # 自适应图片组件
-│   ├── Footer.astro             # 页脚组件
+│   ├── AlumniTable.astro        # 校友表格组件
+│   ├── CollaborationEntryCards.astro # 合作入口卡片
+│   ├── Footer.astro             # 页脚组件（含联系方式）
 │   ├── InventionTable.astro     # 发明专利表格
 │   ├── MemberCard.astro         # 成员卡片
 │   ├── NavBar.astro             # 导航栏
+│   ├── NewsCard.astro           # 新闻卡片
 │   ├── PaperCard.astro          # 论文卡片
+│   ├── PartnerGrid.astro        # 合作单位网格组件
 │   ├── PatentTable/             # 专利表格组件
 │   ├── ProjectCard.astro        # 项目卡片
+│   ├── ResearchCenterList.astro # 科研合作平台列表
 │   ├── SoftwareTable.astro      # 软件著作权表格
 │   └── TimeAxis.astro           # 时间轴组件
 ├── content/             # 内容集合（Markdown）
-│   └── config.ts        # 内容集合配置
+│   ├── config.ts        # 内容集合配置
+│   ├── members/         # 团队成员
+│   └── papers/          # 期刊论文
 ├── data/               # 结构化数据
+│   ├── about.json       # 团队介绍数据
+│   ├── alumni.json      # 校友数据
 │   ├── awards.json      # 奖项数据
 │   ├── news.md          # 新闻动态
+│   ├── partners.json    # 合作单位数据
 │   ├── patents.json     # 专利数据
-│   └── projects.json    # 项目数据
+│   ├── research-centers.json # 科研合作平台数据
+│   ├── research-projects.json # 科研项目数据
+│   └── undergrad-alumni.json # 本科生校友数据
 ├── layouts/            # 页面布局
 │   └── BaseLayout.astro # 基础布局
-├── lib/                # 工具库
-│   ├── data/           # 数据加载工具
-│   ├── types/          # TypeScript 类型定义
-│   └── utils/          # 工具函数
 ├── pages/              # 页面路由
-│   ├── contact.astro   # 联系我们
+│   ├── collaboration.astro # 合作与平台
 │   ├── index.astro     # 首页
 │   ├── news.astro      # 新闻页面
 │   ├── research.astro  # 研究方向
@@ -77,6 +85,11 @@ src/
 ```
 
 - `public/`: 静态资源（图片、图标等）
+  - `assets/logos/` - 各类logo
+  - `assets/social/` - 社交媒体二维码
+  - `assets/partners/` - 合作单位logo
+  - `assets/research-centers/` - 科研合作平台牌匾图片
+  - `assets/avatars/` - 成员头像
 - `docs/`: 项目开发与维护文档
 - `scripts/`: 构建脚本和工具
 
@@ -87,18 +100,28 @@ src/
 ### 结构化数据（Markdown/JSON）
 - **新闻动态**: 编辑 `src/data/news.md`
 - **专利数据**: 编辑 `src/data/patents.json`
-- **科研项目**: 编辑 `src/data/projects.json`
+- **科研项目**: 编辑 `src/data/research-projects.json`
 - **奖项荣誉**: 编辑 `src/data/awards.json`
+- **合作单位**: 编辑 `src/data/partners.json`
+- **科研合作平台**: 编辑 `src/data/research-centers.json`
+- **团队介绍**: 编辑 `src/data/about.json`
+- **校友数据**: 编辑 `src/data/alumni.json` 和 `src/data/undergrad-alumni.json`
 
 ### 内容集合（Markdown）
 - **团队成员**: 在 `src/content/members/` 目录下新增或修改 `.md` 文件
 - **期刊论文**: 在 `src/content/papers/` 目录下新增或修改 `.md` 文件
 
 ### 数据加载工具
-所有数据通过 `src/lib/data/` 目录下的工具函数加载，确保类型安全：
+所有数据通过 `src/lib/data/` 目录下的工具函数或直接导入JSON文件加载：
 - `loadPatents()` - 加载专利数据
 - `loadProjects()` - 加载项目数据
 - `loadNews()` - 加载新闻数据
+- 直接导入JSON：合作单位、科研合作平台、团队介绍等数据直接导入JSON文件
+
+### 联系方式管理
+- **邮箱**: 防爬虫格式 `xxx#domain.edu.cn`（#替换为@），位于Footer组件
+- **微信公众号**: 二维码位于Footer组件，支持悬停显示
+- **GitHub**: 外部链接卡片
 
 详细内容管理规范请参考 [内容管理规范.md](docs/内容管理规范.md)。
 
@@ -132,11 +155,18 @@ npx tsc --noEmit
 - `MemberCard` - 成员卡片，支持照片和简介
 - `ProjectCard` - 项目卡片，显示项目状态和级别
 - `TimeAxis` - 时间轴组件，用于展示发展历程
+- `NewsCard` - 新闻卡片，支持图片和链接
+- `AlumniTable` - 校友表格组件
+- `CollaborationEntryCards` - 合作入口卡片组件
+
+### 合作展示组件
+- `ResearchCenterList` - 科研合作平台列表，支持4:3牌匾图片展示
+- `PartnerGrid` - 合作单位网格组件，高密度布局支持70+单位展示
 
 ### 基础组件
 - `AdaptiveImage` - 自适应图片组件，支持懒加载
 - `NavBar` - 响应式导航栏
-- `Footer` - 页脚组件
+- `Footer` - 页脚组件（含联系方式、GitHub链接、微信公众号二维码）
 
 详细组件使用指南请参考 [组件使用指南.md](docs/组件使用指南.md)。
 
