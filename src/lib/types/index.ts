@@ -97,6 +97,8 @@ export interface ResearchCenter {
   established: string;
   description: string;
   focusAreas?: string[];
+  image?: string;          // 4:3牌匾图片路径
+  shortDescription?: string; // 简短描述（用于卡片展示）
 }
 
 export interface AboutData {

@@ -5,6 +5,8 @@
     "type": "科研合作平台",
     "established": "2023",
     "description": "聚焦测绘遥感大数据处理与应用技术研发，推动地方自然资源管理数字化转型",
+    "shortDescription": "测绘遥感大数据处理与应用技术研发",
+    "image": "/assets/research-centers/survey-remote-sensing-center.jpg",
     "focusAreas": ["遥感大数据处理", "自然资源监测", "智能解译算法"]
   },
   {
@@ -13,6 +15,8 @@
     "type": "科研合作平台",
     "established": "2021",
     "description": "开展测绘地理信息大数据关键技术研究，服务省级国土空间规划与智慧城市建设",
+    "shortDescription": "测绘地理信息大数据关键技术研究",
+    "image": "/assets/research-centers/geoinfo-bigdata-center.jpg",
     "focusAreas": ["地理信息大数据", "三维建模", "时空数据分析"]
   },
   {
@@ -21,6 +25,8 @@
     "type": "科研合作平台",
     "established": "2017",
     "description": "结合电力工程需求，研发地理信息技术在电网规划、设计、运维中的应用解决方案",
+    "shortDescription": "地理信息技术在电网工程中的应用",
+    "image": "/assets/research-centers/power-gis-center.jpg",
     "focusAreas": ["电力GIS", "线路智能选线", "电网数字化"]
   }
 ]
