@@ -4,7 +4,7 @@
     "title": "一种基于多模态语义分析的无人船智能控制系统及方法",
     "patentNumber": "202411903806.1",
     "grantDate": "2025-04-01",
-    "status": "已授权",
+    "status": "审查中",
     "inventors": ["武汉大学"],
     "abstract": "一种基于多模态语义分析的无人船智能控制系统及方法"
   },
@@ -13,7 +13,7 @@
     "title": "一种基于深度学习的三维MESH建筑物单体化与纹理优化方法",
     "patentNumber": "202410527165.8",
     "grantDate": "2024-07-26",
-    "status": "已授权",
+    "status": "审查中",
     "inventors": ["武汉大学"],
     "abstract": "一种基于深度学习的三维MESH建筑物单体化与纹理优化方法"
   },
@@ -22,7 +22,7 @@
     "title": "一种基于深度先验的无人机影像场景语义分割方法",
     "patentNumber": "202410529519.2",
     "grantDate": "2024-07-09",
-    "status": "已授权",
+    "status": "审查中",
     "inventors": ["武汉大学"],
     "abstract": "一种基于深度先验的无人机影像场景语义分割方法"
   },
@@ -31,7 +31,7 @@
     "title": "双时相遥感影像无监督分类与变化检测方法及系统",
     "patentNumber": "202211093654.4",
     "grantDate": "2023-06-23",
-    "status": "已授权",
+    "status": "审查中",
     "inventors": ["武汉大学"],
     "abstract": "双时相遥感影像无监督分类与变化检测方法及系统"
   },
@@ -77,7 +77,7 @@
     "patentNumber": "2010SR069052",
     "grantDate": "2010-01-01",
     "status": "已登记",
-    "inventors": ["武汉大学"],
+    "inventors": ["安徽省电力设计院", "武汉大学"],
     "abstract": "架空送电线路优化设计系统PLOS V1.0"
   },
   {
@@ -136,12 +136,12 @@
   },
   {
     "type": "软件著作权",
-    "title": "地理国情监测图斑智能解译与更新原型系统[简称：识图]",
+    "title": "地理国情监测图斑智能解译与更新原型系统",
     "patentNumber": "2022SR1481210",
     "grantDate": "2022-01-01",
     "status": "已登记",
     "inventors": ["武汉大学"],
-    "abstract": "地理国情监测图斑智能解译与更新原型系统[简称：识图]"
+    "abstract": "地理国情监测图斑智能解译与更新原型系统"
   },
   {
     "type": "软件著作权",
@@ -149,7 +149,7 @@
     "patentNumber": "2023SR0573694",
     "grantDate": "2023-01-01",
     "status": "已登记",
-    "inventors": ["武汉大学"],
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
     "abstract": "露天矿山监测三维可视化分析决策系统V1.0"
   },
   {
@@ -158,7 +158,7 @@
     "patentNumber": "2023SR0573695",
     "grantDate": "2023-01-01",
     "status": "已登记",
-    "inventors": ["武汉大学"],
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
     "abstract": "三维场景仿真重构软件V1.0"
   },
   {
@@ -167,7 +167,7 @@
     "patentNumber": "2023SR0573697",
     "grantDate": "2023-01-01",
     "status": "已登记",
-    "inventors": ["武汉大学"],
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
     "abstract": "实景三维矢量重建与三维数据可视化平台系统V1.0"
   },
   {
@@ -176,7 +176,7 @@
     "patentNumber": "2023SR0573696",
     "grantDate": "2023-01-01",
     "status": "已登记",
-    "inventors": ["武汉大学"],
+    "inventors": ["湖北省国土测绘院", "武汉大学"],
     "abstract": "矢量三维数据生产软件开发 V1.0"
   },
   {
@@ -187,5 +187,14 @@
     "status": "已登记",
     "inventors": ["武汉大学"],
     "abstract": "建筑物三维模型半自动单体化与修复系统"
+  },
+    {
+    "type": "软件著作权",
+    "title": "城市级建筑物三维模型纹理修复系统 [简称：TextureOptimizer] V1.0",
+    "patentNumber": "2025SR1381549",
+    "grantDate": "2025-07-29",
+    "status": "已登记",
+    "inventors": ["武汉大学"],
+    "abstract": "城市级建筑物三维模型纹理修复系统 [简称：TextureOptimizer] V1.0"
   }
 ]

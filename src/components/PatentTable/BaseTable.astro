@@ -231,9 +231,6 @@ const formatDate = (dateStr: string) => {
               </td>
               <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
                 <div class="text-sm font-medium text-slate-900">{formatDate(patent.grantDate)}</div>
-                <div class="text-xs text-slate-500 mt-1">
-                  {patent.type.includes('专利') ? '授权日期' : '登记日期'}
-                </div>
               </td>
               <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
                 {patent.status && (
