@@ -1,5 +1,12 @@
 ---
 const currentYear = new Date().getFullYear();
+
+// 友情链接数据
+const friendLinks = [
+  { name: "武汉大学", url: "https://www.whu.edu.cn/" },
+  { name: "测绘遥感信息工程全国重点实验室", url: "https://liesmars.whu.edu.cn/" }
+  // 未来可添加更多链接
+];
 ---
 
 <footer class="border-t border-slate-200">
@@ -159,7 +166,7 @@ const currentYear = new Date().getFullYear();
               class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10"
             >
               <div
-                class="bg-white p-3 rounded-lg shadow-lg border border-slate-200"
+                class="bg-white rounded-lg shadow-lg border border-slate-200"
               >
                 <p class="text-xs text-slate-600 mb-2 text-center">
                   扫码关注珞珈经纬
@@ -177,9 +184,26 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- 版权信息和导航 -->
+    <!-- 友情链接 -->
+    <div class="my-8">
+      <h3 class="text-sm font-medium text-slate-900 mb-3">友情链接</h3>
+      <div class="flex flex-wrap gap-x-4 gap-y-2">
+        {friendLinks.map(link => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-slate-600 hover:text-brand-900 hover:underline transition-colors duration-200"
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </div>
+
+        <!-- 版权信息和导航 -->
     <div
-      class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-8"
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 my-6"
     >
       <p class="text-slate-600 text-sm text-left">
         武汉大学 CVEO 课题组 © {currentYear}

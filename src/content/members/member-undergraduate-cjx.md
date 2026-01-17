@@ -3,7 +3,7 @@ name: 程觉晓
 role: 武汉大学国家网络安全学院
 research: 23级本科生
 group: Undergrad
-# photo: "assets/avatars/chengjuexiao.jpg"
+photo: "assets/avatars/chengjuexiao.jpg"
 bio: ""
 order: 2
 ---
