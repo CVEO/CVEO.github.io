@@ -6,4 +6,5 @@ link: "https://www.sciopen.com/article/10.11947/j.JGGS.2025.0301"
 journal: "测绘学报（英文版）"
 corresponding: [1]
 abstract: ""
+wechatArticle: https://mp.weixin.qq.com/s/6f6jur56Fyjki0P8rDCZ5g
 ---
