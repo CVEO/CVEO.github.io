@@ -2,16 +2,87 @@
 import '../styles/tailwind.css'
 import NavBar from '../components/NavBar.astro'
 import Footer from '../components/Footer.astro'
-const { title } = Astro.props
+
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  type?: string
+}
+
+const { 
+  title,
+  description = '武汉大学CVEO课题组 - 计算机视觉与地球观测交叉研究团队，聚焦遥感图像分析、深度学习、计算机视觉等前沿研究。',
+  image = '/assets/logos/logo.png',
+  type = 'website'
+} = Astro.props
+
+const siteUrl = 'https://www.whu-cveo.com'
+const fullTitle = title ? `${title} | 武汉大学CVEO课题组` : '武汉大学CVEO课题组'
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`
+
+// JSON-LD 结构化数据
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ResearchOrganization',
+  name: '武汉大学CVEO课题组',
+  alternateName: 'CVEO Research Group',
+  url: siteUrl,
+  logo: `${siteUrl}/assets/logos/logo.png`,
+  description: description,
+  parentOrganization: {
+    '@type': 'Organization',
+    name: '武汉大学',
+    url: 'https://www.whu.edu.cn'
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: '中国'
+  }
+}
 ---
+
 <!doctype html>
 <html lang="zh" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title ? `${title} | 武汉大学CVEO课题组` : '武汉大学CVEO课题组'}</title>
-    <link rel="icon" href="/favicon.svg" />
-    <meta name="theme-color" content="#1d4ed8" />
+    
+    <!-- 基础 SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="武汉大学,CVEO,计算机视觉,地球观测,遥感,深度学习,人工智能,GIS,实验室" />
+    <meta name="author" content="武汉大学CVEO课题组" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- 主题色 -->
+    <meta name="theme-color" content="#2d1f5c" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/logos/logo.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={siteUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="武汉大学CVEO课题组" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={siteUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
+    
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="bg-white text-slate-800 antialiased">
     <NavBar />

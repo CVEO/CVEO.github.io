@@ -1,5 +1,5 @@
 export function parsePapers(mdContent: string) {
-  const papers: any[] = [];
+  const papers: { title: string; authors: string; journal: string; date: string; link: string; abstract: string }[] = [];
   const sections = mdContent.split(/^##\s+/m).filter(Boolean);
 
   sections.forEach(section => {

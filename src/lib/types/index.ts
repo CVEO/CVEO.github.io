@@ -110,3 +110,15 @@ export interface AboutData {
   stats: TeamStats[];
   collaborationCards: CollaborationCard[];
 }
+
+
+
+// Astro Collection Entry 类型
+export interface CollectionEntry<T> {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: T;
+  render(): Promise<{ Content: any; headings: any[] }>;
+}

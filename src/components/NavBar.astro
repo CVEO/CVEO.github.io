@@ -3,34 +3,117 @@
 <header class="bg-white/75 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
       <div class="flex items-center gap-4">
         <a href="/" class="flex items-center gap-3">
           <img 
             src="/assets/logos/logo.png" 
             alt="CVEO课题组logo" 
+            width="128"
+            height="40"
             class="w-32 h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            loading="eager"
+            decoding="async"
           />
           <span class="font-semibold text-brand-900 text-lg hidden md:inline">CVEO课题组</span>
         </a>
       </div>
-      <nav class="flex items-center gap-6 text-sm" id="main-nav">
-        <a href="/" class="text-slate-700 hover:text-brand-900">首页</a>
-        <a href="#news" class="text-slate-700 hover:text-brand-900">新闻动态</a>
-        <a href="#research" class="text-slate-700 hover:text-brand-900">科研成果</a>
-        <a href="/team" class="text-slate-700 hover:text-brand-900">团队成员</a>
-        <a href="/research-projects" class="text-slate-700 hover:text-brand-900">科研项目</a>
-        <a href="/collaboration" class="text-slate-700 hover:text-brand-900">合作平台</a>
-        <!-- <a href="/en" class="text-slate-700 hover:text-brand-700">EN</a> -->
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-6 text-sm" id="main-nav">
+        <a href="/" class="text-slate-700 hover:text-brand-900 transition-colors">首页</a>
+        <a href="#news" class="text-slate-700 hover:text-brand-900 transition-colors">新闻动态</a>
+        <a href="#research" class="text-slate-700 hover:text-brand-900 transition-colors">科研成果</a>
+        <a href="/team" class="text-slate-700 hover:text-brand-900 transition-colors">团队成员</a>
+        <a href="/research-projects" class="text-slate-700 hover:text-brand-900 transition-colors">科研项目</a>
+        <a href="/collaboration" class="text-slate-700 hover:text-brand-900 transition-colors">合作平台</a>
       </nav>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        type="button"
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-colors"
+        aria-label="打开菜单"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
     </div>
+
+    <!-- Mobile Navigation -->
+    <nav 
+      id="mobile-nav"
+      class="hidden md:hidden py-4 border-t border-slate-200"
+      aria-label="移动端导航"
+    >
+      <div class="flex flex-col space-y-2">
+        <a href="/" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors">首页</a>
+        <a href="#news" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors mobile-anchor">新闻动态</a>
+        <a href="#research" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors mobile-anchor">科研成果</a>
+        <a href="/team" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors">团队成员</a>
+        <a href="/research-projects" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors">科研项目</a>
+        <a href="/collaboration" class="px-3 py-2 rounded-lg text-slate-700 hover:text-brand-900 hover:bg-slate-50 transition-colors">合作平台</a>
+      </div>
+    </nav>
   </div>
 </header>
 
 <script>
   function setupNav() {
     const nav = document.getElementById('main-nav');
-    if (!nav) return;
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
+    
+    if (!nav || !mobileNav || !mobileMenuBtn) return;
 
+    // Mobile menu toggle
+    let isMenuOpen = false;
+    
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+      mobileNav.classList.toggle('hidden', !isMenuOpen);
+      menuIconOpen?.classList.toggle('hidden', isMenuOpen);
+      menuIconClose?.classList.toggle('hidden', !isMenuOpen);
+      mobileMenuBtn.setAttribute('aria-expanded', isMenuOpen.toString());
+    }
+    
+    function closeMenu() {
+      if (isMenuOpen) {
+        isMenuOpen = false;
+        mobileNav.classList.add('hidden');
+        menuIconOpen?.classList.remove('hidden');
+        menuIconClose?.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+    
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on mobile nav links
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!mobileNav.contains(target) && !mobileMenuBtn.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Desktop nav anchor links
     const links = nav.querySelectorAll('a');
     const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
@@ -44,23 +127,39 @@
                              (targetId === 'teams' ? document.getElementById('team') : null);
 
         if (isHomePage) {
-          // On homepage, let the default anchor jump work (BaseLayout has scroll-smooth)
           if (targetId === 'teams') {
             e.preventDefault();
             document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
           }
         } else {
-          // On non-homepage
           if (targetElement) {
-            // Target exists on current page
             e.preventDefault();
             targetElement.scrollIntoView({ behavior: 'smooth' });
             history.pushState(null, '', href);
           } else {
-            // Target does not exist, go to homepage + anchor
             e.preventDefault();
             window.location.href = '/' + href;
           }
+        }
+      });
+    });
+    
+    // Mobile anchor links
+    const mobileAnchors = document.querySelectorAll('.mobile-anchor');
+    mobileAnchors.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      
+      link.addEventListener('click', (e) => {
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (!isHomePage && targetElement) {
+          e.preventDefault();
+          window.location.href = '/' + href;
+        } else if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });

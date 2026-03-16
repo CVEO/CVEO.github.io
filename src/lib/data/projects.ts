@@ -1,35 +1,37 @@
 import type { Project } from '../types';
 
 // 验证项目数据
-export function validateProject(project: any): Project {
-  if (!project.title || typeof project.title !== 'string') {
+export function validateProject(project: unknown): Project {
+  const p = project as Record<string, unknown>;
+  
+  if (!p.title || typeof p.title !== 'string') {
     throw new Error('项目标题必须为字符串');
   }
   
-  if (!project.period || typeof project.period !== 'string') {
+  if (!p.period || typeof p.period !== 'string') {
     throw new Error('项目周期必须为字符串');
   }
   
-  if (!project.status || !['在研', '已结题'].includes(project.status)) {
+  if (!p.status || !['在研', '已结题'].includes(p.status as string)) {
     throw new Error('项目状态必须是"在研"或"已结题"');
   }
   
-  if (typeof project.source !== 'string') {
+  if (typeof p.source !== 'string') {
     throw new Error('项目来源必须为字符串');
   }
   
-  if (!project.level || !['国家级', '省部级', '社会服务'].includes(project.level)) {
+  if (!p.level || !['国家级', '省部级', '社会服务'].includes(p.level as string)) {
     throw new Error('项目级别必须是"国家级"、"省部级"或"社会服务"');
   }
   
-  return project as Project;
+  return p as unknown as Project;
 }
 
 // 加载项目数据
 export async function loadProjects(): Promise<Project[]> {
   try {
     const projectsData = await import('../../data/research-projects.json');
-    const projects = projectsData.default;
+    const projects = projectsData.default as unknown[];
     
     if (!Array.isArray(projects)) {
       throw new Error('项目数据必须是数组');

@@ -59,7 +59,7 @@ function formatYear(year: number): string {
               
               {/* 年份内的新闻列表 */}
               <div class="space-y-6">
-                {yearNews.map((news: any) => (
+                {yearNews.map((news: NewsItem) => (
                   <NewsCard 
                     news={news}
                     layout="horizontal"

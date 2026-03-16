@@ -1,11 +1,15 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   src: string;
   alt: string;
-  aspectRatio?: string; // 例如 "3/4" 表示 3:4 竖排头像，"1/1" 表示正方形
+  aspectRatio?: string;
   className?: string;
   lazy?: boolean;
   fallbackSrc?: string;
+  width?: number;
+  height?: number;
 }
 
 const { 
@@ -14,7 +18,9 @@ const {
   aspectRatio = "1/1", 
   className = "", 
   lazy = true,
-  fallbackSrc = "/assets/avatars/placeholder.svg"
+  fallbackSrc = "/assets/avatars/placeholder.svg",
+  width = 400,
+  height = 400
 } = Astro.props;
 
 const aspectRatioClass = {
@@ -33,7 +39,10 @@ const handleError = `
 <img 
   src={src} 
   alt={alt}
+  width={width}
+  height={height}
   class={`object-cover rounded ${aspectRatioClass} ${className}`}
   loading={lazy ? "lazy" : "eager"}
+  decoding={lazy ? "async" : "auto"}
   onerror={handleError}
 />

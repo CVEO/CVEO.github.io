@@ -11,42 +11,44 @@ export function isValidPatentStatus(status: string): status is PatentStatus {
 }
 
 // 验证单个专利
-export function validatePatent(patent: any): Patent {
-  if (!patent.type || !isValidPatentType(patent.type)) {
-    throw new Error(`无效的专利类型: ${patent.type}`);
+export function validatePatent(patent: unknown): Patent {
+  const p = patent as Record<string, unknown>;
+  
+  if (!p.type || !isValidPatentType(p.type as string)) {
+    throw new Error(`无效的专利类型: ${p.type}`);
   }
   
-  if (!patent.title || typeof patent.title !== 'string') {
+  if (!p.title || typeof p.title !== 'string') {
     throw new Error('专利标题必须为字符串');
   }
   
-  if (!patent.patentNumber || typeof patent.patentNumber !== 'string') {
+  if (!p.patentNumber || typeof p.patentNumber !== 'string') {
     throw new Error('专利号必须为字符串');
   }
   
-  if (!patent.grantDate || typeof patent.grantDate !== 'string') {
+  if (!p.grantDate || typeof p.grantDate !== 'string') {
     throw new Error('授权日期必须为字符串');
   }
   
   // 验证日期格式 (YYYY-MM-DD)
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(patent.grantDate)) {
-    throw new Error(`无效的日期格式: ${patent.grantDate}，应为 YYYY-MM-DD`);
+  if (!dateRegex.test(p.grantDate)) {
+    throw new Error(`无效的日期格式: ${p.grantDate}，应为 YYYY-MM-DD`);
   }
   
-  if (patent.status && !isValidPatentStatus(patent.status)) {
-    throw new Error(`无效的专利状态: ${patent.status}`);
+  if (p.status && !isValidPatentStatus(p.status as string)) {
+    throw new Error(`无效的专利状态: ${p.status}`);
   }
   
-  if (patent.inventors && !Array.isArray(patent.inventors)) {
+  if (p.inventors && !Array.isArray(p.inventors)) {
     throw new Error('发明人必须为数组');
   }
   
-  if (patent.abstract && typeof patent.abstract !== 'string') {
+  if (p.abstract && typeof p.abstract !== 'string') {
     throw new Error('摘要必须为字符串');
   }
   
-  return patent as Patent;
+  return p as unknown as Patent;
 }
 
 // 加载和验证专利数据
@@ -54,7 +56,7 @@ export async function loadPatents(): Promise<Patent[]> {
   try {
     // 动态导入JSON数据
     const patentsData = await import('../../data/patents.json');
-    const patents = patentsData.default;
+    const patents = patentsData.default as unknown[];
     
     if (!Array.isArray(patents)) {
       throw new Error('专利数据必须是数组');
