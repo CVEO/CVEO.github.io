@@ -1,0 +1,11 @@
+---
+title: "Sat2flow: A structure-aware diffusion framework for human flow generation from satellite imagery"
+journal: "Proceedings of the AAAI Conference on Artificial Intelligence"
+date: "2026-03-14"
+authors: ["Wang, Xiangyu","Zhao, Tianhong","Tu, Wei","Zhang, Bowen","Chen, Guanzhou","Cao, Jinzhou"]
+link: "https://ojs.aaai.org/index.php/AAAI/article/view/38621"
+abstract: ""
+corresponding: [5]
+ccfPartition: "CCF-A"
+---
+Origin-Destination (OD) flow matrices are essential for urban mobility analysis, underpinning applications in traffic forecasting, infrastructure planning, and policy design. However, existing methods suffer from two critical limitations: (1) reliance on auxiliary features (e.g., Points of Interest, socioeconomic statistics) that are costly to collect and have limited spatial coverage; and (2) sensitivity to spatial topology, where minor index reordering of urban regions (e.g., census tract relabeling) disrupts structural coherence in generated flows. To address these challenges, we propose Sat2Flow, a latent structure-aware diffusion-based framework that generates structurally coherent OD flows using solely satellite imagery as input. Our approach introduces a multi-kernel encoder to capture diverse regional interactions and employs a permutation-aware diffusion process that aligns latent representations across different regional orderings. Through a joint contrastive training objective that bridges satellite-derived features with OD patterns, combined with equivariant diffusion training that enforces structural consistency, Sat2Flow ensures topological robustness under arbitrary regional reindexing. Experimental results on real-world urban datasets demonstrate that Sat2Flow outperforms both physics-based and data-driven baselines in numerical accuracy while preserving empirical distributions and spatial structures under index permutations. Sat2Flow offers a globally scalable solution for OD flow generation in data-scarce urban environments, eliminating region-specific auxiliary data dependencies while maintaining structural invariance for robust mobility …

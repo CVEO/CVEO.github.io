@@ -110,6 +110,9 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
                    <button type="button" class="filter-btn" data-filter="partition" data-type="our">
                     中科院分区
                   </button>
+                   <button type="button" class="filter-btn" data-filter="ccf" data-type="our">
+                    CCF分区
+                  </button>
                    <button type="button" class="filter-btn lg:hidden" id="our-apply-filter">
                     应用筛选
                   </button>
@@ -130,7 +133,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           
           <div id="our-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
             {ourPapers.map((p: any) => (
-              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''}>
+              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''} data-ccf-partition={p.data.ccfPartition || ''}>
                 <PaperCard paper={p} showAbstract={false} showLink={true} />
               </div>
             ))}
@@ -192,6 +195,9 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
                    <button type="button" class="filter-btn" data-filter="partition" data-type="collaborative">
                     中科院分区
                   </button>
+                   <button type="button" class="filter-btn" data-filter="ccf" data-type="collaborative">
+                    CCF分区
+                  </button>
                    <button type="button" class="filter-btn lg:hidden" id="collaborative-apply-filter">
                     应用筛选
                   </button>
@@ -212,7 +218,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           
           <div id="collaborative-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
             {collaborativePapers.map((p: any) => (
-              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''}>
+              <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''} data-ccf-partition={p.data.ccfPartition || ''}>
                 <PaperCard paper={p} showAbstract={false} showLink={true} />
               </div>
             ))}
@@ -266,6 +272,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     paperItems.forEach(item => {
       const itemYear = parseInt(item.getAttribute('data-year') || '0');
       const partition = item.getAttribute('data-partition') || '';
+      const ccfPartition = item.getAttribute('data-ccf-partition') || '';
       let shouldShow = true;
       
       // 按年份筛选
@@ -281,6 +288,10 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
         }
       } else if (filterType === 'partition') {
         if (!partition || partition === '') {
+          shouldShow = false;
+        }
+      } else if (filterType === 'ccf') {
+        if (!ccfPartition || ccfPartition === '') {
           shouldShow = false;
         }
       }

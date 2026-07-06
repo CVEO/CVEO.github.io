@@ -21,6 +21,7 @@ export interface Paper {
   codeDataLink?: string;
   abstract?: string;
   partition?: '中科院一区' | '中科院二区' | '中科院三区' | '中科院四区';
+  ccfPartition?: 'CCF-A' | 'CCF-B' | 'CCF-C';
   equalFirst?: number[];
   corresponding?: number[];
   otherContributions?: Array<{

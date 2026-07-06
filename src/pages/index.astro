@@ -14,7 +14,7 @@ import awardsData from '../data/awards.json'
 
 const papers = await getCollection('papers') || []
 const ourPapers = papers.filter(p => p.id.startsWith('our/'))
-const tierOnePapers = ourPapers.filter(p => p.data.partition === '中科院一区')
+const tierOnePapers = ourPapers.filter(p => p.data.partition === '中科院一区' || p.data.ccfPartition === 'CCF-A')
 const sortedPapers = tierOnePapers.sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 const recentPapers = sortedPapers.slice(0, 5)
 
@@ -220,7 +220,7 @@ const newsItems = getLatestNews(allNews, 3)
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">科研成果</h2>
     
     <div>
-      <h3 class="text-xl font-semibold text-slate-900 mb-6">期刊论文</h3>
+      <h3 class="text-xl font-semibold text-slate-900 mb-6">代表论文</h3>
     
        <div class="grid grid-cols-1 gap-6">
         {(recentPapers || []).map(p => (
