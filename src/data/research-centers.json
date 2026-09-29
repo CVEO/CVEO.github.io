@@ -26,6 +26,7 @@
     "established": "2017",
     "description": "结合电力工程需求，研发地理信息技术在电网规划、设计、运维中的应用解决方案",
     "shortDescription": "地理信息技术在电网工程中的应用",
+    "image": "/assets/research-centers/state-grid-center.jpg",
     "focusAreas": ["电力GIS", "线路智能选线", "电网数字化"]
   }
 ]
