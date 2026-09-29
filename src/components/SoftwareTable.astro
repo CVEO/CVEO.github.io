@@ -4,42 +4,24 @@ import type { Patent } from '../lib/types';
 
 interface Props {
   patents: Patent[];
-  sortable?: boolean;
-  filterable?: boolean;
-  showHeader?: boolean;
-  showFooter?: boolean;
   className?: string;
 }
 
-const { 
+const {
   patents,
-  sortable = false,
-  filterable = false,
-  showHeader = true,
-  showFooter = true,
   className = ''
 } = Astro.props;
 ---
 
- <BaseTable 
+<BaseTable
   patents={patents}
-  enhanced={true}
-  sortable={sortable}
-  filterable={filterable}
-  showHeader={showHeader}
-  showFooter={showFooter}
   className={className}
   id="software-patent-table"
- />
+/>
 
 <style>
   /* 软件著作权特定样式 */
   :global(.software-table) tr:hover {
     background-color: #faf5ff;
-  }
-  
-  :global(.software-table) .type-badge {
-    background-color: #f3e8ff;
-    color: #7c3aed;
   }
 </style>

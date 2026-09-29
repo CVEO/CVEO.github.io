@@ -5,12 +5,17 @@ import NewsCard from '../components/NewsCard.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import CollaborationEntryCards from '../components/CollaborationEntryCards.astro'
 import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
 import { loadNews, getLatestNews } from '../lib/data/news'
+import { resolveImage } from '../lib/images'
+import type { NewsItem } from '../lib/types'
 
 
 import aboutData from '../data/about.json'
 import researchProjectsData from '../data/research-projects.json'
 import awardsData from '../data/awards.json'
+
+const teamPhoto = resolveImage('/assets/avatars/team.jpg')
 
 const papers = await getCollection('papers') || []
 const ourPapers = papers.filter(p => p.id.startsWith('our/'))
@@ -26,7 +31,7 @@ const newsItems = getLatestNews(allNews, 3)
 
 
 ---
-<BaseLayout title="首页">
+<BaseLayout>
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="text-center">
@@ -71,12 +76,19 @@ const newsItems = getLatestNews(allNews, 3)
 
       <section id="team" class="max-w-7xl mx-auto  scroll-mt-16">
               <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200">
-        <img 
-          src="/assets/avatars/team.jpg" 
-          alt="CVEO课题组团队合影" 
-          class="w-full h-auto object-cover"
-        />
-      </div>   
+        {teamPhoto && (
+          <Image
+            src={teamPhoto}
+            alt="CVEO课题组团队合影"
+            class="w-full h-auto object-cover"
+            widths={[640, 1024, 1600]}
+            sizes="(max-width: 1280px) 100vw, 1152px"
+            loading="eager"
+            decoding="async"
+            format="webp"
+          />
+        )}
+      </div>
     <div class="text-center">
       <p class="text-slate-600 mb-2 max-w-2xl mx-auto py-4">
         武汉大学CVEO课题组汇聚了来自计算机视觉与地球观测交叉领域的优秀研究人员
@@ -189,13 +201,11 @@ const newsItems = getLatestNews(allNews, 3)
     </div>
   </section>
 
-  <section id="news"
-
   <section id="news" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-mt-16">
     <h2 class="text-2xl font-semibold text-slate-900 mb-8">新闻动态</h2>
     
     <div class="space-y-6">
-      {(newsItems || []).map((news: any) => (
+      {(newsItems || []).map((news: NewsItem) => (
         <NewsCard 
           news={news}
           layout="horizontal"

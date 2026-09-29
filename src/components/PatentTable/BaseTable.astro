@@ -1,27 +1,17 @@
 ---
 import type { Patent } from '../../lib/types';
 
- interface Props {
+interface Props {
   patents: Patent[];
-  enhanced?: boolean;
-  sortable?: boolean;
-  filterable?: boolean;
-  showHeader?: boolean;
-  showFooter?: boolean;
   className?: string;
   id?: string;
- }
+}
 
- const { 
+const {
   patents,
-  enhanced = false,
-  sortable = false,
-  filterable = false,
-  showHeader = true,
-  showFooter = true,
   className = '',
   id = 'patent-table'
- } = Astro.props;
+} = Astro.props;
 
 const getTypeIcon = (type: string) => {
   if (type === '发明专利') {
@@ -59,130 +49,26 @@ const getStatusColor = (status?: string) => {
     border: 'border-yellow-200'
   };
 };
-
-const formatDate = (dateStr: string) => {
-  try {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
-    return dateStr;
-  } catch {
-    return dateStr;
-  }
-};
 ---
 
- <div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id={id}>
-  {showHeader && (
-    <div class="px-4 md:px-8 py-4 bg-slate-50 border-b border-slate-200">        
-      {enhanced && (
-        <div class="flex flex-wrap gap-2">
-          {filterable && (
-            <div class="relative">
-              <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                <option value="all">所有类型</option>
-                <option value="invention">发明专利</option>
-                <option value="utility">实用新型专利</option>
-                <option value="software">软件著作权</option>
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </div>
-            </div>
-          )}
-            
-          {sortable && (
-            <div class="relative">
-              <select class="pl-3 pr-8 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                <option value="date-desc">按日期降序</option>
-                <option value="date-asc">按日期升序</option>
-                <option value="name">按名称排序</option>
-                <option value="type">按类型排序</option>
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  )}
-  
+<div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id={id}>
   <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-slate-200">
       <thead class="bg-slate-100">
         <tr>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              类型
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              名称
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              授权号/登记号
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              授权/登记日期
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              状态
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
-          <th scope="col" class={`px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider ${sortable ? 'cursor-pointer hover:bg-slate-200 transition-colors duration-200' : ''}`}>
-            <div class="flex items-center">
-              发明人/著作权人
-              {sortable && (
-                <svg class="w-4 h-4 ml-1 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              )}
-            </div>
-          </th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">类型</th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">名称</th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell">授权号/登记号</th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">授权/登记日期</th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">状态</th>
+          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">发明人/著作权人</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-200">
-         {patents.map((patent, _index) => {
+        {patents.map((patent) => {
           const typeIcon = getTypeIcon(patent.type);
           const statusColor = getStatusColor(patent.status);
-          
+
           return (
             <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
               <td class="px-4 md:px-8 py-4 md:py-5">
@@ -215,7 +101,7 @@ const formatDate = (dateStr: string) => {
               <td class="px-4 md:px-8 py-4 md:py-5">
                 <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">{patent.title}</div>
                 <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{formatDate(patent.grantDate)}</span>
+                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.grantDate}</span>
                   {patent.status && (
                     <span class={`inline-flex items-center px-2 py-1 rounded text-xs ${statusColor.bg} ${statusColor.text} border ${statusColor.border}`}>
                       {patent.status}
@@ -230,7 +116,7 @@ const formatDate = (dateStr: string) => {
                 </div>
               </td>
               <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                <div class="text-sm font-medium text-slate-900">{formatDate(patent.grantDate)}</div>
+                <div class="text-sm font-medium text-slate-900">{patent.grantDate}</div>
               </td>
               <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
                 {patent.status && (
@@ -257,25 +143,4 @@ const formatDate = (dateStr: string) => {
       </tbody>
     </table>
   </div>
-  
-  {showFooter && (
-    <div class="px-4 md:px-8 py-4 bg-slate-50 border-t border-slate-200">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <div class="text-sm text-slate-600 mb-2 md:mb-0">
-          共 <span class="font-medium text-slate-900">{patents.length}</span> 项
-        </div>
-        <div class="flex items-center space-x-2">
-          <button type="button" class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200">
-            上一页
-          </button>
-          <span class="px-3 py-1.5 text-sm font-medium text-slate-900 bg-slate-100 rounded">
-            1
-          </span>
-          <button type="button" class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors duration-200">
-            下一页
-          </button>
-        </div>
-      </div>
-    </div>
-  )}
-
+</div>
