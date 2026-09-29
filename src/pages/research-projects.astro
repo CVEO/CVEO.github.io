@@ -21,7 +21,7 @@ const stats = {
   social: allProjects.filter(p => p.level === '社会服务').length
 }
 ---
-<BaseLayout title="科研项目">
+<BaseLayout title="科研项目" description="武汉大学CVEO课题组承担的科研项目：国家级、省部级项目与社会服务项目，含在研与已结题项目。">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- 统计信息 -->
     <div class="mb-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -54,16 +54,24 @@ const stats = {
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
       <h1 class="text-3xl font-bold text-slate-900">科研项目</h1>
       
-      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="project-tabs">
-        <button 
+      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="project-tabs" role="tablist" aria-label="科研项目分类">
+        <button
           type="button"
+          role="tab"
+          id="tab-active"
+          aria-selected="true"
+          aria-controls="active-projects"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm whitespace-nowrap"
           data-tab="active"
         >
           在研项目
         </button>
-        <button 
+        <button
           type="button"
+          role="tab"
+          id="tab-completed"
+          aria-selected="false"
+          aria-controls="completed-projects"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
           data-tab="completed"
         >
@@ -73,7 +81,7 @@ const stats = {
     </div>
 
     <!-- 在研项目 -->
-    <div id="active-projects" class="project-content" data-type="active">
+    <div id="active-projects" class="project-content" data-type="active" role="tabpanel" aria-labelledby="tab-active">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">在研项目</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{sortedActiveProjects.length}</span> 个项目</p>
@@ -96,7 +104,7 @@ const stats = {
     </div>
 
     <!-- 已结题项目 -->
-    <div id="completed-projects" class="project-content hidden" data-type="completed">
+    <div id="completed-projects" class="project-content hidden" data-type="completed" role="tabpanel" aria-labelledby="tab-completed">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">已结题项目</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{sortedCompletedProjects.length}</span> 个项目</p>
@@ -123,53 +131,66 @@ const stats = {
 <script>
   const tabs = document.querySelectorAll('#project-tabs button');
   const contents = document.querySelectorAll('.project-content');
-  
+
   let currentTab = 'active';
-  
+
+  // Tab 激活：样式 + aria-selected + 面板可见性 + URL hash
+  function activateTab(target: string, updateHash = true) {
+    currentTab = target;
+
+    tabs.forEach(t => {
+      const isActive = t.getAttribute('data-tab') === target;
+      t.classList.toggle('bg-white', isActive);
+      t.classList.toggle('text-brand-900', isActive);
+      t.classList.toggle('shadow-sm', isActive);
+      t.classList.toggle('text-slate-600', !isActive);
+      t.classList.toggle('hover:text-slate-900', !isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    contents.forEach(content => {
+      const isTarget = content.getAttribute('data-type') === target;
+      content.classList.toggle('hidden', !isTarget);
+    });
+
+    if (updateHash) {
+      history.replaceState(null, '', `#${target}`);
+    }
+  }
+
   // Tab switching
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.getAttribute('data-tab');
       if (!target) return;
-      
-      currentTab = target;
-      
-      // Update tab styles
-      tabs.forEach(t => {
-        t.classList.remove('bg-white', 'text-brand-900', 'shadow-sm');
-        t.classList.add('text-slate-600', 'hover:text-slate-900');
-      });
-      tab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
-      tab.classList.remove('text-slate-600', 'hover:text-slate-900');
 
-      // Update content visibility
-      contents.forEach(content => {
-        const type = content.getAttribute('data-type');
-        if (type === currentTab) {
-          content.classList.remove('hidden');
-        } else {
-          content.classList.add('hidden');
-        }
-      });
+      activateTab(target);
 
       // Scroll to top of content
       const activeContent = document.querySelector(`.project-content[data-type="${currentTab}"]`) as HTMLElement;
       if (activeContent) {
-        window.scrollTo({ 
-          top: activeContent.offsetTop - 100, 
-          behavior: 'smooth' 
+        window.scrollTo({
+          top: activeContent.offsetTop - 100,
+          behavior: 'smooth'
         });
       }
     });
   });
 
-  // Initialize first tab as active
-  document.addEventListener('DOMContentLoaded', () => {
-    const firstTab = document.querySelector('#project-tabs button[data-tab="active"]');
-    if (firstTab) {
-      firstTab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
-      firstTab.classList.remove('text-slate-600', 'hover:text-slate-900');
+  // 同页 hash 变化（如浏览器前进/后退）也同步 tab
+  window.addEventListener('hashchange', () => {
+    const target = window.location.hash.replace('#', '');
+    const validTabs = Array.from(tabs).map(t => t.getAttribute('data-tab')).filter(Boolean) as string[];
+    if (validTabs.includes(target)) {
+      activateTab(target, false);
     }
+  });
+
+  // Initialize first tab as active; support hash deep-link (e.g. #completed)
+  document.addEventListener('DOMContentLoaded', () => {
+    const validTabs = Array.from(tabs).map(t => t.getAttribute('data-tab')).filter(Boolean) as string[];
+    const hashTarget = window.location.hash.replace('#', '');
+    activateTab(validTabs.includes(hashTarget) ? hashTarget : 'active', false);
   });
 </script>
 

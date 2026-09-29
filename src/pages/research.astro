@@ -11,16 +11,16 @@ const patentsData = await loadPatents()
 const inventionPatents = filterPatentsByType(patentsData, '发明专利')
 const softwarePatents = filterPatentsByType(patentsData, '软件著作权')
 
-const allPapers = (await getCollection('papers') || []).sort((a: any, b: any) => {
+const allPapers = (await getCollection('papers') || []).sort((a, b) => {
   return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 });
-const ourPapers = allPapers.filter((p: any) => p.id.startsWith('our/'))
-const collaborativePapers = allPapers.filter((p: any) => p.id.startsWith('collaborative/'))
+const ourPapers = allPapers.filter(p => p.id.startsWith('our/'))
+const collaborativePapers = allPapers.filter(p => p.id.startsWith('collaborative/'))
 
 // 获取论文年份用于时间轴
-const getPaperYears = (papers: any[]) => {
+const getPaperYears = (papers: ReturnType<typeof allPapers.filter>) => {
   const years = new Set<number>()
-  papers.forEach((paper: any) => {
+  papers.forEach(paper => {
     const year = new Date(paper.data.date).getFullYear()
     years.add(year)
   })
@@ -30,35 +30,51 @@ const getPaperYears = (papers: any[]) => {
 const ourPaperYears = getPaperYears(ourPapers)
 const collaborativePaperYears = getPaperYears(collaborativePapers)
 ---
-<BaseLayout title="科研成果">
+<BaseLayout title="科研成果" description="武汉大学CVEO课题组科研成果：通讯/一作论文、合作论文、发明专利与软件著作权，可按年份与分区筛选。">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
       <h1 class="text-3xl font-bold text-slate-900">科研成果</h1>
       
-      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="research-tabs">
-        <button 
+      <div class="inline-flex p-1 bg-slate-100 rounded-xl overflow-x-auto" id="research-tabs" role="tablist" aria-label="科研成果分类">
+        <button
           type="button"
+          role="tab"
+          id="tab-our"
+          aria-selected="true"
+          aria-controls="our-papers"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-brand-900 shadow-sm whitespace-nowrap"
           data-tab="our"
         >
           通讯/一作论文
         </button>
-        <button 
+        <button
           type="button"
+          role="tab"
+          id="tab-collaborative"
+          aria-selected="false"
+          aria-controls="collaborative-papers"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
           data-tab="collaborative"
         >
           合作论文
         </button>
-        <button 
+        <button
           type="button"
+          role="tab"
+          id="tab-invention"
+          aria-selected="false"
+          aria-controls="invention-patents"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
           data-tab="invention"
         >
           发明专利
         </button>
-        <button 
+        <button
           type="button"
+          role="tab"
+          id="tab-software"
+          aria-selected="false"
+          aria-controls="software-patents"
           class="px-4 md:px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 whitespace-nowrap"
           data-tab="software"
         >
@@ -68,7 +84,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     </div>
 
     <!-- 通讯/一作论文 -->
-    <div id="our-papers" class="research-content" data-type="our">
+    <div id="our-papers" class="research-content" data-type="our" role="tabpanel" aria-labelledby="tab-our">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">通讯/一作论文</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{ourPapers.length}</span> 篇论文</p>
@@ -132,7 +148,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           </div>
           
           <div id="our-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
-            {ourPapers.map((p: any) => (
+            {ourPapers.map(p => (
               <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''} data-ccf-partition={p.data.ccfPartition || ''}>
                 <PaperCard paper={p} showAbstract={false} showLink={true} />
               </div>
@@ -153,7 +169,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     </div>
 
     <!-- 合作论文 -->
-    <div id="collaborative-papers" class="research-content hidden" data-type="collaborative">
+    <div id="collaborative-papers" class="research-content hidden" data-type="collaborative" role="tabpanel" aria-labelledby="tab-collaborative">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">合作论文</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{collaborativePapers.length}</span> 篇论文</p>
@@ -217,7 +233,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
           </div>
           
           <div id="collaborative-papers-list" class="grid grid-cols-1 gap-4 lg:gap-6">
-            {collaborativePapers.map((p: any) => (
+            {collaborativePapers.map(p => (
               <div class="paper-item" data-year={new Date(p.data.date).getFullYear()} data-partition={p.data.partition || ''} data-ccf-partition={p.data.ccfPartition || ''}>
                 <PaperCard paper={p} showAbstract={false} showLink={true} />
               </div>
@@ -238,7 +254,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     </div>
 
     <!-- 发明专利 -->
-    <div id="invention-patents" class="research-content hidden" data-type="invention">
+    <div id="invention-patents" class="research-content hidden" data-type="invention" role="tabpanel" aria-labelledby="tab-invention">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">发明专利</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{inventionPatents.length}</span> 项专利</p>
@@ -247,7 +263,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     </div>
 
     <!-- 软件著作权 -->
-    <div id="software-patents" class="research-content hidden" data-type="software">
+    <div id="software-patents" class="research-content hidden" data-type="software" role="tabpanel" aria-labelledby="tab-software">
       <div class="mb-6">
         <h2 class="text-xl font-semibold text-slate-900 mb-4">软件著作权</h2>
         <p class="text-slate-600">共 <span class="font-medium text-brand-900">{softwarePatents.length}</span> 项软著</p>
@@ -260,8 +276,7 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
 <script>
   const tabs = document.querySelectorAll('#research-tabs button');
   const contents = document.querySelectorAll('.research-content');
-  
-  let currentTab = 'our';
+
   // 筛选论文函数
   function filterPapers(type: string, year = 0, filterType = 'all') {
     const paperItems = document.querySelectorAll(`#${type}-papers-list .paper-item`);
@@ -356,33 +371,45 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     });
   }
 
+  // Tab 激活：样式 + aria-selected + 面板可见性 + URL hash
+  function activateTab(target: string, updateHash = true) {
+    tabs.forEach(t => {
+      const isActive = t.getAttribute('data-tab') === target;
+      t.classList.toggle('bg-white', isActive);
+      t.classList.toggle('text-brand-900', isActive);
+      t.classList.toggle('shadow-sm', isActive);
+      t.classList.toggle('text-slate-600', !isActive);
+      t.classList.toggle('hover:text-slate-900', !isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    contents.forEach(content => {
+      const isTarget = content.getAttribute('data-type') === target;
+      content.classList.toggle('hidden', !isTarget);
+    });
+
+    if (updateHash) {
+      history.replaceState(null, '', `#${target}`);
+    }
+  }
+
   // Tab switching
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       e.preventDefault();
       const target = tab.getAttribute('data-tab');
       if (!target) return;
-      
-      currentTab = target;
-      
-      // Update tab styles
-      tabs.forEach(t => {
-        t.classList.remove('bg-white', 'text-brand-900', 'shadow-sm');
-        t.classList.add('text-slate-600', 'hover:text-slate-900');
-      });
-      tab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
-      tab.classList.remove('text-slate-600', 'hover:text-slate-900');
-
-      // Update content visibility
-      contents.forEach(content => {
-        const type = content.getAttribute('data-type');
-        if (type === currentTab) {
-          content.classList.remove('hidden');
-        } else {
-          content.classList.add('hidden');
-        }
-      });
+      activateTab(target);
     });
+  });
+
+  // 同页 hash 变化（如浏览器前进/后退）也同步 tab
+  window.addEventListener('hashchange', () => {
+    const target = window.location.hash.replace('#', '');
+    const validTabs = Array.from(tabs).map(t => t.getAttribute('data-tab')).filter(Boolean) as string[];
+    if (validTabs.includes(target)) {
+      activateTab(target, false);
+    }
   });
 
   // 时间轴年份选择事件
@@ -472,14 +499,17 @@ const collaborativePaperYears = getPaperYears(collaborativePapers)
     }
   });
 
-  // Initialize first tab as active
+  // Initialize first tab as active; support hash deep-link (e.g. #invention-patents)
   document.addEventListener('DOMContentLoaded', () => {
-    const firstTab = document.querySelector('#research-tabs button[data-tab="our"]');
-    if (firstTab) {
-      firstTab.classList.add('bg-white', 'text-brand-900', 'shadow-sm');
-      firstTab.classList.remove('text-slate-600', 'hover:text-slate-900');
+    const validTabs = Array.from(tabs).map(t => t.getAttribute('data-tab')).filter(Boolean) as string[];
+    const hashTarget = window.location.hash.replace('#', '');
+    const initialTab = validTabs.includes(hashTarget) ? hashTarget : 'our';
+    if (initialTab !== 'our') {
+      activateTab(initialTab, false);
+    } else {
+      activateTab('our', false);
     }
-    
+
     // 初始化筛选按钮样式
     const filterBtns = document.querySelectorAll('.filter-btn[data-filter="all"]');
     filterBtns.forEach(btn => {
