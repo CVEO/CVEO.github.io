@@ -1,5 +1,6 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from 'astro:assets'
+import { resolveImage } from '../lib/images'
 
 interface Props {
   src: string;
@@ -12,15 +13,15 @@ interface Props {
   height?: number;
 }
 
-const { 
-  src, 
-  alt, 
-  aspectRatio = "1/1", 
-  className = "", 
+const {
+  src,
+  alt,
+  aspectRatio = "1/1",
+  className = "",
   lazy = true,
   fallbackSrc = "/assets/avatars/placeholder.svg",
-  width = 400,
-  height = 400
+  width,
+  height
 } = Astro.props;
 
 const aspectRatioClass = {
@@ -30,19 +31,29 @@ const aspectRatioClass = {
   "16/9": "aspect-video"
 }[aspectRatio] || "aspect-square";
 
-const handleError = `
-  this.onerror = null;
-  this.src = '${fallbackSrc}';
-`;
+// 去重类名，避免 html-validate no-dup-class 报错
+const classes = [...new Set(["object-cover", "rounded", aspectRatioClass, ...className.split(/\s+/)])].join(" ");
+
+// 构建期解析到真实文件则走优化管线；解析失败（路径笔误等）时回退并在构建期告警
+const resolved = resolveImage(src) ?? resolveImage(fallbackSrc);
+if (!resolved) {
+  console.warn(`[AdaptiveImage] 无法解析图片路径: ${src}（fallback: ${fallbackSrc}）`);
+}
 ---
 
-<img 
-  src={src} 
-  alt={alt}
-  width={width}
-  height={height}
-  class={`object-cover rounded ${aspectRatioClass} ${className}`}
-  loading={lazy ? "lazy" : "eager"}
-  decoding={lazy ? "async" : "auto"}
-  onerror={handleError}
-/>
+{resolved ? (
+  <Image
+    src={resolved}
+    alt={alt}
+    class={classes}
+    width={width ?? resolved.width}
+    height={height ?? resolved.height}
+    loading={lazy ? "lazy" : "eager"}
+    decoding={lazy ? "async" : "auto"}
+    format="webp"
+  />
+) : (
+  <div class={`${classes} bg-slate-100 flex items-center justify-center text-slate-400 text-xs`} aria-label={alt}>
+    {alt}
+  </div>
+)}

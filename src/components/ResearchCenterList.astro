@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets'
+import { resolveImage } from '../lib/images'
+
 interface ResearchCenter {
   name: string
   partners: string[]
@@ -15,17 +18,20 @@ const { centers } = Astro.props as {
 }
 ---
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-  {centers.map(center => (
+  {centers.map(center => {
+    const image = resolveImage(center.image)
+    return (
     <div class="group p-4 rounded-xl border border-slate-200 bg-white hover:shadow-md hover:border-brand-200 transition-all duration-300">
       <div class="flex flex-col md:flex-row gap-4">
          <div class="md:w-1/3 flex-shrink-0">
           <div class="aspect-[4/3] overflow-hidden rounded-lg bg-slate-100 flex items-center justify-center">
-            {center.image ? (
-              <img 
-                src={center.image}
+            {image ? (
+              <Image
+                src={image}
                 alt={`${center.name}牌匾`}
                 class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                decoding="async"
               />
             ) : (
               <svg class="w-16 h-16 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -83,5 +89,6 @@ const { centers } = Astro.props as {
         </div>
       </div>
     </div>
-  ))}
+    );
+  })}
 </div>

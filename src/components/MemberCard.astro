@@ -11,11 +11,13 @@ const { member } = Astro.props
     class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full hover:border-brand-200 hover:bg-brand-50"
   >
     <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-md">
-      <AdaptiveImage 
-        src={member.data.photo ? `/${member.data.photo}` : "/assets/avatars/placeholder.svg"} 
+      <AdaptiveImage
+        src={member.data.photo ? `/${member.data.photo}` : "/assets/avatars/placeholder.svg"}
         alt={member.data.name}
         aspectRatio="1/1"
         className="w-full h-full"
+        width={256}
+        height={256}
       />
     </div>
     <h3 class="text-lg font-semibold text-slate-900 mb-1">{member.data.name}</h3>
@@ -33,11 +35,13 @@ const { member } = Astro.props
 ) : (
   <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full">
     <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-md">
-      <AdaptiveImage 
-        src={member.data.photo ? `/${member.data.photo}` : "/assets/avatars/placeholder.svg"} 
+      <AdaptiveImage
+        src={member.data.photo ? `/${member.data.photo}` : "/assets/avatars/placeholder.svg"}
         alt={member.data.name}
         aspectRatio="1/1"
         className="w-full h-full"
+        width={256}
+        height={256}
       />
     </div>
     <h3 class="text-lg font-semibold text-slate-900 mb-1">{member.data.name}</h3>
