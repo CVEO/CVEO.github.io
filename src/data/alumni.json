@@ -1,5 +1,21 @@
 [
   {
+    "name": "王铜",
+    "graduationDate": "2026年",
+    "researchDirection": "多模态遥感智能解译",
+    "destination": "空天信息大学",
+    "degree": "PhD",
+    "educationType": "WuhanPhD"
+  },
+  {
+    "name": "张凯琦",
+    "graduationDate": "2026年",
+    "researchDirection": "时空智能",
+    "destination": "上海哔哩哔哩科技有限公司",
+    "degree": "Master",
+    "educationType": "WuhanMaster"
+  },
+  {
     "name": "曹先宇",
     "graduationDate": "2025年",
     "researchDirection": "时空智能",
