@@ -34,7 +34,7 @@ export interface Paper {
 export interface Member {
   name: string;
   role: string;
-  group?: 'Professor' | 'Researcher' | 'PhD' | 'Master' | 'Undergrad' | 'Advisor';
+  group?: 'Professor' | 'Researcher' | 'ResearchAssistant' | 'PhD' | 'Master' | 'Undergrad' | 'Advisor';
   photo?: string;
   bio?: string;
   externalLink?: string;
@@ -51,9 +51,8 @@ export interface Project {
 
 export interface Award {
   title: string;
-  date: string;
+  year: string;
   level: string;
-  recipients?: string[];
 }
 
 export interface NewsItem {
@@ -110,16 +109,4 @@ export interface AboutData {
   researchFields: ResearchField[];
   stats: TeamStats[];
   collaborationCards: CollaborationCard[];
-}
-
-
-
-// Astro Collection Entry 类型
-export interface CollectionEntry<T> {
-  id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: T;
-  render(): Promise<{ Content: any; headings: any[] }>;
 }

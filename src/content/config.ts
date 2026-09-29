@@ -5,7 +5,8 @@ const papers = defineCollection({
   schema: () => z.object({
     title: z.string(),
     journal: z.string(),
-    date: z.string(),
+    // YYYY-MM-DD / YYYY-MM / YYYY
+    date: z.string().regex(/^\d{4}(-\d{2}){0,2}$/, '日期格式应为 YYYY-MM-DD、YYYY-MM 或 YYYY'),
     authors: z.array(z.string()),
     link: z.string().optional(),
     wechatArticle: z.string().url().optional(),

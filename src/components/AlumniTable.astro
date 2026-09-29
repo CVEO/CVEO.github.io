@@ -52,8 +52,6 @@ const EDUCATION_TYPE_MAP = {
   'JointTraining': '联合培养'
 } as const
 
-const TABLE_MAX_HEIGHT = '500px' // 表格最大高度
-
 // ==================== 工具函数 ====================
 /**
  * 从日期字符串中提取年份
@@ -91,21 +89,33 @@ const totalItems = flatAlumni.length
 const sortedAlumni = [...flatAlumni].sort((a, b) => {
   const yearA = extractYear(a.graduationDate)
   const yearB = extractYear(b.graduationDate)
-  
+
   // 优先按年份降序
   if (yearA !== yearB) {
     return yearB - yearA
   }
-  
+
   // 研究生数据额外排序
   if (type === 'graduate' && 'educationType' in a && 'educationType' in b) {
     const weightA = getEducationTypeWeight(a.educationType)
     const weightB = getEducationTypeWeight(b.educationType)
     return weightA - weightB
   }
-  
+
   return 0
 })
+
+// 数据完整性检查：字段缺失的记录会被模板跳过（静默丢行），构建期直接报错暴露
+const invalidRows = sortedAlumni.filter(alum =>
+  type === 'graduate' ? !('educationType' in alum) || !('degree' in alum) : !('school' in alum)
+)
+if (invalidRows.length > 0) {
+  throw new Error(
+    `[AlumniTable] "${title}" 中有 ${invalidRows.length} 条记录缺少必要字段` +
+    `（${type === 'graduate' ? 'graduate 需要 educationType/degree' : 'undergrad 需要 school'}）: ` +
+    invalidRows.map(a => a.name || JSON.stringify(a)).join('、')
+  )
+}
 ---
 
 <div class="mt-16 pt-8 border-t border-slate-200">

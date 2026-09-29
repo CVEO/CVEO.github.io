@@ -66,21 +66,6 @@ function parsePropertyLine(line: string, newsItem: Partial<NewsItem>): void {
   }
 }
 
-// 解析新闻行（向后兼容）
-export function parseNewsLine(line: string): NewsItem | null {
-  const newsItem = parseTitleLine(line);
-  if (!newsItem) {
-    return null;
-  }
-  
-  // 为了向后兼容，将title复制到text字段
-  return {
-    ...newsItem,
-    title: newsItem.title || '',
-    text: newsItem.title || ''
-  } as NewsItem;
-}
-
 // 增强解析新闻Markdown内容
 export function parseEnhancedNewsContent(content: string): NewsItem[] {
   const lines = content.split(/\r?\n/);
@@ -96,9 +81,14 @@ export function parseEnhancedNewsContent(content: string): NewsItem[] {
       if (currentNews && currentNews.date && currentNews.title) {
         newsItems.push(currentNews as NewsItem);
       }
-      
+
       // 解析新新闻标题
-      currentNews = parseTitleLine(line);
+      const parsed = parseTitleLine(line);
+      if (!parsed) {
+        // 格式错误的条目不参与渲染，必须让维护者在构建期就发现
+        console.warn(`[news] 跳过格式错误的新闻标题行（应为 "## YYYY-MM-DD 标题"）: ${line}`);
+      }
+      currentNews = parsed;
     }
     // 解析属性行（只有在当前新闻存在时）
     else if (currentNews && line.startsWith('- **')) {
@@ -124,22 +114,9 @@ export function parseEnhancedNewsContent(content: string): NewsItem[] {
   });
 }
 
-// 向后兼容：保持原有函数名
-export function parseNewsContent(content: string): NewsItem[] {
-  return parseEnhancedNewsContent(content);
-}
-
 // 获取最新新闻
 export function getLatestNews(newsItems: NewsItem[], count: number = 3): NewsItem[] {
   return newsItems.slice(0, count);
-}
-
-// 按年份筛选新闻
-export function filterNewsByYear(newsItems: NewsItem[], year: number): NewsItem[] {
-  return newsItems.filter(item => {
-    const itemYear = new Date(item.date).getFullYear();
-    return itemYear === year;
-  });
 }
 
 // 获取新闻年份列表（用于时间轴）
@@ -174,29 +151,11 @@ export function groupNewsByYear(newsItems: NewsItem[]): Map<number, NewsItem[]> 
   return grouped;
 }
 
-// 格式化日期显示
-export function formatNewsDate(dateStr: string): string {
-  try {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-      return dateStr;
-    }
-    
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    
-    return `${year}年${month}月${day}日`;
-  } catch (error) {
-    return dateStr;
-  }
-}
-
 // 加载新闻数据
 export async function loadNews(): Promise<NewsItem[]> {
   try {
     const newsContent = await import('../../data/news.md?raw');
-    return parseNewsContent(newsContent.default);
+    return parseEnhancedNewsContent(newsContent.default);
   } catch (error) {
     console.error('加载新闻数据失败:', error);
     throw error;

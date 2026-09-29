@@ -1,12 +1,8 @@
 ---
-interface Contribution {
-  authorIndex: number
-  description: string
-  symbol: string
-}
+import type { CollectionEntry } from 'astro:content'
 
 const { paper, showAbstract = false, showLink = false } = Astro.props as {
-  paper: any
+  paper: CollectionEntry<'papers'>
   showAbstract?: boolean
   showLink?: boolean
 }
@@ -22,7 +18,7 @@ function getAuthorDisplay(author: string, idx: number): {html: string, title: st
   let html = author
   let title = ''
   const roles: string[] = []
-  
+
   if (paper.data.equalFirst && paper.data.equalFirst.includes(idx)) {
     html += '<sup>†</sup>'
     roles.push('共同第一作者')
@@ -31,19 +27,19 @@ function getAuthorDisplay(author: string, idx: number): {html: string, title: st
     html += '<sup>*</sup>'
     roles.push('通讯作者')
   }
-  
+
   if (paper.data.otherContributions) {
-    const contributions = paper.data.otherContributions.filter((c: Contribution) => c.authorIndex === idx)
-    contributions.forEach((contrib: Contribution) => {
+    const contributions = paper.data.otherContributions.filter(contrib => contrib.authorIndex === idx)
+    contributions.forEach(contrib => {
       html += `<sup>${contrib.symbol}</sup>`
       roles.push(contrib.description)
     })
   }
-  
+
   if (roles.length > 0) {
     title = roles.join('，')
   }
-  
+
   return { html, title }
 }
 ---
@@ -90,9 +86,10 @@ function getAuthorDisplay(author: string, idx: number): {html: string, title: st
   {(showLink && paper.data.link && paper.data.link !== '#') || paper.data.wechatArticle || paper.data.codeDataLink ? (
     <div class="mt-3 flex flex-wrap gap-3">
       {showLink && paper.data.link && paper.data.link !== '#' && (
-        <a 
-          href={paper.data.link} 
-          target="_blank" 
+        <a
+          href={paper.data.link}
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-brand-50 text-brand-900 border border-brand-200 hover:bg-brand-100 hover:border-brand-300 transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,9 +99,10 @@ function getAuthorDisplay(author: string, idx: number): {html: string, title: st
         </a>
       )}
       {paper.data.wechatArticle && (
-        <a 
-          href={paper.data.wechatArticle} 
-          target="_blank" 
+        <a
+          href={paper.data.wechatArticle}
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-green-50 text-green-700 border border-green-200 hover:bg-green-100 hover:border-green-300 transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,9 +112,10 @@ function getAuthorDisplay(author: string, idx: number): {html: string, title: st
         </a>
       )}
       {paper.data.codeDataLink && (
-        <a 
-          href={paper.data.codeDataLink} 
-          target="_blank" 
+        <a
+          href={paper.data.codeDataLink}
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
