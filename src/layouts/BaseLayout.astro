@@ -10,16 +10,17 @@ interface Props {
   type?: string
 }
 
-const { 
+const {
   title,
   description = '武汉大学CVEO课题组 - 计算机视觉与地球观测交叉研究团队，聚焦遥感图像分析、深度学习、计算机视觉等前沿研究。',
-  image = '/assets/logos/logo.png',
+  image = '/og-image.jpg',
   type = 'website'
 } = Astro.props
 
-const siteUrl = 'https://www.whu-cveo.com'
-const fullTitle = title ? `${title} | 武汉大学CVEO课题组` : '武汉大学CVEO课题组'
-const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`
+const siteUrl = Astro.site ?? 'https://www.whu-cveo.com'
+const fullTitle = title ? `${title} | 武汉大学CVEO课题组` : '武汉大学CVEO课题组 | 计算机视觉与地球观测交叉研究团队'
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl)
+const fullImageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).toString()
 
 // JSON-LD 结构化数据
 const structuredData = {
@@ -28,7 +29,7 @@ const structuredData = {
   name: '武汉大学CVEO课题组',
   alternateName: 'CVEO Research Group',
   url: siteUrl,
-  logo: `${siteUrl}/assets/logos/logo.png`,
+  logo: `${siteUrl}/apple-touch-icon.png`,
   description: description,
   parentOrganization: {
     '@type': 'Organization',
@@ -60,14 +61,14 @@ const structuredData = {
     
     <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/assets/logos/logo.png" />
-    
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <!-- Canonical URL -->
-    <link rel="canonical" href={siteUrl} />
-    
+    <link rel="canonical" href={canonicalUrl} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullImageUrl} />
@@ -76,7 +77,7 @@ const structuredData = {
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={siteUrl} />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullImageUrl} />

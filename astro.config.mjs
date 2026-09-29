@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
+import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  integrations: [tailwind()],
-  site: 'https://www.whu-cveo.com/',
+  site: 'https://www.whu-cveo.com',
+  integrations: [tailwind(), sitemap()],
 })

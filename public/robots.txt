@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://www.whu-cveo.com/sitemap.xml
+# Sitemap（由 @astrojs/sitemap 在构建时自动生成）
+Sitemap: https://www.whu-cveo.com/sitemap-index.xml
