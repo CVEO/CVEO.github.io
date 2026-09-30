@@ -65,7 +65,8 @@ const members = defineCollection({
     photo: z.string().optional(),
     bio: z.string().optional(),
     externalLink: z.string().optional(),
-    research: z.string().optional()  // 研究方向字段
+    research: z.string().optional(),  // 研究方向字段
+    highlights: z.array(z.string()).optional()  // 成员亮点（弹层展示）
   })
 })
 

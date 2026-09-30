@@ -2,40 +2,12 @@
 import AdaptiveImage from './AdaptiveImage.astro'
 
 const { member } = Astro.props
+
+const highlights: string[] = member.data.highlights ?? []
+const hasPopover = highlights.length > 0 || !!member.data.externalLink
 ---
-{member.data.externalLink ? (
-  <a 
-    href={member.data.externalLink} 
-    target="_blank" 
-    rel="noopener noreferrer"
-    class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full hover:border-brand-200 hover:bg-brand-50"
-  >
-    <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-md">
-      <AdaptiveImage
-        src={member.data.photo ? `/${member.data.photo}` : "/assets/avatars/placeholder.svg"}
-        alt={member.data.name}
-        aspectRatio="1/1"
-        className="w-full h-full"
-        width={256}
-        height={256}
-      />
-    </div>
-    <h3 class="text-lg font-semibold text-slate-900 mb-1">{member.data.name}</h3>
-    <p class="text-slate-600 text-sm mb-2">{member.data.role}</p>
-    {member.data.research && (
-      <p class="text-slate-500 text-xs line-clamp-2">{member.data.research}</p>
-    )}
-    {member.data.bio && (
-      <p class="text-slate-500 text-xs leading-relaxed line-clamp-3 mt-1.5">{member.data.bio}</p>
-    )}
-    <div class="mt-2 text-xs text-brand-900 font-medium flex items-center gap-1">
-      <span>查看详情</span>
-      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-      </svg>
-    </div>
-  </a>
-) : (
+
+<div class="member-wrap relative h-full" data-member-card>
   <div class="p-6 rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full">
     <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-md">
       <AdaptiveImage
@@ -52,8 +24,110 @@ const { member } = Astro.props
     {member.data.research && (
       <p class="text-slate-500 text-xs line-clamp-2">{member.data.research}</p>
     )}
-    {member.data.bio && (
+    {!hasPopover && member.data.bio && (
       <p class="text-slate-500 text-xs leading-relaxed line-clamp-3 mt-1.5">{member.data.bio}</p>
     )}
+    {hasPopover && (
+      <button
+        type="button"
+        class="member-btn mt-3 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-brand-900 bg-brand-50 border border-brand-200 hover:bg-brand-100 hover:border-brand-300 transition-colors"
+        aria-expanded="false"
+        aria-label={`查看${member.data.name}的详细介绍`}
+      >
+        查看详情
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+    )}
   </div>
-)}
+
+  {hasPopover && (
+    <div class="member-pop absolute left-1/2 -translate-x-1/2 top-full mt-2 z-20 w-80 max-w-[calc(100vw-2rem)]">
+      <div class="bg-white rounded-xl shadow-xl border border-slate-200 p-5 text-left">
+        <p class="text-sm font-semibold text-slate-900">{member.data.name}</p>
+        <p class="text-xs text-slate-500 mt-0.5">{member.data.role}</p>
+        {member.data.bio && (
+          <p class="text-xs text-slate-600 leading-relaxed mt-2">{member.data.bio}</p>
+        )}
+        {highlights.length > 0 && (
+          <ul class="mt-3 space-y-1.5">
+            {highlights.map((item: string) => (
+              <li class="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
+                <svg class="w-3.5 h-3.5 text-brand-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {member.data.externalLink && (
+          <a
+            href={member.data.externalLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-brand-50 text-brand-900 border border-brand-200 hover:bg-brand-100 hover:border-brand-300 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            访问个人主页
+          </a>
+        )}
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  /* 弹层默认隐藏；桌面端 hover 显示，触屏/键盘通过点击或聚焦（member-pop-open）显示 */
+  .member-pop {
+    display: none;
+  }
+  .member-wrap:hover .member-pop,
+  .member-wrap:focus-within .member-pop,
+  .member-wrap.member-pop-open .member-pop {
+    display: block;
+  }
+</style>
+
+<script>
+  function setupMemberPopovers() {
+    const wraps = document.querySelectorAll<HTMLElement>('[data-member-card]');
+    if (!wraps.length) return;
+
+    const closeAll = (except?: HTMLElement) => {
+      wraps.forEach(wrap => {
+        if (wrap !== except) {
+          wrap.classList.remove('member-pop-open');
+          wrap.querySelector('.member-btn')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    };
+
+    wraps.forEach(wrap => {
+      const btn = wrap.querySelector<HTMLButtonElement>('.member-btn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = wrap.classList.toggle('member-pop-open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) closeAll(wrap);
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('.member-pop')) return; // 弹层内部点击（如打开个人主页链接）不关闭
+      if (!target.closest('[data-member-card]')) {
+        closeAll();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAll();
+    });
+  }
+
+  setupMemberPopovers();
+</script>
