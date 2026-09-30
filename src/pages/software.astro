@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import softwareData from '../data/software.json'
+
+interface SoftwareTool {
+  name: string;
+  tagline: string;
+  status: string;
+  distribution: string;
+  highlights: string[];
+  tags: string[];
+  partners: string[];
+  relatedPaper?: string;
+  award?: string;
+  articleUrl?: string;
+  usageNote?: string;
+}
+
+const tools = (softwareData as SoftwareTool[]).filter(t => t.status === '已发布')
+
+// 在研工具预告（发布后迁移至 software.json 正式条目）
+const upcoming = [
+  { name: '无人机视频三维重建', description: '面向无人机视频序列的快速三维重建工具' },
+  { name: '立体卫星三维地表生成', description: '立体卫星影像驱动的三维地表产品生成工具' }
+]
+
+// 关联论文信息（id 可能带 .md 后缀，两种 key 都注册）
+const papers = await getCollection('papers')
+const paperMap = new Map<string, (typeof papers)[number]>()
+for (const p of papers) {
+  const id = p.id as string
+  paperMap.set(id, p)
+  paperMap.set(id.replace(/\.md$/, ''), p)
+}
+
+const statusBadge = (status: string) => {
+  if (status === '已发布') return 'bg-green-50 text-green-700 border-green-200'
+  if (status === '内测') return 'bg-blue-50 text-blue-700 border-blue-200'
+  return 'bg-amber-50 text-amber-800 border-amber-200'
+}
+---
+<BaseLayout title="软件工具" description="武汉大学CVEO课题组自研软件工具：倾斜摄影三维模型修复、无人机视频三维重建、立体卫星三维地表生成等，学术成果的工程化落地。">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-slate-900 mb-4">软件工具</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+        课题组自研的行业软件与开源工具——把遥感学术论文中的算法，做成工程中用得上的产品
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8">
+      {tools.map(tool => {
+        const paper = tool.relatedPaper ? paperMap.get(tool.relatedPaper) : undefined
+        return (
+          <article class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <!-- 工具头图区（品牌渐变 + 图标，正式截图就绪后可替换） -->
+            <div class="h-44 bg-gradient-to-br from-brand-900 via-brand-800 to-brand-600 relative flex items-center justify-center">
+              <svg class="w-16 h-16 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"></path>
+              </svg>
+              <span class={`absolute top-4 right-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${statusBadge(tool.status)}`}>
+                {tool.status}
+              </span>
+            </div>
+
+            <div class="p-6 md:p-8">
+              <div class="flex flex-col lg:flex-row gap-8">
+                <div class="flex-1">
+                  <h2 class="text-2xl font-bold text-slate-900 mb-2">{tool.name}</h2>
+                  <p class="text-slate-600 leading-relaxed mb-5">{tool.tagline}</p>
+
+                  <ul class="space-y-2.5 mb-5">
+                    {tool.highlights.map(h => (
+                      <li class="flex items-start gap-2.5">
+                        <svg class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="text-sm text-slate-700">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div class="flex flex-wrap gap-2 mb-5">
+                    {tool.tags.map(tag => (
+                      <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-900 border border-brand-100">{tag}</span>
+                    ))}
+                  </div>
+
+                  {paper && (
+                    <a
+                      href={paper.data.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 text-sm text-brand-900 hover:text-brand-700 font-medium mb-2"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                      源自论文：{paper.data.title}（{paper.data.journal}，{paper.data.date.slice(0, 4)}）
+                    </a>
+                  )}
+                </div>
+
+                <!-- 侧栏：获取方式与背书 -->
+                <div class="lg:w-80 flex-shrink-0 space-y-4">
+                  <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <h3 class="text-sm font-semibold text-slate-900 mb-2">获取方式</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">{tool.usageNote}</p>
+                    {tool.articleUrl && (
+                      <a
+                        href={tool.articleUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-brand-900 text-white hover:bg-brand-800 transition-colors text-sm font-medium"
+                      >
+                        查看发布推文
+                      </a>
+                    )}
+                  </div>
+
+                  <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <h3 class="text-sm font-semibold text-slate-900 mb-2">研发单位</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">{tool.partners.join(' · ')}</p>
+                  </div>
+
+                  {tool.award && (
+                    <div class="p-4 rounded-xl bg-brand-50 border border-brand-100">
+                      <h3 class="text-sm font-semibold text-brand-900 mb-1.5 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                        获奖支撑
+                      </h3>
+                      <p class="text-xs text-brand-900/80 leading-relaxed">{tool.award}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
+        )
+      })}
+    </div>
+
+    <!-- 在研工具 -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 flex items-center gap-2">
+        研发中的工具
+        <span class="text-sm font-normal text-slate-500">近期将陆续发布</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {upcoming.map(t => (
+          <div class="p-5 rounded-xl border border-dashed border-slate-300 bg-slate-50/50">
+            <div class="flex items-center justify-between mb-1.5">
+              <h3 class="font-semibold text-slate-900">{t.name}</h3>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200">开发中</span>
+            </div>
+            <p class="text-sm text-slate-600">{t.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 底部 CTA -->
+    <div class="mt-12 p-6 rounded-xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="font-semibold text-slate-900 mb-1">企业定制与软件合作</h3>
+        <p class="text-sm text-slate-600">工具定制开发、联合研发、成果转化，欢迎与我们联系</p>
+      </div>
+      <a
+        href="/collaboration"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-brand-900 text-white hover:bg-brand-800 transition-colors font-medium flex-shrink-0"
+      >
+        了解合作方式
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
