@@ -1,0 +1,773 @@
+---
+import Icon from './icons/Icon.astro'
+/**
+ * 研究成果知识图谱（交互版）。
+ *
+ * 渲染架构：布局由 scripts/build-knowledge-graph.mjs 构建期生成；
+ * 本组件把边画进一层静态 SVG、节点渲染为绝对定位的 DOM 元素，
+ * 两者包在同一个 world 容器里，用 CSS translate3d+scale 做
+ * 平移缩放 —— 变换由浏览器合成器（GPU）处理，不触发重排重绘，
+ * 141+ 节点下保持 60fps。无 JS 时图谱完整可见，节点仍可聚焦。
+ *
+ * 节点类型可视化：图标（论文/代码/数据集/奖项/项目/导师）
+ * + 颜色 + 尺寸层级 + 非论文节点常显标签 + 扇区底纹。
+ */
+import graph from '../data/knowledge-graph.json'
+
+interface GraphNode {
+  id: string;
+  type: string;
+  label: string;
+  sub?: string;
+  year?: number;
+  featured?: boolean;
+  source?: string;
+  href?: string;
+  r: number;
+  x: number;
+  y: number;
+  dirIndex?: number;
+}
+
+interface GraphEdge {
+  s: string;
+  t: string;
+  rel: string;
+}
+
+const { nodes, edges } = graph as { nodes: GraphNode[]; edges: GraphEdge[] }
+
+// ---------- 几何常量（与构建脚本保持一致） ----------
+const WORLD = 1240
+const C = WORLD / 2 // 620, 布局坐标系中心偏移
+const SECTOR_SPAN = 40 // 扇区半角（度），构建脚本 SPAN=100/GAP=20
+
+const sectorWedge = (i: number) => {
+  const anchor = -90 + i * 120
+  const r1 = 172
+  const r2 = 500
+  const pt = (r: number, aDeg: number) => [
+    C + r * Math.cos((aDeg * Math.PI) / 180),
+    C + r * Math.sin((aDeg * Math.PI) / 180)
+  ]
+  const [x1, y1] = pt(r1, anchor - SECTOR_SPAN)
+  const [x2, y2] = pt(r1, anchor + SECTOR_SPAN)
+  const [x3, y3] = pt(r2, anchor + SECTOR_SPAN)
+  const [x4, y4] = pt(r2, anchor - SECTOR_SPAN)
+  return `M ${x1} ${y1} A ${r1} ${r1} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${r2} ${r2} 0 0 0 ${x4} ${y4} Z`
+}
+
+// ---------- 类型视觉规范 ----------
+interface Palette {
+  bg: string;
+  border: string;
+  text: string;
+}
+
+const palettes = {
+  center: { bg: '#2d1f5c', border: '#6b4eff', text: '#ffffff' },
+  direction: { bg: '#ede9fe', border: '#8f7cff', text: '#2d1f5c' },
+  paper: { bg: '#c4baff', border: '#8f7cff', text: '#334155' },
+  paperFeatured: { bg: '#6b4eff', border: '#ffffff', text: '#ffffff' },
+  paperCollab: { bg: '#ffffff', border: '#94a3b8', text: '#64748b' },
+  repo: { bg: '#334155', border: '#1e293b', text: '#ffffff' },
+  dataset: { bg: '#0d9488', border: '#0f766e', text: '#ffffff' },
+  award: { bg: '#f59e0b', border: '#b45309', text: '#ffffff' },
+  project: { bg: '#ea580c', border: '#c2410c', text: '#ffffff' },
+  faculty: { bg: '#0d9488', border: '#0f766e', text: '#ffffff' }
+} satisfies Record<string, Palette>
+
+function paletteOf(n: GraphNode): Palette {
+  if (n.type === 'paper') {
+    if (n.featured) return palettes.paperFeatured
+    return n.source === 'collaborative' ? palettes.paperCollab : palettes.paper
+  }
+  return (palettes as Record<string, Palette>)[n.type] ?? palettes.paper
+}
+
+// 节点尺寸（px）
+const nodeSize = (n: GraphNode) => {
+  switch (n.type) {
+    case 'center': return 52
+    case 'direction': return 0 // pill 自适应
+    case 'paper': return n.featured ? 22 : n.source === 'collaborative' ? 10 : 13
+    case 'repo': return 28
+    case 'dataset': return 28
+    case 'award': return 30
+    case 'project': return 30
+    case 'faculty': return 34
+    default: return 16
+  }
+}
+
+// 类型图标（24 viewBox 线条）
+const typeIcon: Record<string, string> = {
+  paper: 'M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5zm0 0v5h5',
+  repo: 'M9 8l-4 4 4 4m6-8l4 4-4 4M13 5l-2 14',
+  dataset: 'M5 7c0-1.5 3.1-3 7-3s7 1.5 7 3-3.1 3-7 3-7-1.5-7-3zm0 0v10c0 1.5 3.1 3 7 3s7-1.5 7-3V7',
+  award: 'M8 21h8m-4-4v4m-6-16V4h12v5c0 3.313-2.687 6-6 6s-6-2.687-6-6zM6 6H4a2 2 0 002 4m10-4h2a2 2 0 01-2 4',
+  project: 'M9 4h6v3H9zM9 4H8a2 2 0 00-2 2v13a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2h-1',
+  faculty: 'M12 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM5.5 20a6.5 6.5 0 0113 0',
+  direction: 'M12 12m-9 0a9 9 0 1018 0 9 9 0 10-18 0M12 12m-3 0a3 3 0 106 0 3 3 0 10-6 0'
+}
+
+const legendIcon: Record<string, string> = {
+  paper: 'doc',
+  repo: 'code',
+  dataset: 'database',
+  award: 'ribbon',
+  project: 'clipboard',
+  faculty: 'user'
+}
+
+const legendTypes = [
+  { key: 'paper', zh: '论文', en: 'Paper' },
+  { key: 'repo', zh: '开源代码', en: 'Code' },
+  { key: 'dataset', zh: '数据集', en: 'Dataset' },
+  { key: 'award', zh: '奖项', en: 'Award' },
+  { key: 'project', zh: '在研项目', en: 'Project' }
+]
+
+const detailTypeLabel: Record<string, string> = {
+  center: '课题组 / Group',
+  direction: '研究方向 / Direction',
+  paper: '论文 / Paper',
+  repo: '开源代码 / Code',
+  dataset: '数据集 / Dataset',
+  award: '奖项 / Award',
+  project: '在研项目 / Project',
+  faculty: '导师 / Faculty'
+}
+
+// 边去重
+const seen = new Set()
+const uniqueEdges = edges.filter(e => {
+  const key = [e.s, e.t].sort().join('::')
+  if (seen.has(key)) return false
+  seen.add(key)
+  return true
+})
+
+const nodeById = new Map(nodes.map(n => [n.id, n]))
+---
+
+<div class="kg-root relative scroll-mt-24" id="knowledge-graph">
+  <!-- 缩放控制条 -->
+  <div class="flex items-center justify-end gap-1.5 mb-3">
+    <span class="text-xs text-slate-500 hidden md:inline mr-1">滚轮缩放 · 拖拽平移 · 点击节点看详情</span>
+    <button type="button" id="kg-zoom-out" class="kg-zoom-btn" aria-label="缩小">−</button>
+    <button type="button" id="kg-zoom-reset" class="kg-zoom-btn" aria-label="重置视图">重置</button>
+    <button type="button" id="kg-zoom-in" class="kg-zoom-btn" aria-label="放大">＋</button>
+    <button type="button" id="kg-fullscreen" class="kg-zoom-btn" aria-label="全屏">
+      <Icon name="fullscreen" class="w-3.5 h-3.5" />
+    </button>
+  </div>
+
+  <!-- 图谱舞台：固定高度，全图初始可见，滚轮/拖拽/全屏探索 -->
+  <!-- html-validate-disable no-inline-style -->
+  <div id="kg-stage" class="relative h-[420px] sm:h-[520px] lg:h-[600px] rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white overflow-hidden touch-none select-none cursor-grab">
+    <!-- 图例（舞台内悬浮，滚动页面时始终与图谱同屏可见） -->
+    <div class="absolute top-2 left-2 z-10 max-w-[calc(100%-1rem)]" id="kg-legend-wrap">
+      <div class="flex flex-wrap items-center gap-1.5 rounded-lg border border-slate-200 bg-white/90 p-1.5 shadow-sm" id="kg-legend">
+        {legendTypes.map(t => (
+          <button
+            type="button"
+            class="kg-legend-btn inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs border border-slate-200 bg-white text-slate-600 hover:border-brand-300 transition-colors"
+            data-type={t.key}
+          >
+            <Icon name={legendIcon[t.key] ?? 'doc'} class="w-3 h-3" strokeWidth={1.5} />
+            {t.zh} <span class="text-slate-500 hidden sm:inline">{t.en}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+    <div id="kg-world" class="absolute left-0 top-0 will-change-transform" style={`width:${WORLD}px;height:${WORLD}px;transform-origin:0 0`}>
+      <!-- 扇区底纹 + 边（静态 SVG 层） -->
+      <svg class="absolute left-0 top-0 pointer-events-none" width={WORLD} height={WORLD} viewBox={`0 0 ${WORLD} ${WORLD}`} aria-hidden="true">
+        {nodes.filter(n => n.type === 'direction').map(d => (
+          <path d={sectorWedge(d.dirIndex ?? 0)} fill="rgba(107,78,255,0.035)" stroke="rgba(107,78,255,0.08)" stroke-width="1" />
+        ))}
+        {nodes.filter(n => n.type === 'direction').map(d => {
+          const a = (-90 + (d.dirIndex ?? 0) * 120) * Math.PI / 180
+          return (
+            <text
+              x={C + 596 * Math.cos(a)}
+              y={C + 596 * Math.sin(a)}
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="18"
+              font-weight="700"
+              fill="#2d1f5c"
+              opacity="0.85"
+              stroke="#f8fafc"
+              stroke-width="4"
+              paint-order="stroke"
+            >{d.label}</text>
+          )
+        })}
+        <g id="kg-edges">
+          {uniqueEdges.map(e => {
+            const s = nodeById.get(e.s)
+            const t = nodeById.get(e.t)
+            if (!s || !t) return null
+            const isFaculty = e.rel === '通讯作者'
+            return (
+              <line
+                class={`kg-edge ${isFaculty ? 'kg-edge-faculty' : ''}`}
+                data-s={e.s}
+                data-t={e.t}
+                x1={s.x + C} y1={s.y + C} x2={t.x + C} y2={t.y + C}
+                stroke={isFaculty ? '#dbe3f0' : '#d3dcf0'}
+                stroke-width={isFaculty ? 0.7 : 1.1}
+              />
+            )
+          })}
+        </g>
+      </svg>
+
+      <!-- 节点层（DOM，GPU 合成） -->
+      {nodes.map(n => {
+        const p = paletteOf(n)
+        const size = nodeSize(n)
+        const left = n.x + C
+        const top = n.y + C
+        const isPaper = n.type === 'paper'
+        const showLabel = !isPaper || n.featured
+        const label = n.label.length > 30 ? n.label.slice(0, 30) + '…' : n.label
+        const icon = typeIcon[n.type]
+        const href = n.href || (n.type === 'direction' ? '#kg-dir-' + n.dirIndex : '#kg-' + n.id)
+        return (
+          <a
+            href={href}
+            data-node={n.id}
+            data-type={n.type}
+            data-label={n.label}
+            data-sub={n.sub || ''}
+            data-year={n.year || ''}
+            data-href={n.href || ''}
+            tabindex="0"
+            role="button"
+            aria-label={`${detailTypeLabel[n.type]}：${n.label}`}
+            class={`kg-node absolute flex flex-col items-center justify-start ${isPaper ? '' : 'gap-1'}`}
+            style={`left:${left}px;top:${top}px`}
+          >
+            {n.type === 'direction' ? (
+              <span
+                class="kg-shape inline-flex items-center gap-1.5 px-3 h-8 rounded-full border font-semibold text-sm whitespace-nowrap shadow-sm"
+                style={`background:${p.bg};border-color:${p.border};color:${p.text}`}
+              >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d={typeIcon.direction} />
+                </svg>
+                {n.label}
+              </span>
+            ) : n.type === 'center' ? (
+              <span
+                class="kg-shape flex flex-col items-center justify-center rounded-full shadow-md"
+                style={`width:${size}px;height:${size}px;background:${p.bg};border:2px solid ${p.border}`}
+              >
+                <span class="text-white font-bold" style="font-size:13px">CVEO</span>
+                <span class="text-violet-200" style="font-size:8px">课题组</span>
+              </span>
+            ) : (
+              <span
+                class={`kg-shape flex items-center justify-center ${isPaper ? 'rounded-full' : 'rounded-lg'} shadow-sm ${n.featured ? 'kg-featured-ring' : ''}`}
+                style={`width:${size}px;height:${size}px;background:${p.bg};border:${n.featured ? 2 : 1.5}px solid ${p.border}`}
+              >
+                {!isPaper && (
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke={p.text} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d={icon} />
+                  </svg>
+                )}
+              </span>
+            )}
+            {showLabel && n.type !== 'center' && n.type !== 'direction' && (
+              <span class={`kg-nlabel leading-tight text-center text-slate-600 ${isPaper ? 'kg-plabel mt-1 text-[10px] font-medium' : 'text-[11px] font-medium'}`}>
+                {label}
+              </span>
+            )}
+            <span class="sr-only">{n.label}</span>
+          </a>
+        )
+      })}
+    </div>
+
+    <!-- Tooltip（跟随光标，悬停即现） -->
+    <div id="kg-tooltip" class="hidden absolute z-20 pointer-events-none max-w-[260px] rounded-lg border border-slate-200 bg-white shadow-lg px-3 py-2">
+      <p id="kg-tooltip-type" class="text-[10px] font-medium text-brand-900 mb-0.5"></p>
+      <p id="kg-tooltip-title" class="text-xs font-semibold text-slate-900 leading-snug"></p>
+      <p id="kg-tooltip-sub" class="hidden text-[11px] text-slate-500 mt-0.5"></p>
+      <p id="kg-tooltip-hint" class="hidden text-[10px] text-slate-500 mt-1.5 pt-1.5 border-t border-slate-100">单击查看详情 · 双击打开链接</p>
+    </div>
+
+    <!-- 详情卡 -->
+    <div id="kg-detail" class="hidden absolute top-3 right-3 w-64 rounded-lg border border-slate-200 bg-white/95 backdrop-blur shadow-lg p-4 z-10">
+      <div class="flex items-start justify-between gap-2 mb-1.5">
+        <span id="kg-detail-type" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-brand-50 text-brand-900 border border-brand-100"></span>
+        <button type="button" id="kg-detail-close" class="text-slate-500 hover:text-slate-600 leading-none" aria-label="关闭详情">✕</button>
+      </div>
+      <p id="kg-detail-title" class="text-sm font-semibold text-slate-900 leading-snug mb-1"></p>
+      <p id="kg-detail-sub" class="text-xs text-slate-500 mb-3"></p>
+      <a id="kg-detail-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center gap-1 text-sm text-brand-900 font-medium hover:text-brand-700">
+        <span id="kg-detail-action">查看详情</span> →
+      </a>
+    </div>
+
+    <!-- 操作提示 -->
+    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] text-slate-500 bg-white/80 rounded-full px-3 py-1 pointer-events-none">
+      滚轮缩放 · 拖拽平移 · 点击节点查看详情 · 双击方向名聚焦扇区
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .kg-zoom-btn {
+    @apply w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-600 hover:text-brand-900 hover:border-brand-300 text-sm font-medium transition-colors inline-flex items-center justify-center;
+  }
+  .kg-legend-btn.kg-off {
+    @apply opacity-40;
+  }
+  .kg-node {
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+  }
+  .kg-node:focus-visible {
+    outline: 2px solid #6b4eff;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  .kg-featured-ring {
+    box-shadow: 0 0 0 3px rgba(107, 78, 255, 0.18);
+  }
+  #kg-stage.kg-panning .kg-node,
+  #kg-stage.kg-panning .kg-edge {
+    transition: none !important;
+    pointer-events: none !important;
+  }
+  #kg-stage.kg-panning {
+    cursor: grabbing !important;
+  }
+  #kg-stage:fullscreen {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background: #ffffff;
+  }
+  /* 邻域高亮 */
+  #kg-stage[data-focus] .kg-node:not(.kg-hit) {
+    opacity: 0.12;
+  }
+  #kg-stage[data-focus] svg .kg-edge:not(.kg-hit) {
+    opacity: 0.06;
+  }
+  #kg-stage[data-focus] .kg-hit {
+    opacity: 1;
+  }
+  /* featured 论文标签：默认隐藏避免中心区叠压，放大或悬停邻域时显示 */
+  .kg-plabel {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  #kg-stage.kg-zoomed-in .kg-plabel,
+  #kg-stage.kg-zoomed-in .kg-node.kg-hit .kg-plabel,
+  #kg-stage.kg-zoomed-in .kg-node:hover .kg-plabel {
+    opacity: 1;
+  }
+  #kg-stage[data-focus] .kg-node.kg-hit .kg-plabel {
+    opacity: 1;
+  }
+  /* 图例过滤隐藏 */
+  .kg-hidden {
+    display: none !important;
+  }
+</style>
+
+<script>
+  // ============ 知识图谱交互（CSS transform 合成器驱动，GPU 加速） ============
+  const stage = document.getElementById('kg-stage') as HTMLElement | null
+  if (stage) {
+    const world = document.getElementById('kg-world') as HTMLElement
+    const nodeAnchors = Array.from(stage.querySelectorAll<HTMLAnchorElement>('a[data-node]'))
+    const edgeEls = Array.from(stage.querySelectorAll<SVGLineElement>('.kg-edge'))
+    const detail = document.getElementById('kg-detail')!
+    const detailType = document.getElementById('kg-detail-type')!
+    const detailTitle = document.getElementById('kg-detail-title')!
+    const detailSub = document.getElementById('kg-detail-sub')!
+    const detailLink = document.getElementById('kg-detail-link') as HTMLAnchorElement
+    const detailAction = document.getElementById('kg-detail-action')!
+    const tooltip = document.getElementById('kg-tooltip')!
+    const tooltipType = document.getElementById('kg-tooltip-type')!
+    const tooltipTitle = document.getElementById('kg-tooltip-title')!
+    const tooltipSub = document.getElementById('kg-tooltip-sub')!
+    const tooltipHint = document.getElementById('kg-tooltip-hint')!
+
+    const detailTypeLabel: Record<string, string> = {
+      center: '课题组 / Group', direction: '研究方向 / Direction', paper: '论文 / Paper',
+      repo: '开源代码 / Code', dataset: '数据集 / Dataset', award: '奖项 / Award',
+      project: '在研项目 / Project', faculty: '导师 / Faculty'
+    }
+    const detailActionMap: Record<string, string> = {
+      paper: '打开论文', repo: 'GitHub 仓库', dataset: 'GitHub 获取',
+      project: '查看项目', faculty: '查看团队'
+    }
+
+    // 邻接表
+    const adjacency = new Map<string, Set<string>>()
+    edgeEls.forEach(e => {
+      const s = e.dataset.s!, t = e.dataset.t!
+      if (!adjacency.has(s)) adjacency.set(s, new Set())
+      if (!adjacency.has(t)) adjacency.set(t, new Set())
+      adjacency.get(s)!.add(t)
+      adjacency.get(t)!.add(s)
+    })
+
+    // ---- 邻域高亮 ----
+    let pinnedId: string | null = null
+    function highlight(nodeId: string | null) {
+      const id = nodeId ?? pinnedId
+      if (!id) {
+        stage!.removeAttribute('data-focus')
+        nodeAnchors.forEach(a => a.classList.remove('kg-hit'))
+        edgeEls.forEach(e => e.classList.remove('kg-hit'))
+        return
+      }
+      const neighbors = adjacency.get(id) || new Set()
+      stage!.setAttribute('data-focus', id)
+      nodeAnchors.forEach(a => a.classList.toggle('kg-hit', a.dataset.node === id || neighbors.has(a.dataset.node!)))
+      edgeEls.forEach(e => e.classList.toggle('kg-hit', e.dataset.s === id || e.dataset.t === id))
+    }
+
+    function showDetail(a: HTMLAnchorElement) {
+      const type = a.dataset.type!
+      detailType.textContent = detailTypeLabel[type] || type
+      detailTitle.textContent = a.dataset.label!
+      detailSub.textContent = a.dataset.sub || (a.dataset.year ? `${a.dataset.year} 年` : '')
+      const href = a.dataset.href
+      if (href) {
+        detailLink.href = href
+        detailAction.textContent = detailActionMap[type] || '查看详情'
+        detailLink.classList.remove('hidden')
+      } else {
+        detailLink.classList.add('hidden')
+      }
+      detail.classList.remove('hidden')
+    }
+
+    // 事件委托：pointerover/out 覆盖 hover 高亮
+    const typeZh: Record<string, string> = {
+      center: '课题组 / Group', direction: '研究方向 / Direction', paper: '论文 / Paper',
+      repo: '开源代码 / Code', dataset: '数据集 / Dataset', award: '奖项 / Award',
+      project: '在研项目 / Project', faculty: '导师 / Faculty'
+    }
+    stage.addEventListener('pointerover', (e) => {
+      const a = (e.target as Element).closest('a[data-node]') as HTMLAnchorElement | null
+      highlight(a ? a.dataset.node! : null)
+      if (!a) {
+        tooltip!.classList.add('hidden')
+        return
+      }
+      tooltipType!.textContent = typeZh[a.dataset.type!] || a.dataset.type!
+      tooltipTitle!.textContent = a.dataset.label!
+      const sub = a.dataset.sub || (a.dataset.year ? a.dataset.year + ' 年' : '')
+      tooltipSub!.textContent = sub
+      tooltipSub!.classList.toggle('hidden', !sub)
+      tooltipHint!.classList.toggle('hidden', !a.dataset.href)
+      tooltip!.classList.remove('hidden')
+    })
+    stage.addEventListener('pointermove', (e) => {
+      if (tooltip!.classList.contains('hidden')) return
+      const r = stage!.getBoundingClientRect()
+      // 光标右上跟随，越界时翻转到左下
+      let x = e.clientX - r.left + 14
+      let y = e.clientY - r.top + 14
+      const tw = tooltip!.offsetWidth
+      const th = tooltip!.offsetHeight
+      if (x + tw > r.width - 8) x = e.clientX - r.left - tw - 12
+      if (y + th > r.height - 8) y = e.clientY - r.top - th - 12
+      tooltip!.style.left = x + 'px'
+      tooltip!.style.top = y + 'px'
+    })
+    stage.addEventListener('pointerleave', () => tooltip!.classList.add('hidden'))
+    stage.addEventListener('pointerleave', () => highlight(null))
+
+    // 自算双击：同节点 350ms 内两次单击（不依赖原生 dblclick，规避 pointer capture 事件重定向）
+    let lastClickId: string | null = null
+    let lastClickTime = 0
+
+    stage.addEventListener('click', (e) => {
+      // 拖拽平移结束后的 click 一律丢弃，避免误弹详情
+      if (suppressClick || dragStarted) {
+        suppressClick = false
+        return
+      }
+      const a = (e.target as Element).closest('a[data-node]') as HTMLAnchorElement | null
+      if (!a) {
+        pinnedId = null
+        lastClickId = null
+        highlight(null)
+        detail.classList.add('hidden')
+        return
+      }
+      const id = a.dataset.node!
+      // 方向锚点：单击定位方向卡；双击聚焦扇区
+      if (a.getAttribute('href')?.startsWith('#kg-dir-')) {
+        const now = performance.now()
+        if (lastClickId === id && now - lastClickTime < 350) {
+          lastClickId = null
+          markAdjusted()
+          zoomToSector(a)
+        } else {
+          lastClickId = id
+          lastClickTime = now
+          pinnedId = null
+        }
+        return
+      }
+      e.preventDefault()
+      const now = performance.now()
+      // 自算双击：直接打开链接
+      if (lastClickId === id && now - lastClickTime < 350) {
+        lastClickId = null
+        lastClickTime = 0
+        openNodeLink(a)
+        return
+      }
+      // 单击：固定高亮 + 详情卡
+      lastClickId = id
+      lastClickTime = now
+      pinnedId = pinnedId === id ? null : id
+      highlight(pinnedId)
+      if (pinnedId === id) {
+        showDetail(a)
+      } else {
+        detail.classList.add('hidden')
+      }
+    })
+    // 原生 dblclick 兜底：覆盖「单次物理按下即派发 dblclick」的场景（自动化/触屏双击）
+    // 自算双击（两次 click）已先触发导航时，600ms 内的原生 dblclick 跳过防重复开窗
+    stage.addEventListener('dblclick', (e) => {
+      if (performance.now() - lastNavAt < 600) {
+        e.preventDefault()
+        return
+      }
+      const a = (e.target as Element).closest('a[data-node]') as HTMLAnchorElement | null
+      if (!a) return
+      if (a.dataset.type === 'direction') {
+        markAdjusted()
+        zoomToSector(a)
+        return
+      }
+      e.preventDefault()
+      openNodeLink(a)
+    })
+
+    stage.addEventListener('keydown', (e) => {
+      const a = (e.target as Element).closest('a[data-node]') as HTMLAnchorElement | null
+      if (!a) return
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        a.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+      }
+    })
+    document.getElementById('kg-detail-close')?.addEventListener('click', () => {
+      pinnedId = null
+      highlight(null)
+      detail.classList.add('hidden')
+    })
+
+    // ---- 图例过滤 ----
+    document.querySelectorAll<HTMLElement>('.kg-legend-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type!
+        const off = btn.classList.toggle('kg-off')
+        nodeAnchors.forEach(a => {
+          if (a.dataset.type === type) a.classList.toggle('kg-hidden', off)
+        })
+        edgeEls.forEach(e => {
+          const sType = nodeAnchors.find(x => x.dataset.node === e.dataset.s)?.dataset.type
+          const tType = nodeAnchors.find(x => x.dataset.node === e.dataset.t)?.dataset.type
+          if (off && (sType === type || tType === type)) e.classList.add('kg-hidden')
+          else e.classList.remove('kg-hidden')
+        })
+      })
+    })
+
+    // ---- 缩放平移（CSS transform，合成器驱动） ----
+    const WORLD = 1160
+    let scale = 1
+    let tx = 0
+    let ty = 0
+    let fitScale = 1
+
+    function apply() {
+      world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`
+      stage!.classList.toggle('kg-zoomed-in', scale > fitScale * 1.6)
+    }
+    function fit() {
+      const r = stage!.getBoundingClientRect()
+      if (r.height === 0 || r.width === 0) return
+      fitScale = Math.min(r.width / WORLD, r.height / WORLD) * 0.96
+      scale = fitScale
+      tx = (r.width - WORLD * scale) / 2
+      ty = (r.height - WORLD * scale) / 2
+      apply()
+    }
+    function zoomAt(clientX: number, clientY: number, factor: number) {
+      const r = stage!.getBoundingClientRect()
+      const px = clientX - r.left
+      const py = clientY - r.top
+      const wx = (px - tx) / scale
+      const wy = (py - ty) / scale
+      const newScale = Math.min(fitScale * 6, Math.max(fitScale * 0.5, scale * factor))
+      tx = px - wx * newScale
+      ty = py - wy * newScale
+      scale = newScale
+      apply()
+    }
+
+    // 滚轮缩放（rAF 合并）
+    let wheelPending = false
+    let lastWheel: WheelEvent | null = null
+    stage.addEventListener('wheel', (e) => {
+      e.preventDefault()
+      lastWheel = e as WheelEvent
+      if (!wheelPending) {
+        wheelPending = true
+        requestAnimationFrame(() => {
+          if (lastWheel) zoomAt(lastWheel.clientX, lastWheel.clientY, lastWheel.deltaY < 0 ? 1.12 : 1 / 1.12)
+          wheelPending = false
+        })
+      }
+    }, { passive: false })
+
+    document.getElementById('kg-zoom-in')?.addEventListener('click', () => {
+      const r = stage!.getBoundingClientRect()
+      zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.3)
+    })
+    document.getElementById('kg-zoom-out')?.addEventListener('click', () => {
+      const r = stage!.getBoundingClientRect()
+      zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.3)
+    })
+    document.getElementById('kg-zoom-reset')?.addEventListener('click', fit)
+
+    // 拖拽平移：4px 阈值判定，避免微动/误触被当成拖拽
+    let pressing = false
+    let dragStarted = false
+    let suppressClick = false
+    let downX = 0, downY = 0
+    let lastX = 0, lastY = 0
+    let panFrame: number | null = null
+    const panDelta = { x: 0, y: 0 }
+    const DRAG_THRESHOLD = 4
+
+    stage.addEventListener('pointerdown', (e) => {
+      pressing = true
+      dragStarted = false
+      suppressClick = false
+      downX = e.clientX
+      downY = e.clientY
+      lastX = e.clientX
+      lastY = e.clientY
+    })
+    stage.addEventListener('pointermove', (e) => {
+      if (!pressing) return
+      if (!dragStarted) {
+        if (Math.hypot(e.clientX - downX, e.clientY - downY) < DRAG_THRESHOLD) return
+        dragStarted = true
+        suppressClick = true // 拖拽结束后的 click 事件将被丢弃
+        stage!.classList.add('kg-panning')
+        try { stage!.setPointerCapture(e.pointerId) } catch { /* 合成事件无真实 pointerId */ }
+      }
+      panDelta.x += e.clientX - lastX
+      panDelta.y += e.clientY - lastY
+      lastX = e.clientX
+      lastY = e.clientY
+      if (panFrame === null) {
+        panFrame = requestAnimationFrame(() => {
+          tx += panDelta.x
+          ty += panDelta.y
+          panDelta.x = 0
+          panDelta.y = 0
+          apply()
+          panFrame = null
+        })
+      }
+    })
+    const endPan = () => {
+      pressing = false
+      if (!dragStarted) return
+      dragStarted = false
+      stage!.classList.remove('kg-panning')
+      if (panFrame !== null) {
+        cancelAnimationFrame(panFrame)
+        panFrame = null
+      }
+      // 快速拖动时 pointerup 可能先于 rAF，补上未落盘的位移
+      if (panDelta.x !== 0 || panDelta.y !== 0) {
+        tx += panDelta.x
+        ty += panDelta.y
+        panDelta.x = 0
+        panDelta.y = 0
+        apply()
+      }
+      // click 事件在 pointerup 之后同步触发，延迟一帧解除抑制
+      setTimeout(() => { suppressClick = false }, 0)
+    }
+    stage.addEventListener('pointerup', endPan)
+    stage.addEventListener('pointercancel', endPan)
+
+    // 双击扇区聚焦：缩放到方向节点（由 click 流程的自算双击触发）
+    function zoomToSector(a: HTMLAnchorElement) {
+      const nx = Number(a.style.left.replace('px', ''))
+      const ny = Number(a.style.top.replace('px', ''))
+      const target = fitScale * 2.4
+      tx = stage!.clientWidth / 2 - nx * target
+      ty = stage!.clientHeight / 2 - ny * target
+      scale = target
+      apply()
+    }
+    let lastNavAt = 0
+    function openNodeLink(a: HTMLAnchorElement) {
+      const href = a.dataset.href
+      if (!href) return
+      lastNavAt = performance.now()
+      pinnedId = null
+      highlight(null)
+      detail.classList.add('hidden')
+      if (/^https?:/i.test(href)) {
+        window.open(href, '_blank', 'noopener')
+      } else {
+        window.location.href = href
+      }
+    }
+
+    // ---- 全屏 ----
+    document.getElementById('kg-fullscreen')?.addEventListener('click', () => {
+      if (document.fullscreenElement) void document.exitFullscreen()
+      else void stage!.requestFullscreen()
+    })
+    // 自适应初始化：脚本可能先于样式表加载执行（此时 stage 高度为 0），
+    // 用 ResizeObserver 监听实际尺寸变化后再 fit；用户手动缩放/平移后不覆盖
+    let userAdjusted = false
+    function markAdjusted() { userAdjusted = true }
+    document.getElementById('kg-zoom-in')?.addEventListener('click', markAdjusted)
+    document.getElementById('kg-zoom-out')?.addEventListener('click', markAdjusted)
+    stage!.addEventListener('wheel', markAdjusted, { passive: false })
+    stage!.addEventListener('pointerdown', markAdjusted)
+    nodeAnchors.forEach(a => {
+      if (a.dataset.type === 'direction') a.addEventListener('dblclick', markAdjusted)
+    })
+    const ro = new ResizeObserver(() => {
+      const r = stage!.getBoundingClientRect()
+      if (r.height === 0 || r.width === 0) return // 面板隐藏（tab 未激活）时跳过
+      if (!userAdjusted) fit()
+    })
+    ro.observe(stage)
+    document.addEventListener('fullscreenchange', () => {
+      userAdjusted = false
+      fit()
+    })
+  }
+</script>

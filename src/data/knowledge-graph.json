@@ -1,0 +1,1621 @@
+{
+ "generatedAt": "2026-09-30",
+ "typeLabels": {
+  "center": "课题组 / Group",
+  "direction": "研究方向 / Direction",
+  "paper": "论文 / Paper",
+  "repo": "开源代码 / Code",
+  "dataset": "数据集 / Dataset",
+  "award": "奖项 / Award",
+  "project": "在研项目 / Project"
+ },
+ "nodes": [
+  {
+   "id": "center",
+   "type": "center",
+   "label": "CVEO 课题组",
+   "sub": "Computer Vision for Earth Observation",
+   "r": 17,
+   "x": 7,
+   "y": 0
+  },
+  {
+   "id": "dir-0",
+   "type": "direction",
+   "label": "多模态遥感智能解译",
+   "sub": "让计算机看懂卫星与无人机影像：地物分类、语义分割、变化检测与目标提取，覆盖从弱监…",
+   "dirIndex": 0,
+   "r": 13,
+   "x": 0,
+   "y": -130
+  },
+  {
+   "id": "dir-1",
+   "type": "direction",
+   "label": "三维遥感重建与数字孪生",
+   "sub": "从立体影像、卫星视频与点云重建真实三维世界：立体匹配、屋顶结构提取、立面纹理修复…",
+   "dirIndex": 1,
+   "r": 13,
+   "x": 113,
+   "y": 65
+  },
+  {
+   "id": "dir-2",
+   "type": "direction",
+   "label": "全域遥感监测与时空智能",
+   "sub": "长时序、大范围的地球动态观测：植被生产力估算、城市功能与活力感知、社会经济指标的…",
+   "dirIndex": 2,
+   "r": 13,
+   "x": -113,
+   "y": 65
+  },
+  {
+   "id": "paper-our/a-change-detection-method-of-integrating-remote-sensing-and-gis",
+   "type": "paper",
+   "label": "A change detection method of integrating remote sensing and GIS",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 54,
+   "y": -401
+  },
+  {
+   "id": "paper-our/a-deep-transfer-learning-framework-using-teacher-student-structure-for-land-cover-classification-of-",
+   "type": "paper",
+   "label": "A Deep Transfer Learning Framework Using Teacher-Student Structure for Land Cover Classification of Remote-Sensing Imagery",
+   "year": 2024,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2023.3312591",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -10,
+   "y": -249
+  },
+  {
+   "id": "paper-our/a-fusion-algorithm-for-remote-sensing-images-based-on-nonsubsampled-pyramids-and-bidimensional-empirical-decomposition",
+   "type": "paper",
+   "label": "A fusion algorithm for remote sensing images based on nonsubsampled pyramids and bidimensional empirical decomposition",
+   "year": 2010,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 126,
+   "y": -357
+  },
+  {
+   "id": "paper-our/a-linear-pushbroom-satellite-image-epipolar-resampling-method-for-digital-surface-model-generation",
+   "type": "paper",
+   "label": "A linear pushbroom satellite image epipolar resampling method for digital surface model generation",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.isprsjprs.2022.05.010",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 323,
+   "y": 139
+  },
+  {
+   "id": "paper-our/a-microwave-optical-multi-stage-synergistic-daily-30-m-soil-moisture-downscaling-framework",
+   "type": "paper",
+   "label": "A Microwave-Optical Multi-Stage Synergistic Daily 30 m Soil Moisture Downscaling Framework",
+   "year": 2025,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs17223677",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -225,
+   "y": 84
+  },
+  {
+   "id": "paper-our/a-new-filtering-approach-of-lidar-data-based-on-topographic-change-detection",
+   "type": "paper",
+   "label": "A new filtering approach of LiDAR data based on topographic change detection",
+   "year": 2013,
+   "source": "our",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 352,
+   "y": 207
+  },
+  {
+   "id": "paper-our/a-strategy-of-change-detection-based-on-remotely-sensed-imagery-and-gis-data",
+   "type": "paper",
+   "label": "A strategy of change detection based on remotely sensed imagery and GIS data",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -160,
+   "y": -381
+  },
+  {
+   "id": "paper-our/a-study-on-social-economic-statistic-data-spatial-distribution-in-land-sustainab",
+   "type": "paper",
+   "label": "A study on social economic statistic data spatial distribution in land sustainable use assessment",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -399,
+   "y": 186
+  },
+  {
+   "id": "paper-our/a-superpixel-guided-unsupervised-fast-semantic-segmentation-method-of-remote-sensing-images",
+   "type": "paper",
+   "label": "A Superpixel-Guided Unsupervised Fast Semantic Segmentation Method of Remote Sensing Images",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2022.3198065",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 76,
+   "y": -256
+  },
+  {
+   "id": "paper-our/an-image-fusion-method-based-on-emd-decomposition",
+   "type": "paper",
+   "label": "An image fusion method based on EMD decomposition",
+   "year": 2009,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -75,
+   "y": -380
+  },
+  {
+   "id": "paper-our/an-integrated-remote-sensing-and-gis-approach-in-the-detecting-changes-in-beijin",
+   "type": "paper",
+   "label": "An integrated remote sensing and GIS approach in the detecting changes in Beijing",
+   "year": 2005,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -30,
+   "y": -430
+  },
+  {
+   "id": "paper-our/an-object-based-supervised-classification-framework-for-very-high-resolution-remote-sensing-images-u",
+   "type": "paper",
+   "label": "An object-based supervised classification framework for very-high-resolution remote sensing images using convolutional neural networks",
+   "year": 2018,
+   "source": "our",
+   "href": "https://doi.org/10.1080/2150704x.2017.1422873",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 71,
+   "y": -328
+  },
+  {
+   "id": "paper-our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
+   "type": "paper",
+   "label": "BFA-YOLO: A balanced multiscale object detection network for building façade elements detection",
+   "year": 2025,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.aei.2025.103289",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 230,
+   "y": 121
+  },
+  {
+   "id": "paper-our/change-detection-based-on-faster-r-cnn-for-high-resolution-remote-sensing-images",
+   "type": "paper",
+   "label": "Change detection based on Faster R-CNN for high-resolution remote sensing images",
+   "year": 2018,
+   "source": "our",
+   "href": "https://doi.org/10.1080/2150704x.2018.1492172",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -108,
+   "y": -327
+  },
+  {
+   "id": "paper-our/convective-clouds-extraction-from-himawari-8-satellite-images-based-on-double-stream-fully-convoluti",
+   "type": "paper",
+   "label": "Convective Clouds Extraction From Himawari-8 Satellite Images Based on Double-Stream Fully Convolutional Networks",
+   "year": 2020,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2019.2926402",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -131,
+   "y": -274
+  },
+  {
+   "id": "paper-our/detecting-individual-plants-infected-with-pine-wilt-disease-using-drones-and-satellite-imagery-a-cas",
+   "type": "paper",
+   "label": "Detecting Individual Plants Infected with Pine Wilt Disease Using Drones and Satellite Imagery: A Case Study in Xianning, China",
+   "year": 2023,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs15102671",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -155,
+   "y": 302
+  },
+  {
+   "id": "paper-our/detection-of-vegetation-coverage-changes-in-the-yellow-river-basin-from-2003-to-2020",
+   "type": "paper",
+   "label": "Detection of vegetation coverage changes in the Yellow River Basin from 2003 to 2020",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.ecolind.2022.108818",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -355,
+   "y": 84
+  },
+  {
+   "id": "paper-our/distinguishable-keypoint-detection-and-matching-for-optical-satellite-images-with-deep-convolutional",
+   "type": "paper",
+   "label": "Distinguishable keypoint detection and matching for optical satellite images with deep convolutional neural networks",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.jag.2022.102795",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 360,
+   "y": -46
+  },
+  {
+   "id": "paper-our/enhancing-terrestrial-net-primary-productivity-estimation-with-exp-casa-a-novel-light-use-efficiency",
+   "type": "paper",
+   "label": "Enhancing terrestrial net primary productivity estimation with EXP-CASA: A novel light use efficiency model approach",
+   "year": 2025,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.rse.2025.114790",
+   "dirIndex": 2,
+   "r": 7,
+   "x": -71,
+   "y": 199
+  },
+  {
+   "id": "paper-our/enlighten-gan-for-super-resolution-reconstruction-in-mid-resolution-remote-sensing-images",
+   "type": "paper",
+   "label": "Enlighten-GAN for Super Resolution Reconstruction in Mid-Resolution Remote Sensing Images",
+   "year": 2021,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs13061104",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 277,
+   "y": 251
+  },
+  {
+   "id": "paper-our/extraction-of-polymetallic-nodule-information-from-deep-tow-system's-optic-image",
+   "type": "paper",
+   "label": "Extraction of polymetallic nodule information from deep-tow system's optic image",
+   "year": 2002,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -249,
+   "y": -362
+  },
+  {
+   "id": "paper-our/facts",
+   "type": "paper",
+   "label": "FACTS: Training-free zero-shot diffusion framework for facade texture restoration in 3D urban models",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.aei.2026.104385",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 208,
+   "y": -38
+  },
+  {
+   "id": "paper-our/geospatial-object-detection-on-high-resolution-remote-sensing-imagery-based-on-double-multi-scale-fe",
+   "type": "paper",
+   "label": "Geospatial Object Detection on High Resolution Remote Sensing Imagery Based on Double Multi-Scale Feature Pyramid Network",
+   "year": 2019,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs11070755",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 125,
+   "y": -283
+  },
+  {
+   "id": "paper-our/haze-removal-from-a-single-remote-sensing-image-based-on-a-fully-convolutional-neural-network",
+   "type": "paper",
+   "label": "Haze removal from a single remote sensing image based on a fully convolutional neural network",
+   "year": 2019,
+   "source": "our",
+   "href": "https://doi.org/10.1117/1.jrs.13.036505",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -37,
+   "y": -316
+  },
+  {
+   "id": "paper-our/hcewi",
+   "type": "paper",
+   "label": "Evaluating Urban Housing Contradictions Through Multisource Data Fusion: a Case Study of Spatiotemporal Mismatch Analysis in Shenzhen with the HCEWI Model",
+   "year": 2025,
+   "source": "our",
+   "href": "https://www.sciopen.com/article/10.11947/j.JGGS.2025.0301",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -166,
+   "y": 206
+  },
+  {
+   "id": "paper-our/high-resolution-satellite-video-single-object-tracking-based-on-thicksiam-framework",
+   "type": "paper",
+   "label": "High-resolution satellite video single object tracking based on thicksiam framework",
+   "year": 2023,
+   "source": "our",
+   "href": "https://doi.org/10.1080/15481603.2022.2163063",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 200,
+   "y": 275
+  },
+  {
+   "id": "paper-our/invitation-a-framework-for-enhancing-uav-image-semantic-segmentation-accuracy-through-depth-informat",
+   "type": "paper",
+   "label": "INVITATION: A Framework for Enhancing UAV Image Semantic Segmentation Accuracy Through Depth Information Fusion",
+   "year": 2025,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2025.3534994",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 283,
+   "y": 82
+  },
+  {
+   "id": "paper-our/lmfnet-lightweight-multimodal-fusion-network-for-high-resolution-remote-sensing-image-segmentation",
+   "type": "paper",
+   "label": "LMFNet: Lightweight Multimodal Fusion Network for high-resolution remote sensing image segmentation",
+   "year": 2025,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.patcog.2025.111579",
+   "dirIndex": 0,
+   "r": 7,
+   "x": -84,
+   "y": -217
+  },
+  {
+   "id": "paper-our/mssdf",
+   "type": "paper",
+   "label": "MSSDF: Modality-shared self-supervised distillation for high-resolution multi-modal remote sensing image learning",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.inffus.2025.104006",
+   "dirIndex": 0,
+   "r": 7,
+   "x": -136,
+   "y": -161
+  },
+  {
+   "id": "paper-our/multi-oriented-rotation-equivariant-network-for-object-detection-on-remote-sensing-images",
+   "type": "paper",
+   "label": "Multi-Oriented Rotation-Equivariant Network for Object Detection on Remote Sensing Images",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2022.3167530",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -66,
+   "y": -267
+  },
+  {
+   "id": "paper-our/nighttime-light-imagery-or-mobile-phone-footprints-which-better-reflects-urban-socio-economics-at-th",
+   "type": "paper",
+   "label": "Nighttime light imagery or mobile phone footprints: Which better reflects urban socio-economics at the grid level? A case study in the Pearl River Delta, China",
+   "year": 2025,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.compenvurbsys.2024.102220",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -290,
+   "y": 8
+  },
+  {
+   "id": "paper-our/nonparametric-method-for-extraction-of-region-of-interest-based-on-information-t",
+   "type": "paper",
+   "label": "Nonparametric method for extraction of region of interest based on information theory",
+   "year": 2007,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 245,
+   "y": -311
+  },
+  {
+   "id": "paper-our/object-based-classification-framework-of-remote-sensing-images-with-graph-convolutional-networks",
+   "type": "paper",
+   "label": "Object-Based Classification Framework of Remote Sensing Images With Graph Convolutional Networks",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.1109/lgrs.2021.3072627",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 165,
+   "y": -231
+  },
+  {
+   "id": "paper-our/object-based-land-cover-supervised-classification-for-very-high-resolution-uav-images-using-stacked-",
+   "type": "paper",
+   "label": "Object-Based Land-Cover Supervised Classification for Very-High-Resolution UAV Images Using Stacked Denoising Autoencoders",
+   "year": 2017,
+   "source": "our",
+   "href": "https://doi.org/10.1109/jstars.2017.2672736",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 192,
+   "y": 347
+  },
+  {
+   "id": "paper-our/propagating-spatio-temporal-state-and-progressively-associating-trajectory-for-satellite-video-multi",
+   "type": "paper",
+   "label": "Propagating spatio-temporal state and progressively associating trajectory for satellite video multi-object tracking",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.eswa.2025.130507",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 175,
+   "y": 144
+  },
+  {
+   "id": "paper-our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
+   "type": "paper",
+   "label": "RoofMapNet: Utilizing geometric primitives for depicting planar building roof structure from high-resolution remote sensing imagery",
+   "year": 2025,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.jag.2025.104630",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 271,
+   "y": -13
+  },
+  {
+   "id": "paper-our/roofstructnet",
+   "type": "paper",
+   "label": "From Roof Structure to 3D Building Models: A RoofStructNet-Based Framework for Roof Extraction Towards Multi-Level 3D Reconstruction",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://www.sciencedirect.com/science/article/pii/S0957417426023006",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 235,
+   "y": 37
+  },
+  {
+   "id": "paper-our/sdfcnv2-an-improved-fcn-framework-for-remote-sensing-images-semantic-segmentation",
+   "type": "paper",
+   "label": "SDFCNv2: An Improved FCN Framework for Remote Sensing Images Semantic Segmentation",
+   "year": 2021,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs13234902",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 25,
+   "y": -291
+  },
+  {
+   "id": "paper-our/segment-change-model-scm-for-unsupervised-change-detection-in-vhr-remote-sensing-images-a-case-study",
+   "type": "paper",
+   "label": "SEGMENT CHANGE MODEL (SCM) FOR UNSUPERVISED CHANGE DETECTION IN VHR REMOTE SENSING IMAGES: A CASE STUDY OF BUILDINGS",
+   "year": 2024,
+   "source": "our",
+   "href": "https://doi.org/10.1109/igarss53475.2024.10642429",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 127,
+   "y": 278
+  },
+  {
+   "id": "paper-our/single-object-tracking-in-satellite-videos-deep-siamese-network-incorporating-an-interframe-differen",
+   "type": "paper",
+   "label": "Single Object Tracking in Satellite Videos: Deep Siamese Network Incorporating an Interframe Difference Centroid Inertia Motion Model",
+   "year": 2021,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs13071298",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 378,
+   "y": 78
+  },
+  {
+   "id": "paper-our/smilies-a-soft-multi-label-guided-weakly-supervised-semantic-segmentation-framework-for-remote-sensi",
+   "type": "paper",
+   "label": "Smilies: A Soft-Multi-Label-Guided Weakly Supervised Semantic Segmentation Framework for Remote Sensing Images",
+   "year": 2023,
+   "source": "our",
+   "href": "https://doi.org/10.1109/geoinformatics60313.2023.10248015",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -140,
+   "y": -217
+  },
+  {
+   "id": "paper-our/spatial-assessment-of-the-change-of-mountain-range-farmland-use-based-on-rs-and-",
+   "type": "paper",
+   "label": "Spatial assessment of the change of mountain range farmland use based on RS and GIS",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -263,
+   "y": 384
+  },
+  {
+   "id": "paper-our/spatio-temporal-fusion-of-landsat-and-modis-data-for-monitoring-of-high-intensity-fire-traces-in-kar",
+   "type": "paper",
+   "label": "Spatio-Temporal Fusion of Landsat and MODIS Data for Monitoring of High-Intensity Fire Traces in Karst Landscapes: A Case Study in China",
+   "year": 2025,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs17111852",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -266,
+   "y": 168
+  },
+  {
+   "id": "paper-our/ssup2-supnet-a-multitask-learning-network-for-semantic-stereo-of-satellite-image-pairs",
+   "type": "paper",
+   "label": "S2Net: A Multitask Learning Network for Semantic Stereo of Satellite Image Pairs",
+   "year": 2024,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1109/tgrs.2023.3335997",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 194,
+   "y": 206
+  },
+  {
+   "id": "paper-our/ssup3-supnet-innovating-stereo-matching-and-semantic-segmentation-with-a-single-branch-semantic-ster",
+   "type": "paper",
+   "label": "S3NET: INNOVATING STEREO MATCHING AND SEMANTIC SEGMENTATION WITH A SINGLE-BRANCH SEMANTIC STEREO NETWORK IN SATELLITE EPIPOLAR IMAGERY",
+   "year": 2024,
+   "source": "our",
+   "href": "https://doi.org/10.1109/igarss53475.2024.10640492",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 260,
+   "y": 182
+  },
+  {
+   "id": "paper-our/stars",
+   "type": "paper",
+   "label": "STARS: Shared-specific Translation and Alignment for missing-modality Remote Sensing Semantic Segmentation",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://www.sciencedirect.com/science/article/pii/S1569843226002943",
+   "dirIndex": 0,
+   "r": 7,
+   "x": 37,
+   "y": -221
+  },
+  {
+   "id": "paper-our/symmetrical-dense-shortcut-deep-fully-convolutional-networks-for-semantic-segmentation-of-very-high-",
+   "type": "paper",
+   "label": "Symmetrical Dense-Shortcut Deep Fully Convolutional Networks for Semantic Segmentation of Very-High-Resolution Remote Sensing Images",
+   "year": 2018,
+   "source": "our",
+   "href": "https://doi.org/10.1109/jstars.2018.2810320",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 182,
+   "y": -302
+  },
+  {
+   "id": "paper-our/the-design-and-development-of-object-oriented-uav-image-change-detection-system",
+   "type": "paper",
+   "label": "The design and development of object-oriented UAV image change detection system",
+   "year": 2013,
+   "source": "our",
+   "href": "https://doi.org/10.1007/978-3-642-45025-9_4",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 420,
+   "y": 0
+  },
+  {
+   "id": "paper-our/training-small-networks-for-scene-classification-of-remote-sensing-images-via-knowledge-distillation",
+   "type": "paper",
+   "label": "Training Small Networks for Scene Classification of Remote Sensing Images via Knowledge Distillation",
+   "year": 2018,
+   "source": "our",
+   "href": "https://doi.org/10.3390/rs10050719",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 3,
+   "y": -362
+  },
+  {
+   "id": "paper-our/trigeonet",
+   "type": "paper",
+   "label": "TriGeoNet: A Triple-Feature-Split network with geometry-statistics co-optimization for high-accuracy satellite stereo matching",
+   "year": 2026,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.jag.2026.105232",
+   "dirIndex": 1,
+   "r": 7,
+   "x": 131,
+   "y": 212
+  },
+  {
+   "id": "paper-our/triples-mitigating-multi-task-learning-conflicts-for-semantic-change-detection-in-high-resolution-re",
+   "type": "paper",
+   "label": "TripleS: Mitigating multi-task learning conflicts for semantic change detection in high-resolution remote sensing imagery",
+   "year": 2025,
+   "featured": true,
+   "source": "our",
+   "href": "https://doi.org/10.1016/j.isprsjprs.2025.09.019",
+   "dirIndex": 0,
+   "r": 7,
+   "x": 114,
+   "y": -212
+  },
+  {
+   "id": "paper-our/à-trous-wavelet-decomposition-applied-to-image-edge-detection",
+   "type": "paper",
+   "label": "À Trous Wavelet Decomposition Applied to Image Edge Detection",
+   "year": 2001,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 116,
+   "y": -433
+  },
+  {
+   "id": "paper-our/à-trous小波分解在边缘检测中的应用",
+   "type": "paper",
+   "label": "à trous小波分解在边缘检测中的应用",
+   "year": 2001,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -123,
+   "y": -440
+  },
+  {
+   "id": "paper-our/一种基于面特征的遥感影像与gis数据配准方法",
+   "type": "paper",
+   "label": "一种基于面特征的遥感影像与GIS数据配准方法",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 419,
+   "y": 143
+  },
+  {
+   "id": "paper-our/一种新的特征提取方法",
+   "type": "paper",
+   "label": "一种新的特征提取方法",
+   "year": 2016,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -185,
+   "y": -320
+  },
+  {
+   "id": "paper-our/利用卫星遥感技术进行电力线路设计",
+   "type": "paper",
+   "label": "利用卫星遥感技术进行电力线路设计",
+   "year": 2005,
+   "source": "our",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 168,
+   "y": 421
+  },
+  {
+   "id": "paper-our/基于深度学习的遥感影像地物目标检测和轮廓提取一体化模型",
+   "type": "paper",
+   "label": "基于深度学习的遥感影像地物目标检测和轮廓提取一体化模型",
+   "year": 2019,
+   "source": "our",
+   "href": "https://doi.org/10.14188/j.2095-6045.2019002",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": -198,
+   "y": -260
+  },
+  {
+   "id": "paper-our/实景三维模型缺陷修复关键技术",
+   "type": "paper",
+   "label": "实景三维模型缺陷修复关键技术",
+   "year": 2024,
+   "source": "our",
+   "href": "https://doi.org/10.12404/j.issn.1671-1815.2303601",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 328,
+   "y": 25
+  },
+  {
+   "id": "paper-our/山东省植被覆盖度长时序动态监测与分析",
+   "type": "paper",
+   "label": "山东省植被覆盖度长时序动态监测与分析",
+   "year": 2021,
+   "source": "our",
+   "href": "https://doi.org/10.3969/j.issn.1000-2324.2021.04.011",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -413,
+   "y": -40
+  },
+  {
+   "id": "paper-our/机载激光雷达技术在电力选线工程中的应用",
+   "type": "paper",
+   "label": "机载激光雷达技术在电力选线工程中的应用",
+   "year": 2010,
+   "source": "our",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 280,
+   "y": 327
+  },
+  {
+   "id": "paper-our/松材线虫病遥感监测研究进展及方法述评",
+   "type": "paper",
+   "label": "松材线虫病遥感监测研究进展及方法述评",
+   "year": 2022,
+   "source": "our",
+   "href": "https://doi.org/10.11975/j.issn.1002-6819.2022.18.020",
+   "dirIndex": 2,
+   "r": 3.5,
+   "x": -281,
+   "y": 270
+  },
+  {
+   "id": "paper-our/遥感图像处理系统geoimager的总体设计及实现",
+   "type": "paper",
+   "label": "遥感图像处理系统GeoImager的总体设计及实现",
+   "year": 2000,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 259,
+   "y": -386
+  },
+  {
+   "id": "paper-our/遥感影像与gis分析相结合的变化检测方法",
+   "type": "paper",
+   "label": "遥感影像与GIS分析相结合的变化检测方法",
+   "year": 2006,
+   "source": "our",
+   "dirIndex": 0,
+   "r": 3.5,
+   "x": 189,
+   "y": -377
+  },
+  {
+   "id": "paper-our/高精度数字栅格地图的制作方法",
+   "type": "paper",
+   "label": "高精度数字栅格地图的制作方法",
+   "year": 2005,
+   "source": "our",
+   "dirIndex": 1,
+   "r": 3.5,
+   "x": 368,
+   "y": 285
+  },
+  {
+   "id": "dataset-HR-Pairs",
+   "type": "dataset",
+   "label": "HR-Pairs",
+   "year": 2026,
+   "href": "https://github.com/CVEO/MSSDF",
+   "r": 6,
+   "x": -368,
+   "y": -374
+  },
+  {
+   "id": "dataset-BFA-3D",
+   "type": "dataset",
+   "label": "BFA-3D",
+   "year": 2025,
+   "href": "https://github.com/CVEO/BFA-YOLO",
+   "r": 6,
+   "x": 482,
+   "y": 207
+  },
+  {
+   "id": "dataset-RoofMapNet 数据集",
+   "type": "dataset",
+   "label": "RoofMapNet 数据集",
+   "year": 2025,
+   "href": "https://github.com/CVEO/RoofMapNet",
+   "r": 6,
+   "x": 521,
+   "y": -67
+  },
+  {
+   "id": "repo-TriGeoNet",
+   "type": "repo",
+   "label": "TriGeoNet",
+   "year": 2026,
+   "href": "https://github.com/CVEO/TriGeoNet",
+   "r": 5.5,
+   "x": 276,
+   "y": 447
+  },
+  {
+   "id": "repo-STARS",
+   "type": "repo",
+   "label": "STARS",
+   "year": 2026,
+   "href": "https://github.com/CVEO/STARS",
+   "r": 5.5,
+   "x": 86,
+   "y": -518
+  },
+  {
+   "id": "repo-FACTS",
+   "type": "repo",
+   "label": "FACTS",
+   "year": 2026,
+   "href": "https://github.com/CVEO/FACTS",
+   "r": 5.5,
+   "x": 517,
+   "y": -91
+  },
+  {
+   "id": "repo-MSSDF",
+   "type": "repo",
+   "label": "MSSDF",
+   "year": 2026,
+   "href": "https://github.com/CVEO/MSSDF",
+   "r": 5.5,
+   "x": -305,
+   "y": -427
+  },
+  {
+   "id": "repo-PS2PAT-MOT",
+   "type": "repo",
+   "label": "PS2PAT-MOT",
+   "year": 2026,
+   "href": "https://github.com/HELOBILLY/PS2PAT-MOT",
+   "r": 5.5,
+   "x": 405,
+   "y": 334
+  },
+  {
+   "id": "repo-MTL-TripleS",
+   "type": "repo",
+   "label": "MTL-TripleS",
+   "year": 2025,
+   "href": "https://github.com/StephenApX/MTL-TripleS",
+   "r": 5.5,
+   "x": 249,
+   "y": -462
+  },
+  {
+   "id": "repo-RoofMapNet",
+   "type": "repo",
+   "label": "RoofMapNet",
+   "year": 2025,
+   "href": "https://github.com/CVEO/RoofMapNet",
+   "r": 5.5,
+   "x": 525,
+   "y": 16
+  },
+  {
+   "id": "repo-BFA-YOLO",
+   "type": "repo",
+   "label": "BFA-YOLO",
+   "year": 2025,
+   "href": "https://github.com/CVEO/BFA-YOLO",
+   "r": 5.5,
+   "x": 444,
+   "y": 280
+  },
+  {
+   "id": "repo-S3Net",
+   "type": "repo",
+   "label": "S3Net",
+   "year": 2024,
+   "href": "https://github.com/CVEO/S3Net",
+   "r": 5.5,
+   "x": 430,
+   "y": 301
+  },
+  {
+   "id": "repo-UCD-SCM",
+   "type": "repo",
+   "label": "UCD-SCM",
+   "year": 2023,
+   "href": "https://github.com/StephenApX/UCD-SCM",
+   "r": 5.5,
+   "x": 217,
+   "y": 478
+  },
+  {
+   "id": "repo-OBIC-GCN",
+   "type": "repo",
+   "label": "OBIC-GCN",
+   "year": 2020,
+   "href": "https://github.com/CVEO/OBIC-GCN",
+   "r": 5.5,
+   "x": 305,
+   "y": -427
+  },
+  {
+   "id": "repo-Unsupervised-OBIC-Pytorch",
+   "type": "repo",
+   "label": "Unsupervised-OBIC-Pytorch",
+   "year": 2021,
+   "href": "https://github.com/CVEO/Unsupervised-OBIC-Pytorch",
+   "r": 5.5,
+   "x": 150,
+   "y": -503
+  },
+  {
+   "id": "repo-vectorizer-pro",
+   "type": "repo",
+   "label": "vectorizer-pro",
+   "year": 2026,
+   "href": "https://github.com/CVEO/vectorizer-pro",
+   "r": 5.5,
+   "x": -26,
+   "y": -87
+  },
+  {
+   "id": "repo-INVITATION",
+   "type": "repo",
+   "label": "INVITATION",
+   "year": 2025,
+   "href": "https://github.com/CVEO/INVITATION",
+   "r": 5.5,
+   "x": 504,
+   "y": 146
+  },
+  {
+   "id": "repo-CDTStudio",
+   "type": "repo",
+   "label": "CDTStudio",
+   "year": 2019,
+   "href": "https://github.com/chenguanzhou/CDTStudio",
+   "r": 5.5,
+   "x": -90,
+   "y": 19
+  },
+  {
+   "id": "award-0",
+   "type": "award",
+   "label": "三维时空底座建设关键技术及赋能应用",
+   "sub": "湖北省测绘科技进步奖 · 特等奖 · 2025",
+   "r": 7,
+   "x": 96,
+   "y": -72
+  },
+  {
+   "id": "award-1",
+   "type": "award",
+   "label": "高分辨率卫星遥感影像理解与智能监测关…",
+   "sub": "自然资源科学技术奖 · 科技进步二等奖 · 2023",
+   "r": 7,
+   "x": 15,
+   "y": 119
+  },
+  {
+   "id": "award-2",
+   "type": "award",
+   "label": "航空激光成像系统在输电线路优化设计中…",
+   "sub": "安徽省科学技术奖 · 三等奖 · 2012",
+   "r": 7,
+   "x": -110,
+   "y": -47
+  },
+  {
+   "id": "award-3",
+   "type": "award",
+   "label": "全国大学生测绘学科创新创业智能大赛（…",
+   "sub": "特等奖 · 2026 · 优秀指导教师",
+   "r": 7,
+   "x": 161,
+   "y": -68
+  },
+  {
+   "id": "award-4",
+   "type": "award",
+   "label": "PRCV 超高速脉冲视觉挑战赛",
+   "sub": "最佳新锐奖 · 2025",
+   "r": 7,
+   "x": -21,
+   "y": 174
+  },
+  {
+   "id": "award-5",
+   "type": "award",
+   "label": "第21届 SuperMap 杯高校 …",
+   "sub": "全国三等奖 · 2023",
+   "r": 7,
+   "x": -140,
+   "y": -105
+  },
+  {
+   "id": "award-6",
+   "type": "award",
+   "label": "第十届「中国软件杯」大学生软件设计大…",
+   "sub": "全国总决赛一等奖 · 2021 · 最佳指导教师奖",
+   "r": 7,
+   "x": 231,
+   "y": -36
+  },
+  {
+   "id": "award-7",
+   "type": "award",
+   "label": "首届欧比特杯行业应用大赛",
+   "sub": "一等奖 · 2019 · 优秀指导教师",
+   "r": 7,
+   "x": -85,
+   "y": 218
+  },
+  {
+   "id": "award-8",
+   "type": "award",
+   "label": "AI in RTC 超分图像质量挑战…",
+   "sub": "二等奖 · 2019 · 优秀指导老师",
+   "r": 7,
+   "x": -147,
+   "y": -183
+  },
+  {
+   "id": "award-9",
+   "type": "award",
+   "label": "中国模式识别与计算机视觉技术挑战赛",
+   "sub": "三等奖 · 2018",
+   "r": 7,
+   "x": 284,
+   "y": 25
+  },
+  {
+   "id": "proj-0",
+   "type": "project",
+   "label": "国家重点研发计划课题",
+   "sub": "科技部 · 2024年07月 - 2026年06月",
+   "href": "/research-projects",
+   "r": 6.5,
+   "x": -163,
+   "y": 233
+  },
+  {
+   "id": "proj-1",
+   "type": "project",
+   "label": "管道路由带风险目标识别和分类分级应用",
+   "sub": "国家石油天然气管网集团有限公司科学技术研究总院分公司 · 2025年11月 - 2027年05月",
+   "href": "/research-projects",
+   "r": 6.5,
+   "x": -120,
+   "y": -257
+  },
+  {
+   "id": "proj-2",
+   "type": "project",
+   "label": "倾斜摄影测量的边坡三维建模与监测方法",
+   "sub": "中南勘察设计院集团有限公司 · 2025年05月 - 2027年05月",
+   "href": "/research-projects",
+   "r": 6.5,
+   "x": 321,
+   "y": 111
+  },
+  {
+   "id": "proj-3",
+   "type": "project",
+   "label": "天-空-地多源异构时空立体监测平台关键技术",
+   "sub": "东湖高新区第二批“揭榜挂帅”项目 · 2023年09月 - 2026年08月",
+   "href": "/research-projects",
+   "r": 6.5,
+   "x": -257,
+   "y": 223
+  }
+ ],
+ "edges": [
+  {
+   "s": "center",
+   "t": "dir-0",
+   "rel": "聚焦"
+  },
+  {
+   "s": "center",
+   "t": "dir-1",
+   "rel": "聚焦"
+  },
+  {
+   "s": "center",
+   "t": "dir-2",
+   "rel": "聚焦"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/a-change-detection-method-of-integrating-remote-sensing-and-gis",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/a-deep-transfer-learning-framework-using-teacher-student-structure-for-land-cover-classification-of-",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/a-fusion-algorithm-for-remote-sensing-images-based-on-nonsubsampled-pyramids-and-bidimensional-empirical-decomposition",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/a-linear-pushbroom-satellite-image-epipolar-resampling-method-for-digital-surface-model-generation",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/a-microwave-optical-multi-stage-synergistic-daily-30-m-soil-moisture-downscaling-framework",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/a-new-filtering-approach-of-lidar-data-based-on-topographic-change-detection",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/a-strategy-of-change-detection-based-on-remotely-sensed-imagery-and-gis-data",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/a-study-on-social-economic-statistic-data-spatial-distribution-in-land-sustainab",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/a-superpixel-guided-unsupervised-fast-semantic-segmentation-method-of-remote-sensing-images",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/an-image-fusion-method-based-on-emd-decomposition",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/an-integrated-remote-sensing-and-gis-approach-in-the-detecting-changes-in-beijin",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/an-object-based-supervised-classification-framework-for-very-high-resolution-remote-sensing-images-u",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/change-detection-based-on-faster-r-cnn-for-high-resolution-remote-sensing-images",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/convective-clouds-extraction-from-himawari-8-satellite-images-based-on-double-stream-fully-convoluti",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/detecting-individual-plants-infected-with-pine-wilt-disease-using-drones-and-satellite-imagery-a-cas",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/detection-of-vegetation-coverage-changes-in-the-yellow-river-basin-from-2003-to-2020",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/distinguishable-keypoint-detection-and-matching-for-optical-satellite-images-with-deep-convolutional",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/enhancing-terrestrial-net-primary-productivity-estimation-with-exp-casa-a-novel-light-use-efficiency",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/enlighten-gan-for-super-resolution-reconstruction-in-mid-resolution-remote-sensing-images",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/extraction-of-polymetallic-nodule-information-from-deep-tow-system's-optic-image",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/facts",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/geospatial-object-detection-on-high-resolution-remote-sensing-imagery-based-on-double-multi-scale-fe",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/haze-removal-from-a-single-remote-sensing-image-based-on-a-fully-convolutional-neural-network",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/hcewi",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/high-resolution-satellite-video-single-object-tracking-based-on-thicksiam-framework",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/invitation-a-framework-for-enhancing-uav-image-semantic-segmentation-accuracy-through-depth-informat",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/lmfnet-lightweight-multimodal-fusion-network-for-high-resolution-remote-sensing-image-segmentation",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/mssdf",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/multi-oriented-rotation-equivariant-network-for-object-detection-on-remote-sensing-images",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/nighttime-light-imagery-or-mobile-phone-footprints-which-better-reflects-urban-socio-economics-at-th",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/nonparametric-method-for-extraction-of-region-of-interest-based-on-information-t",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/object-based-classification-framework-of-remote-sensing-images-with-graph-convolutional-networks",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/object-based-land-cover-supervised-classification-for-very-high-resolution-uav-images-using-stacked-",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/propagating-spatio-temporal-state-and-progressively-associating-trajectory-for-satellite-video-multi",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/roofstructnet",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/sdfcnv2-an-improved-fcn-framework-for-remote-sensing-images-semantic-segmentation",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/segment-change-model-scm-for-unsupervised-change-detection-in-vhr-remote-sensing-images-a-case-study",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/single-object-tracking-in-satellite-videos-deep-siamese-network-incorporating-an-interframe-differen",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/smilies-a-soft-multi-label-guided-weakly-supervised-semantic-segmentation-framework-for-remote-sensi",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/spatial-assessment-of-the-change-of-mountain-range-farmland-use-based-on-rs-and-",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/spatio-temporal-fusion-of-landsat-and-modis-data-for-monitoring-of-high-intensity-fire-traces-in-kar",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/ssup2-supnet-a-multitask-learning-network-for-semantic-stereo-of-satellite-image-pairs",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/ssup3-supnet-innovating-stereo-matching-and-semantic-segmentation-with-a-single-branch-semantic-ster",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/stars",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/symmetrical-dense-shortcut-deep-fully-convolutional-networks-for-semantic-segmentation-of-very-high-",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/the-design-and-development-of-object-oriented-uav-image-change-detection-system",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/training-small-networks-for-scene-classification-of-remote-sensing-images-via-knowledge-distillation",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/trigeonet",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/triples-mitigating-multi-task-learning-conflicts-for-semantic-change-detection-in-high-resolution-re",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/à-trous-wavelet-decomposition-applied-to-image-edge-detection",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/à-trous小波分解在边缘检测中的应用",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/一种基于面特征的遥感影像与gis数据配准方法",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/一种新的特征提取方法",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/利用卫星遥感技术进行电力线路设计",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/基于深度学习的遥感影像地物目标检测和轮廓提取一体化模型",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/实景三维模型缺陷修复关键技术",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/山东省植被覆盖度长时序动态监测与分析",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/机载激光雷达技术在电力选线工程中的应用",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-2",
+   "t": "paper-our/松材线虫病遥感监测研究进展及方法述评",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/遥感图像处理系统geoimager的总体设计及实现",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-0",
+   "t": "paper-our/遥感影像与gis分析相结合的变化检测方法",
+   "rel": "包含论文"
+  },
+  {
+   "s": "dir-1",
+   "t": "paper-our/高精度数字栅格地图的制作方法",
+   "rel": "包含论文"
+  },
+  {
+   "s": "paper-our/mssdf",
+   "t": "dataset-HR-Pairs",
+   "rel": "发布数据集"
+  },
+  {
+   "s": "paper-our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
+   "t": "dataset-BFA-3D",
+   "rel": "发布数据集"
+  },
+  {
+   "s": "paper-our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
+   "t": "dataset-RoofMapNet 数据集",
+   "rel": "发布数据集"
+  },
+  {
+   "s": "paper-our/trigeonet",
+   "t": "repo-TriGeoNet",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/stars",
+   "t": "repo-STARS",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/facts",
+   "t": "repo-FACTS",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/mssdf",
+   "t": "repo-MSSDF",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/propagating-spatio-temporal-state-and-progressively-associating-trajectory-for-satellite-video-multi",
+   "t": "repo-PS2PAT-MOT",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/triples-mitigating-multi-task-learning-conflicts-for-semantic-change-detection-in-high-resolution-re",
+   "t": "repo-MTL-TripleS",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
+   "t": "repo-RoofMapNet",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
+   "t": "repo-BFA-YOLO",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/ssup3-supnet-innovating-stereo-matching-and-semantic-segmentation-with-a-single-branch-semantic-ster",
+   "t": "repo-S3Net",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/segment-change-model-scm-for-unsupervised-change-detection-in-vhr-remote-sensing-images-a-case-study",
+   "t": "repo-UCD-SCM",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/object-based-classification-framework-of-remote-sensing-images-with-graph-convolutional-networks",
+   "t": "repo-OBIC-GCN",
+   "rel": "开源实现"
+  },
+  {
+   "s": "paper-our/a-superpixel-guided-unsupervised-fast-semantic-segmentation-method-of-remote-sensing-images",
+   "t": "repo-Unsupervised-OBIC-Pytorch",
+   "rel": "开源实现"
+  },
+  {
+   "s": "center",
+   "t": "repo-vectorizer-pro",
+   "rel": "开源产出"
+  },
+  {
+   "s": "paper-our/invitation-a-framework-for-enhancing-uav-image-semantic-segmentation-accuracy-through-depth-informat",
+   "t": "repo-INVITATION",
+   "rel": "开源实现"
+  },
+  {
+   "s": "center",
+   "t": "repo-CDTStudio",
+   "rel": "开源产出"
+  },
+  {
+   "s": "center",
+   "t": "award-0",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-1",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-2",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-3",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-4",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-5",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-6",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-7",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-8",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "award-9",
+   "rel": "荣获"
+  },
+  {
+   "s": "center",
+   "t": "proj-0",
+   "rel": "承担"
+  },
+  {
+   "s": "center",
+   "t": "proj-1",
+   "rel": "承担"
+  },
+  {
+   "s": "center",
+   "t": "proj-2",
+   "rel": "承担"
+  },
+  {
+   "s": "center",
+   "t": "proj-3",
+   "rel": "承担"
+  }
+ ]
+}
