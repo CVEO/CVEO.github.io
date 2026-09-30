@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/build-knowledge-graph.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -21,6 +22,7 @@
     "@astrojs/sitemap": "3.2.1",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.0",
+    "d3-force": "^3.0.0",
     "html-validate": "^9.0.0",
     "linkinator": "^4.0.0",
     "postcss": "^8.4.0",

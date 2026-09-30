@@ -38,3 +38,6 @@ Thumbs.db
 
 # Project specific
 cveo-webpage/
+
+# QA 截图（视觉验收临时产物）
+.qa-shots/
