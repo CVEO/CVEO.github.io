@@ -4,7 +4,11 @@
     "type": "dataset",
     "description": "厘米级多模态遥感样本数据集，配套 MSSDF 自监督蒸馏框架发布，降低对标注数据的依赖",
     "url": "https://github.com/CVEO/MSSDF",
-    "tags": ["多模态", "高分辨率", "自监督"],
+    "tags": [
+      "多模态",
+      "高分辨率",
+      "自监督"
+    ],
     "relatedPaper": "our/mssdf",
     "year": 2026
   },
@@ -13,7 +17,11 @@
     "type": "dataset",
     "description": "建筑立面元素三维检测数据集，配套 BFA-YOLO 检测网络发布，面向自动化建筑信息建模（BIM）",
     "url": "https://github.com/CVEO/BFA-YOLO",
-    "tags": ["建筑立面", "目标检测", "BIM"],
+    "tags": [
+      "建筑立面",
+      "目标检测",
+      "BIM"
+    ],
     "relatedPaper": "our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
     "year": 2025
   },
@@ -22,7 +30,10 @@
     "type": "dataset",
     "description": "高分辨率影像建筑屋顶结构提取数据集，配套 RoofMapNet 模型发布，服务城市数字孪生应用",
     "url": "https://github.com/CVEO/RoofMapNet",
-    "tags": ["屋顶结构", "建筑物提取"],
+    "tags": [
+      "屋顶结构",
+      "建筑物提取"
+    ],
     "relatedPaper": "our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
     "year": 2025
   },
@@ -31,7 +42,10 @@
     "type": "code",
     "description": "三特征分裂卫星立体匹配网络，几何-统计协同优化，实现高精度卫星立体测图",
     "url": "https://github.com/CVEO/TriGeoNet",
-    "tags": ["立体匹配", "三维重建"],
+    "tags": [
+      "立体匹配",
+      "三维重建"
+    ],
     "relatedPaper": "our/trigeonet",
     "year": 2026
   },
@@ -40,7 +54,10 @@
     "type": "code",
     "description": "共享特定翻译与对齐框架，面向缺失模态遥感影像语义分割",
     "url": "https://github.com/CVEO/STARS",
-    "tags": ["多模态", "语义分割"],
+    "tags": [
+      "多模态",
+      "语义分割"
+    ],
     "relatedPaper": "our/stars",
     "year": 2026
   },
@@ -49,7 +66,11 @@
     "type": "code",
     "description": "免训练零样本扩散框架，用于建筑立面纹理修复",
     "url": "https://github.com/CVEO/FACTS",
-    "tags": ["扩散模型", "纹理修复", "零样本"],
+    "tags": [
+      "扩散模型",
+      "纹理修复",
+      "零样本"
+    ],
     "relatedPaper": "our/facts",
     "year": 2026
   },
@@ -58,7 +79,11 @@
     "type": "code",
     "description": "多模态共享自监督蒸馏框架，大幅降低遥感解译对标注数据的依赖",
     "url": "https://github.com/CVEO/MSSDF",
-    "tags": ["自监督", "知识蒸馏", "多模态"],
+    "tags": [
+      "自监督",
+      "知识蒸馏",
+      "多模态"
+    ],
     "relatedPaper": "our/mssdf",
     "year": 2026
   },
@@ -67,7 +92,10 @@
     "type": "code",
     "description": "卫星视频多目标跟踪框架，通过路径平滑与路径关联提升轨迹完整性与连续性",
     "url": "https://github.com/HELOBILLY/PS2PAT-MOT",
-    "tags": ["卫星视频", "多目标跟踪"],
+    "tags": [
+      "卫星视频",
+      "多目标跟踪"
+    ],
     "relatedPaper": "our/propagating-spatio-temporal-state-and-progressively-associating-trajectory-for-satellite-video-multi",
     "year": 2026
   },
@@ -76,7 +104,10 @@
     "type": "code",
     "description": "语义变化检测多任务学习优化框架，缓解梯度冲突，协同优化变化检测与地物分类子任务",
     "url": "https://github.com/StephenApX/MTL-TripleS",
-    "tags": ["变化检测", "多任务学习"],
+    "tags": [
+      "变化检测",
+      "多任务学习"
+    ],
     "relatedPaper": "our/triples-mitigating-multi-task-learning-conflicts-for-semantic-change-detection-in-high-resolution-re",
     "year": 2025
   },
@@ -85,7 +116,10 @@
     "type": "code",
     "description": "利用几何基元刻画平面建筑屋顶结构的端到端网络，应对异构性、遮挡与数据稀缺难题",
     "url": "https://github.com/CVEO/RoofMapNet",
-    "tags": ["屋顶结构", "建筑物提取"],
+    "tags": [
+      "屋顶结构",
+      "建筑物提取"
+    ],
     "relatedPaper": "our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
     "year": 2025
   },
@@ -94,26 +128,22 @@
     "type": "code",
     "description": "均衡多尺度建筑立面元素检测网络，解决元素分布不均、小目标难检与背景噪声干扰",
     "url": "https://github.com/CVEO/BFA-YOLO",
-    "tags": ["目标检测", "建筑立面"],
+    "tags": [
+      "目标检测",
+      "建筑立面"
+    ],
     "relatedPaper": "our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection",
     "year": 2025
-  },
-  {
-    "name": "LMFNet",
-    "type": "code",
-    "description": "轻量级多模态融合分割网络，高效融合 RGB、近红外、DSM 等多种模态遥感数据",
-    "url": "",
-    "tags": ["多模态融合", "语义分割", "轻量化"],
-    "relatedPaper": "our/lmfnet-lightweight-multimodal-fusion-network-for-high-resolution-remote-sensing-image-segmentation",
-    "year": 2025,
-    "comingSoon": true
   },
   {
     "name": "S3Net",
     "type": "code",
     "description": "单分支语义立体匹配网络（SSUP3-SupNet），创新性地将立体匹配与语义分割统一到单一分支",
     "url": "https://github.com/CVEO/S3Net",
-    "tags": ["立体匹配", "语义分割"],
+    "tags": [
+      "立体匹配",
+      "语义分割"
+    ],
     "relatedPaper": "our/ssup3-supnet-innovating-stereo-matching-and-semantic-segmentation-with-a-single-branch-semantic-ster",
     "year": 2024
   },
@@ -122,7 +152,10 @@
     "type": "code",
     "description": "段变化模型（SCM），面向超高分辨率遥感影像无监督变化检测",
     "url": "https://github.com/StephenApX/UCD-SCM",
-    "tags": ["变化检测", "无监督"],
+    "tags": [
+      "变化检测",
+      "无监督"
+    ],
     "relatedPaper": "our/segment-change-model-scm-for-unsupervised-change-detection-in-vhr-remote-sensing-images-a-case-study",
     "year": 2023
   },
@@ -131,7 +164,10 @@
     "type": "code",
     "description": "基于图卷积网络的面向对象遥感影像分类框架",
     "url": "https://github.com/CVEO/OBIC-GCN",
-    "tags": ["面向对象分类", "图卷积"],
+    "tags": [
+      "面向对象分类",
+      "图卷积"
+    ],
     "relatedPaper": "our/object-based-classification-framework-of-remote-sensing-images-with-graph-convolutional-networks",
     "year": 2020
   },
@@ -140,8 +176,48 @@
     "type": "code",
     "description": "超像素引导的遥感影像无监督快速语义分割方法（PyTorch 实现）",
     "url": "https://github.com/CVEO/Unsupervised-OBIC-Pytorch",
-    "tags": ["无监督分割", "超像素"],
+    "tags": [
+      "无监督分割",
+      "超像素"
+    ],
     "relatedPaper": "our/a-superpixel-guided-unsupervised-fast-semantic-segmentation-method-of-remote-sensing-images",
     "year": 2021
+  },
+  {
+    "name": "vectorizer-pro",
+    "type": "code",
+    "description": "栅格掩膜转矢量多边形命令行工具：拓扑保持简化（Visvalingam-Whyatt），支持 3 万×3 万以上大图，输出 Shapefile/GeoPackage/GeoJSON，是遥感语义分割成果制图的实用后处理工具",
+    "url": "https://github.com/CVEO/vectorizer-pro",
+    "tags": [
+      "矢量化",
+      "GIS 工具",
+      "MIT"
+    ],
+    "year": 2026
+  },
+  {
+    "name": "INVITATION",
+    "type": "code",
+    "description": "融合深度信息的无人机影像语义分割框架，通过深度信息增强分割精度",
+    "url": "https://github.com/CVEO/INVITATION",
+    "tags": [
+      "无人机",
+      "语义分割",
+      "深度辅助"
+    ],
+    "relatedPaper": "our/invitation-a-framework-for-enhancing-uav-image-semantic-segmentation-accuracy-through-depth-informat",
+    "year": 2025
+  },
+  {
+    "name": "CDTStudio",
+    "type": "code",
+    "description": "面向对象图像分析（OBIA/GeoOBIA）开源跨平台桌面软件（GPL v3），面向对象变化检测的业务化工具",
+    "url": "https://github.com/chenguanzhou/CDTStudio",
+    "tags": [
+      "桌面软件",
+      "面向对象分析",
+      "GPL"
+    ],
+    "year": 2019
   }
 ]
