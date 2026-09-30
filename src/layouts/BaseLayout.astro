@@ -29,7 +29,7 @@ const structuredData = {
   name: '武汉大学CVEO课题组',
   alternateName: 'CVEO Research Group',
   url: siteUrl,
-  logo: `${siteUrl}/apple-touch-icon.png`,
+  logo: new URL('/apple-touch-icon.png', siteUrl).toString(),
   description: description,
   parentOrganization: {
     '@type': 'Organization',
