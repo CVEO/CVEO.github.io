@@ -19,12 +19,6 @@ interface SoftwareTool {
 
 const tools = (softwareData as SoftwareTool[]).filter(t => t.status === '已发布')
 
-// 在研工具预告（发布后迁移至 software.json 正式条目）
-const upcoming = [
-  { name: '无人机视频三维重建', description: '面向无人机视频序列的快速三维重建工具' },
-  { name: '立体卫星三维地表生成', description: '立体卫星影像驱动的三维地表产品生成工具' }
-]
-
 // 关联论文信息（id 可能带 .md 后缀，两种 key 都注册）
 const papers = await getCollection('papers')
 const paperMap = new Map<string, (typeof papers)[number]>()
@@ -46,7 +40,7 @@ const statusBadge = (status: string) => {
       <h1 class="text-3xl font-bold text-slate-900 mb-4">软件工具</h1>
       <p class="text-sm tracking-widest text-slate-500 uppercase mb-4">Software &amp; Tools</p>
       <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-        课题组自研的行业软件与开源工具——把遥感学术论文中的算法，做成工程中用得上的产品
+        课题组自研的行业软件工具——把学术论文中的算法，做成工程中用得上的产品
       </p>
     </div>
 
@@ -142,25 +136,6 @@ const statusBadge = (status: string) => {
           </article>
         )
       })}
-    </div>
-
-    <!-- 在研工具 -->
-    <div class="mt-12">
-      <h2 class="text-xl font-semibold text-slate-900 mb-6 flex items-center gap-2">
-        研发中的工具
-        <span class="text-sm font-normal text-slate-500">近期将陆续发布</span>
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {upcoming.map(t => (
-          <div class="p-5 rounded-xl border border-dashed border-slate-300 bg-slate-50/50">
-            <div class="flex items-center justify-between mb-1.5">
-              <h3 class="font-semibold text-slate-900">{t.name}</h3>
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200">开发中</span>
-            </div>
-            <p class="text-sm text-slate-600">{t.description}</p>
-          </div>
-        ))}
-      </div>
     </div>
 
     <!-- 底部 CTA -->
