@@ -5,7 +5,7 @@ research: 25级博士研究生
 group: PhD
 order: 5
 photo: "assets/avatars/wangruixuan.jpg"
-bio: 研究方向为多模态三维重建
+bio: 研究方向为多模态三维重建与时空风险评估
 ---
 
 简介占位

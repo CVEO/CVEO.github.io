@@ -5,7 +5,7 @@ research: 23级博士研究生
 group: PhD
 order: 3
 photo: "assets/avatars/wangjiaqi.jpg"
-bio: 研究方向为遥感图像理解
+bio: 研究方向为三维重建与实体建模
 ---
 
 简介占位
