@@ -26,14 +26,14 @@ export function validatePatent(patent: unknown): Patent {
     throw new Error('专利号必须为字符串');
   }
   
-  if (!p.grantDate || typeof p.grantDate !== 'string') {
-    throw new Error('授权日期必须为字符串');
-  }
-  
-  // 验证日期格式 (YYYY-MM-DD)
+  // 授权/登记日期：已授权、已登记的条目必填；申请中、审查中的条目没有授权日期，允许为空
+  const grantDate = (typeof p.grantDate === 'string' ? p.grantDate : '').trim();
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(p.grantDate)) {
-    throw new Error(`无效的日期格式: ${p.grantDate}，应为 YYYY-MM-DD`);
+  if (grantDate && !dateRegex.test(grantDate)) {
+    throw new Error(`无效的日期格式: ${grantDate}，应为 YYYY-MM-DD`);
+  }
+  if (!grantDate && (p.status === '已授权' || p.status === '已登记')) {
+    throw new Error(`已授权/已登记专利必须填写授权日期: ${p.title}`);
   }
   
   if (p.status && !isValidPatentStatus(p.status as string)) {
@@ -48,7 +48,7 @@ export function validatePatent(patent: unknown): Patent {
     throw new Error('摘要必须为字符串');
   }
   
-  return p as unknown as Patent;
+  return { ...p, grantDate } as unknown as Patent;
 }
 
 // 加载和验证专利数据
@@ -83,6 +83,7 @@ export function filterPatentsByStatus(patents: Patent[], status: PatentStatus): 
 // 按年份筛选专利
 export function filterPatentsByYear(patents: Patent[], year: number): Patent[] {
   return patents.filter(patent => {
+    if (!patent.grantDate) return false;
     const patentYear = new Date(patent.grantDate).getFullYear();
     return patentYear === year;
   });
@@ -91,12 +92,12 @@ export function filterPatentsByYear(patents: Patent[], year: number): Patent[] {
 // 排序专利
 export function sortPatents(patents: Patent[], sortBy: 'date-desc' | 'date-asc' | 'title' | 'type'): Patent[] {
   const sorted = [...patents];
-  
+
   switch (sortBy) {
     case 'date-desc':
-      return sorted.sort((a, b) => new Date(b.grantDate).getTime() - new Date(a.grantDate).getTime());
+      return sorted.sort((a, b) => new Date(b.grantDate || 0).getTime() - new Date(a.grantDate || 0).getTime());
     case 'date-asc':
-      return sorted.sort((a, b) => new Date(a.grantDate).getTime() - new Date(b.grantDate).getTime());
+      return sorted.sort((a, b) => new Date(a.grantDate || 0).getTime() - new Date(b.grantDate || 0).getTime());
     case 'title':
       return sorted.sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'));
     case 'type':
