@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import Icon from '../components/icons/Icon.astro'
 import PaperCard from '../components/PaperCard.astro'
 import NewsCard from '../components/NewsCard.astro'
 import ProjectCard from '../components/ProjectCard.astro'
@@ -14,6 +15,11 @@ import type { NewsItem } from '../lib/types'
 import aboutData from '../data/about.json'
 import researchProjectsData from '../data/research-projects.json'
 import awardsData from '../data/awards.json'
+
+const techAwards = awardsData.filter(a => a.type === 'tech')
+const studentAwards = awardsData
+  .filter(a => a.type === 'student')
+  .sort((a, b) => Number(b.year) - Number(a.year))
 
 const teamPhoto = resolveImage('/assets/avatars/team.jpg')
 
@@ -37,12 +43,10 @@ const newsItems = getLatestNews(allNews, 3)
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="text-center">
         <h1 class="text-3xl sm:text-5xl font-bold text-brand-900 mb-4 py-4">武汉大学 CVEO 课题组</h1>
-        <p class="text-xl text-slate-700 mb-6">计算机视觉与地球观测交叉研究团队</p>
+        <p class="text-xl text-slate-700 mb-2">计算机视觉与地球观测交叉研究团队</p>
+        <p class="text-sm tracking-widest text-slate-500 uppercase mb-5">Computer Vision for Earth Observation · Wuhan University</p>
         <div class="inline-flex items-center space-x-2 text-slate-600">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
+          <Icon name="map-pin" class="w-5 h-5" />
           <span>{aboutData.affiliation}</span>
         </div>
       </div>
@@ -68,7 +72,7 @@ const newsItems = getLatestNews(allNews, 3)
         <div class="grid grid-cols-2 gap-3">
           {(aboutData.stats || []).map(stat => (
             <div class="p-4 rounded-lg bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition-all duration-300">
-              <div class="text-2xl font-bold text-brand-900 mb-1">{stat.value}<span class="text-sm ml-1 font-normal text-slate-500">{stat.unit}</span></div>
+              <div class="text-2xl font-semibold text-brand-900 mb-1">{stat.value}<span class="text-sm ml-1 font-normal text-slate-500">{stat.unit}</span></div>
               <div class="text-sm text-slate-600 font-medium">{stat.label}</div>
             </div>
           ))}
@@ -96,23 +100,31 @@ const newsItems = getLatestNews(allNews, 3)
       </p>
       <a href="/team" class="inline-flex items-center justify-center px-6 py-3 mb-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看完整团队成员
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
+        <Icon name="arrow-right" class="w-5 h-5 ml-2" />
       </a>
     </div>
   </section>
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="p-5 rounded-xl bg-gradient-to-br from-brand-green-50 to-white border border-brand-green-100 shadow-sm">
-          <h3 class="text-lg font-semibold text-slate-900 mb-3">核心研究领域</h3>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-semibold text-slate-900">核心研究领域</h3>
+            <a
+              href="/research/#kg-graph"
+              class="inline-flex items-center text-sm font-medium text-brand-900 hover:text-brand-700 group"
+              title="查看研究成果知识图谱"
+            >
+              研究图谱
+              <svg class="w-4 h-4 ml-0.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
           <div class="space-y-3">
             {(aboutData.researchFields || []).map(field => (
               <div class="flex items-start group">
                 <div class="flex-shrink-0 w-9 h-9 rounded-lg bg-brand-green-100 flex items-center justify-center mr-3 group-hover:bg-brand-green-200 transition-colors duration-300">
-                  <svg class="w-4 h-4 text-brand-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
+                  <Icon name="check" class="w-4 h-4" />
                 </div>
                 <div>
                   <h4 class="font-semibold text-slate-900 group-hover:text-brand-green-900 transition-colors duration-300">{field.title}</h4>
@@ -128,9 +140,7 @@ const newsItems = getLatestNews(allNews, 3)
           <div class="space-y-3">
             <div class="flex items-start">
               <div class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center mr-3">
-                <svg class="w-3.5 h-3.5 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <Icon name="check-circle" class="w-3.5 h-3.5" />
               </div>
               <div>
                 <h4 class="font-medium text-slate-900">产学研结合</h4>
@@ -139,9 +149,7 @@ const newsItems = getLatestNews(allNews, 3)
             </div>
             <div class="flex items-start">
               <div class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center mr-3">
-                <svg class="w-3.5 h-3.5 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <Icon name="users" class="w-3.5 h-3.5" />
               </div>
               <div>
                 <h4 class="font-medium text-slate-900">国际化视野</h4>
@@ -150,9 +158,7 @@ const newsItems = getLatestNews(allNews, 3)
             </div>
             <div class="flex items-start">
               <div class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center mr-3">
-                <svg class="w-3.5 h-3.5 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
+                <Icon name="bolt" class="w-3.5 h-3.5" />
               </div>
               <div>
                 <h4 class="font-medium text-slate-900">创新驱动</h4>
@@ -172,12 +178,9 @@ const newsItems = getLatestNews(allNews, 3)
         <div class="flex-1">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-10 h-10 rounded-lg bg-brand-900 flex items-center justify-center">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-              </svg>
+              <Icon name="graduation-cap" class="w-6 h-6 text-white" />
             </div>
-            <h2 class="text-2xl font-bold text-slate-900">加入我们</h2>
+            <h2 class="text-2xl font-semibold text-slate-900">加入我们</h2>
           </div>
           <p class="text-slate-600 mb-4">
             招收武汉大学本科生（日常科研、大创）、硕士研究生、博士研究生；
@@ -194,9 +197,7 @@ const newsItems = getLatestNews(allNews, 3)
           class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-brand-900 text-white hover:bg-brand-800 transition-colors font-medium min-w-[140px]"
         >
           了解详情
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
+          <Icon name="arrow-right" class="w-5 h-5 ml-2" />
         </a>
       </div>
     </div>
@@ -220,9 +221,7 @@ const newsItems = getLatestNews(allNews, 3)
     <div class="mt-8 text-center">
       <a href="/news" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看全部动态
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
+        <Icon name="arrow-right" class="w-5 h-5 ml-2" />
       </a>
     </div>
   </section>
@@ -240,9 +239,7 @@ const newsItems = getLatestNews(allNews, 3)
       <div class="mt-8 text-center">
         <a href="/research" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
           查看更多科研成果
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
+          <Icon name="arrow-right" class="w-5 h-5 ml-2" />
         </a>
       </div>
     </div>
@@ -263,32 +260,62 @@ const newsItems = getLatestNews(allNews, 3)
     <div class="mt-8 text-center">
       <a href="/research-projects" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand-900 text-brand-900 hover:bg-brand-50 hover:border-brand-800 active:bg-brand-100 active:scale-95 transition-all duration-200 font-medium text-base min-h-[44px] min-w-[120px]">
         查看全部科研项目
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
+        <Icon name="arrow-right" class="w-5 h-5 ml-2" />
       </a>
     </div>
   </section>
 
   <section id="awards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-mt-16">
-    <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center">
-      <!-- <span class="w-8 h-1 bg-brand-900 mr-4"></span> -->
-      获奖情况
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {awardsData.map(award => (
-        <div class="flex items-center p-6 rounded-xl border border-slate-200 bg-white hover:shadow-md transition">
-          <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center mr-6 flex-shrink-0">
-            <svg class="w-6 h-6 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-900">{award.title}</h3>
-            <p class="text-sm text-slate-600 mt-1">{award.level} • {award.year}年</p>
-          </div>
+    <h2 class="text-2xl font-semibold text-slate-900 mb-2">荣誉奖项</h2>
+    <p class="text-slate-500 mb-8">科技奖励与学生竞赛累计 <span class="font-medium text-brand-900">{awardsData.length}</span> 项</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- 科技奖励 -->
+      <div class="p-6 rounded-xl bg-gradient-to-br from-brand-50 to-white border border-brand-100">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="text-lg font-semibold text-slate-900">科技奖励</h3>
+          <span class="text-xs text-slate-500">Science & Tech Awards · {techAwards.length} 项</span>
         </div>
-      ))}
+        <div class="space-y-4">
+          {techAwards.map(award => (
+            <div class="flex items-start p-4 rounded-xl border border-slate-200 bg-white hover:shadow-md transition">
+              <div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center mr-4 flex-shrink-0">
+                <Icon name="trophy" class="w-5 h-5 text-brand-900" />
+              </div>
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${award.prize === '特等奖' ? 'bg-brand-900 text-white' : award.prize.includes('二等') ? 'bg-brand-600 text-white' : 'bg-brand-200 text-brand-900'}`}>{award.prize}</span>
+                  <span class="text-xs text-slate-500">{award.awardName} · {award.year}</span>
+                </div>
+                <p class="text-sm font-medium text-slate-800 mt-1.5 leading-snug">{award.project}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 学生竞赛 -->
+      <div class="p-6 rounded-xl bg-gradient-to-br from-brand-green-50 to-white border border-brand-green-100">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="text-lg font-semibold text-slate-900">学生竞赛</h3>
+          <span class="text-xs text-slate-500">Student Competitions · {studentAwards.length} 项</span>
+        </div>
+        <ol class="relative border-l-2 border-brand-green-200 ml-3 space-y-4">
+          {studentAwards.map(award => (
+            <li class="ml-5">
+              <span class="absolute -left-[7px] w-3 h-3 rounded-full bg-brand-green-500 border-2 border-white"></span>
+              <div class="flex flex-wrap items-baseline gap-x-2">
+                <span class="text-sm font-bold text-brand-green-900">{award.year}</span>
+                <span class="text-sm font-medium text-slate-800">{award.awardName}</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-brand-green-100 text-brand-green-900">{award.prize}</span>
+                {award.mentor && (
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-white border border-brand-green-200 text-brand-green-900">{award.mentor}</span>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   </section>
 

@@ -1,17 +1,73 @@
 [
   {
-    "title": "2025年湖北省测绘科技进步奖特等奖",
+    "type": "tech",
+    "awardName": "湖北省测绘科技进步奖",
+    "prize": "特等奖",
+    "project": "三维时空底座建设关键技术及赋能应用",
     "year": "2025",
     "level": "省级学会奖"
-  },  
+  },
   {
-    "title": "2023年度自然资源科学技术科技进步二等奖",
-    "year": "2024",
+    "type": "tech",
+    "awardName": "自然资源科学技术奖",
+    "prize": "科技进步二等奖",
+    "project": "高分辨率卫星遥感影像理解与智能监测关键技术及应用",
+    "year": "2023",
     "level": "省部级"
   },
   {
-    "title": "2012年安徽省科学技术三等奖",
+    "type": "tech",
+    "awardName": "安徽省科学技术奖",
+    "prize": "三等奖",
+    "project": "航空激光成像系统在输电线路优化设计中应用研究",
     "year": "2012",
     "level": "省部级"
+  },
+  {
+    "type": "student",
+    "awardName": "全国大学生测绘学科创新创业智能大赛（科技论文竞赛）",
+    "prize": "特等奖",
+    "year": "2026",
+    "mentor": "优秀指导教师"
+  },
+  {
+    "type": "student",
+    "awardName": "PRCV 超高速脉冲视觉挑战赛",
+    "prize": "最佳新锐奖",
+    "year": "2025",
+    "team": "CVLearner"
+  },
+  {
+    "type": "student",
+    "awardName": "第21届 SuperMap 杯高校 GIS 大赛",
+    "prize": "全国三等奖",
+    "year": "2023"
+  },
+  {
+    "type": "student",
+    "awardName": "第十届「中国软件杯」大学生软件设计大赛",
+    "prize": "全国总决赛一等奖",
+    "year": "2021",
+    "mentor": "最佳指导教师奖"
+  },
+  {
+    "type": "student",
+    "awardName": "首届欧比特杯行业应用大赛",
+    "prize": "一等奖",
+    "year": "2019",
+    "mentor": "优秀指导教师"
+  },
+  {
+    "type": "student",
+    "awardName": "AI in RTC 超分图像质量挑战赛",
+    "prize": "二等奖",
+    "year": "2019",
+    "mentor": "优秀指导老师"
+  },
+  {
+    "type": "student",
+    "awardName": "中国模式识别与计算机视觉技术挑战赛",
+    "prize": "三等奖",
+    "year": "2018"
   }
 ]
