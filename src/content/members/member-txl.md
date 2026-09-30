@@ -1,6 +1,6 @@
 ---
 name: 谭效良
-role: 测绘遥感信息全国重点实验室
+role: 测绘遥感信息工程全国重点实验室
 research: 23级博士研究生
 group: PhD
 order: 2

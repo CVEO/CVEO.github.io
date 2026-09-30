@@ -1,6 +1,6 @@
 ---
 name: 王睿轩
-role: 测绘遥感信息全国重点实验室
+role: 测绘遥感信息工程全国重点实验室
 research: 25级博士研究生
 group: PhD
 order: 5

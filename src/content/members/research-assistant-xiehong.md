@@ -1,6 +1,6 @@
 ---
 name: 谢泓
-role: 测绘遥感信息全国重点实验室
+role: 测绘遥感信息工程全国重点实验室
 group: ResearchAssistant
 order: 1
 photo: "assets/avatars/xiehong.jpg"

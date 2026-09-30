@@ -18,10 +18,26 @@
     }
   ],
   "stats": [
-    { "label": "承担科研项目", "value": "45+", "unit": "项" },
-    { "label": "团队成员", "value": "40+", "unit": "人" },
-    { "label": "高水平论文", "value": "60+", "unit": "篇" },
-    { "label": "发明专利", "value": "8", "unit": "项" }
+    {
+      "label": "科研项目",
+      "value": "46",
+      "unit": "项"
+    },
+    {
+      "label": "团队成员",
+      "value": "47",
+      "unit": "人"
+    },
+    {
+      "label": "发表论文",
+      "value": "113",
+      "unit": "篇"
+    },
+    {
+      "label": "授权发明专利",
+      "value": "4",
+      "unit": "项"
+    }
   ],
   "collaborationCards": [
     {
@@ -38,6 +54,5 @@
       "link": "/collaboration#partners",
       "count": "28+"
     }
-
   ]
 }
