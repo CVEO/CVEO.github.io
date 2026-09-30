@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* 全局键盘焦点环（品牌紫），仅 :focus-visible 触发，不影响鼠标点击 */
+  :focus-visible {
+    outline: 2px solid #6b4eff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}

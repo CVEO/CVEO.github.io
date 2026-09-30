@@ -4,11 +4,11 @@ const { project } = Astro.props;
 function getLevelColor(level: string) {
   switch (level) {
     case '国家级':
-      return 'bg-blue-50 text-blue-700 border-blue-200';
+      return 'bg-brand-600 text-white border-brand-600';
     case '省部级':
-      return 'bg-green-50 text-green-700 border-green-200';
+      return 'bg-brand-100 text-brand-900 border-brand-200';
     case '社会服务':
-      return 'bg-purple-50 text-purple-700 border-purple-200';
+      return 'bg-slate-50 text-slate-600 border-slate-200';
     default:
       return 'bg-slate-50 text-slate-700 border-slate-200';
   }
@@ -19,7 +19,7 @@ function getStatusColor(status: string) {
     case '在研':
       return 'bg-yellow-50 text-yellow-700 border-yellow-200';
     case '已结题':
-      return 'bg-green-50 text-green-700 border-green-200';
+      return 'bg-brand-green-50 text-brand-green-900 border-brand-green-200';
     default:
       return 'bg-slate-50 text-slate-700 border-slate-200';
   }

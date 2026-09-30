@@ -35,7 +35,7 @@ for (const p of papers) {
 }
 
 const statusBadge = (status: string) => {
-  if (status === '已发布') return 'bg-green-50 text-green-700 border-green-200'
+  if (status === '已发布') return 'bg-brand-green-50 text-brand-green-900 border-brand-green-200'
   if (status === '内测') return 'bg-blue-50 text-blue-700 border-blue-200'
   return 'bg-amber-50 text-amber-800 border-amber-200'
 }
@@ -44,6 +44,7 @@ const statusBadge = (status: string) => {
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-12">
       <h1 class="text-3xl font-bold text-slate-900 mb-4">软件工具</h1>
+      <p class="text-sm tracking-widest text-slate-500 uppercase mb-4">Software &amp; Tools</p>
       <p class="text-lg text-slate-600 max-w-3xl mx-auto">
         课题组自研的行业软件与开源工具——把遥感学术论文中的算法，做成工程中用得上的产品
       </p>
@@ -67,14 +68,14 @@ const statusBadge = (status: string) => {
             <div class="p-6 md:p-8">
               <div class="flex flex-col lg:flex-row gap-8">
                 <div class="flex-1">
-                  <h2 class="text-2xl font-bold text-slate-900 mb-2">{tool.name}</h2>
+                  <h2 class="text-2xl font-semibold text-slate-900 mb-2">{tool.name}</h2>
                   <p class="text-slate-600 leading-relaxed mb-5">{tool.tagline}</p>
 
                   <ul class="space-y-2.5 mb-5">
                     {tool.highlights.map(h => (
                       <li class="flex items-start gap-2.5">
                         <svg class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <span class="text-sm text-slate-700">{h}</span>
                       </li>
@@ -95,7 +96,7 @@ const statusBadge = (status: string) => {
                       class="inline-flex items-center gap-1.5 text-sm text-brand-900 hover:text-brand-700 font-medium mb-2"
                     >
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                       </svg>
                       源自论文：{paper.data.title}（{paper.data.journal}，{paper.data.date.slice(0, 4)}）
                     </a>
@@ -128,7 +129,7 @@ const statusBadge = (status: string) => {
                     <div class="p-4 rounded-xl bg-brand-50 border border-brand-100">
                       <h3 class="text-sm font-semibold text-brand-900 mb-1.5 flex items-center gap-1.5">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21h8m-4-4v4m-6-16V4h12v5c0 3.313-2.687 6-6 6s-6-2.687-6-6zM6 6H4a2 2 0 002 4m10-4h2a2 2 0 01-2 4" />
                         </svg>
                         获奖支撑
                       </h3>
@@ -174,7 +175,7 @@ const statusBadge = (status: string) => {
       >
         了解合作方式
         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
         </svg>
       </a>
     </div>

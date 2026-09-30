@@ -20,6 +20,7 @@ function byGroup(g: string) {
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="text-center mb-12">
       <h1 class="text-3xl font-bold text-slate-900 mb-4">团队成员</h1>
+      <p class="text-sm tracking-widest text-slate-500 uppercase mb-4">People</p>
       <p class="text-lg text-slate-600 max-w-3xl mx-auto">
         武汉大学CVEO课题组汇聚了来自计算机视觉与地球观测交叉领域的优秀研究人员
       </p>
@@ -27,7 +28,7 @@ function byGroup(g: string) {
 
     <div class="mb-16">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-semibold text-slate-900">指导老师</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">指导老师 <span class="text-sm text-slate-500 font-normal ml-1">Faculty</span></h2>
         <span class="text-sm text-slate-500">
           {(byGroup('Professor') || []).length + (byGroup('Researcher') || []).length} 位
         </span>
@@ -40,7 +41,7 @@ function byGroup(g: string) {
 
     <div class="mb-16">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-semibold text-slate-900">科研助理</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">科研助理 <span class="text-sm text-slate-500 font-normal ml-1">Research Assistants</span></h2>
         <span class="text-sm text-slate-500">{byGroup('ResearchAssistant').length} 位</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -50,7 +51,7 @@ function byGroup(g: string) {
 
     <div class="mb-16">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-semibold text-slate-900">学生团队</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">学生团队 <span class="text-sm text-slate-500 font-normal ml-1">Students</span></h2>
         <span class="text-sm text-slate-500">
           {byGroup('PhD').length + byGroup('Master').length + byGroup('Undergrad').length} 位
         </span>
@@ -58,7 +59,7 @@ function byGroup(g: string) {
       
       <div class="mb-10">
         <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-semibold text-slate-900">博士研究生</h3>
+          <h3 class="text-xl font-semibold text-slate-900">博士研究生 <span class="text-sm text-slate-500 font-normal ml-1">PhD Students</span></h3>
           <span class="text-sm text-slate-500">{byGroup('PhD').length} 位</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -68,7 +69,7 @@ function byGroup(g: string) {
       
       <div class="mb-10">
         <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-semibold text-slate-900">硕士研究生</h3>
+          <h3 class="text-xl font-semibold text-slate-900">硕士研究生 <span class="text-sm text-slate-500 font-normal ml-1">Master's Students</span></h3>
           <span class="text-sm text-slate-500">{byGroup('Master').length} 位</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -78,7 +79,7 @@ function byGroup(g: string) {
       
       <div>
         <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-semibold text-slate-900">本科生</h3>
+          <h3 class="text-xl font-semibold text-slate-900">本科生 <span class="text-sm text-slate-500 font-normal ml-1">Undergraduates</span></h3>
           <span class="text-sm text-slate-500">{byGroup('Undergrad').length} 位</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -89,7 +90,7 @@ function byGroup(g: string) {
 
     <div>
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-semibold text-slate-900">团队顾问</h2>
+        <h2 class="text-2xl font-semibold text-slate-900">团队顾问 <span class="text-sm text-slate-500 font-normal ml-1">Advisors</span></h2>
         <span class="text-sm text-slate-500">{byGroup('Advisor').length} 位</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

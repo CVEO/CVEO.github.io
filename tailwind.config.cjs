@@ -1,7 +1,22 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{astro,html,md,js,ts}"],
   theme: {
     extend: {
+      fontFamily: {
+        // 中文优先的系统字体栈：Win=雅黑 / macOS=PingFang，数字与英文走 UI 字体
+        sans: [
+          'system-ui',
+          '-apple-system',
+          '"Segoe UI"',
+          'Roboto',
+          '"PingFang SC"',
+          '"Hiragino Sans GB"',
+          '"Microsoft YaHei"',
+          '"Noto Sans SC"',
+          'sans-serif',
+        ],
+      },
       colors: {
         brand: {
           // 珞珈蓝 (Luojia Blue) 主色调
@@ -28,6 +43,17 @@ module.exports = {
             800: "#2a5f2a",
             900: "#2a4829" // 珞珈绿主色
           }
+        },
+        // 知识图谱节点语义色（与 KnowledgeGraph.astro 组件内色板保持一致）
+        graph: {
+          paper: "#c4baff",
+          paperFeatured: "#6b4eff",
+          paperCollab: "#ffffff",
+          repo: "#334155",
+          dataset: "#7c3aed",
+          award: "#f59e0b",
+          project: "#ea580c",
+          faculty: "#0d9488"
         }
       },
       // 统一按钮样式配置

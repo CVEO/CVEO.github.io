@@ -20,12 +20,12 @@ const RECENT_YEARS = 5;
 
 const typeBadge = (type: string) => {
   if (type === '发明专利') return 'bg-blue-50 text-blue-700 border-blue-200';
-  if (type === '实用新型专利') return 'bg-green-50 text-green-700 border-green-200';
+  if (type === '实用新型专利') return 'bg-brand-green-50 text-brand-green-900 border-brand-green-200';
   return 'bg-purple-50 text-purple-700 border-purple-200';
 };
 
 const statusBadge = (status?: string) => {
-  if (status === '已授权' || status === '已登记') return 'bg-green-50 text-green-700 border-green-200';
+  if (status === '已授权' || status === '已登记') return 'bg-brand-green-50 text-brand-green-900 border-brand-green-200';
   return 'bg-amber-50 text-amber-800 border-amber-200';
 };
 
