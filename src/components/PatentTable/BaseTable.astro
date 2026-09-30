@@ -5,144 +5,93 @@ interface Props {
   patents: Patent[];
   className?: string;
   id?: string;
+  /** 按近五年/更早分组展示（适用于软件著作权等长期积累成果） */
+  groupByRecent?: boolean;
 }
 
 const {
   patents,
   className = '',
-  id = 'patent-table'
+  id = 'patent-table',
+  groupByRecent = false
 } = Astro.props;
 
-const getTypeIcon = (type: string) => {
-  if (type === '发明专利') {
-    return {
-      bg: 'bg-blue-100',
-      text: 'text-blue-800',
-      icon: 'invention'
-    };
-  }
-  if (type === '实用新型专利') {
-    return {
-      bg: 'bg-green-100',
-      text: 'text-green-800',
-      icon: 'utility'
-    };
-  }
-  return {
-    bg: 'bg-purple-100',
-    text: 'text-purple-800',
-    icon: 'software'
-  };
+const RECENT_YEARS = 5;
+
+const typeBadge = (type: string) => {
+  if (type === '发明专利') return 'bg-blue-50 text-blue-700 border-blue-200';
+  if (type === '实用新型专利') return 'bg-green-50 text-green-700 border-green-200';
+  return 'bg-purple-50 text-purple-700 border-purple-200';
 };
 
-const getStatusColor = (status?: string) => {
-  if (status === '已授权' || status === '已登记') {
-    return {
-      bg: 'bg-green-100',
-      text: 'text-green-800',
-      border: 'border-green-200'
-    };
-  }
-  return {
-    bg: 'bg-yellow-100',
-    text: 'text-yellow-800',
-    border: 'border-yellow-200'
-  };
+const statusBadge = (status?: string) => {
+  if (status === '已授权' || status === '已登记') return 'bg-green-50 text-green-700 border-green-200';
+  return 'bg-amber-50 text-amber-800 border-amber-200';
 };
+
+const numberLabel = (patent: Patent) => {
+  if (patent.status === '审查中' || patent.status === '申请中') return '申请号';
+  if (patent.type === '软件著作权') return '登记号';
+  if (/^CN/i.test(patent.patentNumber)) return '授权公告号';
+  return '专利号';
+};
+
+const ownerLabel = (patent: Patent) =>
+  patent.type === '软件著作权' ? '著作权人' : '发明人（单位）';
+
+const currentYear = new Date().getFullYear();
+const recentSince = currentYear - (RECENT_YEARS - 1);
+const isRecent = (p: Patent) => {
+  const y = parseInt((p.grantDate || '').slice(0, 4), 10);
+  return Number.isFinite(y) && y >= recentSince;
+};
+
+const groups = groupByRecent
+  ? [
+      { label: `近五年（${recentSince} 年至今）`, items: patents.filter(isRecent) },
+      { label: '更早', items: patents.filter(p => !isRecent(p)) }
+    ].filter(group => group.items.length > 0)
+  : [{ label: '', items: patents }];
 ---
 
-<div class={`rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm ${className}`} id={id}>
-  <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-slate-200">
-      <thead class="bg-slate-100">
-        <tr>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">类型</th>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">名称</th>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden md:table-cell">授权号/登记号</th>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">授权/登记日期</th>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider hidden lg:table-cell">状态</th>
-          <th scope="col" class="px-4 md:px-8 py-4 text-left text-sm font-semibold text-slate-900 uppercase tracking-wider">发明人/著作权人</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-slate-200">
-        {patents.map((patent) => {
-          const typeIcon = getTypeIcon(patent.type);
-          const statusColor = getStatusColor(patent.status);
-
-          return (
-            <tr class="hover:bg-slate-50 transition-colors duration-200 even:bg-slate-50/50">
-              <td class="px-4 md:px-8 py-4 md:py-5">
-                <div class="flex items-center">
-                  <span class={`inline-flex items-center justify-center w-6 h-6 mr-2 text-xs font-medium ${typeIcon.bg} ${typeIcon.text} rounded-full`}>
-                    {typeIcon.icon === 'invention' && (
-                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                      </svg>
-                    )}
-                    {typeIcon.icon === 'utility' && (
-                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                      </svg>
-                    )}
-                    {typeIcon.icon === 'software' && (
-                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                      </svg>
-                    )}
-                  </span>
-                  <div>
-                    <div class="text-sm font-medium text-slate-900">{patent.type}</div>
-                    <div class="mt-1 md:hidden">
-                      <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.patentNumber}</span>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 md:px-8 py-4 md:py-5">
-                <div class="text-sm md:text-base font-medium text-slate-900 leading-tight">{patent.title}</div>
-                <div class="mt-2 md:hidden flex flex-wrap gap-2">
-                  {patent.grantDate && (
-                    <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-100 text-slate-700">{patent.grantDate}</span>
-                  )}
-                  {patent.status && (
-                    <span class={`inline-flex items-center px-2 py-1 rounded text-xs ${statusColor.bg} ${statusColor.text} border ${statusColor.border}`}>
-                      {patent.status}
-                    </span>
-                  )}
-                </div>
-              </td>
-              <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden md:table-cell">
-                <div class="text-sm font-medium text-slate-900">{patent.patentNumber}</div>
-                <div class="text-xs text-slate-500 mt-1">
-                  {patent.status === '审查中' ? '申请号' : patent.type.includes('专利') ? '专利号' : '登记号'}
-                </div>
-              </td>
-              <td class="px-4 md:px-8 py-4 md:py-5 whitespace-nowrap hidden lg:table-cell">
-                <div class="text-sm font-medium text-slate-900">{patent.grantDate || '—'}</div>
-              </td>
-              <td class="px-4 md:px-8 py-4 md:py-5 hidden lg:table-cell">
+<div class={className} id={id}>
+  {groups.map((group) => (
+    <section class={groupByRecent ? 'mb-10 last:mb-0' : ''}>
+      {group.label && (
+        <h3 class="text-lg font-semibold text-slate-900 mb-4">{group.label}</h3>
+      )}
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {group.items.map((patent) => (
+          <article class="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center gap-2 min-w-0">
+                <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border whitespace-nowrap ${typeBadge(patent.type)}`}>
+                  {patent.type}
+                </span>
                 {patent.status && (
-                  <div class="flex items-center">
-                    <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${statusColor.bg} ${statusColor.text}`}>
-                      {patent.status}
-                    </span>
-                  </div>
-                )}
-              </td>
-              <td class="px-4 md:px-8 py-4 md:py-5">
-                <div class="text-sm text-slate-900">
-                  {patent.inventors?.join('、') || '未指定'}
-                </div>
-                <div class="mt-1">
-                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-50 text-blue-700 border border-blue-200">
-                    {patent.type.includes('专利') ? '发明人' : '著作权人'}
+                  <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border whitespace-nowrap ${statusBadge(patent.status)}`}>
+                    {patent.status}
                   </span>
-                </div>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
+                )}
+              </div>
+              {patent.grantDate && (
+                <span class="text-xs text-slate-500 whitespace-nowrap shrink-0">{patent.grantDate}</span>
+              )}
+            </div>
+            <h4 class="text-base font-semibold text-slate-900 leading-snug">{patent.title}</h4>
+            <div class="mt-3 flex flex-col gap-1.5 text-sm">
+              <p class="flex flex-wrap items-baseline gap-x-2">
+                <span class="text-xs text-slate-500 whitespace-nowrap">{numberLabel(patent)}</span>
+                <span class="font-mono text-slate-800 break-all">{patent.patentNumber}</span>
+              </p>
+              <p class="flex flex-wrap items-baseline gap-x-2">
+                <span class="text-xs text-slate-500 whitespace-nowrap">{ownerLabel(patent)}</span>
+                <span class="text-slate-700">{patent.inventors?.join('、') || '—'}</span>
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
 </div>
