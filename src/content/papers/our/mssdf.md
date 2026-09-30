@@ -5,6 +5,7 @@ authors: ["Wang, Tong","Chen, Guanzhou","Zhang, Xiaodong","Liu, Chenxi","Wang, J
 link: "https://doi.org/10.1016/j.inffus.2025.104006"
 journal: "INFORMATION FUSION"
 corresponding: [1,2]
+featured: true
 partition: "中科院一区"
 abstract: ""
 wechatArticle: https://mp.weixin.qq.com/s/HeKP7aTD7jLTqDJRFNbzCg

@@ -6,6 +6,7 @@ link: "https://doi.org/10.1016/j.jag.2026.105232"
 journal: "International Journal of Applied Earth Observation and Geoinformation"
 corresponding: [0,9]
 equalFirst: [0,1]
+featured: true
 partition: "中科院一区"
 abstract: ""
 codeDataLink: https://github.com/CVEO/TriGeoNet

@@ -7,6 +7,7 @@ link: "https://doi.org/10.1016/j.jag.2025.104630"
 abstract: "RoofMapNet: Utilizing geometric primitives for depicting planar building roof structure from high-resolution remote sensing imagery"
 corresponding: [1,2]
 equalFirst: [0,1]
+featured: true
 partition: "中科院一区"
 wechatArticle: https://mp.weixin.qq.com/s/z4-TtD0BMJ1enBOhTfoelQ
 codeDataLink: https://github.com/CVEO/RoofMapNet

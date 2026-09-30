@@ -1,0 +1,33 @@
+{
+  "directions": [
+    {
+      "name": "多模态遥感智能解译",
+      "description": "让计算机看懂卫星与无人机影像：地物分类、语义分割、变化检测与目标提取，覆盖从弱监督、自监督到多任务优化的完整技术链",
+      "papers": [
+        "our/stars",
+        "our/triples-mitigating-multi-task-learning-conflicts-for-semantic-change-detection-in-high-resolution-re",
+        "our/lmfnet-lightweight-multimodal-fusion-network-for-high-resolution-remote-sensing-image-segmentation",
+        "our/mssdf"
+      ]
+    },
+    {
+      "name": "三维遥感重建与数字孪生",
+      "description": "从立体影像、卫星视频与点云重建真实三维世界：立体匹配、屋顶结构提取、立面纹理修复与卫星视频目标跟踪",
+      "papers": [
+        "our/trigeonet",
+        "our/roofmapnet-utilizing-geometric-primitives-for-depicting-planar-building-roof-structure-from-high-res",
+        "our/ssup2-supnet-a-multitask-learning-network-for-semantic-stereo-of-satellite-image-pairs",
+        "our/facts"
+      ]
+    },
+    {
+      "name": "全域遥感监测与时空智能",
+      "description": "长时序、大范围的地球动态观测：植被生产力估算、城市功能与活力感知、社会经济指标的空间化反演",
+      "papers": [
+        "our/enhancing-terrestrial-net-primary-productivity-estimation-with-exp-casa-a-novel-light-use-efficiency",
+        "our/nighttime-light-imagery-or-mobile-phone-footprints-which-better-reflects-urban-socio-economics-at-th",
+        "our/detection-of-vegetation-coverage-changes-in-the-yellow-river-basin-from-2003-to-2020"
+      ]
+    }
+  ]
+}

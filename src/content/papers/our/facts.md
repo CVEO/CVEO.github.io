@@ -5,6 +5,7 @@ authors: ["Cheng, Juexiao", "Huang, Xiangru","Chen, Guanzhou","Wang, Tong", "Wan
 link: "https://doi.org/10.1016/j.aei.2026.104385"
 journal: "Advanced Engineering Informatics"
 corresponding: [2,7]
+featured: true
 partition: "中科院一区"
 abstract: ""
 #wechatArticle: https://mp.weixin.qq.com/s/HeKP7aTD7jLTqDJRFNbzCg

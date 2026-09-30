@@ -5,6 +5,7 @@ authors: ["Wang, Tong", "Zhang, Xiaodong","Chen, Guanzhou","Wang, Jiaqi", "Liu, 
 link: "https://www.sciencedirect.com/science/article/pii/S1569843226002943"
 journal: "International Journal of Applied Earth Observation and Geoinformation"
 corresponding: [1,2]
+featured: true
 partition: "中科院一区"
 abstract: ""
 ---

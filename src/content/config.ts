@@ -14,6 +14,7 @@ const papers = defineCollection({
     abstract: z.string().optional(),
     partition: z.enum(['中科院一区', '中科院二区', '中科院三区', '中科院四区']).optional(),
     ccfPartition: z.enum(['CCF-A', 'CCF-B', 'CCF-C']).optional(),
+    featured: z.boolean().optional(),  // 代表作：首页展示与方向叙事卡引用
     equalFirst: z.array(z.number()).optional(),
     corresponding: z.array(z.number()).optional(),
     otherContributions: z.array(z.object({

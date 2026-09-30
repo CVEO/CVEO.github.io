@@ -5,6 +5,7 @@ authors: ["Wang, Jiaqi", "Zhang, Xiaodong","Chen, Guanzhou","Wang, Tong", "Tan, 
 link: "https://www.sciencedirect.com/science/article/pii/S0957417426023006"
 journal: "Expert Systems with Applications"
 corresponding: [1,2]
+featured: true
 partition: "中科院一区"
 abstract: ""
 ---

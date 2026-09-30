@@ -5,6 +5,28 @@ import ResearchCenterList from '../components/ResearchCenterList.astro'
 
 import partnersData from '../data/partners.json'
 import researchCentersData from '../data/research-centers.json'
+import solutionsData from '../data/solutions.json'
+
+interface Solution {
+  icon: string;
+  title: string;
+  painPoint: string;
+  solution: string;
+  outcomes: string[];
+  links: { label: string; href: string }[];
+}
+
+const solutions = solutionsData as Solution[]
+
+const solutionIcon = (icon: string) => {
+  if (icon === 'cube') {
+    return 'M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9';
+  }
+  if (icon === 'map') {
+    return 'M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7';
+  }
+  return 'M13 10V3L4 14h7v7l9-11h-7z';
+}
 ---
 
 <BaseLayout title="合作与平台" description="武汉大学CVEO课题组与政府机构、科研院所、企事业单位共建产学研合作研究中心，共同推动科技成果转化。">
@@ -15,6 +37,61 @@ import researchCentersData from '../data/research-centers.json'
         武汉大学CVEO课题组与多家政府机构、科研院所、企事业单位建立长期合作关系，共同推动产学研深度融合与科技成果转化。
       </p>
     </div>
+
+    <!-- 行业解决方案 -->
+    <section id="solutions" class="scroll-mt-20 pb-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl font-semibold text-slate-900 mb-2">行业解决方案</h2>
+          <p class="text-slate-600">
+            面向行业痛点，把课题组的技术积累组装成可落地的解决方案
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {solutions.map(sol => (
+          <div class="p-5 rounded-xl border border-slate-200 bg-white hover:shadow-md hover:border-brand-200 transition-all duration-300 flex flex-col">
+            <div class="w-11 h-11 rounded-lg bg-brand-50 flex items-center justify-center text-brand-900 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={solutionIcon(sol.icon)} />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-4">{sol.title}</h3>
+
+            <div class="space-y-3 text-sm mb-5 flex-1">
+              <div>
+                <span class="inline-block text-xs font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5 mb-1">行业痛点</span>
+                <p class="text-slate-600 leading-relaxed">{sol.painPoint}</p>
+              </div>
+              <div>
+                <span class="inline-block text-xs font-medium text-blue-800 bg-blue-50 border border-blue-200 rounded px-1.5 py-0.5 mb-1">技术方案</span>
+                <p class="text-slate-600 leading-relaxed">{sol.solution}</p>
+              </div>
+              <div>
+                <span class="inline-block text-xs font-medium text-green-800 bg-green-50 border border-green-200 rounded px-1.5 py-0.5 mb-1">落地与成效</span>
+                <ul class="space-y-1">
+                  {sol.outcomes.map(o => (
+                    <li class="text-slate-600 leading-relaxed flex items-start gap-1.5">
+                      <svg class="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-x-4 gap-y-1 pt-3 border-t border-slate-100">
+              {sol.links.map(l => (
+                <a href={l.href} class="text-sm text-brand-900 font-medium hover:text-brand-700">{l.label} →</a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <!-- 研究中心部分 -->
     <section id="research-centers" class="scroll-mt-20 py-8">

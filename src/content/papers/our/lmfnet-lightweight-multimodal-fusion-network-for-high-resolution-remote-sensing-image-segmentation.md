@@ -7,6 +7,7 @@ link: "https://doi.org/10.1016/j.patcog.2025.111579"
 abstract: "LMFNet: Lightweight Multimodal Fusion Network for high-resolution remote sensing image segmentation"
 corresponding: [2]
 equalFirst: [0,1]
+featured: true
 partition: "中科院一区"
 wechatArticle: https://mp.weixin.qq.com/s/4VhQxBwXPgq8U65xbYs3aw
 ---

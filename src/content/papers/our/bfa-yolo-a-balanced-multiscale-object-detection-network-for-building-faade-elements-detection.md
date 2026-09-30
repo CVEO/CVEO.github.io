@@ -6,6 +6,7 @@ authors: ["Chen, Yangguang","Wang, Tong","Chen, Guanzhou","Zhu, Kun","Tan, Xiaol
 link: "https://doi.org/10.1016/j.aei.2025.103289"
 abstract: "BFA-YOLO: A balanced multiscale object detection network for building façade elements detection"
 corresponding: [2,9]
+featured: true
 partition: "中科院一区"
 equalFirst: [0,1]
 wechatArticle: https://mp.weixin.qq.com/s/EyMvKJNqYigFJWDJ5p8CMQ
