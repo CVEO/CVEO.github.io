@@ -25,7 +25,7 @@
     {
       "name": "全域遥感监测与时空智能",
       "icon": "chart",
-      "description": "长时序、大范围的地球动态观测：植被生产力估算、城市功能与活力感知、社会经济指标的空间化反演",
+      "description": "长时序、大范围的地球动态观测：植被生产力估算、农林水草与环境监测、社会经济指标反演",
       "papers": [
         { "slug": "our/enhancing-terrestrial-net-primary-productivity-estimation-with-exp-casa-a-novel-light-use-efficiency", "label": "EXP-CASA" },
         { "slug": "our/nighttime-light-imagery-or-mobile-phone-footprints-which-better-reflects-urban-socio-economics-at-th", "label": "遥感经济学" },

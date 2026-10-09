@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-30",
+ "generatedAt": "2026-10-09",
  "typeLabels": {
   "center": "课题组 / Group",
   "direction": "研究方向 / Direction",
@@ -43,7 +43,7 @@
    "id": "dir-2",
    "type": "direction",
    "label": "全域遥感监测与时空智能",
-   "sub": "长时序、大范围的地球动态观测：植被生产力估算、城市功能与活力感知、社会经济指标的…",
+   "sub": "长时序、大范围的地球动态观测：植被生产力估算、农林水草与环境监测、社会经济指标反…",
    "dirIndex": 2,
    "r": 13,
    "x": -113,
