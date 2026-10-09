@@ -10,11 +10,52 @@
       "建筑处理：轮廓标注 → 点云提取 → 建筑模型重建 → 纹理生成 → 单体化",
       "成果输出：OSGB、OBJ、3D Tiles 多格式，支持 DOM/DSM 生成"
     ],
-    "tags": ["实景三维", "模型修复", "单体化"],
-    "partners": ["武汉大学CVEO课题组", "湖北省国土测绘院", "湖北富瑞尔科技有限公司"],
-    "relatedPaper": "our/实景三维模型缺陷修复关键技术",
+    "tags": [
+      "实景三维",
+      "模型修复",
+      "单体化"
+    ],
+    "partners": [
+      "武汉大学CVEO课题组",
+      "湖北省国土测绘院",
+      "湖北富瑞尔科技有限公司"
+    ],
     "award": "2025年度湖北省测绘科技进步奖特等奖「三维时空底座建设关键技术及赋能应用」项目支撑成果",
     "articleUrl": "https://mp.weixin.qq.com/s/yQTpDX5zmplShknr7n4W1A",
-    "usageNote": "免费使用，扫码关注公众号「CVEO课题组」填写使用申请单即可获取"
+    "usageNote": "免费使用，扫码关注公众号「CVEO课题组」填写使用申请单即可获取",
+    "images": {
+      "hero": {
+        "src": "/assets/software/3dmender-ui-hd.png",
+        "alt": "3DMender 主界面：瓦片管理视图与工业园区三维实景模型"
+      },
+      "showcase": [
+        {
+          "src": "/assets/software/3dmender-road-u.png",
+          "caption": "道路场景 · 悬浮物清理",
+          "alt": "道路场景修复前后对比：清理悬浮碎片与错误贴图"
+        },
+        {
+          "src": "/assets/software/3dmender-facade-u.png",
+          "caption": "建筑立面 · 纹理修复",
+          "alt": "建筑立面纹理修复前后对比：窗格与文字恢复清晰"
+        },
+        {
+          "src": "/assets/software/3dmender-water-u.png",
+          "caption": "水体 · 破洞修复",
+          "alt": "水体破洞修复前后对比：破损水面恢复完整"
+        },
+        {
+          "src": "/assets/software/3dmender-parking-u.png",
+          "caption": "停车场 · 悬浮物与贴图修复",
+          "alt": "停车场场景修复前后对比"
+        }
+      ]
+    },
+    "slug": "3dmender",
+    "relatedPapers": [
+      "our/实景三维模型缺陷修复关键技术",
+      "our/facts",
+      "our/bfa-yolo-a-balanced-multiscale-object-detection-network-for-building-faade-elements-detection"
+    ]
   }
 ]

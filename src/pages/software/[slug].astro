@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+import { resolveImage } from '../../lib/images'
+import softwareData from '../../data/software.json'
+
+interface SoftwareImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface SoftwareTool {
+  slug: string;
+  name: string;
+  tagline: string;
+  status: string;
+  distribution: string;
+  highlights: string[];
+  tags: string[];
+  partners: string[];
+  relatedPapers?: string[];
+  award?: string;
+  articleUrl?: string;
+  usageNote?: string;
+  images?: {
+    hero?: SoftwareImage;
+    showcase?: SoftwareImage[];
+  };
+}
+
+const tools = softwareData as SoftwareTool[]
+
+export function getStaticPaths() {
+  return (softwareData as SoftwareTool[]).map(tool => ({ params: { slug: tool.slug }, props: { tool } }))
+}
+
+const { tool } = Astro.props as { tool: SoftwareTool }
+
+const others = tools.filter(t => t.slug !== tool.slug && t.status === '已发布')
+
+// 关联论文信息（id 可能带 .md 后缀，两种 key 都注册）
+const papers = await getCollection('papers')
+const paperMap = new Map<string, (typeof papers)[number]>()
+for (const p of papers) {
+  const id = p.id as string
+  paperMap.set(id, p)
+  paperMap.set(id.replace(/\.md$/, ''), p)
+}
+const relatedPapers = (tool.relatedPapers ?? [])
+  .map(slug => paperMap.get(slug))
+  .filter(Boolean)
+
+const heroImg = resolveImage(tool.images?.hero?.src)
+const showcase = (tool.images?.showcase ?? [])
+  .map(item => ({ ...item, resolved: resolveImage(item.src) }))
+  .filter(item => item.resolved)
+
+// 深色 hero 上的徽标：白框半透明
+const heroBadge = 'bg-white/10 text-white border-white/25'
+---
+<BaseLayout
+  title={tool.name}
+  description={`${tool.name}：${tool.tagline}（武汉大学CVEO课题组自研软件工具）`}
+>
+  <!-- Hero：品牌深紫整幅 + 界面截图悬浮窗 -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-600">
+    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 pointer-events-none"></div>
+    <div class="absolute -bottom-32 -left-16 w-80 h-80 rounded-full bg-white/5 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <!-- 面包屑 -->
+      <a href="/software" class="inline-flex items-center gap-1.5 text-sm text-violet-200/90 hover:text-white transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        全部软件工具
+      </a>
+
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div class="lg:col-span-4 text-center lg:text-left">
+          <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${heroBadge}}`}>
+            {tool.status}
+          </span>
+          <h1 class="text-2xl md:text-3xl font-bold text-white mt-4 mb-3 leading-snug">{tool.name}</h1>
+          <p class="text-violet-200/90 leading-relaxed">{tool.tagline}</p>
+        </div>
+
+        <div class="lg:col-span-8">
+          {heroImg && tool.images?.hero ? (
+            <div class="rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/20 bg-white">
+              <Image
+                src={heroImg}
+                alt={tool.images.hero.alt}
+                class="w-full h-auto"
+                widths={[640, 1080, 1461]}
+                quality={92}
+                sizes="(min-width: 1024px) 62vw, 100vw"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          ) : (
+            <div class="aspect-[16/10] rounded-xl bg-white/10 ring-1 ring-white/20 flex items-center justify-center text-violet-200/80 text-sm">界面截图整理中</div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- 主内容 -->
+      <div class="flex-1">
+        <h2 class="text-xl font-semibold text-slate-900 mb-4">功能特性</h2>
+        <ul class="space-y-3 mb-6">
+          {tool.highlights.map(h => (
+            <li class="flex items-start gap-2.5">
+              <svg class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-sm text-slate-700 leading-relaxed">{h}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          {tool.tags.map(tag => (
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-900 border border-brand-100">{tag}</span>
+          ))}
+        </div>
+
+        {relatedPapers.length > 0 && (
+          <div class="space-y-2">
+            <p class="text-xs font-medium text-slate-500">源自论文</p>
+            {relatedPapers.map(p => (
+              <a
+                href={p!.data.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-start gap-2 text-sm text-brand-900 hover:text-brand-700 font-medium leading-snug"
+              >
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                {p!.data.title}（{p!.data.journal}，{p!.data.date.slice(0, 4)}）
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- 侧栏：获取方式与背书 -->
+      <div class="lg:w-80 flex-shrink-0 space-y-4">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <h3 class="text-sm font-semibold text-slate-900 mb-2">获取方式</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">{tool.usageNote}</p>
+          {tool.articleUrl && (
+            <a
+              href={tool.articleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-brand-900 text-white hover:bg-brand-800 transition-colors text-sm font-medium"
+            >
+              查看发布推文
+            </a>
+          )}
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <h3 class="text-sm font-semibold text-slate-900 mb-2">研发单位</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">{tool.partners.join(' · ')}</p>
+        </div>
+
+        {tool.award && (
+          <div class="p-4 rounded-xl bg-brand-50 border border-brand-100">
+            <h3 class="text-sm font-semibold text-brand-900 mb-1.5 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21h8m-4-4v4m-6-16V4h12v5c0 3.313-2.687 6-6 6s-6-2.687-6-6zM6 6H4a2 2 0 002 4m10-4h2a2 2 0 01-2 4" />
+              </svg>
+              获奖支撑
+            </h3>
+            <p class="text-xs text-brand-900/80 leading-relaxed">{tool.award}</p>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- 修复效果展示 -->
+    {showcase.length > 0 && (
+      <div class="mt-10 pt-8 border-t border-slate-100">
+        <div class="flex items-baseline justify-between mb-5">
+          <h2 class="text-xl font-semibold text-slate-900">效果展示</h2>
+          <span class="text-xs text-slate-500">Showcase · 点击图片放大</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {showcase.map(item => (
+            <figure class="group">
+              <button
+                type="button"
+                class="shot-open block w-full aspect-[2.2/1] cursor-zoom-in rounded-lg overflow-hidden border border-slate-200 bg-slate-50"
+                data-full={item.resolved!.src}
+                data-alt={item.alt}
+              >
+                <Image
+                  src={item.resolved!}
+                  alt={item.alt}
+                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  widths={[560, 1120]}
+                  quality={90}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              {item.caption && (
+                <figcaption class="mt-2 text-xs text-slate-500 text-center">{item.caption}</figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- 其他工具导航 -->
+    {others.length > 0 && (
+      <div class="mt-12 pt-8 border-t border-slate-100">
+        <h2 class="text-lg font-semibold text-slate-900 mb-5">其他软件工具</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {others.map(o => {
+            const oh = resolveImage(o.images?.hero?.src)
+            return (
+              <a
+                href={`/software/${o.slug}`}
+                class="group flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:shadow-md hover:border-brand-200 transition-all duration-300"
+              >
+                <div class="w-20 h-14 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
+                  {oh && o.images?.hero ? (
+                    <Image src={oh} alt={o.images.hero.alt} class="w-full h-full object-cover object-left-top" widths={[160, 320]} quality={90} sizes="80px" loading="lazy" decoding="async" />
+                  ) : (
+                    <div class="w-full h-full"></div>
+                  )}
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-medium text-slate-900 group-hover:text-brand-900 transition-colors line-clamp-1">{o.name}</h3>
+                  <p class="text-xs text-slate-500 line-clamp-1 mt-0.5">{o.tagline}</p>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- 底部 CTA -->
+    <div class="mt-12 p-6 rounded-xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="font-semibold text-slate-900 mb-1">企业定制与软件合作</h3>
+        <p class="text-sm text-slate-600">工具定制开发、联合研发、成果转化，欢迎与我们联系</p>
+      </div>
+      <a
+        href="/collaboration"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-brand-900 text-white hover:bg-brand-800 transition-colors font-medium flex-shrink-0"
+      >
+        了解合作方式
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- 图片放大（原生 dialog，零依赖） -->
+  <dialog id="shot-lightbox" class="rounded-xl p-0 w-[min(92vw,1080px)] bg-white shadow-2xl backdrop:bg-slate-900/70 overflow-hidden">
+    <div class="relative w-full">
+      <button type="button" id="shot-lightbox-close" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 backdrop-blur border border-slate-200 shadow-md text-slate-500 hover:text-slate-800 flex items-center justify-center" aria-label="关闭">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <img id="shot-lightbox-img" src="" alt="" class="block w-full max-h-[78vh] object-contain rounded-xl" />
+      <p id="shot-lightbox-caption" class="text-center text-sm text-slate-500 py-3"></p>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<script>
+  // 效果图点击放大（原生 dialog）
+  const dialog = document.getElementById('shot-lightbox') as HTMLDialogElement | null
+  if (dialog) {
+    const img = document.getElementById('shot-lightbox-img') as HTMLImageElement
+    const caption = document.getElementById('shot-lightbox-caption')!
+    document.querySelectorAll<HTMLButtonElement>('.shot-open').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const inner = btn.querySelector('img')
+        img.src = inner?.currentSrc || inner?.src || btn.dataset.full || ''
+        img.alt = btn.dataset.alt || ''
+        const figcaption = btn.closest('figure')?.querySelector('figcaption')?.textContent || ''
+        caption.textContent = figcaption
+        dialog.showModal()
+      })
+    })
+    document.getElementById('shot-lightbox-close')?.addEventListener('click', () => dialog.close())
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close()
+    })
+    dialog.addEventListener('close', () => {
+      img.src = ''
+    })
+  }
+</script>
