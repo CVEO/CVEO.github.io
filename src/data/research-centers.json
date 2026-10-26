@@ -1,32 +1,71 @@
 [
   {
     "name": "测绘遥感大数据应用研发中心",
-    "partners": ["汕头市自然资源测绘院", "武汉大学"],
+    "partners": [
+      "汕头市自然资源测绘院",
+      "武汉大学"
+    ],
     "type": "科研合作平台",
     "established": "2021",
     "description": "聚焦测绘遥感大数据处理与应用技术研发，推动地方自然资源管理数字化转型",
     "shortDescription": "测绘遥感大数据处理与应用技术研发",
     "image": "/assets/research-centers/survey-remote-sensing-center.jpg",
-    "focusAreas": ["遥感大数据处理", "自然资源监测", "智能解译算法"]
+    "focusAreas": [
+      "遥感大数据处理",
+      "自然资源监测",
+      "智能解译算法"
+    ]
   },
   {
     "name": "测绘地理信息大数据研究中心",
-    "partners": ["湖北省国土测绘院", "武汉大学"],
+    "partners": [
+      "湖北省国土测绘院",
+      "武汉大学"
+    ],
     "type": "科研合作平台",
     "established": "2019",
     "description": "开展测绘地理信息大数据关键技术研究，服务省级国土空间规划与智慧城市建设",
     "shortDescription": "测绘地理信息大数据关键技术研究",
     "image": "/assets/research-centers/geoinfo-bigdata-center.jpg",
-    "focusAreas": ["地理信息大数据", "三维建模", "时空数据分析"]
+    "focusAreas": [
+      "地理信息大数据",
+      "三维建模",
+      "时空数据分析"
+    ]
+  },
+  {
+    "name": "智慧林业遥感技术研究中心",
+    "partners": [
+      "福建金森集团有限公司",
+      "武汉大学"
+    ],
+    "type": "科研合作平台",
+    "established": "2018",
+    "description": "面向林业场景的遥感智能监测技术研发：森林资源调查与动态监测、树种识别与林分结构分析、林业有害生物与火灾预警、森林碳汇计量评估，以多模态遥感智能解译技术支撑森林可持续经营与生态产品价值实现",
+    "shortDescription": "森林资源遥感监测与智慧林业应用技术研发",
+    "image": "/assets/research-centers/forest.jpg",
+    "focusAreas": [
+      "森林资源动态监测",
+      "树种识别与林分结构分析",
+      "林业有害生物预警",
+      "森林碳汇计量"
+    ]
   },
   {
     "name": "电网工程地理信息研究中心",
-    "partners": ["中能建安徽省电力设计院", "武汉大学"],
+    "partners": [
+      "中能建安徽省电力设计院",
+      "武汉大学"
+    ],
     "type": "科研合作平台",
     "established": "2017",
     "description": "结合电力工程需求，研发地理信息技术在电网规划、设计、运维中的应用解决方案",
     "shortDescription": "地理信息技术在电网工程中的应用",
     "image": "/assets/research-centers/state-grid-center.jpg",
-    "focusAreas": ["电力GIS", "线路智能选线", "电网数字化"]
+    "focusAreas": [
+      "电力GIS",
+      "线路智能选线",
+      "电网数字化"
+    ]
   }
 ]

@@ -273,7 +273,6 @@ const typeLabel = {
   project: '在研项目 / Project'
 }
 const payload = {
-  generatedAt: new Date().toISOString().slice(0, 10),
   typeLabels: typeLabel,
   nodes: nodes.map(n => ({
     id: n.id, type: n.type, label: n.label, sub: n.sub, year: n.year,
